@@ -24,6 +24,10 @@ private slots:
 
     void on_btnDisconnect_clicked();
 
+    void on_btnRefresh_clicked();
+
+    void on_btnClear_clicked();
+
 private:
     Ui::Uart *ui;
     QSerialPortInfo info;

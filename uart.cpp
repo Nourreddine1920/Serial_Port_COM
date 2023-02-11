@@ -18,7 +18,7 @@ Uart::Uart(QWidget *parent)
     for(int i = 0 ; i < ports.size() ; i++){
         stringPorts.append(ports.at(i).portName());
     }
-    ui->comboBox->addItems(stringPorts);
+    ui->comboBox_6->addItems(stringPorts);
     // Baud Rate Ratios
     QList<qint32> baudRates = info.standardBaudRates(); // What baudrates does my computer support ?
     QList<QString> stringBaudRates;
@@ -136,12 +136,33 @@ void Uart::on_btnConnect_clicked()
 
 }
 
-
+// Disconnect Button
 void Uart::on_btnDisconnect_clicked()
 {
 
     serialPort.close();
 
+
+}
+
+// Button of Refresh Ports
+
+void Uart::on_btnRefresh_clicked()
+{
+    ui->comboBox_6->clear();
+        QList<QSerialPortInfo> ports = info.availablePorts();
+        QList<QString> stringPorts;
+        for(int i = 0 ; i < ports.size() ; i++){
+            stringPorts.append(ports.at(i).portName());
+        }
+        ui->comboBox->addItems(stringPorts);
+
+}
+
+
+void Uart::on_btnClear_clicked()
+{
+    ui->textBrowser->clear();
 
 }
 
