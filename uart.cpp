@@ -41,7 +41,10 @@ Uart::Uart(QWidget *parent)
        ui->comboBox_4->addItem("Odd Parity");
        ui->comboBox_4->addItem("Mark Parity");
        ui->comboBox_4->addItem("Space Parity");
-
+       //Flow Controls
+          ui->comboBox_2->addItem("No Flow Control");
+          ui->comboBox_2->addItem("Hardware Flow Control");
+          ui->comboBox_2->addItem("Software Flow Control");
 
 }
 
