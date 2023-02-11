@@ -35,6 +35,13 @@ Uart::Uart(QWidget *parent)
     ui->comboBox_3->addItem("1 Bit");
     ui->comboBox_3->addItem("1,5 Bits");
     ui->comboBox_3->addItem("2 Bits");
+    // Parities
+       ui->comboBox_4->addItem("No Parity");
+       ui->comboBox_4->addItem("Even Parity");
+       ui->comboBox_4->addItem("Odd Parity");
+       ui->comboBox_4->addItem("Mark Parity");
+       ui->comboBox_4->addItem("Space Parity");
+
 
 }
 
