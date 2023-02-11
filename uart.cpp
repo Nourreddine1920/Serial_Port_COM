@@ -6,6 +6,9 @@ Uart::Uart(QWidget *parent)
     , ui(new Ui::Uart)
 {
     ui->setupUi(this);
+
+    // Disable maximizing
+      setFixedSize(width(), height());
 }
 
 Uart::~Uart()
