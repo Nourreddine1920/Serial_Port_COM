@@ -11,6 +11,15 @@ Uart::Uart(QWidget *parent)
     setFixedSize(width(), height());
 
     QWidget::setWindowTitle("UART Configurations ");
+
+    // Ports
+    QList<QSerialPortInfo> ports = info.availablePorts();
+    QList<QString> stringPorts;
+    for(int i = 0 ; i < ports.size() ; i++){
+        stringPorts.append(ports.at(i).portName());
+    }
+    ui->comboBox->addItems(stringPorts);
+
 }
 
 Uart::~Uart()

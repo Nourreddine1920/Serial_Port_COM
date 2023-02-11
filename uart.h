@@ -2,6 +2,7 @@
 #define UART_H
 
 #include <QMainWindow>
+#include<QtSerialPort/QSerialPortInfo>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Uart; }
@@ -17,5 +18,6 @@ public:
 
 private:
     Ui::Uart *ui;
+    QSerialPortInfo info;
 };
 #endif // UART_H
