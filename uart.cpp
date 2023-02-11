@@ -31,6 +31,10 @@ Uart::Uart(QWidget *parent)
     ui->comboBox->addItem("6");
     ui->comboBox->addItem("7");
     ui->comboBox->addItem("8");
+    // Stop Bits
+    ui->comboBox_3->addItem("1 Bit");
+    ui->comboBox_3->addItem("1,5 Bits");
+    ui->comboBox_3->addItem("2 Bits");
 
 }
 
