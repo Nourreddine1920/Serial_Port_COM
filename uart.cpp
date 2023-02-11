@@ -8,7 +8,9 @@ Uart::Uart(QWidget *parent)
     ui->setupUi(this);
 
     // Disable maximizing
-      setFixedSize(width(), height());
+    setFixedSize(width(), height());
+
+    QWidget::setWindowTitle("UART Configurations ");
 }
 
 Uart::~Uart()
