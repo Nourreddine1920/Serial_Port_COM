@@ -26,6 +26,12 @@ Uart::Uart(QWidget *parent)
         stringBaudRates.append(QString::number(baudRates.at(i)));
     }
     ui->comboBox_5->addItems(stringBaudRates);
+    // Data Bits
+    ui->comboBox->addItem("5");
+    ui->comboBox->addItem("6");
+    ui->comboBox->addItem("7");
+    ui->comboBox->addItem("8");
+
 }
 
 Uart::~Uart()
