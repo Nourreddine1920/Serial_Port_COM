@@ -19,7 +19,13 @@ Uart::Uart(QWidget *parent)
         stringPorts.append(ports.at(i).portName());
     }
     ui->comboBox->addItems(stringPorts);
-
+    // Baud Rate Ratios
+    QList<qint32> baudRates = info.standardBaudRates(); // What baudrates does my computer support ?
+    QList<QString> stringBaudRates;
+    for(int i = 0 ; i < baudRates.size() ; i++){
+        stringBaudRates.append(QString::number(baudRates.at(i)));
+    }
+    ui->comboBox_5->addItems(stringBaudRates);
 }
 
 Uart::~Uart()
