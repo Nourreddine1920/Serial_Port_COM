@@ -140,5 +140,8 @@ void Uart::on_btnConnect_clicked()
 void Uart::on_btnDisconnect_clicked()
 {
 
+    serialPort.close();
+
+
 }
 
