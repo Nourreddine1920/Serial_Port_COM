@@ -136,10 +136,24 @@ void Uart::on_btnConnect_clicked()
                 }
                 code = ui->lineEdit_2->text();
                 codeSize = code.size();
-                connect(&serialPort,SIGNAL(readyRead()),this,SLOT(on_btnSendMsg_clicked()));
+                connect(&serialPort,SIGNAL(readyRead()),this,SLOT(recieveMessage()));
 
 
         }
+
+}
+// Recieve msg from UART application
+void Uart::recieveMessage(){
+    QByteArray dataBA = serialPort.readAll();
+    QString data(dataBA);
+    buffer.append(data);
+    int index = buffer.indexOf(code);
+    if(index != -1){
+        QString message = buffer.mid(0,index);
+        ui->textBrowser->setTextColor(Qt::blue); // Receieved message's color is blue.
+        ui->textBrowser->append(message);
+        buffer.remove(0,index+codeSize);
+       }
 
 }
 // Disconnect Button
@@ -175,16 +189,10 @@ void Uart::on_btnClear_clicked()
 
 void Uart::on_btnSendMsg_clicked()
 {
-    QByteArray dataBA = serialPort.readAll();
-    QString data(dataBA);
-    buffer.append(data);
-    int index = buffer.indexOf(code);
-    if(index != -1){
-       QString message = buffer.mid(0,index);
-       ui->textBrowser->setTextColor(Qt::blue); // Receieved message's color is blue.
-       ui->textBrowser->append(message);
-       buffer.remove(0,index+codeSize);
-    }
+    QString message = ui->lineEdit_3->text();
+    ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
+    ui->textBrowser->append(message);
+    serialPort.write(message.toUtf8());
 
 }
 

@@ -29,6 +29,7 @@ private slots:
     void on_btnClear_clicked();
 
     void on_btnSendMsg_clicked();
+    void recieveMessage();
 
 private:
     Ui::Uart *ui;
