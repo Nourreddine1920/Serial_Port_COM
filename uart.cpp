@@ -9,8 +9,15 @@ Uart::Uart(QWidget *parent)
 
     // Disable maximizing
     setFixedSize(width(), height());
-
+    QPixmap pixmapApp;
+    QIcon iconApp;
+    pixmapApp.load(":Autres fichiers/images/logo-actia.png");
+    iconApp.addPixmap(pixmapApp);
+    QWidget::setWindowIcon(iconApp);
     QWidget::setWindowTitle("UART Configurations ");
+
+//    QWidget::setFixedSize(QSize(411,511));
+
 
     // Ports
     QList<QSerialPortInfo> ports = info.availablePorts();
