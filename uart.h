@@ -28,12 +28,16 @@ private slots:
 
     void on_btnClear_clicked();
 
+    void on_btnSendMsg_clicked();
+
 private:
     Ui::Uart *ui;
     QSerialPortInfo info;
     QSerialPort serialPort;
     QString code;
     int codeSize;
+    QString buffer;
+
 
 };
 #endif // UART_H
