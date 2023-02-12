@@ -9,8 +9,15 @@ Uart::Uart(QWidget *parent)
 
     // Disable maximizing
     setFixedSize(width(), height());
-
+    QPixmap pixmapApp;
+    QIcon iconApp;
+    pixmapApp.load(":Autres fichiers/images/logo-actia.png");
+    iconApp.addPixmap(pixmapApp);
+    QWidget::setWindowIcon(iconApp);
     QWidget::setWindowTitle("UART Configurations ");
+
+//    QWidget::setFixedSize(QSize(411,511));
+
 
     // Ports
     QList<QSerialPortInfo> ports = info.availablePorts();
@@ -36,15 +43,15 @@ Uart::Uart(QWidget *parent)
     ui->comboBox_3->addItem("1,5 Bits");
     ui->comboBox_3->addItem("2 Bits");
     // Parities
-       ui->comboBox_4->addItem("No Parity");
-       ui->comboBox_4->addItem("Even Parity");
-       ui->comboBox_4->addItem("Odd Parity");
-       ui->comboBox_4->addItem("Mark Parity");
-       ui->comboBox_4->addItem("Space Parity");
-       //Flow Controls
-          ui->comboBox_2->addItem("No Flow Control");
-          ui->comboBox_2->addItem("Hardware Flow Control");
-          ui->comboBox_2->addItem("Software Flow Control");
+    ui->comboBox_4->addItem("No Parity");
+    ui->comboBox_4->addItem("Even Parity");
+    ui->comboBox_4->addItem("Odd Parity");
+    ui->comboBox_4->addItem("Mark Parity");
+    ui->comboBox_4->addItem("Space Parity");
+    //Flow Controls
+    ui->comboBox_2->addItem("No Flow Control");
+    ui->comboBox_2->addItem("Hardware Flow Control");
+    ui->comboBox_2->addItem("Software Flow Control");
 
 }
 
@@ -127,15 +134,28 @@ void Uart::on_btnConnect_clicked()
                 else if(flowControl == "Software Flow Control") {
                   serialPort.setFlowControl(QSerialPort::SoftwareControl);
                 }
-//                code = ui->lineEdit->text();
+                code = ui->lineEdit_2->text();
                 codeSize = code.size();
-                connect(&serialPort,SIGNAL(readyRead()),this,SLOT(receiveMessage()));
+                connect(&serialPort,SIGNAL(readyRead()),this,SLOT(recieveMessage()));
 
 
         }
 
 }
+// Recieve msg from UART application
+void Uart::recieveMessage(){
+    QByteArray dataBA = serialPort.readAll();
+    QString data(dataBA);
+    buffer.append(data);
+    int index = buffer.indexOf(code);
+    if(index != -1){
+        QString message = buffer.mid(0,index);
+        ui->textBrowser->setTextColor(Qt::blue); // Receieved message's color is blue.
+        ui->textBrowser->append(message);
+        buffer.remove(0,index+codeSize);
+       }
 
+}
 // Disconnect Button
 void Uart::on_btnDisconnect_clicked()
 {
@@ -163,6 +183,16 @@ void Uart::on_btnRefresh_clicked()
 void Uart::on_btnClear_clicked()
 {
     ui->textBrowser->clear();
+
+}
+
+
+void Uart::on_btnSendMsg_clicked()
+{
+    QString message = ui->lineEdit_3->text();
+    ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
+    ui->textBrowser->append(message);
+    serialPort.write(message.toUtf8());
 
 }
 
