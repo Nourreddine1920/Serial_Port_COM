@@ -17,7 +17,7 @@
    <widget class="QLabel" name="UartConfig">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>290</x>
       <y>20</y>
       <width>176</width>
       <height>24</height>
@@ -34,7 +34,7 @@
      <string>UART Configuration</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -149,13 +149,13 @@
      <rect>
       <x>11</x>
       <y>51</y>
-      <width>273</width>
-      <height>280</height>
+      <width>761</width>
+      <height>441</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_7"/>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -227,6 +227,19 @@
       </layout>
      </item>
     </layout>
+   </widget>
+   <widget class="QCommandLinkButton" name="commandLinkButton">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>0</y>
+      <width>50</width>
+      <height>47</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

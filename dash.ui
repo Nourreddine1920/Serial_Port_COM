@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>654</height>
+    <width>812</width>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>60</y>
+     <x>100</x>
+     <y>90</y>
      <width>601</width>
      <height>371</height>
     </rect>
@@ -78,6 +78,35 @@
      </layout>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>50</y>
+     <width>270</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Verdana</family>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="lineWidth">
+    <number>5</number>
+   </property>
+   <property name="text">
+    <string>Select IP for new configurations </string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
   </widget>
  </widget>
  <resources/>
