@@ -5,6 +5,7 @@
 #include<QtSerialPort/QSerialPortInfo>
 #include<QtSerialPort/QSerialPort>
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class Uart; }
 QT_END_NAMESPACE
@@ -15,6 +16,7 @@ class Uart : public QMainWindow
 
 public:
     Uart(QWidget *parent = nullptr);
+
     ~Uart();
 
 private slots:
@@ -30,6 +32,8 @@ private slots:
 
     void on_btnSendMsg_clicked();
     void recieveMessage();
+
+    void on_commandLinkButton_clicked();
 
 private:
     Ui::Uart *ui;

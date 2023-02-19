@@ -1,5 +1,6 @@
 #include "uart.h"
 #include "ui_uart.h"
+#include "dash.h"
 
 Uart::Uart(QWidget *parent)
     : QMainWindow(parent)
@@ -9,11 +10,7 @@ Uart::Uart(QWidget *parent)
 
     // Disable maximizing
     setFixedSize(width(), height());
-    QPixmap pixmapApp;
-    QIcon iconApp;
-    pixmapApp.load(":Autres fichiers/images/logo-actia.png");
-    iconApp.addPixmap(pixmapApp);
-    QWidget::setWindowIcon(iconApp);
+
     QWidget::setWindowTitle("UART Configurations ");
 
 //    QWidget::setFixedSize(QSize(411,511));
@@ -194,5 +191,13 @@ void Uart::on_btnSendMsg_clicked()
     ui->textBrowser->append(message);
     serialPort.write(message.toUtf8());
 
+}
+
+
+void Uart::on_commandLinkButton_clicked()
+{
+    Dash* dash = new Dash();
+    dash->show();
+    this->hide();
 }
 
