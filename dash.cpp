@@ -24,8 +24,8 @@ Dash::~Dash()
 
 void Dash::on_UARTbtn_clicked()
 {
-    Uart* uart = new Uart();
-    uart->show();
+    Uartips* uartips = new Uartips();
+    uartips->show();
     this->hide();
 
 }
