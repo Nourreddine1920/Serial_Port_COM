@@ -1,5 +1,5 @@
 QT       += core gui
-QT += serialport
+QT  += serialport
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -13,15 +13,18 @@ CONFIG += c++17
 SOURCES += \
     dash.cpp \
     main.cpp \
-    uart.cpp
+    uart.cpp \
+    uartips.cpp
 
 HEADERS += \
     dash.h \
-    uart.h
+    uart.h \
+    uartips.h
 
 FORMS += \
     dash.ui \
-    uart.ui
+    uart.ui \
+    uartips.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

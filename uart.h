@@ -38,7 +38,7 @@ private slots:
 private:
     Ui::Uart *ui;
     QSerialPortInfo info;
-    QSerialPort serialPort;
+    QSerialPort *serialPort;
     QString code;
     int codeSize;
     QString buffer;
