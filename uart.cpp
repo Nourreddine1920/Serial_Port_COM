@@ -199,9 +199,10 @@ void Uart::on_btnClear_clicked()
 void Uart::on_btnSendMsg_clicked()
 {
     QString message = ui->lineEdit_3->text();
+    QByteArray Message = message.toUtf8();
     ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
     ui->textBrowser->append(message);
-    serialPort->write("test");
+    serialPort->write(Message);
 
 }
 
