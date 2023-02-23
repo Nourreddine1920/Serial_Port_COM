@@ -39,8 +39,8 @@
      <rect>
       <x>90</x>
       <y>90</y>
-      <width>251</width>
-      <height>258</height>
+      <width>216</width>
+      <height>224</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -144,17 +144,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="Widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>11</x>
-      <y>51</y>
-      <width>761</width>
-      <height>441</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_7"/>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
@@ -231,8 +220,32 @@
    <widget class="QCommandLinkButton" name="commandLinkButton">
     <property name="geometry">
      <rect>
-      <x>730</x>
+      <x>10</x>
+      <y>10</y>
+      <width>50</width>
+      <height>47</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
       <y>0</y>
+      <width>2</width>
+      <height>2</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout"/>
+   </widget>
+   <widget class="QCommandLinkButton" name="commandLinkButton_2">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>10</y>
       <width>50</width>
       <height>47</height>
      </rect>
@@ -248,7 +261,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
