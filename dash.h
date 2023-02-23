@@ -2,6 +2,8 @@
 #define DASH_H
 
 #include <QDialog>
+#include <QStackedWidget>
+
 
 namespace Ui {
 class Dash;
@@ -18,8 +20,10 @@ public:
 private slots:
     void on_UARTbtn_clicked();
 
+
 private:
     Ui::Dash *ui;
+    QStackedWidget *stackedWidget;
 };
 
 #endif // DASH_H

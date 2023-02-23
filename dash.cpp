@@ -1,5 +1,6 @@
 #include "dash.h"
 #include "ui_dash.h"
+#include "uartips.h"
 #include "uart.h"
 
 Dash::Dash(QWidget *parent) :
@@ -8,6 +9,11 @@ Dash::Dash(QWidget *parent) :
 {
     ui->setupUi(this);
     setFixedSize(width(), height());
+    QWidget::setWindowTitle("IPs Configurations ");
+
+
+
+
 
 }
 
@@ -23,4 +29,7 @@ void Dash::on_UARTbtn_clicked()
     this->hide();
 
 }
+
+
+
 

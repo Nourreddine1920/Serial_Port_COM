@@ -1,6 +1,9 @@
 #include "uart.h"
 #include "ui_uart.h"
 #include "dash.h"
+#include<QtSerialPort/QSerialPort>
+#include<QMessageBox>
+
 
 Uart::Uart(QWidget *parent)
     : QMainWindow(parent)
@@ -63,85 +66,94 @@ void Uart::on_pushButton_clicked(){
 
 void Uart::on_btnConnect_clicked()
 {
-    QString portName = ui->comboBox->currentText();
-        serialPort.setPortName(portName);
+    QString portName = ui->comboBox_6->currentText();
+        serialPort = new QSerialPort(this);
+        serialPort->setPortName(portName);
 
-        serialPort.open(QIODevice::ReadWrite);
+        //serialPort->open(QIODevice::ReadWrite);
 
-        if(!serialPort.isOpen()){
-            ui->textBrowser->setTextColor(Qt::red);
-            ui->textBrowser->append("!!!! Something went Wrong !!!!");
-        }
-        else {
+//        if(!serialPort->isOpen()){
+//            ui->textBrowser->setTextColor(Qt::red);
+//            ui->textBrowser->append("!!!! Something went Wrong !!!!");
+//        }
+//        else {
 
             QString stringbaudRate = ui->comboBox_5->currentText();
                 int intbaudRate = stringbaudRate.toInt();
-                serialPort.setBaudRate(intbaudRate);
+                serialPort->setBaudRate(intbaudRate);
 
                 QString dataBits = ui->comboBox->currentText();
                 if(dataBits == "5 Bits") {
-                   serialPort.setDataBits(QSerialPort::Data5);
+                   serialPort->setDataBits(QSerialPort::Data5);
                 }
                 else if((dataBits == "6 Bits")) {
-                   serialPort.setDataBits(QSerialPort::Data6);
+                   serialPort->setDataBits(QSerialPort::Data6);
                 }
                 else if(dataBits == "7 Bits") {
-                   serialPort.setDataBits(QSerialPort::Data7);
+                   serialPort->setDataBits(QSerialPort::Data7);
                 }
                 else if(dataBits == "8 Bits"){
-                   serialPort.setDataBits(QSerialPort::Data8);
+                   serialPort->setDataBits(QSerialPort::Data8);
                 }
 
                 QString stopBits = ui->comboBox_3->currentText();
                 if(stopBits == "1 Bit") {
-                 serialPort.setStopBits(QSerialPort::OneStop);
+                 serialPort->setStopBits(QSerialPort::OneStop);
                 }
                 else if(stopBits == "1,5 Bits") {
-                 serialPort.setStopBits(QSerialPort::OneAndHalfStop);
+                 serialPort->setStopBits(QSerialPort::OneAndHalfStop);
                 }
                 else if(stopBits == "2 Bits") {
-                 serialPort.setStopBits(QSerialPort::TwoStop);
+                 serialPort->setStopBits(QSerialPort::TwoStop);
                 }
 
                 QString parity = ui->comboBox_4->currentText();
                 if(parity == "No Parity"){
-                  serialPort.setParity(QSerialPort::NoParity);
+                  serialPort->setParity(QSerialPort::NoParity);
                 }
                 else if(parity == "Even Parity"){
-                  serialPort.setParity(QSerialPort::EvenParity);
+                  serialPort->setParity(QSerialPort::EvenParity);
                 }
                 else if(parity == "Odd Parity"){
-                  serialPort.setParity(QSerialPort::OddParity);
+                  serialPort->setParity(QSerialPort::OddParity);
                 }
                 else if(parity == "Mark Parity"){
-                  serialPort.setParity(QSerialPort::MarkParity);
+                  serialPort->setParity(QSerialPort::MarkParity);
                 }
                 else if(parity == "Space Parity") {
-                    serialPort.setParity(QSerialPort::SpaceParity);
+                    serialPort->setParity(QSerialPort::SpaceParity);
                 }
 
 
                 QString flowControl = ui->comboBox_2->currentText();
                 if(flowControl == "No Flow Control") {
-                  serialPort.setFlowControl(QSerialPort::NoFlowControl);
+                  serialPort->setFlowControl(QSerialPort::NoFlowControl);
                 }
                 else if(flowControl == "Hardware Flow Control") {
-                  serialPort.setFlowControl(QSerialPort::HardwareControl);
+                  serialPort->setFlowControl(QSerialPort::HardwareControl);
                 }
                 else if(flowControl == "Software Flow Control") {
-                  serialPort.setFlowControl(QSerialPort::SoftwareControl);
+                  serialPort->setFlowControl(QSerialPort::SoftwareControl);
                 }
-                code = ui->lineEdit_2->text();
-                codeSize = code.size();
-                connect(&serialPort,SIGNAL(readyRead()),this,SLOT(recieveMessage()));
+                //code = ui->lineEdit_2->text();
+                //codeSize = code.size();
+                //connect(&serialPort,SIGNAL(readyRead()),this,SLOT(recieveMessage()));
+                if(serialPort->open(QIODevice::ReadWrite)){
+                QMessageBox::information(this,"COM ouverte","connexion OK sur"+ portName);
+                serialPort->write("Hello\n");
 
+                }else{
+                //probleme d'ouverure du port serie
+                QMessageBox::critical(this,"Erreur sur port"+QString(portName),serialPort->errorString());
+                exit(1);
+                }
 
-        }
+       // }
 
 }
 // Recieve msg from UART application
 void Uart::recieveMessage(){
-    QByteArray dataBA = serialPort.readAll();
+    QByteArray dataBA = serialPort->readAll();
     QString data(dataBA);
     buffer.append(data);
     int index = buffer.indexOf(code);
@@ -157,7 +169,7 @@ void Uart::recieveMessage(){
 void Uart::on_btnDisconnect_clicked()
 {
 
-    serialPort.close();
+    serialPort->close();
 
 
 }
@@ -189,7 +201,7 @@ void Uart::on_btnSendMsg_clicked()
     QString message = ui->lineEdit_3->text();
     ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
     ui->textBrowser->append(message);
-    serialPort.write(message.toUtf8());
+    serialPort->write("test");
 
 }
 
