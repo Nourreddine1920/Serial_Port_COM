@@ -7,8 +7,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlag(Qt::FramelessWindowHint);
-    setMaximumHeight(400);
-    setMaximumWidth(800);
+    QWidget::setWindowTitle("Welcome Page");
+
+
+    setFixedSize(width(), height());
+
     ui->progressBar->setMinimum(1);
     ui->progressBar->setMaximum(100);
     ui->progressBar->setRange(1,100);
