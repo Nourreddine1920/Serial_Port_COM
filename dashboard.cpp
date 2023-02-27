@@ -131,20 +131,20 @@ Dashboard::Dashboard(QWidget *parent) :
     TIMER->addAction(USART1);
 
     // Connect to the UART configurations
-    connect(UART4, &QAction::triggered, this, &Dashboard::openWidget);
-    connect(UART5, &QAction::triggered, this, &Dashboard::openWidget);
-    connect(UART7, &QAction::triggered, this, &Dashboard::openWidget);
-    connect(UART8, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(UART4, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(UART5, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(UART7, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(UART8, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(UART9, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(UART9, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(USART1, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(USART1, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(USART2, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(USART2, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(USART6, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(USART6, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(USART10, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(USART10, &QAction::triggered, this, &Dashboard::UARTConfig);
 
 
     // Available SPI IPs
@@ -158,14 +158,14 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the SPI configurations
-    connect(SPI1, &QAction::triggered, this, &Dashboard::openWidget);
-    connect(SPI2, &QAction::triggered, this, &Dashboard::openWidget);
-    connect(SPI3, &QAction::triggered, this, &Dashboard::openWidget);
-    connect(SPI4, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(SPI1, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(SPI2, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(SPI3, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(SPI4, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(SPI5, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(SPI5, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(SPI6, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(SPI6, &QAction::triggered, this, &Dashboard::UARTConfig);
 
 
     // Available I2C IPs
@@ -178,12 +178,12 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the I2C configurations
-    connect(I2C1, &QAction::triggered, this, &Dashboard::openWidget);
-    connect(I2C2, &QAction::triggered, this, &Dashboard::openWidget);
-    connect(I2C3, &QAction::triggered, this, &Dashboard::openWidget);
-    connect(I2C4, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(I2C1, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(I2C2, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(I2C3, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(I2C4, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(I2C5, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(I2C5, &QAction::triggered, this, &Dashboard::UARTConfig);
 
 
     // Available ADC IPs
@@ -194,16 +194,16 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the SPI configurations
-    connect(ADC1, &QAction::triggered, this, &Dashboard::openWidget);
-    connect(ADC2, &QAction::triggered, this, &Dashboard::openWidget);
-    connect(ADC3, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(ADC1, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(ADC2, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(ADC3, &QAction::triggered, this, &Dashboard::UARTConfig);
 
 
     // Available DAC IPs
     DAC->addAction(DAC1);
 
     // Connect to the DAC configurations
-    connect(DAC1, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(DAC1, &QAction::triggered, this, &Dashboard::UARTConfig);
 
 
     connect(quit, &QAction::triggered, qApp, QApplication::quit);

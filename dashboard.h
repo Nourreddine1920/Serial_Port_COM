@@ -22,7 +22,7 @@ public:
     explicit Dashboard(QWidget *parent = nullptr);
     ~Dashboard();
 private slots :
-    void openWidget()
+    void UARTConfig()
     {
         QWidget *widget = new QWidget(this);
         setCentralWidget(widget);
@@ -112,6 +112,87 @@ private slots :
 
 
 
+
+    }
+
+    void SPIConfig (){
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+                // Create Layout form for SPI
+                QFormLayout* layout = new QFormLayout(this);
+
+               // Create the Mode label and combo box
+
+               QLabel* ModeLabel = new QLabel(tr("Mode"), this);
+               QComboBox* ModeComboBox = new QComboBox(this);
+
+               ModeComboBox->addItems(QStringList() << "Full-Duplex Master" << "Full-Duplex Slave" << "Half-Duplex Master " << "Half-Duplex Slave" );
+               ModeComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+               // Set the minimum width to 100 pixels
+               ModeComboBox->setMinimumWidth(10);
+               ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ModeComboBox->setStyleSheet("font: 15px; color: green; background-color: white;");
+
+
+               layout->addRow(ModeLabel, ModeComboBox);
+
+               // Create the NSS label and combo box
+
+               QLabel* NSSLabel = new QLabel(tr("Hardware NSS Signal"), this);
+               QComboBox* NSSComboBox = new QComboBox(this);
+               NSSComboBox->addItems(QStringList() << "Disable" << "Hardware NSS Input Signal" << "Hardware NSS Output Signal");
+               NSSLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               NSSComboBox->setStyleSheet("font: 15px; color: green; background-color: white;");
+
+               layout->addRow(NSSLabel, NSSComboBox);
+
+
+               // Create the Frame Format label and combo box
+
+               QLabel* FrameFormatLabel = new QLabel(tr("Stop Bits"), this);
+               QComboBox* FrameFormatComboBox = new QComboBox(this);
+               FrameFormatComboBox->addItems(QStringList() << "Motorola" << "Texas Instruments");
+               FrameFormatLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FrameFormatComboBox->setStyleSheet("font: 15px; color: green; background-color: white;");
+
+               layout->addRow(FrameFormatLabel, FrameFormatComboBox);
+
+
+               // Create the data bits label and combo box
+
+               QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
+               QComboBox* DataBitsComboBox = new QComboBox(this);
+               DataBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
+               DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               DataBitsComboBox->setStyleSheet("font: 15px; color: green; background-color: white;");
+
+               // Create the flow control label and combo box
+
+               layout->addRow(DataBitsLabel, DataBitsComboBox);
+               QLabel* FlowControlLabel = new QLabel(tr("Flow Control"), this);
+               QComboBox* FlowControlComboBox = new QComboBox(this);
+               FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control " );
+               FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FlowControlComboBox->setStyleSheet("font: 15px; color: green; background-color: white;");
+
+               layout->addRow(FlowControlLabel, FlowControlComboBox);
+
+               // Create the vertical layout and add the form layout to it
+               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+               verticalLayout->addStretch();
+               verticalLayout->addLayout(layout);
+               verticalLayout->addStretch();
+
+               // Create the horizontal layout and add the vertical layout to it
+               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+               horizontalLayout->addStretch();
+               horizontalLayout->addLayout(verticalLayout);
+               horizontalLayout->addStretch();
+
+               // Set the widget layout to the horizontal layout
+
+               widget->setLayout(horizontalLayout);
 
     }
 private:
