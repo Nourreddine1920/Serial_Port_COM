@@ -158,14 +158,14 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the SPI configurations
-    connect(SPI1, &QAction::triggered, this, &Dashboard::UARTConfig);
-    connect(SPI2, &QAction::triggered, this, &Dashboard::UARTConfig);
-    connect(SPI3, &QAction::triggered, this, &Dashboard::UARTConfig);
-    connect(SPI4, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(SPI1, &QAction::triggered, this, &Dashboard::SPIConfig);
+    connect(SPI2, &QAction::triggered, this, &Dashboard::SPIConfig);
+    connect(SPI3, &QAction::triggered, this, &Dashboard::SPIConfig);
+    connect(SPI4, &QAction::triggered, this, &Dashboard::SPIConfig);
 
-    connect(SPI5, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(SPI5, &QAction::triggered, this, &Dashboard::SPIConfig);
 
-    connect(SPI6, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(SPI6, &QAction::triggered, this, &Dashboard::SPIConfig);
 
 
     // Available I2C IPs
