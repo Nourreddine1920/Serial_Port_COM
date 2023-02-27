@@ -20,11 +20,20 @@ Uart::Uart(QWidget *parent)
 
 
     // Ports
-    QList<QSerialPortInfo> ports = info.availablePorts();
-    QList<QString> stringPorts;
-    for(int i = 0 ; i < ports.size() ; i++){
-        stringPorts.append(ports.at(i).portName());
-    }
+
+    QList<QSerialPortInfo> portList = QSerialPortInfo::availablePorts();
+        QStringList stringPorts;
+
+        // Parcours de la liste des ports série disponibles
+        for(const QSerialPortInfo &info : portList) {
+            // Vérification si le port contient la chaîne "STMicroelectronics STLink Virtual COM Port"
+            if(info.description().contains("STMicroelectronics STLink Virtual COM Port")) {
+                // Ajout du nom du port dans la liste à afficher sur l'interface
+               stringPorts << info.portName();
+            }
+        }
+
+
     ui->comboBox_6->addItems(stringPorts);
     // Baud Rate Ratios
     QList<qint32> baudRates = info.standardBaudRates(); // What baudrates does my computer support ?
@@ -149,6 +158,10 @@ void Uart::on_btnConnect_clicked()
                 }
 
        // }
+                Dash* dash = new Dash();
+                dash->show();
+                this->hide();
+
 
 }
 // Recieve msg from UART application
@@ -199,18 +212,14 @@ void Uart::on_btnClear_clicked()
 void Uart::on_btnSendMsg_clicked()
 {
     QString message = ui->lineEdit_3->text();
-    QByteArray Message = message.toUtf8();
+    QByteArray data = message.toUtf8();
     ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
     ui->textBrowser->append(message);
-    serialPort->write(Message);
+    serialPort->write(data);
+
 
 }
 
 
-void Uart::on_commandLinkButton_clicked()
-{
-    Dash* dash = new Dash();
-    dash->show();
-    this->hide();
-}
+
 

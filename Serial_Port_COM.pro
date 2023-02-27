@@ -13,16 +13,22 @@ CONFIG += c++17
 SOURCES += \
     dash.cpp \
     main.cpp \
+    mainwindow.cpp \
+    starting_screen.cpp \
     uart.cpp \
     uartips.cpp
 
 HEADERS += \
     dash.h \
+    mainwindow.h \
+    starting_screen.h \
     uart.h \
     uartips.h
 
 FORMS += \
     dash.ui \
+    mainwindow.ui \
+    starting_screen.ui \
     uart.ui \
     uartips.ui
 

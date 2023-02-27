@@ -33,7 +33,7 @@ private slots:
     void on_btnSendMsg_clicked();
     void recieveMessage();
 
-    void on_commandLinkButton_clicked();
+
 
 private:
     Ui::Uart *ui;
