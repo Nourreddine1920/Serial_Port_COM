@@ -79,6 +79,23 @@ Dashboard::Dashboard(QWidget *parent) :
     QAction *I2C5 = new QAction("&I2C5", this);
     I2C5->setCheckable(true);
 
+    // Checkable ADC Configurations
+    QAction *ADC1 = new QAction("ADC1", this);
+    ADC1->setCheckable(true);
+
+
+    QAction *ADC2 = new QAction("&ADC2", this);
+    ADC2->setCheckable(true);
+
+    QAction *ADC3 = new QAction("&ADC3", this);
+    ADC3->setCheckable(true);
+
+
+
+    // Checkable SPI Configurations
+    QAction *DAC1 = new QAction("DAC1", this);
+    DAC1->setCheckable(true);
+
 
 
 
@@ -160,7 +177,7 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 
-    // Connect to the SPI configurations
+    // Connect to the I2C configurations
     connect(I2C1, &QAction::triggered, this, &Dashboard::openWidget);
     connect(I2C2, &QAction::triggered, this, &Dashboard::openWidget);
     connect(I2C3, &QAction::triggered, this, &Dashboard::openWidget);
@@ -169,7 +186,24 @@ Dashboard::Dashboard(QWidget *parent) :
     connect(I2C5, &QAction::triggered, this, &Dashboard::openWidget);
 
 
+    // Available ADC IPs
+    ADC->addAction(ADC1);
+    ADC->addAction(ADC2);
+    ADC->addAction(ADC3);
 
+
+
+    // Connect to the SPI configurations
+    connect(ADC1, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(ADC2, &QAction::triggered, this, &Dashboard::openWidget);
+    connect(ADC3, &QAction::triggered, this, &Dashboard::openWidget);
+
+
+    // Available DAC IPs
+    DAC->addAction(DAC1);
+
+    // Connect to the DAC configurations
+    connect(DAC1, &QAction::triggered, this, &Dashboard::openWidget);
 
 
     connect(quit, &QAction::triggered, qApp, QApplication::quit);
