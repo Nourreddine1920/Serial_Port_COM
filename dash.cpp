@@ -1,7 +1,6 @@
 #include "dash.h"
 #include "ui_dash.h"
 #include "uartips.h"
-#include "uart.h"
 
 Dash::Dash(QWidget *parent) :
     QDialog(parent),
