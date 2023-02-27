@@ -93,10 +93,20 @@ private slots :
                QLabel* stopBitsLabel = new QLabel(tr("Stop Bits"), this);
                QComboBox* stopBitsComboBox = new QComboBox(this);
                stopBitsComboBox->addItems(QStringList() << "1" << "1.5" << "2");
-               stopBitsLabel->setStyleSheet("font-family: Manjari 15px; color: black; background-color: white;");
+               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                stopBitsComboBox->setStyleSheet("font: 15px; color: blue; background-color: white;");
 
                layout->addRow(stopBitsLabel, stopBitsComboBox);
+
+               QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
+               QComboBox* DataBitsComboBox = new QComboBox(this);
+               stopBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
+               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               stopBitsComboBox->setStyleSheet("font: 15px; color: blue; background-color: white;");
+
+               layout->addRow(DataBitsLabel, DataBitsComboBox);
+
+
                // Create the vertical layout and add the form layout to it
                       QVBoxLayout* verticalLayout = new QVBoxLayout(this);
                       verticalLayout->addStretch();
@@ -117,12 +127,6 @@ private slots :
 
 
 
-//        layout->addWidget(Parity);
-//        layout->addWidget(ParityList);
-
-
-
-        //layout->setContentsMargins(10, 10, 10, 10); // set the margins of the layout
 
 
 
