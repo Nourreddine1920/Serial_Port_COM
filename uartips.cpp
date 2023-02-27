@@ -1,6 +1,5 @@
 #include "uartips.h"
 #include "ui_uartips.h"
-#include "dash.h"
 #include"uart.h"
 
 Uartips::Uartips(QWidget *parent) :
@@ -17,9 +16,7 @@ Uartips::~Uartips()
 
 void Uartips::on_commandLinkButton_clicked()
 {
-    Dash* dash = new Dash();
-    dash->show();
-    this->hide();
+
 }
 
 

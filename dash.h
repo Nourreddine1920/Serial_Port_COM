@@ -3,7 +3,8 @@
 
 #include <QDialog>
 #include <QStackedWidget>
-
+#include <QLabel>
+#include <QWidget>
 
 namespace Ui {
 class Dash;
@@ -19,6 +20,15 @@ public:
 
 private slots:
     void on_UARTbtn_clicked();
+    void openWidget()
+    {
+        QWidget *widget = new QWidget(this);
+        //setCentralWidget(widget);
+        QWidget::setWindowIconText("UART Configurations ");
+        QLabel *label = new QLabel("Hello, world!", widget);
+
+
+    }
 
 
 private:

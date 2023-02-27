@@ -9,6 +9,10 @@ starting_screen::starting_screen(QWidget *parent) :
 {
     ui->setupUi(this);
     // Initialize uart_connection object
+    QWidget::setWindowTitle("Welcome Page");
+
+
+    setFixedSize(width(), height());
     Uartscreen=new Uart(this);
 }
 
