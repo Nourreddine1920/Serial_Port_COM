@@ -1,7 +1,6 @@
 #include "dash.h"
 #include "ui_dash.h"
 #include "uartips.h"
-#include "uart.h"
 
 Dash::Dash(QWidget *parent) :
     QDialog(parent),
@@ -24,8 +23,8 @@ Dash::~Dash()
 
 void Dash::on_UARTbtn_clicked()
 {
-    Uart* uart = new Uart();
-    uart->show();
+    Uartips* uartips = new Uartips();
+    uartips->show();
     this->hide();
 
 }

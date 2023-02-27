@@ -217,6 +217,7 @@ void Uart::on_btnSendMsg_clicked()
     ui->textBrowser->append(message);
     serialPort->write(data);
 
+
 }
 
 
