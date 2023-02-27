@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -28,7 +28,7 @@
       <widget class="QLabel" name="label_titre">
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Goudy Old Style</family>
          <pointsize>20</pointsize>
          <bold>true</bold>
          <underline>true</underline>
@@ -48,7 +48,7 @@
         <widget class="QLabel" name="label_value">
          <property name="font">
           <font>
-           <family>Arial</family>
+           <family>Arial Rounded MT Bold</family>
            <pointsize>20</pointsize>
            <bold>true</bold>
           </font>

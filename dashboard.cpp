@@ -115,6 +115,13 @@ Dashboard::Dashboard(QWidget *parent) :
     QSizePolicy policy = UART->sizePolicy();
     policy.setHorizontalStretch(20); // increase by a factor of 2
     UART->setSizePolicy(policy);
+    UART->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
+    SPI->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
+    I2C->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
+    ADC->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
+    DAC->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
+    TIMER->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
+
     menuBar()->setFont(font);
     UART->setFont(font);
     // Available UART IPs
