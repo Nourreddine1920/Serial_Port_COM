@@ -1,15 +1,24 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QWidget>
+#include <QMainWindow>
+#include<Qthread>
 
-class Mainwindow : public QWidget
+namespace Ui {
+class MainWindow;
+}
+
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
-public:
-    explicit Mainwindow(QWidget *parent = nullptr);
 
-signals:
+public:
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+    void start_Loading() ;
+
+private:
+    Ui::MainWindow *ui;
 
 };
 
