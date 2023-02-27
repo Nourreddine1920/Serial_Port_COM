@@ -1,16 +1,11 @@
-//#include "uart.h"
-#include  "dash.h"
+#include "starting_screen.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //Uart w;
-    Dash d;
-    d.setWindowIcon(QIcon("icon.png"));
-
-    //w.show();
-    d.show();
+    starting_screen w ;
+    w.show();
     return a.exec();
 }
