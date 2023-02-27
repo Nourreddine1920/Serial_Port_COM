@@ -100,12 +100,18 @@ private slots :
 
                QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
                QComboBox* DataBitsComboBox = new QComboBox(this);
-               stopBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
-               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               stopBitsComboBox->setStyleSheet("font: 15px; color: blue; background-color: white;");
+               DataBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
+               DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               DataBitsComboBox->setStyleSheet("font: 15px; color: blue; background-color: white;");
 
                layout->addRow(DataBitsLabel, DataBitsComboBox);
+               QLabel* FlowControlLabel = new QLabel(tr("Flow Control"), this);
+               QComboBox* FlowControlComboBox = new QComboBox(this);
+               FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control " );
+               FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FlowControlComboBox->setStyleSheet("font: 15px; color: green; background-color: white;");
 
+               layout->addRow(FlowControlLabel, FlowControlComboBox);
 
                // Create the vertical layout and add the form layout to it
                       QVBoxLayout* verticalLayout = new QVBoxLayout(this);
