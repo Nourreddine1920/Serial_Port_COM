@@ -201,9 +201,9 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the SPI configurations
-    connect(ADC1, &QAction::triggered, this, &Dashboard::UARTConfig);
-    connect(ADC2, &QAction::triggered, this, &Dashboard::UARTConfig);
-    connect(ADC3, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(ADC1, &QAction::triggered, this, &Dashboard::ADCConfig);
+    connect(ADC2, &QAction::triggered, this, &Dashboard::ADCConfig);
+    connect(ADC3, &QAction::triggered, this, &Dashboard::ADCConfig);
 
 
     // Available DAC IPs

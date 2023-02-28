@@ -93,6 +93,8 @@ private slots :
                FlowControlComboBox->setStyleSheet("font: 15px; color: gray; background-color: white;");
 
                layout->addRow(FlowControlLabel, FlowControlComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
 
                // Create the vertical layout and add the form layout to it
                QVBoxLayout* verticalLayout = new QVBoxLayout(this);
@@ -109,6 +111,8 @@ private slots :
                // Set the widget layout to the horizontal layout
 
                widget->setLayout(horizontalLayout);
+               widget->setGeometry(500, 500, 600, 500);
+
 
 
 
@@ -184,6 +188,8 @@ private slots :
                FirstBitComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
 
                layout->addRow(FirstBitLabel, FirstBitComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
 
                // Create the vertical layout and add the form layout to it
                QVBoxLayout* verticalLayout = new QVBoxLayout(this);
@@ -200,6 +206,8 @@ private slots :
                // Set the widget layout to the horizontal layout
 
                widget->setLayout(horizontalLayout);
+               widget->setGeometry(500, 500, 600, 500);
+
 
     }
     void I2CConfig (){
@@ -238,6 +246,134 @@ private slots :
 
 
                // Create the Speed Frequency label and combo box
+
+               QLabel* FrequencyLabel = new QLabel(tr("Speed Frequency"), this);
+               QComboBox* FrequencyComboBox = new QComboBox(this);
+               FrequencyComboBox->addItems(QStringList() << "200 KHz" << "400 KHz " << "1 MHz");
+
+
+
+
+
+
+               FrequencyLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FrequencyComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+               layout->addRow(FrequencyLabel, FrequencyComboBox);
+
+
+               // Create the Rise Time label and combo box
+
+               QLabel* RiseLabel = new QLabel(tr("Rise Time"), this);
+               QSpinBox* RiseSpinBox = new QSpinBox(this);
+               RiseSpinBox->setMinimum(20);
+               RiseSpinBox->setMaximum(1000);
+
+               RiseLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               RiseSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               layout->addRow(RiseLabel, RiseSpinBox);
+
+
+               // Create the Fall Time label and combo box
+
+               QLabel* FallLabel = new QLabel(tr("Fall Time"), this);
+               QSpinBox* FallSpinBox = new QSpinBox(this);
+               FallSpinBox->setMinimum(10);
+               FallSpinBox->setMaximum(300);
+
+               FallLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FallSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               layout->addRow(FallLabel, FallSpinBox);
+
+
+               // Create the Coefficient of digital converter  label and combo box
+
+               QLabel* ConverterLabel = new QLabel(tr("Coefficient of Digital Converter"), this);
+               QSpinBox* ConverterSpinBox = new QSpinBox(this);
+               ConverterSpinBox->setMinimum(0);
+               ConverterSpinBox->setMaximum(16);
+
+               ConverterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ConverterSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               layout->addRow(ConverterLabel, ConverterSpinBox);
+
+               // Create the Analog Filter label and combo box
+
+               QLabel* AnalogFilterLabel = new QLabel(tr("Analog Filter"), this);
+               QComboBox* AnalogFilterComboBox = new QComboBox(this);
+               AnalogFilterComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
+               AnalogFilterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               AnalogFilterComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+               //QSpacerItem* spacerItem = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+
+               layout->addRow(AnalogFilterLabel, AnalogFilterComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
+
+               // Create the vertical layout and add the form layout to it
+               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+               verticalLayout->addStretch();
+               verticalLayout->addLayout(layout);
+               verticalLayout->addStretch();
+
+               // Create the horizontal layout and add the vertical layout to it
+               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+               horizontalLayout->addStretch();
+               horizontalLayout->addLayout(verticalLayout);
+               horizontalLayout->addStretch();
+
+               // Set the widget layout to the horizontal layout
+
+               widget->setLayout(horizontalLayout);
+               widget->setGeometry(500, 500, 600, 500);
+
+
+    }
+    void ADCConfig (){
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+                // Create Layout form for ADC
+                QFormLayout* layout = new QFormLayout(this);
+
+
+
+               // Create the Mode label and combo box
+
+               QLabel* ChannelLabel = new QLabel(tr("Select Channel"), this);
+               QComboBox* ChannelComboBox = new QComboBox(this);
+
+               ChannelComboBox->addItems(QStringList() << "IN2" << "IN3" << "IN4" <<"IN5" << "IN6" << "IN7" << "IN8" << "IN9" << "IN10" << "IN11" << "IN14" << "IN15" << "IN16" << "IN17" <<"IN18" <<"IN19");
+               // Create the second QComboBox and add it as an item to the first combo box
+               QComboBox* ChannelSelectionMode = new QComboBox();
+               ChannelSelectionMode->addItems(QStringList() << "Option 1" << "Option 2" << "Option 3");
+               //ChannelComboBox->addItem("New Selection", QVariant::fromValue(ChannelSelectionMode));
+
+               ChannelComboBox->setItemData(0, QVariant::fromValue(ChannelSelectionMode), Qt::UserRole);
+
+               ChannelComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+               // Set the minimum width to 100 pixels
+               ChannelComboBox->setMinimumWidth(10);
+               ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ChannelComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+
+               layout->addRow(ChannelLabel, ChannelComboBox);
+
+               // Create the Resolution Bit label and combo box
+
+               QLabel* ResolutionLabel = new QLabel(tr("ADC Resolution Bit"), this);
+               QComboBox* ResolutionComboBox = new QComboBox(this);
+               ResolutionComboBox->addItems(QStringList() << "ADC 8-Bit Resolution" << "ADC 10-Bit Resolution" << "ADC 12-Bit Resolution" << "ADC 14-Bit Resolution" << "ADC 16-Bit Resolution"<< "ADC 12-Bit Optimized Resolution" << "ADC 14-Bit Optimized Resolution"  );
+               ResolutionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ResolutionComboBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+
+               layout->addRow(ResolutionLabel, ResolutionComboBox);
+
+
+               // Create the Conversion Modes  Frequency label and combo box
 
                QLabel* FrequencyLabel = new QLabel(tr("Speed Frequency"), this);
                QComboBox* FrequencyComboBox = new QComboBox(this);
