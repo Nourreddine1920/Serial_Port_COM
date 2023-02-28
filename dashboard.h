@@ -373,33 +373,28 @@ private slots :
                layout->addRow(ResolutionLabel, ResolutionComboBox);
 
 
-               // Create the Conversion Modes  Frequency label and combo box
+               // Create the Conversion Modes =====  "Scan Mode"  Frequency label and combo box
 
-               QLabel* FrequencyLabel = new QLabel(tr("Speed Frequency"), this);
-               QComboBox* FrequencyComboBox = new QComboBox(this);
-               FrequencyComboBox->addItems(QStringList() << "200 KHz" << "400 KHz " << "1 MHz");
+               QLabel* ScanLabel = new QLabel(tr("Scan Conversion Mode"), this);
+               QComboBox* ScanComboBox = new QComboBox(this);
+               ScanComboBox->addItems(QStringList() << "Disabled" );
+               ScanLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ScanComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
 
-
-
-
-
-
-               FrequencyLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FrequencyComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
-
-               layout->addRow(FrequencyLabel, FrequencyComboBox);
+               layout->addRow(ScanLabel, ScanComboBox);
 
 
-               // Create the Rise Time label and combo box
+                // Create the Conversion Modes =====  "Continuous Mode"  Frequency label and combo box
 
-               QLabel* RiseLabel = new QLabel(tr("Rise Time"), this);
-               QSpinBox* RiseSpinBox = new QSpinBox(this);
-               RiseSpinBox->setMinimum(20);
-               RiseSpinBox->setMaximum(1000);
+               QLabel* ContinuousLabel = new QLabel(tr("Continuous Conversion Mode"), this);
+               QComboBox* ContinuousComboBox = new QComboBox(this);
 
-               RiseLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               RiseSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
-               layout->addRow(RiseLabel, RiseSpinBox);
+
+               ContinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
+
+               ContinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ContinuousComboBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               layout->addRow(ContinuousLabel, ContinuousComboBox);
 
 
                // Create the Fall Time label and combo box
