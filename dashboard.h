@@ -397,7 +397,7 @@ private slots :
                layout->addRow(ContinuousLabel, ContinuousComboBox);
 
 
-               // Create the Conversion Modes =====  "Discontinuous Mode"  Frequency label and combo box
+               // Create the Conversion Modes =====  "Discontinuous Mode"  label and combo box
 
               QLabel* DiscontinuousLabel = new QLabel(tr("Discontinuous Conversion Mode"), this);
               QComboBox* DiscontinuousComboBox = new QComboBox(this);
@@ -408,6 +408,19 @@ private slots :
               DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
               DiscontinuousComboBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
               layout->addRow(DiscontinuousLabel, DiscontinuousComboBox);
+
+
+              // Create the End Conversion Mode label and combo box
+
+             QLabel* EndConversionLabel = new QLabel(tr("End of Conversion Mode"), this);
+             QComboBox* EndConversionComboBox = new QComboBox(this);
+
+
+             EndConversionComboBox->addItems(QStringList() << "End of Single Conversion" << "End of sequence Conversion");
+
+             EndConversionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+             EndConversionComboBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+             layout->addRow(EndConversionLabel, EndConversionComboBox);
 
 
                // Create the Coefficient of digital converter  label and combo box
