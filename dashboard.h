@@ -423,29 +423,32 @@ private slots :
              layout->addRow(EndConversionLabel, EndConversionComboBox);
 
 
-               // Create the Coefficient of digital converter  label and combo box
+             // Create the Overrun Behavior Mode label and combo box
 
-               QLabel* ConverterLabel = new QLabel(tr("Coefficient of Digital Converter"), this);
-               QSpinBox* ConverterSpinBox = new QSpinBox(this);
-               ConverterSpinBox->setMinimum(0);
-               ConverterSpinBox->setMaximum(16);
+            QLabel* BehaviorLabel = new QLabel(tr("Overrun Behavior"), this);
+            QComboBox* BehaviorComboBox = new QComboBox(this);
 
-               ConverterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               ConverterSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
-               layout->addRow(ConverterLabel, ConverterSpinBox);
 
-               // Create the Analog Filter label and combo box
+            BehaviorComboBox->addItems(QStringList() << "Overrun Data Preserved" << "Overrun Data Overwritten");
 
-               QLabel* AnalogFilterLabel = new QLabel(tr("Analog Filter"), this);
-               QComboBox* AnalogFilterComboBox = new QComboBox(this);
-               AnalogFilterComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
-               AnalogFilterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               AnalogFilterComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+            BehaviorLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+            BehaviorComboBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+            layout->addRow(BehaviorLabel, BehaviorComboBox);
+
+
+
+               // Create the Left Bit label and combo box
+
+               QLabel* LeftBitLabel = new QLabel(tr("Left Bit Shift"), this);
+               QComboBox* LeftBitComboBox = new QComboBox(this);
+               LeftBitComboBox->addItems(QStringList() << "No Bit Shift" << "1 Bit Shift" << "2 Bit Shift"<<  "3 Bit Shift" << "4 Bit Shift" <<"5 Bit Shift" << "6 Bit Shift" <<"7 Bit Shift" <<"8 Bit Shift" <<"9 Bit Shift" <<"10 Bit Shift" <<"11 Bit Shift" << "12 Bit Shift" <<"13 Bit Shift" <<"14 Bit Shift" << "15 Bit Shift" );
+               LeftBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               LeftBitComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
 
                //QSpacerItem* spacerItem = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
 
-               layout->addRow(AnalogFilterLabel, AnalogFilterComboBox);
+               layout->addRow(LeftBitLabel, LeftBitComboBox);
                layout->setContentsMargins(0, 0, 0, 0);
                layout->setSpacing(30);
 
