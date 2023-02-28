@@ -9,6 +9,8 @@
 #include<QtSerialPort/QSerialPortInfo>
 #include <QSpinBox>
 #include <QLineEdit>
+#include <QSpacerItem>
+
 
 
 
@@ -207,6 +209,8 @@ private slots :
                 // Create Layout form for I2C
                 QFormLayout* layout = new QFormLayout(this);
 
+
+
                // Create the Custom Timing label and combo box
 
                QLabel* TimingLabel = new QLabel(tr("Custom Timing"), this);
@@ -235,7 +239,7 @@ private slots :
 
                // Create the Speed Frequency label and combo box
 
-               QLabel* FrequencyLabel = new QLabel(tr("Frame Format"), this);
+               QLabel* FrequencyLabel = new QLabel(tr("Speed Frequency"), this);
                QComboBox* FrequencyComboBox = new QComboBox(this);
                FrequencyComboBox->addItems(QStringList() << "200 KHz" << "400 KHz " << "1 MHz");
 
@@ -250,27 +254,55 @@ private slots :
                layout->addRow(FrequencyLabel, FrequencyComboBox);
 
 
-               // Create the data size label and combo box
+               // Create the Rise Time label and combo box
 
-               QLabel* DataSizeLabel = new QLabel(tr("Data Size"), this);
-               QSpinBox* DataSizeSpinBox = new QSpinBox(this);
-               DataSizeSpinBox->setMinimum(4);
-               DataSizeSpinBox->setMaximum(32);
+               QLabel* RiseLabel = new QLabel(tr("Rise Time"), this);
+               QSpinBox* RiseSpinBox = new QSpinBox(this);
+               RiseSpinBox->setMinimum(20);
+               RiseSpinBox->setMaximum(1000);
 
-               DataSizeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               DataSizeSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
-               layout->addRow(DataSizeLabel, DataSizeSpinBox);
+               RiseLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               RiseSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               layout->addRow(RiseLabel, RiseSpinBox);
 
 
-               // Create the First Bit label and combo box
+               // Create the Fall Time label and combo box
 
-               QLabel* FirstBitLabel = new QLabel(tr("First Bit"), this);
-               QComboBox* FirstBitComboBox = new QComboBox(this);
-               FirstBitComboBox->addItems(QStringList() << "LSB" << "MSB"  );
-               FirstBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FirstBitComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+               QLabel* FallLabel = new QLabel(tr("Fall Time"), this);
+               QSpinBox* FallSpinBox = new QSpinBox(this);
+               FallSpinBox->setMinimum(10);
+               FallSpinBox->setMaximum(300);
 
-               layout->addRow(FirstBitLabel, FirstBitComboBox);
+               FallLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FallSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               layout->addRow(FallLabel, FallSpinBox);
+
+
+               // Create the Coefficient of digital converter  label and combo box
+
+               QLabel* ConverterLabel = new QLabel(tr("Coefficient of Digital Converter"), this);
+               QSpinBox* ConverterSpinBox = new QSpinBox(this);
+               ConverterSpinBox->setMinimum(0);
+               ConverterSpinBox->setMaximum(16);
+
+               ConverterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ConverterSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               layout->addRow(ConverterLabel, ConverterSpinBox);
+
+               // Create the Analog Filter label and combo box
+
+               QLabel* AnalogFilterLabel = new QLabel(tr("Analog Filter"), this);
+               QComboBox* AnalogFilterComboBox = new QComboBox(this);
+               AnalogFilterComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
+               AnalogFilterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               AnalogFilterComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+               //QSpacerItem* spacerItem = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+
+               layout->addRow(AnalogFilterLabel, AnalogFilterComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
 
                // Create the vertical layout and add the form layout to it
                QVBoxLayout* verticalLayout = new QVBoxLayout(this);
@@ -287,6 +319,8 @@ private slots :
                // Set the widget layout to the horizontal layout
 
                widget->setLayout(horizontalLayout);
+               widget->setGeometry(500, 500, 600, 500);
+
 
     }
 

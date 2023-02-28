@@ -185,12 +185,12 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the I2C configurations
-    connect(I2C1, &QAction::triggered, this, &Dashboard::UARTConfig);
-    connect(I2C2, &QAction::triggered, this, &Dashboard::UARTConfig);
-    connect(I2C3, &QAction::triggered, this, &Dashboard::UARTConfig);
-    connect(I2C4, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(I2C1, &QAction::triggered, this, &Dashboard::I2CConfig);
+    connect(I2C2, &QAction::triggered, this, &Dashboard::I2CConfig);
+    connect(I2C3, &QAction::triggered, this, &Dashboard::I2CConfig);
+    connect(I2C4, &QAction::triggered, this, &Dashboard::I2CConfig);
 
-    connect(I2C5, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(I2C5, &QAction::triggered, this, &Dashboard::I2CConfig);
 
 
     // Available ADC IPs
