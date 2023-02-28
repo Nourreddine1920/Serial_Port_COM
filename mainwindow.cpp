@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget::setWindowTitle("Welcome Page");
 
 
-    setFixedSize(width(), height());
+    //setFixedSize(width(), height());
 
     ui->progressBar->setMinimum(1);
     ui->progressBar->setMaximum(100);
