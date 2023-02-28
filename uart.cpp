@@ -1,8 +1,8 @@
 #include "uart.h"
 #include "ui_uart.h"
-#include "dash.h"
 #include<QtSerialPort/QSerialPort>
 #include<QMessageBox>
+#include "dashboard.h"
 
 
 Uart::Uart(QWidget *parent)
@@ -158,8 +158,8 @@ void Uart::on_btnConnect_clicked()
                 }
 
        // }
-                Dash* dash = new Dash();
-                dash->show();
+                Dashboard* dashboard = new Dashboard();
+                dashboard->show();
                 this->hide();
 
 
@@ -216,6 +216,7 @@ void Uart::on_btnSendMsg_clicked()
     ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
     ui->textBrowser->append(message);
     serialPort->write(data);
+
 
 }
 

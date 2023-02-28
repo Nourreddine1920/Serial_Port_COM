@@ -1,5 +1,7 @@
 QT       += core gui
 QT  += serialport
+QT += widgets
+
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -11,7 +13,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    dash.cpp \
+    dashboard.cpp \
     main.cpp \
     mainwindow.cpp \
     starting_screen.cpp \
@@ -19,14 +21,14 @@ SOURCES += \
     uartips.cpp
 
 HEADERS += \
-    dash.h \
+    dashboard.h \
     mainwindow.h \
     starting_screen.h \
     uart.h \
     uartips.h
 
 FORMS += \
-    dash.ui \
+    dashboard.ui \
     mainwindow.ui \
     starting_screen.ui \
     uart.ui \
