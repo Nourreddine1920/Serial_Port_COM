@@ -210,7 +210,7 @@ Dashboard::Dashboard(QWidget *parent) :
     DAC->addAction(DAC1);
 
     // Connect to the DAC configurations
-    connect(DAC1, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(DAC1, &QAction::triggered, this, &Dashboard::DACConfig);
 
 
     connect(quit, &QAction::triggered, qApp, QApplication::quit);

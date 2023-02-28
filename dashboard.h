@@ -471,6 +471,173 @@ private slots :
 
 
     }
+    void DACConfig (){
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+                // Create Layout form for DAC
+                QFormLayout* layout = new QFormLayout(this);
+
+
+
+               // Create the OUT1 Connected to channel and combo box
+
+               QLabel* ChannelLabel = new QLabel(tr("OUT1 Connected to "), this);
+               QComboBox* ChannelComboBox = new QComboBox(this);
+
+               ChannelComboBox->addItems(QStringList() << "Disable" << "Only External Pin" << "Only on Chip Analog Peripherals" <<"Both external Pin and on Chip Analog" );
+
+
+               ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ChannelComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+
+               layout->addRow(ChannelLabel, ChannelComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
+
+               connect(ChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                       this, &Dashboard::ShowingDACConfigs);
+
+
+
+
+               // Create the OUT1 Connected to channel and combo box
+
+               QLabel* Channel2Label = new QLabel(tr("OUT2 Connected to "), this);
+               QComboBox* Channel2ComboBox = new QComboBox(this);
+
+               Channel2ComboBox->addItems(QStringList() << "Disable" << "Only External Pin" << "Only on Chip Analog Peripherals" <<"Both external Pin and on Chip Analog" );
+
+
+               Channel2Label->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               Channel2ComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+
+               layout->addRow(Channel2Label, Channel2ComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
+
+
+
+               // Create the vertical layout and add the form layout to it
+               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+               verticalLayout->addStretch();
+               verticalLayout->addLayout(layout);
+               verticalLayout->addStretch();
+
+               // Create the horizontal layout and add the vertical layout to it
+               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+               horizontalLayout->addStretch();
+               horizontalLayout->addLayout(verticalLayout);
+               horizontalLayout->addStretch();
+
+               // Set the widget layout to the horizontal layout
+
+               widget->setLayout(horizontalLayout);
+               widget->setGeometry(500, 500, 600, 500);
+
+
+    }
+
+
+    // Layout Form the DAC Configuration
+
+    void ShowingDACConfigs(){
+
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+
+        QFormLayout* layout = new QFormLayout(this);
+
+        // --------------Mode selected for the OUT1--------------------//
+
+        QLabel* ModeLabel = new QLabel(tr("Mode selected"), this);
+        QComboBox* ModeComboBox = new QComboBox(this);
+
+        ModeComboBox->addItems(QStringList() << "Normal Mode" << "Sample and Hold Mode" );
+
+
+        ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        ModeComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+
+        layout->addRow(ModeLabel, ModeComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+        // --------------Output Buffer for the OUT1--------------------//
+
+        QLabel* BufferLabel = new QLabel(tr(" Output Buffer "), this);
+        QComboBox* BufferComboBox = new QComboBox(this);
+
+        BufferComboBox->addItems(QStringList() << "Enable" << "Disable" );
+
+
+        BufferLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        BufferComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+
+        layout->addRow(BufferLabel, BufferComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // --------------Trigger for the OUT1--------------------//
+
+        QLabel* TriggerLabel = new QLabel(tr(" Trigger "), this);
+        QComboBox* TriggerComboBox = new QComboBox(this);
+
+        TriggerComboBox->addItems(QStringList() << "None" << "TIMER1 Trigger OUT event " << "TIMER1 Trigger OUT event " << "TIMER1 Trigger OUT event " << "TIMER2 Trigger OUT event " << "TIMER4 Trigger OUT event " << "TIMER5 Trigger OUT event " << "TIMER6 Trigger OUT event " << "TIMER7 Trigger OUT event " << "TIMER8 Trigger OUT event " << "TIMER15 Trigger OUT event" << "LPTIMER1 Trigger OUT event" << "LPTIMER2 Trigger OUT event" << "Software Trigger");
+
+
+        TriggerLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        TriggerComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+
+        layout->addRow(TriggerLabel, TriggerComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // --------------Trimming for the OUT1--------------------//
+
+        QLabel* TrimmingLabel = new QLabel(tr(" Trimming "), this);
+        QComboBox* TrimmingComboBox = new QComboBox(this);
+
+        TrimmingComboBox->addItems(QStringList() << "Factory Trimming" << "User Trimming" );
+
+
+        TrimmingLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        TrimmingComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+
+        layout->addRow(TrimmingLabel, TrimmingComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // Create the vertical layout and add the form layout to it
+        QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+        verticalLayout->addStretch();
+        verticalLayout->addLayout(layout);
+        verticalLayout->addStretch();
+
+        // Create the horizontal layout and add the vertical layout to it
+        QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+        horizontalLayout->addStretch();
+        horizontalLayout->addLayout(verticalLayout);
+        horizontalLayout->addStretch();
+
+        // Set the widget layout to the horizontal layout
+
+        widget->setLayout(horizontalLayout);
+        widget->setGeometry(500, 500, 600, 500);
+
+
+    }
+
 
 private:
     Ui::Dashboard *ui;
