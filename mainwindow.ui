@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>765</width>
-    <height>515</height>
+    <width>601</width>
+    <height>365</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>40</y>
-      <width>761</width>
-      <height>411</height>
+      <x>70</x>
+      <y>80</y>
+      <width>461</width>
+      <height>211</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -31,7 +31,7 @@
          <family>Goudy Old Style</family>
          <pointsize>20</pointsize>
          <bold>true</bold>
-         <underline>true</underline>
+         <underline>false</underline>
         </font>
        </property>
        <property name="text">
@@ -76,17 +76,6 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>765</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

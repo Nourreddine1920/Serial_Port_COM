@@ -8,6 +8,8 @@
 #include<QFormLayout>
 #include<QtSerialPort/QSerialPortInfo>
 #include <QSpinBox>
+#include <QLineEdit>
+
 
 
 namespace Ui {
@@ -122,7 +124,7 @@ private slots :
                 // Create Layout form for SPI
                 QFormLayout* layout = new QFormLayout(this);
 
-               // Create the Mode label and combo box
+               // Create the Model label and combo box
 
                QLabel* ModeLabel = new QLabel(tr("Mode"), this);
                QComboBox* ModeComboBox = new QComboBox(this);
@@ -198,6 +200,96 @@ private slots :
                widget->setLayout(horizontalLayout);
 
     }
+    void I2CConfig (){
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+                // Create Layout form for I2C
+                QFormLayout* layout = new QFormLayout(this);
+
+               // Create the Custom Timing label and combo box
+
+               QLabel* TimingLabel = new QLabel(tr("Custom Timing"), this);
+               QComboBox* TimingComboBox = new QComboBox(this);
+
+               TimingComboBox->addItems(QStringList() << "Enable" << "Disable");
+               TimingComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+               // Set the minimum width to 100 pixels
+               TimingComboBox->setMinimumWidth(10);
+               TimingLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               TimingComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+
+               layout->addRow(TimingLabel, TimingComboBox);
+
+               // Create the I2C Speed Mode label and combo box
+
+               QLabel* SpeedLabel = new QLabel(tr("I2C Speed Mode"), this);
+               QComboBox* SpeedComboBox = new QComboBox(this);
+               SpeedComboBox->addItems(QStringList() << "Standart Mode" << "Fast Mode " << "Fast Mode Plus");
+               SpeedLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               SpeedComboBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+
+               layout->addRow(SpeedLabel, SpeedComboBox);
+
+
+               // Create the Speed Frequency label and combo box
+
+               QLabel* FrequencyLabel = new QLabel(tr("Frame Format"), this);
+               QComboBox* FrequencyComboBox = new QComboBox(this);
+               FrequencyComboBox->addItems(QStringList() << "200 KHz" << "400 KHz " << "1 MHz");
+
+
+
+
+
+
+               FrequencyLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FrequencyComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+               layout->addRow(FrequencyLabel, FrequencyComboBox);
+
+
+               // Create the data size label and combo box
+
+               QLabel* DataSizeLabel = new QLabel(tr("Data Size"), this);
+               QSpinBox* DataSizeSpinBox = new QSpinBox(this);
+               DataSizeSpinBox->setMinimum(4);
+               DataSizeSpinBox->setMaximum(32);
+
+               DataSizeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               DataSizeSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               layout->addRow(DataSizeLabel, DataSizeSpinBox);
+
+
+               // Create the First Bit label and combo box
+
+               QLabel* FirstBitLabel = new QLabel(tr("First Bit"), this);
+               QComboBox* FirstBitComboBox = new QComboBox(this);
+               FirstBitComboBox->addItems(QStringList() << "LSB" << "MSB"  );
+               FirstBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FirstBitComboBox->setStyleSheet("font: Arial 15px; color: gray; background-color: white;");
+
+               layout->addRow(FirstBitLabel, FirstBitComboBox);
+
+               // Create the vertical layout and add the form layout to it
+               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+               verticalLayout->addStretch();
+               verticalLayout->addLayout(layout);
+               verticalLayout->addStretch();
+
+               // Create the horizontal layout and add the vertical layout to it
+               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+               horizontalLayout->addStretch();
+               horizontalLayout->addLayout(verticalLayout);
+               horizontalLayout->addStretch();
+
+               // Set the widget layout to the horizontal layout
+
+               widget->setLayout(horizontalLayout);
+
+    }
+
 private:
     Ui::Dashboard *ui;
     QSerialPortInfo info;

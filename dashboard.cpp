@@ -107,7 +107,7 @@ Dashboard::Dashboard(QWidget *parent) :
     QMenu *I2C = menuBar()->addMenu("&I2C Selection");
     QMenu *ADC = menuBar()->addMenu("&ADC Selection");
     QMenu *DAC = menuBar()->addMenu("&DAC Selection");
-    QMenu *TIMER = menuBar()->addMenu("&TIMER Selection");
+    QMenu *TIMER = menuBar()->addMenu("&Frequency Mesure");
     QFont font = menuBar()->font();
     font.setPointSize(font.pointSize() + 6); // increase by 2 points
     font.setPixelSize(20);
