@@ -397,16 +397,17 @@ private slots :
                layout->addRow(ContinuousLabel, ContinuousComboBox);
 
 
-               // Create the Fall Time label and combo box
+               // Create the Conversion Modes =====  "Discontinuous Mode"  Frequency label and combo box
 
-               QLabel* FallLabel = new QLabel(tr("Fall Time"), this);
-               QSpinBox* FallSpinBox = new QSpinBox(this);
-               FallSpinBox->setMinimum(10);
-               FallSpinBox->setMaximum(300);
+              QLabel* DiscontinuousLabel = new QLabel(tr("Discontinuous Conversion Mode"), this);
+              QComboBox* DiscontinuousComboBox = new QComboBox(this);
 
-               FallLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FallSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
-               layout->addRow(FallLabel, FallSpinBox);
+
+              DiscontinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
+
+              DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+              DiscontinuousComboBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+              layout->addRow(DiscontinuousLabel, DiscontinuousComboBox);
 
 
                // Create the Coefficient of digital converter  label and combo box
