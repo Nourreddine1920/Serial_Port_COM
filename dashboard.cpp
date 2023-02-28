@@ -11,7 +11,7 @@ Dashboard::Dashboard(QWidget *parent) :
     auto *quit = new QAction("&Quit", this);
 
     // Checkable UART Configurations
-    QAction *UART4 = new QAction("UART4", this);
+    auto *UART4 = new QAction("UART4", this);
     UART4->setCheckable(true);
 
 
@@ -125,6 +125,8 @@ Dashboard::Dashboard(QWidget *parent) :
     menuBar()->setFont(font);
     UART->setFont(font);
     // Available UART IPs
+    QSettings settings("MyCompany", "MyApp" , this);
+
     UART->addAction(UART4);
     UART->addAction(UART5);
     UART->addAction(UART7);

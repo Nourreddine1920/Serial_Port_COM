@@ -149,7 +149,7 @@ void Uart::on_btnConnect_clicked()
                 //connect(&serialPort,SIGNAL(readyRead()),this,SLOT(recieveMessage()));
                 if(serialPort->open(QIODevice::ReadWrite)){
                 QMessageBox::information(this,"COM ouverte","connexion OK sur"+ portName);
-                serialPort->write("Hello\n");
+                //serialPort->write("Hello\n");
 
                 }else{
                 //probleme d'ouverure du port serie

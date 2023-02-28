@@ -10,6 +10,7 @@
 #include <QSpinBox>
 #include <QLineEdit>
 #include <QSpacerItem>
+#include <QSettings>
 
 
 
@@ -44,6 +45,8 @@ private slots :
                     stringBaudRates.append(QString::number(baudRates.at(i)));
                 }
                baudRateComboBox->addItems(stringBaudRates);
+               QString Baudrates = baudRateComboBox->currentText();
+
                baudRateComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                baudRateComboBox->setMinimumWidth(10);
@@ -113,6 +116,19 @@ private slots :
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
 
+               QSettings settings("MyCompany", "MyApp" , this);
+               settings.setValue("UART/BaudRate", baudRateComboBox->currentText());
+               settings.setValue("UART/Parity", parityComboBox->currentText());
+               settings.setValue("UART/StopBits", stopBitsComboBox->currentText());
+               settings.setValue("UART/DataBits", DataBitsComboBox->currentText());
+               settings.setValue("UART/FlowControl", FlowControlComboBox->currentText());
+
+               // Restore the UART configurations using the QSettings object
+               baudRateComboBox->setCurrentText(settings.value("UART/BaudRate", "").toString());
+               parityComboBox->setCurrentText(settings.value("UART/Parity", "").toString());
+               stopBitsComboBox->setCurrentText(settings.value("UART/StopBits", "").toString());
+               DataBitsComboBox->setCurrentText(settings.value("UART/DataBits", "").toString());
+               FlowControlComboBox->setCurrentText(settings.value("UART/FlowControl", "").toString());
 
 
 
@@ -502,7 +518,8 @@ private slots :
 
 
 
-               // Create the OUT1 Connected to channel and combo box
+               //--------------Create the OUT2 Connected to channel and combo box--------------------------------//
+
 
                QLabel* Channel2Label = new QLabel(tr("OUT2 Connected to "), this);
                QComboBox* Channel2ComboBox = new QComboBox(this);
@@ -518,15 +535,19 @@ private slots :
                layout->setContentsMargins(0, 0, 0, 0);
                layout->setSpacing(30);
 
+               connect(Channel2ComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                       this, &Dashboard::ShowingDACConfigs);
 
 
-               // Create the vertical layout and add the form layout to it
+
+
+               //------------Create the vertical layout and add the form layout to it---------------------------//
                QVBoxLayout* verticalLayout = new QVBoxLayout(this);
                verticalLayout->addStretch();
                verticalLayout->addLayout(layout);
                verticalLayout->addStretch();
 
-               // Create the horizontal layout and add the vertical layout to it
+               //------------Create the horizontal layout and add the vertical layout to it---------------------//
                QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
                horizontalLayout->addStretch();
                horizontalLayout->addLayout(verticalLayout);
