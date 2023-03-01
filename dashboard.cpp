@@ -93,34 +93,53 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 
-    // Checkable SPI Configurations
+    // Checkable DAC Configurations
     QAction *DAC1 = new QAction("DAC1", this);
     DAC1->setCheckable(true);
 
 
 
+    // Checkable Input Capture Mode Configurations
+    QAction *InputCaptureMode = new QAction("Input Capture Mode" , this);
+    InputCaptureMode->setCheckable(true);
 
 
 
 
-    QMenu *UART = menuBar()->addMenu("&UART Selection");
-    QMenu *SPI = menuBar()->addMenu("&SPI Selection");
-    QMenu *I2C = menuBar()->addMenu("&I2C Selection");
-    QMenu *ADC = menuBar()->addMenu("&ADC Selection");
-    QMenu *DAC = menuBar()->addMenu("&DAC Selection");
+
+
+
+
+    QMenu *UART = menuBar()->addMenu("&UART");
+    QMenu *SPI = menuBar()->addMenu("&SPI");
+    QMenu *I2C = menuBar()->addMenu("&I2C");
+    QMenu *ADC = menuBar()->addMenu("&ADC");
+    QMenu *DAC = menuBar()->addMenu("&DAC");
     QMenu *TIMER = menuBar()->addMenu("&Frequency Mesure");
     QFont font = menuBar()->font();
     // Create a QFont object and set its bold property to true
     font.setBold(true);
+    menuBar()->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    QBoxLayout *layout = new QBoxLayout(QBoxLayout::LeftToRight);
+    menuBar()->setLayout(layout);
+    QLabel *logoLabel = new QLabel(menuBar());
+    QPixmap logoPixmap(":/logo-actia.png");  // Replace with your own logo image file
+    logoLabel->setPixmap(logoPixmap);
+    logoLabel->setScaledContents(true);
+    //QAction *logoAction = new QAction(menuBar());
+
+
 
     QString style = "\
             QMenuBar {\
                 background-color: #868482;\
+                spacing: 50px;\
             }\
             QMenuBar::item {\
                 background-color: transparent;\
-                padding: 10px 15px;\
-                margin: 5px;\
+                padding: 15px ;\
+                width : 500px;\
+                margin: 2px;\
                 border: 5px;\
                 font : Helvetica gras 20px;\
                 color: #FFFFFF;\
@@ -197,7 +216,7 @@ Dashboard::Dashboard(QWidget *parent) :
     UART->addAction(USART10);
     UART->addSeparator();
 
-    TIMER->addAction(USART1);
+    TIMER->addAction(InputCaptureMode);
     UART->addSeparator();
 
 
