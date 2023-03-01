@@ -115,6 +115,16 @@ private slots :
 
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
+               // Create the QLabel and set its text and minimum height
+               QLabel* footerLabel = new QLabel();
+               footerLabel->setText("Footer Text");
+               footerLabel->setMinimumHeight(40);
+
+               // Add the QLabel to the QHBoxLayout and center it
+               //layout->addWidget(footerLabel, 0, Qt::AlignHCenter);
+
+               // Set the size of the QWidget
+               widget->setGeometry(100, 100, 400, 300);
 
                QSettings settings("MyCompany", "MyApp" , this);
                settings.setValue("UART/BaudRate", baudRateComboBox->currentText());

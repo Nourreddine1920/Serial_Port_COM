@@ -1,5 +1,6 @@
 #include "dashboard.h"
 #include "ui_dashboard.h"
+#include <QIcon>
 
 Dashboard::Dashboard(QWidget *parent) :
     QMainWindow(parent),
@@ -109,35 +110,96 @@ Dashboard::Dashboard(QWidget *parent) :
     QMenu *DAC = menuBar()->addMenu("&DAC Selection");
     QMenu *TIMER = menuBar()->addMenu("&Frequency Mesure");
     QFont font = menuBar()->font();
+    // Create a QFont object and set its bold property to true
+    font.setBold(true);
+
+    QString style = "\
+            QMenuBar {\
+                background-color: #868482;\
+            }\
+            QMenuBar::item {\
+                background-color: transparent;\
+                padding: 10px 15px;\
+                margin: 5px;\
+                border: 5px;\
+                font : Helvetica gras 20px;\
+                color: #FFFFFF;\
+            }\
+            QMenuBar::item:selected {\
+                background-color:#328930;\
+            }\
+            QMenu {\
+                background-color: #444444;\
+                border: none;\
+                padding: 6px 10px;\
+            }\
+            QMenu::item {\
+                background-color: transparent;\
+                padding: 4px 20px;\
+                margin: 0px;\
+                border: none;\
+                color: #FFFFFF;\
+            }\
+            QMenu::item:selected {\
+                background-color: #328930;\
+            }";
+
+    menuBar()->setStyleSheet(style);
     font.setPointSize(font.pointSize() + 6); // increase by 2 points
     font.setPixelSize(20);
     font.setPointSizeF(10);
     QSizePolicy policy = UART->sizePolicy();
-    policy.setHorizontalStretch(20); // increase by a factor of 2
+    policy.setHorizontalStretch(10); // increase by a factor of 2
+
     UART->setSizePolicy(policy);
-    UART->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
-    SPI->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
-    I2C->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
-    ADC->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
-    DAC->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
-    TIMER->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
+    UART->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+    SPI->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+    I2C->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+    ADC->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+    DAC->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+    TIMER->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
 
     menuBar()->setFont(font);
     UART->setFont(font);
     // Available UART IPs
     QSettings settings("MyCompany", "MyApp" , this);
 
+
     UART->addAction(UART4);
+    UART->addSeparator();
+    //UART->setIcon(QIcon::fromTheme("document-open"));
+    //UART->setIcon(style()->standardIcon(QStyle::SP_FileDialogContentsView));
+
+
+
     UART->addAction(UART5);
+    UART->addSeparator();
+
     UART->addAction(UART7);
+    UART->addSeparator();
+
     UART->addAction(UART8);
+    UART->addSeparator();
+
     UART->addAction(UART9);
+    UART->addSeparator();
+
 
     UART->addAction(USART1);
+    UART->addSeparator();
+
     UART->addAction(USART2);
+    UART->addSeparator();
+
     UART->addAction(USART6);
+    UART->addSeparator();
+
     UART->addAction(USART10);
+    UART->addSeparator();
+
     TIMER->addAction(USART1);
+    UART->addSeparator();
+
 
     // Connect to the UART configurations
     connect(UART4, &QAction::triggered, this, &Dashboard::UARTConfig);
@@ -158,12 +220,24 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Available SPI IPs
     SPI->addAction(SPI1);
+    SPI->addSeparator();
+
     SPI->addAction(SPI2);
+    SPI->addSeparator();
+
     SPI->addAction(SPI3);
+    SPI->addSeparator();
+
     SPI->addAction(SPI4);
+    SPI->addSeparator();
+
     SPI->addAction(SPI5);
+    SPI->addSeparator();
+
 
     SPI->addAction(SPI6);
+    SPI->addSeparator();
+
 
 
     // Connect to the SPI configurations
@@ -179,10 +253,20 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Available I2C IPs
     I2C->addAction(I2C1);
+    I2C->addSeparator();
+
     I2C->addAction(I2C2);
+    I2C->addSeparator();
+
     I2C->addAction(I2C3);
+    I2C->addSeparator();
+
     I2C->addAction(I2C4);
+    I2C->addSeparator();
+
     I2C->addAction(I2C5);
+    I2C->addSeparator();
+
 
 
 
@@ -197,8 +281,14 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Available ADC IPs
     ADC->addAction(ADC1);
+    ADC->addSeparator();
+
     ADC->addAction(ADC2);
+    ADC->addSeparator();
+
     ADC->addAction(ADC3);
+    ADC->addSeparator();
+
 
 
 
@@ -210,6 +300,8 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Available DAC IPs
     DAC->addAction(DAC1);
+    DAC->addSeparator();
+
 
     // Connect to the DAC configurations
     connect(DAC1, &QAction::triggered, this, &Dashboard::DACConfig);
