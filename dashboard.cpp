@@ -1,6 +1,8 @@
 #include "dashboard.h"
 #include "ui_dashboard.h"
 #include <QIcon>
+#include <QCheckBox>
+#include <QWidgetAction>
 
 Dashboard::Dashboard(QWidget *parent) :
     QMainWindow(parent),
@@ -13,33 +15,35 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Checkable UART Configurations
     auto *UART4 = new QAction("UART4", this);
-    UART4->setCheckable(true);
+    //QAction *action = new QAction("Checkable Action", menuBar());
+
+//    UART4->setCheckable(true);
 
 
     QAction *UART5 = new QAction("&UART5", this);
-    UART5->setCheckable(true);
+//    UART5->setCheckable(true);
 
     QAction *UART7 = new QAction("&UART7", this);
-    UART7->setCheckable(true);
+//    UART7->setCheckable(true);
 
     QAction *UART8 = new QAction("&UART8", this);
-    UART8->setCheckable(true);
+//    UART8->setCheckable(true);
 
     QAction *UART9 = new QAction("&UART9", this);
-    UART9->setCheckable(true);
+//    UART9->setCheckable(true);
 
     QAction *USART1 = new QAction("&USART1", this);
-    USART1->setCheckable(true);
+//    USART1->setCheckable(true);
 
 
     QAction *USART2 = new QAction("&USART2", this);
-    USART2->setCheckable(true);
+//    USART2->setCheckable(true);
 
     QAction *USART6 = new QAction("&USART6", this);
-    USART6->setCheckable(true);
+//    USART6->setCheckable(true);
 
     QAction *USART10 = new QAction("&USART10", this);
-    USART10->setCheckable(true);
+//    USART10->setCheckable(true);
 
 
 
@@ -111,6 +115,13 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     QMenu *UART = menuBar()->addMenu("&UART");
+    QCheckBox *checkBox = new QCheckBox();
+
+    QWidgetAction *action = new QWidgetAction(menuBar());
+    action->setDefaultWidget(checkBox);
+
+
+
     QMenu *SPI = menuBar()->addMenu("&SPI");
     QMenu *I2C = menuBar()->addMenu("&I2C");
     QMenu *ADC = menuBar()->addMenu("&ADC");
@@ -185,6 +196,8 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     UART->addAction(UART4);
+    //UART->addAction(action);
+
     UART->addSeparator();
     //UART->setIcon(QIcon::fromTheme("document-open"));
     //UART->setIcon(style()->standardIcon(QStyle::SP_FileDialogContentsView));
@@ -234,7 +247,7 @@ Dashboard::Dashboard(QWidget *parent) :
 
     connect(USART6, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(USART10, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(USART10, &QAction::triggered, this,&Dashboard::UARTConfig);
 
 
     // Available SPI IPs

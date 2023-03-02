@@ -12,7 +12,8 @@
 #include <QSpacerItem>
 #include <QSettings>
 #include <QMessageBox>
-
+#include <QDesktopServices>
+#include <QFileInfo>
 
 
 
@@ -96,11 +97,45 @@ private slots :
 
                QLabel* stopBitsLabel = new QLabel(tr("Stop Bits"), this);
                QComboBox* stopBitsComboBox = new QComboBox(this);
-               stopBitsComboBox->addItems(QStringList() << "1" << "1.5" << "2");
+               stopBitsComboBox->addItem("1 Bits");
+               stopBitsComboBox->addItem("1,5 Bits");
+               stopBitsComboBox->addItem("2 Bits");
+
                stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(stopBitsLabel, stopBitsComboBox);
+
+
+
+//               QString stopBits = stopBitsComboBox->currentText();
+//               if(stopBits == "1 Bits") {
+////                   settings.setValue("stopBits", stopBits);
+
+
+//               }
+//               else if(stopBits == "1,5 Bits") {
+//                   stopBits = stopBitsComboBox->currentText();
+////                   settings.setValue("stopBits", stopBits);
+
+//               }
+//               else if(stopBits == "2 Bits") {
+//                   stopBits = stopBitsComboBox->currentText();
+////                   settings.setValue("stopBits", stopBits);
+
+//               }
+               QString stopBits ;
+               stopBits = stopBitsComboBox->itemData(stopBitsComboBox->currentIndex()).toString();
+
+               settings.setValue("stopBits", stopBits);
+
+               QString stopBitsConfig = settings.value("stopBits" ,stopBits ).toString();
+               qDebug() << "stopBits:" << stopBitsConfig;
+
+
+
+
+
 
 
                // Create the data bits label and combo box
@@ -160,27 +195,44 @@ private slots :
 
 
                QSettings settings("file.txt", QSettings::IniFormat);
+               qDebug() << "Settings file path: " << settings.fileName();
+
+               // Open the file in a text editor or appropriate tool to view the settings
 //               QMessageBox::information(this, "Item Selection",
 //                                            baudRateComboBox->currentText());
+//               QFileInfo fileInfo("C:/Users/nawledbr/Documents/build-Serial_Port_COM-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/file.txt");
+               //QDesktopServices::openUrl(QUrl("file://" + settings.fileName()));
+
+//               if (fileInfo.exists()) {
+//                   QDesktopServices::openUrl(QUrl("file://" + settings.fileName()));
+//               } else {
+//                   qDebug() << "File not found!";
+//               }
+               QString stringbaudRate = baudRateComboBox->currentText();
+               int intbaudRate = stringbaudRate.toInt();
+               settings.beginGroup("UARTConfigs");
+
+               settings.setValue("Baudrate",  baudRateComboBox->currentText());
+               settings.setValue("stopbits",  stopBitsComboBox->currentText());
+               settings.setValue("databits",  DataBitsComboBox->currentText());
+               settings.setValue("flowcontrol",  FlowControlComboBox->currentText());
+               settings.setValue("parity",  parityComboBox->currentText());
+
+               settings.endGroup();
 
 
-               settings.setValue("baudRate", baudRateComboBox->currentText());
-               settings.setValue("parity", parityComboBox->currentText());
-               settings.setValue("stopBits", stopBitsComboBox->currentText());
-               settings.setValue("dataBits", DataBitsComboBox->currentText());
-               settings.setValue("flowControl", FlowControlComboBox->currentText());
 
-               QString baudRate = settings.value("baudRate", "").toString();
-               QString parity = settings.value("parity", "").toString();
-               QString stopBits = settings.value("stopBits", "").toString();
-               QString dataBits = settings.value("dataBits", "").toString();
-               QString flowControl = settings.value("flowControl", "").toString();
 
-               qDebug() << "baudRate:" << baudRate;
-               qDebug() << "parity:" << parity;
-               qDebug() << "stopBits:" << stopBits;
-               qDebug() << "dataBits:" << dataBits;
-               qDebug() << "flowControl:" << flowControl;
+//               QString baudRate = settings.value("baudRate").toString();
+//               QString parity = settings.value("parity").toString();
+//               QString dataBits = settings.value("dataBits").toString();
+//               QString flowControl = settings.value("flowControl").toString();
+
+//               qDebug() << "baudRate:" << baudRate;
+//               qDebug() << "parity:" << parity;
+//               qDebug() << "stopBits:" << stopBits;
+//               qDebug() << "dataBits:" << dataBits;
+//               qDebug() << "flowControl:" << flowControl;
 
 
 
@@ -292,6 +344,25 @@ private slots :
 
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
+
+               // save settings in a settings file
+               QSettings settings("file.txt", QSettings::IniFormat);
+
+
+
+               settings.beginGroup("SPIConfigs");
+
+
+               settings.setValue("Mode",  ModeComboBox->currentText());
+               settings.setValue("NSS",  NSSComboBox->currentText());
+               settings.setValue("Frameformat",  FrameFormatComboBox->currentText());
+               settings.setValue("Datasize",  DataSizeSpinBox->value());
+               settings.setValue("Firstbit",  FirstBitComboBox->currentText());
+
+               settings.endGroup();
+
+
+
 
 
     }
@@ -413,6 +484,27 @@ private slots :
 
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
+
+
+               // Save I2C Configs in a file*
+               QSettings settings("file.txt", QSettings::IniFormat);
+
+
+
+               settings.beginGroup("I2CConfigs");
+
+               settings.setValue("Timing",  TimingComboBox->currentText());
+               settings.setValue("I2CSpeedMode",  SpeedComboBox->currentText());
+               settings.setValue("SpeedFrequency",  FrequencyComboBox->currentText());
+               settings.setValue("RiseTime",  RiseSpinBox->value());
+               settings.setValue("FallTime",  FallSpinBox->value());
+               settings.setValue("CoefficientofDigitalConverter",  ConverterSpinBox->value());
+               settings.setValue("Analogfilter",  AnalogFilterComboBox->currentText());
+
+
+
+               settings.endGroup();
+
 
 
     }
