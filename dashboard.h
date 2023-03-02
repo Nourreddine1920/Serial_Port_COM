@@ -646,6 +646,25 @@ private slots :
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
 
+               // save ADC Configs in a file
+               settings.beginGroup("ADCConfigs");
+
+               settings.setValue("Channel",  ChannelComboBox->currentText());
+               settings.setValue("ChannelSelectionMode",  ChannelSelectionMode->currentText());
+               settings.setValue("Resolution",  ResolutionComboBox->currentText());
+               settings.setValue("Scan",  ScanComboBox->currentText());
+               settings.setValue("Continuous",  ContinuousComboBox->currentText());
+               settings.setValue("Discontinuous",  DiscontinuousComboBox->currentText());
+               settings.setValue("EndConversion",  EndConversionComboBox->currentText());
+               settings.setValue("Behavior",  BehaviorComboBox->currentText());
+               settings.setValue("LeftBit",  LeftBitComboBox->currentText());
+
+
+
+
+               settings.endGroup();
+
+
 
     }
     void DACConfig (){
