@@ -739,6 +739,16 @@ private slots :
                widget->setGeometry(500, 500, 600, 500);
 
 
+               // Saving DAC Configs into a file
+               settings.beginGroup("DACConfigs");
+
+               settings.setValue("Channel",  ChannelComboBox->currentText());
+               settings.setValue("Channel2",  Channel2ComboBox->currentText());
+
+
+               settings.endGroup();
+
+
     }
 
 
@@ -835,6 +845,20 @@ private slots :
 
         widget->setLayout(horizontalLayout);
         widget->setGeometry(500, 500, 600, 500);
+
+        // DAC Configs
+        settings.beginGroup("SohwingDACConfigs");
+
+        settings.setValue("ModeDAC",  ModeComboBox->currentText());
+        settings.setValue("Buffer",  BufferComboBox->currentText());
+        settings.setValue("Trigger",  TriggerComboBox->currentText());
+        settings.setValue("Trimming",  TrimmingComboBox->currentText());
+
+
+
+
+        settings.endGroup();
+
 
 
     }
