@@ -141,6 +141,7 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 
+
     QString style = "\
             QMenuBar {\
                 background-color: #868482;\
@@ -337,6 +338,7 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Connect to the DAC configurations
     connect(DAC1, &QAction::triggered, this, &Dashboard::DACConfig);
+
 
 
     connect(quit, &QAction::triggered, qApp, QApplication::quit);

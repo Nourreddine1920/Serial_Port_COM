@@ -31,6 +31,9 @@ public:
 
     ~Dashboard();
 private slots :
+
+
+
     void UARTConfig()
     {
         QWidget *widget = new QWidget(this);
@@ -67,7 +70,7 @@ private slots :
                // Save the selected baud rate when changed
                int selectedIndex = settings.value("MyWidget/SelectedIndex", 0).toInt();
                baudRateComboBox->setCurrentIndex(selectedIndex);
-               qDebug() << "selectedIndex:" << selectedIndex;
+//               qDebug() << "selectedIndex:" << selectedIndex;
 
 
 
@@ -107,30 +110,26 @@ private slots :
                layout->addRow(stopBitsLabel, stopBitsComboBox);
 
 
+               // Connect the combo box to the slot
 
-//               QString stopBits = stopBitsComboBox->currentText();
-//               if(stopBits == "1 Bits") {
-////                   settings.setValue("stopBits", stopBits);
+               // Load the stored value from the settings file
+               QString stopBitsConfig = settings.value("stopBits", "").toString();
+
+               // Set the selected option in the combo box
+
+               int index = stopBitsComboBox->findText(stopBitsConfig);
+               if (index != -1)
+                   stopBitsComboBox->setCurrentIndex(index);
+
+               // Connect the combo box to the slot
+               connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
 
 
-//               }
-//               else if(stopBits == "1,5 Bits") {
-//                   stopBits = stopBitsComboBox->currentText();
-////                   settings.setValue("stopBits", stopBits);
 
-//               }
-//               else if(stopBits == "2 Bits") {
-//                   stopBits = stopBitsComboBox->currentText();
-////                   settings.setValue("stopBits", stopBits);
 
-//               }
-               QString stopBits ;
-               stopBits = stopBitsComboBox->itemData(stopBitsComboBox->currentIndex()).toString();
 
-               settings.setValue("stopBits", stopBits);
 
-               QString stopBitsConfig = settings.value("stopBits" ,stopBits ).toString();
-               qDebug() << "stopBits:" << stopBitsConfig;
+
 
 
 
@@ -213,7 +212,7 @@ private slots :
                settings.beginGroup("UARTConfigs");
 
                settings.setValue("Baudrate",  baudRateComboBox->currentText());
-               settings.setValue("stopbits",  stopBitsComboBox->currentText());
+               //settings.setValue("stopbits",  stopBits);
                settings.setValue("databits",  DataBitsComboBox->currentText());
                settings.setValue("flowcontrol",  FlowControlComboBox->currentText());
                settings.setValue("parity",  parityComboBox->currentText());
@@ -259,6 +258,8 @@ private slots :
 
 
     }
+
+
 
     void SPIConfig (){
         QWidget *widget = new QWidget(this);
@@ -647,10 +648,11 @@ private slots :
                widget->setGeometry(500, 500, 600, 500);
 
                // save ADC Configs in a file
+               QSettings settings("file.txt", QSettings::IniFormat);
+
                settings.beginGroup("ADCConfigs");
 
                settings.setValue("Channel",  ChannelComboBox->currentText());
-               settings.setValue("ChannelSelectionMode",  ChannelSelectionMode->currentText());
                settings.setValue("Resolution",  ResolutionComboBox->currentText());
                settings.setValue("Scan",  ScanComboBox->currentText());
                settings.setValue("Continuous",  ContinuousComboBox->currentText());
@@ -663,6 +665,12 @@ private slots :
 
 
                settings.endGroup();
+
+               settings.beginGroup("ADCConfigs");
+               settings.remove("ChannelSelectionMode");
+               settings.endGroup();
+
+
 
 
 
@@ -740,6 +748,9 @@ private slots :
 
 
                // Saving DAC Configs into a file
+
+               QSettings settings("file.txt", QSettings::IniFormat);
+
                settings.beginGroup("DACConfigs");
 
                settings.setValue("Channel",  ChannelComboBox->currentText());
@@ -862,11 +873,25 @@ private slots :
 
 
     }
+    void onStopBitsComboBoxChanged(int index){
+        // Retrieve the selected option
+        QString stopBits = stopBitsComboBox->itemText(index);
+
+        // Store the selected option in the settings file
+        settings.setValue("stopBits", stopBits);
+
+        // Retrieve the stored value and print to the console
+        QString stopBitsConfig = settings.value("stopBits", stopBits).toString();
+        qDebug() << "selected option:" << stopBits;
+        qDebug() << "stopBits:" << stopBitsConfig;
+    }
 
 
 private:
     Ui::Dashboard *ui;
     QSerialPortInfo info;
+    QComboBox *stopBitsComboBox;
+
 
 };
 
