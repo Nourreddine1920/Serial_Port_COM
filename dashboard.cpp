@@ -1,5 +1,8 @@
 #include "dashboard.h"
 #include "ui_dashboard.h"
+#include <QIcon>
+#include <QCheckBox>
+#include <QWidgetAction>
 
 Dashboard::Dashboard(QWidget *parent) :
     QMainWindow(parent),
@@ -11,34 +14,36 @@ Dashboard::Dashboard(QWidget *parent) :
     auto *quit = new QAction("&Quit", this);
 
     // Checkable UART Configurations
-    QAction *UART4 = new QAction("UART4", this);
-    UART4->setCheckable(true);
+    auto *UART4 = new QAction("UART4", this);
+    //QAction *action = new QAction("Checkable Action", menuBar());
+
+//    UART4->setCheckable(true);
 
 
     QAction *UART5 = new QAction("&UART5", this);
-    UART5->setCheckable(true);
+//    UART5->setCheckable(true);
 
     QAction *UART7 = new QAction("&UART7", this);
-    UART7->setCheckable(true);
+//    UART7->setCheckable(true);
 
     QAction *UART8 = new QAction("&UART8", this);
-    UART8->setCheckable(true);
+//    UART8->setCheckable(true);
 
     QAction *UART9 = new QAction("&UART9", this);
-    UART9->setCheckable(true);
+//    UART9->setCheckable(true);
 
     QAction *USART1 = new QAction("&USART1", this);
-    USART1->setCheckable(true);
+//    USART1->setCheckable(true);
 
 
     QAction *USART2 = new QAction("&USART2", this);
-    USART2->setCheckable(true);
+//    USART2->setCheckable(true);
 
     QAction *USART6 = new QAction("&USART6", this);
-    USART6->setCheckable(true);
+//    USART6->setCheckable(true);
 
     QAction *USART10 = new QAction("&USART10", this);
-    USART10->setCheckable(true);
+//    USART10->setCheckable(true);
 
 
 
@@ -92,50 +97,142 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 
-    // Checkable SPI Configurations
+    // Checkable DAC Configurations
     QAction *DAC1 = new QAction("DAC1", this);
     DAC1->setCheckable(true);
 
 
 
+    // Checkable Input Capture Mode Configurations
+    QAction *InputCaptureMode = new QAction("Input Capture Mode" , this);
+    InputCaptureMode->setCheckable(true);
 
 
 
 
-    QMenu *UART = menuBar()->addMenu("&UART Selection");
-    QMenu *SPI = menuBar()->addMenu("&SPI Selection");
-    QMenu *I2C = menuBar()->addMenu("&I2C Selection");
-    QMenu *ADC = menuBar()->addMenu("&ADC Selection");
-    QMenu *DAC = menuBar()->addMenu("&DAC Selection");
+
+
+
+
+    QMenu *UART = menuBar()->addMenu("&UART");
+    QCheckBox *checkBox = new QCheckBox();
+
+    QWidgetAction *action = new QWidgetAction(menuBar());
+    action->setDefaultWidget(checkBox);
+
+
+
+    QMenu *SPI = menuBar()->addMenu("&SPI");
+    QMenu *I2C = menuBar()->addMenu("&I2C");
+    QMenu *ADC = menuBar()->addMenu("&ADC");
+    QMenu *DAC = menuBar()->addMenu("&DAC");
     QMenu *TIMER = menuBar()->addMenu("&Frequency Mesure");
     QFont font = menuBar()->font();
+    // Create a QFont object and set its bold property to true
+    font.setBold(true);
+    menuBar()->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    QBoxLayout *layout = new QBoxLayout(QBoxLayout::LeftToRight);
+    menuBar()->setLayout(layout);
+    QLabel *logoLabel = new QLabel(menuBar());
+    QPixmap logoPixmap(":/logo-actia.png");  // Replace with your own logo image file
+    logoLabel->setPixmap(logoPixmap);
+    logoLabel->setScaledContents(true);
+    //QAction *logoAction = new QAction(menuBar());
+
+
+
+
+    QString style = "\
+            QMenuBar {\
+                background-color: #868482;\
+                spacing: 50px;\
+            }\
+            QMenuBar::item {\
+                background-color: transparent;\
+                padding: 15px ;\
+                width : 500px;\
+                margin: 2px;\
+                border: 5px;\
+                font : Helvetica gras 20px;\
+                color: #FFFFFF;\
+            }\
+            QMenuBar::item:selected {\
+                background-color:#328930;\
+            }\
+            QMenu {\
+                background-color: #444444;\
+                border: none;\
+                padding: 6px 10px;\
+            }\
+            QMenu::item {\
+                background-color: transparent;\
+                padding: 4px 20px;\
+                margin: 0px;\
+                border: none;\
+                color: #FFFFFF;\
+            }\
+            QMenu::item:selected {\
+                background-color: #328930;\
+            }";
+
+    menuBar()->setStyleSheet(style);
     font.setPointSize(font.pointSize() + 6); // increase by 2 points
     font.setPixelSize(20);
     font.setPointSizeF(10);
     QSizePolicy policy = UART->sizePolicy();
-    policy.setHorizontalStretch(20); // increase by a factor of 2
+    policy.setHorizontalStretch(10); // increase by a factor of 2
+
     UART->setSizePolicy(policy);
-    UART->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
-    SPI->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
-    I2C->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
-    ADC->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
-    DAC->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
-    TIMER->setStyleSheet("font: Arial 15px; color: white; background-color: gray;");
+    UART->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+    SPI->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+    I2C->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+    ADC->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+    DAC->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+    TIMER->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
 
     menuBar()->setFont(font);
     UART->setFont(font);
     // Available UART IPs
+    QSettings settings("MyCompany", "MyApp" , this);
+
+
     UART->addAction(UART4);
+    //UART->addAction(action);
+
+    UART->addSeparator();
+    //UART->setIcon(QIcon::fromTheme("document-open"));
+    //UART->setIcon(style()->standardIcon(QStyle::SP_FileDialogContentsView));
+
+
+
     UART->addAction(UART5);
+    UART->addSeparator();
+
     UART->addAction(UART7);
+    UART->addSeparator();
+
     UART->addAction(UART8);
+    UART->addSeparator();
+
     UART->addAction(UART9);
+    UART->addSeparator();
+
 
     UART->addAction(USART1);
+    UART->addSeparator();
+
     UART->addAction(USART2);
+    UART->addSeparator();
+
     UART->addAction(USART6);
+    UART->addSeparator();
+
     UART->addAction(USART10);
-    TIMER->addAction(USART1);
+    UART->addSeparator();
+
+    TIMER->addAction(InputCaptureMode);
+    UART->addSeparator();
+
 
     // Connect to the UART configurations
     connect(UART4, &QAction::triggered, this, &Dashboard::UARTConfig);
@@ -151,17 +248,29 @@ Dashboard::Dashboard(QWidget *parent) :
 
     connect(USART6, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(USART10, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(USART10, &QAction::triggered, this,&Dashboard::UARTConfig);
 
 
     // Available SPI IPs
     SPI->addAction(SPI1);
+    SPI->addSeparator();
+
     SPI->addAction(SPI2);
+    SPI->addSeparator();
+
     SPI->addAction(SPI3);
+    SPI->addSeparator();
+
     SPI->addAction(SPI4);
+    SPI->addSeparator();
+
     SPI->addAction(SPI5);
+    SPI->addSeparator();
+
 
     SPI->addAction(SPI6);
+    SPI->addSeparator();
+
 
 
     // Connect to the SPI configurations
@@ -177,10 +286,20 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Available I2C IPs
     I2C->addAction(I2C1);
+    I2C->addSeparator();
+
     I2C->addAction(I2C2);
+    I2C->addSeparator();
+
     I2C->addAction(I2C3);
+    I2C->addSeparator();
+
     I2C->addAction(I2C4);
+    I2C->addSeparator();
+
     I2C->addAction(I2C5);
+    I2C->addSeparator();
+
 
 
 
@@ -195,8 +314,14 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Available ADC IPs
     ADC->addAction(ADC1);
+    ADC->addSeparator();
+
     ADC->addAction(ADC2);
+    ADC->addSeparator();
+
     ADC->addAction(ADC3);
+    ADC->addSeparator();
+
 
 
 
@@ -208,13 +333,32 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Available DAC IPs
     DAC->addAction(DAC1);
+    DAC->addSeparator();
+
 
     // Connect to the DAC configurations
-    connect(DAC1, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(DAC1, &QAction::triggered, this, &Dashboard::DACConfig);
+
 
 
     connect(quit, &QAction::triggered, qApp, QApplication::quit);
 }
+
+//void Dashboard::onStopBitsComboBoxChanged(int index){
+//        // Retrieve the selected option
+//        QComboBox* stopBitsComboBox = new QComboBox(this);
+
+//        QString stopBits = stopBitsComboBox->itemText(index);
+
+//        // Store the selected option in the settings file
+//        settings.setValue("stopBits", stopBits);
+
+//        // Retrieve the stored value and print to the console
+//        QString stopBitsConfig = settings.value("stopBits", stopBits).toString();
+//        qDebug() << "selected option:" << stopBits;
+//        qDebug() << "stopBits:" << stopBitsConfig;
+//    }
+
 
 Dashboard::~Dashboard()
 {
