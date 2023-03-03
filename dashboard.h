@@ -60,28 +60,28 @@ private slots :
                baudRateComboBox->setMinimumWidth(10);
                baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-//                int baudRateIndex = settings.value("UART/baudRateIndex", 0).toInt();
+    //                int baudRateIndex = settings.value("UART/baudRateIndex", 0).toInt();
 
-//               int parityIndex = settings.value("UART/parityIndex", 0).toInt();
-//               int stopBitsIndex = settings.value("UART/stopBitsIndex", 0).toInt();
-//               int dataBitsIndex = settings.value("UART/dataBitsIndex", 0).toInt();
-//               int flowControlIndex = settings.value("UART/flowControlIndex", 0).toInt();
-//               baudRateComboBox->setCurrentIndex(baudRateIndex);
+    //               int parityIndex = settings.value("UART/parityIndex", 0).toInt();
+    //               int stopBitsIndex = settings.value("UART/stopBitsIndex", 0).toInt();
+    //               int dataBitsIndex = settings.value("UART/dataBitsIndex", 0).toInt();
+    //               int flowControlIndex = settings.value("UART/flowControlIndex", 0).toInt();
+    //               baudRateComboBox->setCurrentIndex(baudRateIndex);
                // Save the selected baud rate when changed
-               int selectedIndex = settings.value("MyWidget/SelectedIndex", 0).toInt();
-               baudRateComboBox->setCurrentIndex(selectedIndex);
-//               qDebug() << "selectedIndex:" << selectedIndex;
+//               int selectedIndex = settings.value("MyWidget/SelectedIndex", 0).toInt();
+//               baudRateComboBox->setCurrentIndex(selectedIndex);
+//    //               qDebug() << "selectedIndex:" << selectedIndex;
 
 
 
 
-                connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index) {
-                        baudRateComboBox->setCurrentIndex(index);
-                        settings.setValue("UART/baudRateIndex", index);
+//                connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index) {
+//                        baudRateComboBox->setCurrentIndex(index);
+//                        settings.setValue("UART/baudRateIndex", index);
 
-                   });
+//                   });
 
-;
+//    ;
 
                layout->addRow(baudRateLabel, baudRateComboBox);
 
@@ -113,8 +113,10 @@ private slots :
                // Connect the combo box to the slot
 
                // Load the stored value from the settings file
-               QString stopBitsConfig = settings.value("stopBits", "").toString();
+               QSettings settings("file.txt", QSettings::IniFormat);
 
+               QString stopBitsConfig = settings.value("stopBits", "").toString();
+//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int index = stopBitsComboBox->findText(stopBitsConfig);
@@ -122,9 +124,28 @@ private slots :
                    stopBitsComboBox->setCurrentIndex(index);
 
                // Connect the combo box to the slot
-               connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString stopBits; // declare stopBits outside of the lambda
+
+               connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&stopBits](int index){
+                   // Retrieve the selected option
+                   QSettings settings("file.txt", QSettings::IniFormat);
+
+                   QString stopBits = stopBitsComboBox->itemText(index);
+                   settings.beginGroup("UARTConfigs");
 
 
+                   // Store the selected option in the settings file
+                   settings.setValue("stopBits", stopBits);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << stopBits;
+                   qDebug() << "stopBits:" << stopBitsConfig;
+               });
 
 
 
@@ -154,11 +175,11 @@ private slots :
                FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-//               FlowControlComboBox->setStyleSheet("QComboBox {"
+    //               FlowControlComboBox->setStyleSheet("QComboBox {"
 
-//                                       "  font-weight: bold;"
-//                                       "  border: 1px solid black;"
-//                                       "}");
+    //                                       "  font-weight: bold;"
+    //                                       "  border: 1px solid black;"
+    //                                       "}");
 
 
                layout->addRow(FlowControlLabel, FlowControlComboBox);
@@ -192,46 +213,37 @@ private slots :
                                          "  padding: 5px;"
                                          "}");
 
+//               QSettings settings("file.txt", QSettings::IniFormat);
 
-               QSettings settings("file.txt", QSettings::IniFormat);
                qDebug() << "Settings file path: " << settings.fileName();
 
-               // Open the file in a text editor or appropriate tool to view the settings
-//               QMessageBox::information(this, "Item Selection",
-//                                            baudRateComboBox->currentText());
-//               QFileInfo fileInfo("C:/Users/nawledbr/Documents/build-Serial_Port_COM-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/file.txt");
-               //QDesktopServices::openUrl(QUrl("file://" + settings.fileName()));
 
-//               if (fileInfo.exists()) {
-//                   QDesktopServices::openUrl(QUrl("file://" + settings.fileName()));
-//               } else {
-//                   qDebug() << "File not found!";
-//               }
-               QString stringbaudRate = baudRateComboBox->currentText();
-               int intbaudRate = stringbaudRate.toInt();
+
                settings.beginGroup("UARTConfigs");
 
                settings.setValue("Baudrate",  baudRateComboBox->currentText());
-               //settings.setValue("stopbits",  stopBits);
+               settings.setValue("stopBits",  stopBits);
                settings.setValue("databits",  DataBitsComboBox->currentText());
                settings.setValue("flowcontrol",  FlowControlComboBox->currentText());
-               settings.setValue("parity",  parityComboBox->currentText());
+               settings.setValue("parity",  FlowControlComboBox->currentText());
 
                settings.endGroup();
 
 
 
 
-//               QString baudRate = settings.value("baudRate").toString();
-//               QString parity = settings.value("parity").toString();
-//               QString dataBits = settings.value("dataBits").toString();
-//               QString flowControl = settings.value("flowControl").toString();
 
-//               qDebug() << "baudRate:" << baudRate;
-//               qDebug() << "parity:" << parity;
-//               qDebug() << "stopBits:" << stopBits;
-//               qDebug() << "dataBits:" << dataBits;
-//               qDebug() << "flowControl:" << flowControl;
+
+    //               QString baudRate = settings.value("baudRate").toString();
+    //               QString parity = settings.value("parity").toString();
+    //               QString dataBits = settings.value("dataBits").toString();
+    //               QString flowControl = settings.value("flowControl").toString();
+
+    //               qDebug() << "baudRate:" << baudRate;
+    //               qDebug() << "parity:" << parity;
+    //               qDebug() << "stopBits:" << stopBits;
+    //               qDebug() << "dataBits:" << dataBits;
+    //               qDebug() << "flowControl:" << flowControl;
 
 
 
@@ -258,7 +270,6 @@ private slots :
 
 
     }
-
 
 
     void SPIConfig (){
@@ -873,24 +884,24 @@ private slots :
 
 
     }
-    void onStopBitsComboBoxChanged(int index){
-        // Retrieve the selected option
-        QString stopBits = stopBitsComboBox->itemText(index);
+//    void Dashbord::onStopBitsComboBoxChanged(int index){
+//        // Retrieve the selected option
+//        QString stopBits = stopBitsComboBox->itemText(index);
 
-        // Store the selected option in the settings file
-        settings.setValue("stopBits", stopBits);
+//        // Store the selected option in the settings file
+//        settings.setValue("stopBits", stopBits);
 
-        // Retrieve the stored value and print to the console
-        QString stopBitsConfig = settings.value("stopBits", stopBits).toString();
-        qDebug() << "selected option:" << stopBits;
-        qDebug() << "stopBits:" << stopBitsConfig;
-    }
+//        // Retrieve the stored value and print to the console
+//        QString stopBitsConfig = settings.value("stopBits", stopBits).toString();
+//        qDebug() << "selected option:" << stopBits;
+//        qDebug() << "stopBits:" << stopBitsConfig;
+//    }
+//    void onStopBitsComboBoxChanged(int index);
 
 
 private:
     Ui::Dashboard *ui;
     QSerialPortInfo info;
-    QComboBox *stopBitsComboBox;
 
 
 };

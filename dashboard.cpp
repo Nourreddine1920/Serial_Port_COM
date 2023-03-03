@@ -344,6 +344,22 @@ Dashboard::Dashboard(QWidget *parent) :
     connect(quit, &QAction::triggered, qApp, QApplication::quit);
 }
 
+//void Dashboard::onStopBitsComboBoxChanged(int index){
+//        // Retrieve the selected option
+//        QComboBox* stopBitsComboBox = new QComboBox(this);
+
+//        QString stopBits = stopBitsComboBox->itemText(index);
+
+//        // Store the selected option in the settings file
+//        settings.setValue("stopBits", stopBits);
+
+//        // Retrieve the stored value and print to the console
+//        QString stopBitsConfig = settings.value("stopBits", stopBits).toString();
+//        qDebug() << "selected option:" << stopBits;
+//        qDebug() << "stopBits:" << stopBitsConfig;
+//    }
+
+
 Dashboard::~Dashboard()
 {
     delete ui;
