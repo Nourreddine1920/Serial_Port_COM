@@ -60,30 +60,49 @@ private slots :
                baudRateComboBox->setMinimumWidth(10);
                baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-    //                int baudRateIndex = settings.value("UART/baudRateIndex", 0).toInt();
-
-    //               int parityIndex = settings.value("UART/parityIndex", 0).toInt();
-    //               int stopBitsIndex = settings.value("UART/stopBitsIndex", 0).toInt();
-    //               int dataBitsIndex = settings.value("UART/dataBitsIndex", 0).toInt();
-    //               int flowControlIndex = settings.value("UART/flowControlIndex", 0).toInt();
-    //               baudRateComboBox->setCurrentIndex(baudRateIndex);
-               // Save the selected baud rate when changed
-//               int selectedIndex = settings.value("MyWidget/SelectedIndex", 0).toInt();
-//               baudRateComboBox->setCurrentIndex(selectedIndex);
-//    //               qDebug() << "selectedIndex:" << selectedIndex;
 
 
 
-
-//                connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index) {
-//                        baudRateComboBox->setCurrentIndex(index);
-//                        settings.setValue("UART/baudRateIndex", index);
-
-//                   });
-
-//    ;
 
                layout->addRow(baudRateLabel, baudRateComboBox);
+
+
+
+               // Save Baudrate configs into a file.txt
+
+
+               QString BaudrateConfig = settings.value("Baudrate", "").toString();
+//                QString stopBitsConfig;
+               // Set the selected option in the combo box
+
+               int indexBaudrate = baudRateComboBox->findText(BaudrateConfig);
+               if (indexBaudrate != -1)
+                   baudRateComboBox->setCurrentIndex(indexBaudrate);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString Baudrate; // declare stopBits outside of the lambda
+
+               connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Baudrate](int indexBaudrate){
+                   // Retrieve the selected option
+                   QSettings settings("file.txt", QSettings::IniFormat);
+
+                   QString Baudrate = baudRateComboBox->itemText(indexBaudrate);
+                   settings.beginGroup("UARTConfigs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("Baudrate", Baudrate);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString BaudrateConfig = settings.value("Baudrate" , Baudrate).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << Baudrate;
+                   qDebug() << "Baudrate:" << BaudrateConfig;
+               });
+
 
                // Create the parity label and combo box
 
@@ -221,7 +240,7 @@ private slots :
 
                settings.beginGroup("UARTConfigs");
 
-               settings.setValue("Baudrate",  baudRateComboBox->currentText());
+               settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
                settings.setValue("databits",  DataBitsComboBox->currentText());
                settings.setValue("flowcontrol",  FlowControlComboBox->currentText());
