@@ -348,9 +348,6 @@ private slots :
 
                settings.endGroup();
 
-               settings.beginGroup("UARTConfigs");
-               settings.remove("DataaBits");
-               settings.endGroup();
 
 
 
