@@ -170,20 +170,18 @@ private slots :
 
                // Connect the combo box to the slot
 
-               // Load the stored value from the settings file
-               QSettings settings("file.txt", QSettings::IniFormat);
+             //--------------------------- Save Stop Bits Configs into a file.txt -------------------------//
 
                QString stopBitsConfig = settings.value("stopBits", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int index = stopBitsComboBox->findText(stopBitsConfig);
                if (index != -1)
                    stopBitsComboBox->setCurrentIndex(index);
 
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString stopBits; // declare stopBits outside of the lambda
+
+               // Connect the combo box to the slot
 
                connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&stopBits](int index){
                    // Retrieve the selected option
@@ -199,7 +197,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                    qDebug() << "selected option:" << stopBits;
                    qDebug() << "stopBits:" << stopBitsConfig;
@@ -268,16 +265,45 @@ private slots :
                FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-    //               FlowControlComboBox->setStyleSheet("QComboBox {"
 
-    //                                       "  font-weight: bold;"
-    //                                       "  border: 1px solid black;"
-    //                                       "}");
 
 
                layout->addRow(FlowControlLabel, FlowControlComboBox);
                layout->setContentsMargins(0, 0, 0, 0);
                layout->setSpacing(30);
+
+
+               //--------------------------- Save Stop Bits Configs into a file.txt -------------------------//
+
+                 QString FlowControlConfig = settings.value("FlowControl", "").toString();
+                 // Set the selected option in the combo box
+
+                 int indexFlowControl = FlowControlComboBox->findText(FlowControlConfig);
+                 if (indexFlowControl != -1)
+                     FlowControlComboBox->setCurrentIndex(indexFlowControl);
+
+                 QString FlowControl; // declare FlowControl outside of the lambda
+
+                 // Connect the combo box to the slot
+
+                 connect(FlowControlComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&FlowControl](int indexFlowControl){
+                     // Retrieve the selected option
+                     QSettings settings("file.txt", QSettings::IniFormat);
+
+                     QString FlowControl = FlowControlComboBox->itemText(indexFlowControl);
+                     settings.beginGroup("UARTConfigs");
+
+
+                     // Store the selected option in the settings file
+                     settings.setValue("FlowControl", FlowControl);
+                     settings.endGroup();
+
+                     // Retrieve the stored value and print to the console
+                     QString FlowControlConfig = settings.value("FlowControl" , FlowControl).toString();
+
+                     qDebug() << "selected option:" << FlowControl;
+                     qDebug() << "FlowControl:" << FlowControlConfig;
+                 });
 
                // Create the vertical layout and add the form layout to it
                QVBoxLayout* verticalLayout = new QVBoxLayout(this);
@@ -306,7 +332,7 @@ private slots :
                                          "  padding: 5px;"
                                          "}");
 
-//               QSettings settings("file.txt", QSettings::IniFormat);
+               QSettings settings("file.txt", QSettings::IniFormat);
 
                qDebug() << "Settings file path: " << settings.fileName();
 
@@ -317,10 +343,16 @@ private slots :
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
                settings.setValue("DataBits",  DataBits);
-               settings.setValue("flowcontrol",  FlowControlComboBox->currentText());
+               settings.setValue("FlowControl",  FlowControl);
                settings.setValue("Parity",  Parity);
 
                settings.endGroup();
+
+               settings.beginGroup("UARTConfigs");
+               settings.remove("DataaBits");
+               settings.endGroup();
+
+
 
 
 
