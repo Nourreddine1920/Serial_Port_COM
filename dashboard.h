@@ -1898,7 +1898,7 @@ private slots :
         //        titleLabel->setFont(titleFont);
                 layout->addRow(titleLabel);
 
-               // Create the Model label and combo box
+                // ----------------------Create Mode----------------------//
 
                QLabel* ModeLabel = new QLabel(tr("Mode"), this);
                QComboBox* ModeComboBox = new QComboBox(this);
@@ -1913,7 +1913,7 @@ private slots :
 
                layout->addRow(ModeLabel, ModeComboBox);
 
-               // Create the NSS label and combo box
+               // ----------------------Create NSS----------------------//
 
                QLabel* NSSLabel = new QLabel(tr("Hardware NSS Signal"), this);
                QComboBox* NSSComboBox = new QComboBox(this);
@@ -1924,7 +1924,8 @@ private slots :
                layout->addRow(NSSLabel, NSSComboBox);
 
 
-               // Create the Frame Format label and combo box
+
+               // ----------------------Create Frame Format----------------------//
 
                QLabel* FrameFormatLabel = new QLabel(tr("Frame Format"), this);
                QComboBox* FrameFormatComboBox = new QComboBox(this);
@@ -1935,7 +1936,7 @@ private slots :
                layout->addRow(FrameFormatLabel, FrameFormatComboBox);
 
 
-               // Create the data size label and combo box
+               // ----------------------Create Data size----------------------//
 
                QLabel* DataSizeLabel = new QLabel(tr("Data Size"), this);
                QSpinBox* DataSizeSpinBox = new QSpinBox(this);
@@ -1947,7 +1948,7 @@ private slots :
                layout->addRow(DataSizeLabel, DataSizeSpinBox);
 
 
-               // Create the First Bit label and combo box
+               // ----------------------Create First Bit----------------------//
 
                QLabel* FirstBitLabel = new QLabel(tr("First Bit"), this);
                QComboBox* FirstBitComboBox = new QComboBox(this);
@@ -1976,7 +1977,9 @@ private slots :
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
 
-               // save settings in a settings file
+               // ----------------------Save configs into a file----------------------//
+
+
                QSettings settings("file.txt", QSettings::IniFormat);
 
 
@@ -2020,15 +2023,12 @@ private slots :
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
-        //        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-        //        QFont titleFont("Helvetica", 10, QFont::Bold);
-        //        titleLabel->setFont(titleFont);
                 layout->addRow(titleLabel);
 
 
 
-               // Create the Custom Timing label and combo box
+                // ----------------------Create Timing----------------------//
 
                QLabel* TimingLabel = new QLabel(tr("Custom Timing"), this);
                QComboBox* TimingComboBox = new QComboBox(this);
@@ -2043,7 +2043,7 @@ private slots :
 
                layout->addRow(TimingLabel, TimingComboBox);
 
-               // Create the I2C Speed Mode label and combo box
+               // ----------------------Create Speed Mode----------------------//
 
                QLabel* SpeedLabel = new QLabel(tr("I2C Speed Mode"), this);
                QComboBox* SpeedComboBox = new QComboBox(this);
@@ -2054,7 +2054,7 @@ private slots :
                layout->addRow(SpeedLabel, SpeedComboBox);
 
 
-               // Create the Speed Frequency label and combo box
+               // ----------------------Create Frequency Speed----------------------//
 
                QLabel* FrequencyLabel = new QLabel(tr("Speed Frequency"), this);
                QComboBox* FrequencyComboBox = new QComboBox(this);
@@ -2071,7 +2071,7 @@ private slots :
                layout->addRow(FrequencyLabel, FrequencyComboBox);
 
 
-               // Create the Rise Time label and combo box
+               // ----------------------Create Rise Edge----------------------//
 
                QLabel* RiseLabel = new QLabel(tr("Rise Time"), this);
                QSpinBox* RiseSpinBox = new QSpinBox(this);
@@ -2083,7 +2083,7 @@ private slots :
                layout->addRow(RiseLabel, RiseSpinBox);
 
 
-               // Create the Fall Time label and combo box
+               // ----------------------Create Fall edge----------------------//
 
                QLabel* FallLabel = new QLabel(tr("Fall Time"), this);
                QSpinBox* FallSpinBox = new QSpinBox(this);
@@ -2095,7 +2095,7 @@ private slots :
                layout->addRow(FallLabel, FallSpinBox);
 
 
-               // Create the Coefficient of digital converter  label and combo box
+               // ----------------------Create Converter----------------------//
 
                QLabel* ConverterLabel = new QLabel(tr("Coefficient of Digital Converter"), this);
                QSpinBox* ConverterSpinBox = new QSpinBox(this);
@@ -2106,7 +2106,7 @@ private slots :
                ConverterSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
                layout->addRow(ConverterLabel, ConverterSpinBox);
 
-               // Create the Analog Filter label and combo box
+               // ----------------------Create Analog Filter----------------------//
 
                QLabel* AnalogFilterLabel = new QLabel(tr("Analog Filter"), this);
                QComboBox* AnalogFilterComboBox = new QComboBox(this);
@@ -2139,7 +2139,8 @@ private slots :
                widget->setGeometry(500, 500, 600, 500);
 
 
-               // Save I2C Configs in a file*
+               // ----------------------Save configs into file ----------------------//
+
                QSettings settings("file.txt", QSettings::IniFormat);
 
 
@@ -2192,18 +2193,14 @@ private slots :
 
 
 
-               // Create the Mode label and combo box
+                // ----------------------Create Channel Choices----------------------//
 
                QLabel* ChannelLabel = new QLabel(tr("Select Channel"), this);
                QComboBox* ChannelComboBox = new QComboBox(this);
 
                ChannelComboBox->addItems(QStringList() << "IN2" << "IN3" << "IN4" <<"IN5" << "IN6" << "IN7" << "IN8" << "IN9" << "IN10" << "IN11" << "IN14" << "IN15" << "IN16" << "IN17" <<"IN18" <<"IN19");
                // Create the second QComboBox and add it as an item to the first combo box
-               QComboBox* ChannelSelectionMode = new QComboBox();
-               ChannelSelectionMode->addItems(QStringList() << "Option 1" << "Option 2" << "Option 3");
-               //ChannelComboBox->addItem("New Selection", QVariant::fromValue(ChannelSelectionMode));
 
-               ChannelComboBox->setItemData(0, QVariant::fromValue(ChannelSelectionMode), Qt::UserRole);
 
                ChannelComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
@@ -2214,7 +2211,7 @@ private slots :
 
                layout->addRow(ChannelLabel, ChannelComboBox);
 
-               // Create the Resolution Bit label and combo box
+               // ----------------------Create Resolution Mode----------------------//
 
                QLabel* ResolutionLabel = new QLabel(tr("ADC Resolution Bit"), this);
                QComboBox* ResolutionComboBox = new QComboBox(this);
@@ -2225,7 +2222,7 @@ private slots :
                layout->addRow(ResolutionLabel, ResolutionComboBox);
 
 
-               // Create the Conversion Modes =====  "Scan Mode"  Frequency label and combo box
+               // ----------------------Create Scan Mode----------------------//
 
                QLabel* ScanLabel = new QLabel(tr("Scan Conversion Mode"), this);
                QComboBox* ScanComboBox = new QComboBox(this);
@@ -2236,7 +2233,7 @@ private slots :
                layout->addRow(ScanLabel, ScanComboBox);
 
 
-                // Create the Conversion Modes =====  "Continuous Mode"  Frequency label and combo box
+               // ----------------------Create continuous Mode----------------------//
 
                QLabel* ContinuousLabel = new QLabel(tr("Continuous Conversion Mode"), this);
                QComboBox* ContinuousComboBox = new QComboBox(this);
@@ -2249,7 +2246,7 @@ private slots :
                layout->addRow(ContinuousLabel, ContinuousComboBox);
 
 
-               // Create the Conversion Modes =====  "Discontinuous Mode"  label and combo box
+               // ----------------------Create Discontinuous Mode----------------------//
 
               QLabel* DiscontinuousLabel = new QLabel(tr("Discontinuous Conversion Mode"), this);
               QComboBox* DiscontinuousComboBox = new QComboBox(this);
@@ -2262,7 +2259,7 @@ private slots :
               layout->addRow(DiscontinuousLabel, DiscontinuousComboBox);
 
 
-              // Create the End Conversion Mode label and combo box
+              // ----------------------Create End of Conversion Mode----------------------//
 
              QLabel* EndConversionLabel = new QLabel(tr("End of Conversion Mode"), this);
              QComboBox* EndConversionComboBox = new QComboBox(this);
@@ -2275,7 +2272,7 @@ private slots :
              layout->addRow(EndConversionLabel, EndConversionComboBox);
 
 
-             // Create the Overrun Behavior Mode label and combo box
+             // ----------------------Create Behavior Bit----------------------//
 
             QLabel* BehaviorLabel = new QLabel(tr("Overrun Behavior"), this);
             QComboBox* BehaviorComboBox = new QComboBox(this);
@@ -2289,7 +2286,7 @@ private slots :
 
 
 
-               // Create the Left Bit label and combo box
+            // ----------------------Create Left Bit----------------------//
 
                QLabel* LeftBitLabel = new QLabel(tr("Left Bit Shift"), this);
                QComboBox* LeftBitComboBox = new QComboBox(this);
@@ -2321,7 +2318,7 @@ private slots :
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
 
-               // save ADC Configs in a file
+               // ----------------------Save Configs in file----------------------//
                QSettings settings("file.txt", QSettings::IniFormat);
 
                settings.beginGroup("ADCConfigs");
@@ -2334,16 +2331,7 @@ private slots :
                settings.setValue("EndConversion",  EndConversionComboBox->currentText());
                settings.setValue("Behavior",  BehaviorComboBox->currentText());
                settings.setValue("LeftBit",  LeftBitComboBox->currentText());
-
-
-
-
                settings.endGroup();
-
-               settings.beginGroup("ADCConfigs");
-               settings.remove("ChannelSelectionMode");
-               settings.endGroup();
-
 
 
 
@@ -2385,7 +2373,8 @@ private slots :
 
 
 
-        // Create the OUT1 Connected to channel and combo box
+        // -----------------OUT1 Connected to-----------------//
+
         QLabel* ChannelLabel = new QLabel(tr("OUT1 Connected to "), this);
         QComboBox* ChannelComboBox = new QComboBox(this);
         ChannelComboBox->addItems(QStringList() << "Disable" << "Only External Pin" << "Only on Chip Analog Peripherals" <<"Both external Pin and on Chip Analog" );
@@ -2393,7 +2382,8 @@ private slots :
         ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
         layout->addRow(ChannelLabel, ChannelComboBox);
 
-        // Create the OUT2 Connected to channel and combo box
+        // --------------OUT2 Connected to--------------------//
+
         QLabel* Channel2Label = new QLabel(tr("OUT2 Connected to "), this);
         QComboBox* Channel2ComboBox = new QComboBox(this);
         Channel2ComboBox->addItems(QStringList() << "Disable" << "Only External Pin" << "Only on Chip Analog Peripherals" <<"Both external Pin and on Chip Analog" );
@@ -2403,6 +2393,9 @@ private slots :
 
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
+
+
+        // --------------Connection between two widgets Channel1 & Channel2--------------------//
 
         connect(ChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
                 this, &Dashboard::ShowingDACConfigs);
