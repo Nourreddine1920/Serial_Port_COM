@@ -3,6 +3,8 @@
 #include "mainwindow.h"
 #include"uart.h"
 
+#include"dashboard.h"
+
 starting_screen::starting_screen(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::starting_screen)
@@ -30,7 +32,13 @@ void starting_screen::on_pushButton_startapplication_clicked()
     LoadingScreen->start_Loading();
     //passer à l'ecran uart
 
-    Uartscreen->show();
+    //dashboard->show();
+
+
+    Dashboard* dashboard = new Dashboard();
+    dashboard->show();
+    //this->hide();
+
     this->hide();
 
 }
