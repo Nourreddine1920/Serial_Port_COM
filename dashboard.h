@@ -1405,7 +1405,6 @@ private slots :
 
 
 }
-
 private:
     Ui::Dashboard *ui;
     QSerialPortInfo info;
