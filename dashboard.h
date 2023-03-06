@@ -1143,7 +1143,7 @@ private slots :
         QLabel* PINLabel = new QLabel(tr("GPIO Input PIN "), this);
         QComboBox* PINComboBox = new QComboBox(this);
 
-        PINComboBox->addItems(QStringList() << "PG4" << "PG5" << "PG6" << "PG7" << "PG10" << "PG11" << "PG12" << "PG13" );
+        PINComboBox->addItems(QStringList() << "PA6" << "PA7" << "PA8" << "PA9" << "PA10" << "PA11" << "PA12" << "PA13" );
 
 
         PINLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
@@ -1230,6 +1230,181 @@ private slots :
 
 
     }
+    void FrequencyMesureConfig(){
+
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+
+        QFormLayout* layout = new QFormLayout(this);
+
+        // --------------Select Channel --------------------//
+
+        QLabel* ChannelLabel = new QLabel(tr("Select Channel"), this);
+        QComboBox* ChannelComboBox = new QComboBox(this);
+
+        ChannelComboBox->addItems(QStringList() << "Channel1" << "Channel2" << "Channel3" << "Channel4");
+
+
+        ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(ChannelLabel, ChannelComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+        // --------------Prescaler for Frequency Mesure--------------------//
+
+        QLabel* PrescalerLabel = new QLabel(tr("Prescaler"), this);
+        QSpinBox* PrescalerSpinBox = new QSpinBox(this);
+        PrescalerSpinBox->setMinimum(0);
+        PrescalerSpinBox->setMaximum(65535);
+
+
+
+
+        PrescalerLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        PrescalerSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(PrescalerLabel, PrescalerSpinBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+        // --------------Counter Mode--------------------//
+
+        QLabel* CounterLabel = new QLabel(tr("Counter Mode"), this);
+        QComboBox* CounterComboBox = new QComboBox(this);
+
+        CounterComboBox->addItems(QStringList() <<"Up" << "Down" );
+
+
+        CounterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        CounterComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(CounterLabel, CounterComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // --------------Counter Periode === AutoReload--------------------//
+
+        QLabel* AutoReloadLabel = new QLabel(tr("Counter Period (AutoReload) "), this);
+        QSpinBox* AutoReloadSpinBox = new QSpinBox(this);
+        AutoReloadSpinBox->setMinimum(0);
+        AutoReloadSpinBox->setMaximum(65535);
+
+
+        AutoReloadLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        AutoReloadSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(AutoReloadLabel, AutoReloadSpinBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // --------------Inetrnal Clock Division --------------------//
+
+        QLabel* ClockLabel = new QLabel(tr("Internal Clock Division"), this);
+        QComboBox* ClockComboBox = new QComboBox(this);
+
+        ClockComboBox->addItems(QStringList() <<"No Division" << "Division by 2" << "Division by 4" );
+
+
+
+        ClockLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        ClockComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(ClockLabel, ClockComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+
+        // --------------Repitition Counter --------------------//
+
+        QLabel* RepititionLabel = new QLabel(tr("Repitition Counter"), this);
+        QSpinBox* RepititionSpinBox = new QSpinBox(this);
+        RepititionSpinBox->setMinimum(0);
+        RepititionSpinBox->setMaximum(65535);
+
+
+        RepititionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        RepititionSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(RepititionLabel, RepititionSpinBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // --------------Auto-Reload Preload --------------------//
+
+        QLabel* PreloadLabel = new QLabel(tr("Auto-Reload Preload"), this);
+        QComboBox* PreloadComboBox = new QComboBox(this);
+
+        PreloadComboBox->addItems(QStringList() <<"Enable" << "Disable" );
+
+
+
+        PreloadLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        PreloadComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(PreloadLabel, PreloadComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+
+        // Create the vertical layout and add the form layout to it
+        QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+        verticalLayout->addStretch();
+        verticalLayout->addLayout(layout);
+        verticalLayout->addStretch();
+
+        // Create the horizontal layout and add the vertical layout to it
+        QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+        horizontalLayout->addStretch();
+        horizontalLayout->addLayout(verticalLayout);
+        horizontalLayout->addStretch();
+
+        // Set the widget layout to the horizontal layout
+
+        widget->setLayout(horizontalLayout);
+        widget->setGeometry(500, 500, 600, 500);
+
+
+        QSettings settings("file.txt", QSettings::IniFormat);
+
+
+        // GPIO OUTPUT Configs
+        settings.beginGroup("FrequencyMesure");
+
+        settings.setValue("Channel",  ChannelComboBox->currentText());
+        settings.setValue("Prescaler",  PrescalerSpinBox->value());
+
+        settings.setValue("CounterMode",  CounterComboBox->currentText());
+        settings.setValue("CounterPeriod",  AutoReloadSpinBox->value());
+        settings.setValue("InetrnalClock",  ClockComboBox->currentText());
+        settings.setValue("RepititionCounter",  RepititionSpinBox->value());
+        settings.setValue("Auto-Reload",  PreloadComboBox->currentText());
+
+
+
+
+
+
+        settings.endGroup();
+
+
+
+
+}
 
 private:
     Ui::Dashboard *ui;

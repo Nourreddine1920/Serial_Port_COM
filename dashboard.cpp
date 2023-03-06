@@ -11,7 +11,6 @@ Dashboard::Dashboard(QWidget *parent) :
     ui->setupUi(this);
     QWidget::setWindowTitle("IPs Configurations ");
 
-    auto *quit = new QAction("&Quit", this);
 
     // Checkable UART Configurations
     auto *UART4 = new QAction("UART4", this);
@@ -241,7 +240,7 @@ Dashboard::Dashboard(QWidget *parent) :
     UART->addSeparator();
 
     TIMER->addAction(InputCaptureMode);
-    UART->addSeparator();
+    TIMER->addSeparator();
 
 
     // Connect to the GPIO configurations
@@ -359,6 +358,10 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Connect to the DAC configurations
     connect(DAC1, &QAction::triggered, this, &Dashboard::DACConfig);
+
+
+    // Connect to the TIMER configurations
+    connect(InputCaptureMode, &QAction::triggered, this, &Dashboard::FrequencyMesureConfig);
 
 
 
