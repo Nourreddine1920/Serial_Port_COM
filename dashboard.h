@@ -471,10 +471,10 @@ private slots :
 
                connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Baudrate](int indexBaudrate){
                    // Retrieve the selected option
-                   QSettings settings("file.txt", QSettings::IniFormat);
+                   QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Baudrate = baudRateComboBox->itemText(indexBaudrate);
-                   settings.beginGroup("UARTConfigs");
+                   settings.beginGroup("UART4Configs");
 
 
                    // Store the selected option in the settings file
@@ -501,7 +501,7 @@ private slots :
                layout->addRow(parityLabel, parityComboBox);
 
 
-               // ----------------------- Save Pqrity configs into a file.txt-----------------------------------//
+               // ----------------------- Save Pqrity configs into a UARTConfig.txt-----------------------------------//
 
 
                QString ParityConfig = settings.value("Parity", "").toString();
@@ -518,10 +518,10 @@ private slots :
 
                connect(parityComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Parity](int indexParity){
                    // Retrieve the selected option
-                   QSettings settings("file.txt", QSettings::IniFormat);
+                   QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Parity = parityComboBox->itemText(indexParity);
-                   settings.beginGroup("UARTConfigs");
+                   settings.beginGroup("UART4Configs");
 
 
                    // Store the selected option in the settings file
@@ -556,7 +556,7 @@ private slots :
 
                // Connect the combo box to the slot
 
-             //--------------------------- Save Stop Bits Configs into a file.txt -------------------------//
+             //--------------------------- Save Stop Bits Configs into a UARTConfig.txt -------------------------//
 
                QString stopBitsConfig = settings.value("stopBits", "").toString();
                // Set the selected option in the combo box
@@ -571,10 +571,10 @@ private slots :
 
                connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&stopBits](int index){
                    // Retrieve the selected option
-                   QSettings settings("file.txt", QSettings::IniFormat);
+                   QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString stopBits = stopBitsComboBox->itemText(index);
-                   settings.beginGroup("UARTConfigs");
+                   settings.beginGroup("UART4Configs");
 
 
                    // Store the selected option in the settings file
@@ -607,7 +607,7 @@ private slots :
                DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                DataBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-               // ----------------------- Save DataBits configs into a file.txt-----------------------------------//
+               // ----------------------- Save DataBits configs into a UARTConfig.txt-----------------------------------//
 
 
                QString DataBitsConfig = settings.value("DataBits", "").toString();
@@ -624,10 +624,10 @@ private slots :
 
                connect(DataBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DataBits](int indexDataBits){
                    // Retrieve the selected option
-                   QSettings settings("file.txt", QSettings::IniFormat);
+                   QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString DataBits = DataBitsComboBox->itemText(indexDataBits);
-                   settings.beginGroup("UARTConfigs");
+                   settings.beginGroup("UART4Configs");
 
 
                    // Store the selected option in the settings file
@@ -659,7 +659,7 @@ private slots :
                layout->setSpacing(30);
 
 
-               //--------------------------- Save Stop Bits Configs into a file.txt -------------------------//
+               //--------------------------- Save Stop Bits Configs into a UARTConfig.txt -------------------------//
 
                  QString FlowControlConfig = settings.value("FlowControl", "").toString();
                  // Set the selected option in the combo box
@@ -674,10 +674,10 @@ private slots :
 
                  connect(FlowControlComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&FlowControl](int indexFlowControl){
                      // Retrieve the selected option
-                     QSettings settings("file.txt", QSettings::IniFormat);
+                     QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                      QString FlowControl = FlowControlComboBox->itemText(indexFlowControl);
-                     settings.beginGroup("UARTConfigs");
+                     settings.beginGroup("UART4Configs");
 
 
                      // Store the selected option in the settings file
@@ -718,13 +718,13 @@ private slots :
                                          "  padding: 5px;"
                                          "}");
 
-               QSettings settings("file.txt", QSettings::IniFormat);
+               QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                qDebug() << "Settings file path: " << settings.fileName();
 
 
 
-               settings.beginGroup("UARTConfigs");
+               settings.beginGroup("UART4Configs");
 
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
@@ -837,10 +837,10 @@ private slots :
 
                connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Baudrate](int indexBaudrate){
                    // Retrieve the selected option
-                   QSettings settings("file.txt", QSettings::IniFormat);
+                   QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Baudrate = baudRateComboBox->itemText(indexBaudrate);
-                   settings.beginGroup("UARTConfigs");
+                   settings.beginGroup("UART5Configs");
 
 
                    // Store the selected option in the settings file
@@ -867,7 +867,7 @@ private slots :
                layout->addRow(parityLabel, parityComboBox);
 
 
-               // ----------------------- Save Pqrity configs into a file.txt-----------------------------------//
+               // ----------------------- Save Pqrity configs into a UARTConfig.txt-----------------------------------//
 
 
                QString ParityConfig = settings.value("Parity", "").toString();
@@ -884,10 +884,10 @@ private slots :
 
                connect(parityComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Parity](int indexParity){
                    // Retrieve the selected option
-                   QSettings settings("file.txt", QSettings::IniFormat);
+                   QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Parity = parityComboBox->itemText(indexParity);
-                   settings.beginGroup("UARTConfigs");
+                   settings.beginGroup("UART5Configs");
 
 
                    // Store the selected option in the settings file
@@ -922,7 +922,7 @@ private slots :
 
                // Connect the combo box to the slot
 
-             //--------------------------- Save Stop Bits Configs into a file.txt -------------------------//
+             //--------------------------- Save Stop Bits Configs into a UARTConfig.txt -------------------------//
 
                QString stopBitsConfig = settings.value("stopBits", "").toString();
                // Set the selected option in the combo box
@@ -937,10 +937,10 @@ private slots :
 
                connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&stopBits](int index){
                    // Retrieve the selected option
-                   QSettings settings("file.txt", QSettings::IniFormat);
+                   QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString stopBits = stopBitsComboBox->itemText(index);
-                   settings.beginGroup("UARTConfigs");
+                   settings.beginGroup("UART5Configs");
 
 
                    // Store the selected option in the settings file
@@ -973,7 +973,7 @@ private slots :
                DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                DataBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-               // ----------------------- Save DataBits configs into a file.txt-----------------------------------//
+               // ----------------------- Save DataBits configs into a UARTConfig.txt-----------------------------------//
 
 
                QString DataBitsConfig = settings.value("DataBits", "").toString();
@@ -990,10 +990,10 @@ private slots :
 
                connect(DataBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DataBits](int indexDataBits){
                    // Retrieve the selected option
-                   QSettings settings("file.txt", QSettings::IniFormat);
+                   QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString DataBits = DataBitsComboBox->itemText(indexDataBits);
-                   settings.beginGroup("UARTConfigs");
+                   settings.beginGroup("UART5Configs");
 
 
                    // Store the selected option in the settings file
@@ -1025,7 +1025,7 @@ private slots :
                layout->setSpacing(30);
 
 
-               //--------------------------- Save Stop Bits Configs into a file.txt -------------------------//
+               //--------------------------- Save Stop Bits Configs into a UARTConfig.txt -------------------------//
 
                  QString FlowControlConfig = settings.value("FlowControl", "").toString();
                  // Set the selected option in the combo box
@@ -1040,10 +1040,10 @@ private slots :
 
                  connect(FlowControlComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&FlowControl](int indexFlowControl){
                      // Retrieve the selected option
-                     QSettings settings("file.txt", QSettings::IniFormat);
+                     QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                      QString FlowControl = FlowControlComboBox->itemText(indexFlowControl);
-                     settings.beginGroup("UARTConfigs");
+                     settings.beginGroup("UART5Configs");
 
 
                      // Store the selected option in the settings file
@@ -1084,13 +1084,13 @@ private slots :
                                          "  padding: 5px;"
                                          "}");
 
-               QSettings settings("file.txt", QSettings::IniFormat);
+               QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                qDebug() << "Settings file path: " << settings.fileName();
 
 
 
-               settings.beginGroup("UARTConfigs");
+               settings.beginGroup("UART5Configs");
 
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
