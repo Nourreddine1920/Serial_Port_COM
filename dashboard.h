@@ -2025,6 +2025,9 @@ private slots :
 
                layout->addRow(ModeLabel, ModeComboBox);
 
+
+               //---------------------Save configuration into SPIConfig.txt---------------------------//
+
                QString ModeConfig = settings.value("Mode", "").toString();
                // Set the selected option in the combo box
 
@@ -2066,6 +2069,40 @@ private slots :
 
                layout->addRow(NSSLabel, NSSComboBox);
 
+               //---------------------Save configuration into SPIConfig.txt---------------------------//
+
+               QString NSSConfig = settings.value("NSS", "").toString();
+               // Set the selected option in the combo box
+
+               int indexNSS = NSSComboBox->findText(NSSConfig);
+               if (indexNSS != -1)
+                   NSSComboBox->setCurrentIndex(indexNSS);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString NSS; // declare stopBits outside of the lambda
+
+               connect(NSSComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&NSS](int indexNSS){
+                   // Retrieve the selected option
+                   QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+                   QString NSS = NSSComboBox->itemText(indexNSS);
+                   settings.beginGroup("SPIConfigs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("NSS", NSS);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString NSSConfig = settings.value("NSS" , NSS).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << NSS;
+                   qDebug() << "NSS:" << NSSConfig;
+               });
+
+
 
 
                // ----------------------Create Frame Format----------------------//
@@ -2077,6 +2114,41 @@ private slots :
                FrameFormatComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(FrameFormatLabel, FrameFormatComboBox);
+
+               //---------------------Save configuration into SPIConfig.txt---------------------------//
+
+               QString FrameformatConfig = settings.value("Frameformat", "").toString();
+               // Set the selected option in the combo box
+
+               int indexFrameformat = FrameFormatComboBox->findText(FrameformatConfig);
+               if (indexFrameformat != -1)
+                   FrameFormatComboBox->setCurrentIndex(indexFrameformat);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString Frameformat; // declare stopBits outside of the lambda
+
+               connect(FrameFormatComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Frameformat](int indexFrameformat){
+                   // Retrieve the selected option
+                   QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+                   QString Frameformat = FrameFormatComboBox->itemText(indexFrameformat);
+                   settings.beginGroup("SPIConfigs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("Frameformat", Frameformat);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString FrameformatConfig = settings.value("Frameformat" , Frameformat).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << Frameformat;
+                   qDebug() << "Frameformat:" << FrameformatConfig;
+               });
+
+
 
 
                // ----------------------Create Data size----------------------//
@@ -2090,6 +2162,34 @@ private slots :
                DataSizeSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
                layout->addRow(DataSizeLabel, DataSizeSpinBox);
 
+               QString DataSizeConfig = settings.value("DataSize", "").toString();
+               // Set the selected value in the spin box
+               DataSizeSpinBox->setValue(DataSizeConfig.toInt());
+
+               // Connect the spin box to the slot
+               QString DataSize; // declare DataSize outside of the lambda
+               connect(DataSizeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&DataSize](int value){
+                   // Retrieve the selected value
+                   QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+                   QString DataSize = QString::number(value);
+                   settings.beginGroup("SPIConfigs");
+
+                   // Store the selected value in the settings file
+                   settings.setValue("DataSize", DataSize);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString DataSizeConfig = settings.value("DataSize" , DataSize).toString();
+                   qDebug() << "selected value:" << DataSize;
+                   qDebug() << "DataSize:" << DataSizeConfig;
+               });
+
+
+
+
+
+
 
                // ----------------------Create First Bit----------------------//
 
@@ -2102,6 +2202,40 @@ private slots :
                layout->addRow(FirstBitLabel, FirstBitComboBox);
                layout->setContentsMargins(0, 0, 0, 0);
                layout->setSpacing(30);
+
+               //---------------------Save configuration into SPIConfig.txt---------------------------//
+
+               QString FirstbitConfig = settings.value("Firstbit", "").toString();
+               // Set the selected option in the combo box
+
+               int indexFirstbit = FirstBitComboBox->findText(FirstbitConfig);
+               if (indexFirstbit != -1)
+                   FirstBitComboBox->setCurrentIndex(indexFirstbit);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString Firstbit; // declare stopBits outside of the lambda
+
+               connect(FirstBitComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Firstbit](int indexFirstbit){
+                   // Retrieve the selected option
+                   QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+                   QString Firstbit = FirstBitComboBox->itemText(indexFirstbit);
+                   settings.beginGroup("SPIConfigs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("Firstbit", Firstbit);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString FirstbitConfig = settings.value("Firstbit" , Firstbit).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << Firstbit;
+                   qDebug() << "Firstbit:" << FirstbitConfig;
+               });
+
 
                // Create the vertical layout and add the form layout to it
                QVBoxLayout* verticalLayout = new QVBoxLayout(this);
@@ -2123,20 +2257,20 @@ private slots :
                // ----------------------Save configs into a file----------------------//
 
 
-               QSettings settings("file.txt", QSettings::IniFormat);
+//               QSettings settings("file.txt", QSettings::IniFormat);
 
 
 
-               settings.beginGroup("SPIConfigs");
+//               settings.beginGroup("SPIConfigs");
 
 
-               settings.setValue("Mode",  ModeComboBox->currentText());
-               settings.setValue("NSS",  NSSComboBox->currentText());
-               settings.setValue("Frameformat",  FrameFormatComboBox->currentText());
-               settings.setValue("Datasize",  DataSizeSpinBox->value());
-               settings.setValue("Firstbit",  FirstBitComboBox->currentText());
+//               settings.setValue("Mode",  ModeComboBox->currentText());
+//               settings.setValue("NSS",  NSSComboBox->currentText());
+//               settings.setValue("Frameformat",  FrameFormatComboBox->currentText());
+//               settings.setValue("Datasize",  DataSizeSpinBox->value());
+//               settings.setValue("Firstbit",  FirstBitComboBox->currentText());
 
-               settings.endGroup();
+//               settings.endGroup();
 
 
 
