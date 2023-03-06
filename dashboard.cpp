@@ -394,8 +394,8 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the I2C configurations
-    connect(I2C1, &QAction::triggered, this, &Dashboard::I2CConfig);
-    connect(I2C2, &QAction::triggered, this, &Dashboard::I2CConfig);
+    connect(I2C1, &QAction::triggered, this, &Dashboard::I2C1Config);
+    connect(I2C2, &QAction::triggered, this, &Dashboard::I2C2Config);
     connect(I2C3, &QAction::triggered, this, &Dashboard::I2CConfig);
     connect(I2C4, &QAction::triggered, this, &Dashboard::I2CConfig);
 
@@ -417,9 +417,9 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 
-    connect(ADC1, &QAction::triggered, this, &Dashboard::ADCConfig);
+    connect(ADC1, &QAction::triggered, this, &Dashboard::ADC1Config);
     connect(ADC2, &QAction::triggered, this, &Dashboard::ADCConfig);
-    connect(ADC3, &QAction::triggered, this, &Dashboard::ADCConfig);
+    connect(ADC3, &QAction::triggered, this, &Dashboard::ADC3Config);
 
 
     //-------------------------Connect to the DAC configurations-------------------------//

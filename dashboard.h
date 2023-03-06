@@ -1966,39 +1966,7 @@ private slots :
                 QFormLayout* layout = new QFormLayout(this);
 
 
-                // Create a QLabel for "DAC configurations" and center it horizontally
-//                QLabel* titleLabel = new QLabel("SPI configurations", this);
-//                QFontDatabase fontDatabase;
-//                QStringList fontFamilies = fontDatabase.families();
 
-//                // Choose the first available font as the best font
-//                QString bestFont = fontFamilies.first();
-
-//                // Create a font object with the best font and size
-//                QFont font(bestFont, 15);
-
-//                // Set the font and style sheet for the label
-//                titleLabel->setFont(font);
-//                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-
-//                titleLabel->setAlignment(Qt::AlignCenter);
-//        //        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-
-//        //        QFont titleFont("Helvetica", 10, QFont::Bold);
-//        //        titleLabel->setFont(titleFont);
-//                layout->addRow(titleLabel);
-
-
-//                QLabel* titleLabel = new QLabel(this);
-//                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
-//                titleLabel->setPixmap(icon.scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-
-//                titleLabel->setText("SPI Configurations");
-//                titleLabel->setStyleSheet("font-weight: bold; font-size: 20px; color: black;");
-//                titleLabel->setAlignment(Qt::AlignCenter);
-//                layout->addRow(titleLabel);
-
-                // Load the icon and scale it to an appropriate size
                 // Create a QLabel for "SPI configurations" and center it horizontally
                 QLabel* titleLabel = new QLabel("SPI configurations", this);
 
@@ -2056,6 +2024,37 @@ private slots :
 
 
                layout->addRow(ModeLabel, ModeComboBox);
+
+               QString ModeConfig = settings.value("Mode", "").toString();
+               // Set the selected option in the combo box
+
+               int indexMode = ModeComboBox->findText(ModeConfig);
+               if (indexMode != -1)
+                   ModeComboBox->setCurrentIndex(indexMode);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString Mode; // declare stopBits outside of the lambda
+
+               connect(ModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Mode](int indexMode){
+                   // Retrieve the selected option
+                   QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+                   QString Mode = ModeComboBox->itemText(indexMode);
+                   settings.beginGroup("SPIConfigs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("Mode", Mode);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString ModeConfig = settings.value("Mode" , Mode).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << Mode;
+                   qDebug() << "Mode:" << ModeConfig;
+               });
 
                // ----------------------Create NSS----------------------//
 
@@ -2625,6 +2624,370 @@ private slots :
 
 
     }
+
+    void I2C1Config (){
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+                // Create Layout form for I2C
+                QFormLayout* layout = new QFormLayout(this);
+
+                QLabel* titleLabel = new QLabel("I2C1 configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
+                QFontDatabase fontDatabase;
+                QStringList fontFamilies = fontDatabase.families();
+
+                // Choose the first available font as the best font
+                QString bestFont = fontFamilies.first();
+
+                // Create a font object with the best font and size
+                QFont font(bestFont, 15);
+
+                // Set the font and style sheet for the label
+                titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
+                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+                titleLabel->setAlignment(Qt::AlignCenter);
+
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
+
+
+                // ----------------------Create Timing----------------------//
+
+               QLabel* TimingLabel = new QLabel(tr("Custom Timing"), this);
+               QComboBox* TimingComboBox = new QComboBox(this);
+
+               TimingComboBox->addItems(QStringList() << "Enable" << "Disable");
+               TimingComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+               // Set the minimum width to 100 pixels
+               TimingComboBox->setMinimumWidth(10);
+               TimingLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               TimingComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+               layout->addRow(TimingLabel, TimingComboBox);
+
+               // ----------------------Create Speed Mode----------------------//
+
+               QLabel* SpeedLabel = new QLabel(tr("I2C Speed Mode"), this);
+               QComboBox* SpeedComboBox = new QComboBox(this);
+               SpeedComboBox->addItems(QStringList() << "Standart Mode" << "Fast Mode " << "Fast Mode Plus");
+               SpeedLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               SpeedComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(SpeedLabel, SpeedComboBox);
+
+
+               // ----------------------Create Frequency Speed----------------------//
+
+               QLabel* FrequencyLabel = new QLabel(tr("Speed Frequency"), this);
+               QComboBox* FrequencyComboBox = new QComboBox(this);
+               FrequencyComboBox->addItems(QStringList() << "200 KHz" << "400 KHz " << "1 MHz");
+
+
+
+
+
+
+               FrequencyLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FrequencyComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(FrequencyLabel, FrequencyComboBox);
+
+
+               // ----------------------Create Rise Edge----------------------//
+
+               QLabel* RiseLabel = new QLabel(tr("Rise Time"), this);
+               QSpinBox* RiseSpinBox = new QSpinBox(this);
+               RiseSpinBox->setMinimum(20);
+               RiseSpinBox->setMaximum(1000);
+
+               RiseLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               RiseSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               layout->addRow(RiseLabel, RiseSpinBox);
+
+
+               // ----------------------Create Fall edge----------------------//
+
+               QLabel* FallLabel = new QLabel(tr("Fall Time"), this);
+               QSpinBox* FallSpinBox = new QSpinBox(this);
+               FallSpinBox->setMinimum(10);
+               FallSpinBox->setMaximum(300);
+
+               FallLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FallSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               layout->addRow(FallLabel, FallSpinBox);
+
+
+               // ----------------------Create Converter----------------------//
+
+               QLabel* ConverterLabel = new QLabel(tr("Coefficient of Digital Converter"), this);
+               QSpinBox* ConverterSpinBox = new QSpinBox(this);
+               ConverterSpinBox->setMinimum(0);
+               ConverterSpinBox->setMaximum(16);
+
+               ConverterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ConverterSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               layout->addRow(ConverterLabel, ConverterSpinBox);
+
+               // ----------------------Create Analog Filter----------------------//
+
+               QLabel* AnalogFilterLabel = new QLabel(tr("Analog Filter"), this);
+               QComboBox* AnalogFilterComboBox = new QComboBox(this);
+               AnalogFilterComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
+               AnalogFilterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               AnalogFilterComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               //QSpacerItem* spacerItem = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+
+               layout->addRow(AnalogFilterLabel, AnalogFilterComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
+
+               // Create the vertical layout and add the form layout to it
+               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+               verticalLayout->addStretch();
+               verticalLayout->addLayout(layout);
+               verticalLayout->addStretch();
+
+               // Create the horizontal layout and add the vertical layout to it
+               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+               horizontalLayout->addStretch();
+               horizontalLayout->addLayout(verticalLayout);
+               horizontalLayout->addStretch();
+
+               // Set the widget layout to the horizontal layout
+
+               widget->setLayout(horizontalLayout);
+               widget->setGeometry(500, 500, 600, 500);
+
+
+               // ----------------------Save configs into file ----------------------//
+
+               QSettings settings("I2CConfigs.txt", QSettings::IniFormat);
+
+
+
+               settings.beginGroup("I2C1Configs");
+
+               settings.setValue("Timing",  TimingComboBox->currentText());
+               settings.setValue("I2CSpeedMode",  SpeedComboBox->currentText());
+               settings.setValue("SpeedFrequency",  FrequencyComboBox->currentText());
+               settings.setValue("RiseTime",  RiseSpinBox->value());
+               settings.setValue("FallTime",  FallSpinBox->value());
+               settings.setValue("CoefficientofDigitalConverter",  ConverterSpinBox->value());
+               settings.setValue("Analogfilter",  AnalogFilterComboBox->currentText());
+
+
+
+               settings.endGroup();
+
+
+
+    }
+
+    void I2C2Config (){
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+                // Create Layout form for I2C
+                QFormLayout* layout = new QFormLayout(this);
+
+                QLabel* titleLabel = new QLabel("I2C2 configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
+                QFontDatabase fontDatabase;
+                QStringList fontFamilies = fontDatabase.families();
+
+                // Choose the first available font as the best font
+                QString bestFont = fontFamilies.first();
+
+                // Create a font object with the best font and size
+                QFont font(bestFont, 15);
+
+                // Set the font and style sheet for the label
+                titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
+                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+                titleLabel->setAlignment(Qt::AlignCenter);
+
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
+
+
+                // ----------------------Create Timing----------------------//
+
+               QLabel* TimingLabel = new QLabel(tr("Custom Timing"), this);
+               QComboBox* TimingComboBox = new QComboBox(this);
+
+               TimingComboBox->addItems(QStringList() << "Enable" << "Disable");
+               TimingComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+               // Set the minimum width to 100 pixels
+               TimingComboBox->setMinimumWidth(10);
+               TimingLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               TimingComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+               layout->addRow(TimingLabel, TimingComboBox);
+
+               // ----------------------Create Speed Mode----------------------//
+
+               QLabel* SpeedLabel = new QLabel(tr("I2C Speed Mode"), this);
+               QComboBox* SpeedComboBox = new QComboBox(this);
+               SpeedComboBox->addItems(QStringList() << "Standart Mode" << "Fast Mode " << "Fast Mode Plus");
+               SpeedLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               SpeedComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(SpeedLabel, SpeedComboBox);
+
+
+               // ----------------------Create Frequency Speed----------------------//
+
+               QLabel* FrequencyLabel = new QLabel(tr("Speed Frequency"), this);
+               QComboBox* FrequencyComboBox = new QComboBox(this);
+               FrequencyComboBox->addItems(QStringList() << "200 KHz" << "400 KHz " << "1 MHz");
+
+
+
+
+
+
+               FrequencyLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FrequencyComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(FrequencyLabel, FrequencyComboBox);
+
+
+               // ----------------------Create Rise Edge----------------------//
+
+               QLabel* RiseLabel = new QLabel(tr("Rise Time"), this);
+               QSpinBox* RiseSpinBox = new QSpinBox(this);
+               RiseSpinBox->setMinimum(20);
+               RiseSpinBox->setMaximum(1000);
+
+               RiseLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               RiseSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               layout->addRow(RiseLabel, RiseSpinBox);
+
+
+               // ----------------------Create Fall edge----------------------//
+
+               QLabel* FallLabel = new QLabel(tr("Fall Time"), this);
+               QSpinBox* FallSpinBox = new QSpinBox(this);
+               FallSpinBox->setMinimum(10);
+               FallSpinBox->setMaximum(300);
+
+               FallLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FallSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               layout->addRow(FallLabel, FallSpinBox);
+
+
+               // ----------------------Create Converter----------------------//
+
+               QLabel* ConverterLabel = new QLabel(tr("Coefficient of Digital Converter"), this);
+               QSpinBox* ConverterSpinBox = new QSpinBox(this);
+               ConverterSpinBox->setMinimum(0);
+               ConverterSpinBox->setMaximum(16);
+
+               ConverterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ConverterSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               layout->addRow(ConverterLabel, ConverterSpinBox);
+
+               // ----------------------Create Analog Filter----------------------//
+
+               QLabel* AnalogFilterLabel = new QLabel(tr("Analog Filter"), this);
+               QComboBox* AnalogFilterComboBox = new QComboBox(this);
+               AnalogFilterComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
+               AnalogFilterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               AnalogFilterComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               //QSpacerItem* spacerItem = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+
+               layout->addRow(AnalogFilterLabel, AnalogFilterComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
+
+               // Create the vertical layout and add the form layout to it
+               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+               verticalLayout->addStretch();
+               verticalLayout->addLayout(layout);
+               verticalLayout->addStretch();
+
+               // Create the horizontal layout and add the vertical layout to it
+               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+               horizontalLayout->addStretch();
+               horizontalLayout->addLayout(verticalLayout);
+               horizontalLayout->addStretch();
+
+               // Set the widget layout to the horizontal layout
+
+               widget->setLayout(horizontalLayout);
+               widget->setGeometry(500, 500, 600, 500);
+
+
+               // ----------------------Save configs into file ----------------------//
+
+               QSettings settings("I2CConfigs.txt", QSettings::IniFormat);
+
+
+
+               settings.beginGroup("I2C2Configs");
+
+               settings.setValue("Timing",  TimingComboBox->currentText());
+               settings.setValue("I2CSpeedMode",  SpeedComboBox->currentText());
+               settings.setValue("SpeedFrequency",  FrequencyComboBox->currentText());
+               settings.setValue("RiseTime",  RiseSpinBox->value());
+               settings.setValue("FallTime",  FallSpinBox->value());
+               settings.setValue("CoefficientofDigitalConverter",  ConverterSpinBox->value());
+               settings.setValue("Analogfilter",  AnalogFilterComboBox->currentText());
+
+
+
+               settings.endGroup();
+
+
+
+    }
     void ADCConfig (){
         QWidget *widget = new QWidget(this);
         setCentralWidget(widget);
@@ -2803,6 +3166,394 @@ private slots :
                QSettings settings("file.txt", QSettings::IniFormat);
 
                settings.beginGroup("ADCConfigs");
+
+               settings.setValue("Channel",  ChannelComboBox->currentText());
+               settings.setValue("Resolution",  ResolutionComboBox->currentText());
+               settings.setValue("Scan",  ScanComboBox->currentText());
+               settings.setValue("Continuous",  ContinuousComboBox->currentText());
+               settings.setValue("Discontinuous",  DiscontinuousComboBox->currentText());
+               settings.setValue("EndConversion",  EndConversionComboBox->currentText());
+               settings.setValue("Behavior",  BehaviorComboBox->currentText());
+               settings.setValue("LeftBit",  LeftBitComboBox->currentText());
+               settings.endGroup();
+
+
+
+
+    }
+
+    void ADC1Config (){
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+                // Create Layout form for ADC
+                QFormLayout* layout = new QFormLayout(this);
+
+                // Create a QLabel for "DAC configurations" and center it horizontally
+                QLabel* titleLabel = new QLabel("ADC1 configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
+                QFontDatabase fontDatabase;
+                QStringList fontFamilies = fontDatabase.families();
+
+                // Choose the first available font as the best font
+                QString bestFont = fontFamilies.first();
+
+                // Create a font object with the best font and size
+                QFont font(bestFont, 15);
+
+                // Set the font and style sheet for the label
+                titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
+                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+                titleLabel->setAlignment(Qt::AlignCenter);
+
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
+
+
+
+                // ----------------------Create Channel Choices----------------------//
+
+               QLabel* ChannelLabel = new QLabel(tr("Select Channel"), this);
+               QComboBox* ChannelComboBox = new QComboBox(this);
+
+               ChannelComboBox->addItems(QStringList() << "IN2" << "IN3" << "IN4" <<"IN5" << "IN6" << "IN7" << "IN8" << "IN9" << "IN10" << "IN11" << "IN14" << "IN15" << "IN16" << "IN17" <<"IN18" <<"IN19");
+               // Create the second QComboBox and add it as an item to the first combo box
+
+
+               ChannelComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+               // Set the minimum width to 100 pixels
+               ChannelComboBox->setMinimumWidth(10);
+               ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+               layout->addRow(ChannelLabel, ChannelComboBox);
+
+               // ----------------------Create Resolution Mode----------------------//
+
+               QLabel* ResolutionLabel = new QLabel(tr("ADC Resolution Bit"), this);
+               QComboBox* ResolutionComboBox = new QComboBox(this);
+               ResolutionComboBox->addItems(QStringList() << "ADC 8-Bit Resolution" << "ADC 10-Bit Resolution" << "ADC 12-Bit Resolution" << "ADC 14-Bit Resolution" << "ADC 16-Bit Resolution"<< "ADC 12-Bit Optimized Resolution" << "ADC 14-Bit Optimized Resolution"  );
+               ResolutionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ResolutionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(ResolutionLabel, ResolutionComboBox);
+
+
+               // ----------------------Create Scan Mode----------------------//
+
+               QLabel* ScanLabel = new QLabel(tr("Scan Conversion Mode"), this);
+               QComboBox* ScanComboBox = new QComboBox(this);
+               ScanComboBox->addItems(QStringList() << "Disabled" );
+               ScanLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ScanComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(ScanLabel, ScanComboBox);
+
+
+               // ----------------------Create continuous Mode----------------------//
+
+               QLabel* ContinuousLabel = new QLabel(tr("Continuous Conversion Mode"), this);
+               QComboBox* ContinuousComboBox = new QComboBox(this);
+
+
+               ContinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
+
+               ContinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ContinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               layout->addRow(ContinuousLabel, ContinuousComboBox);
+
+
+               // ----------------------Create Discontinuous Mode----------------------//
+
+              QLabel* DiscontinuousLabel = new QLabel(tr("Discontinuous Conversion Mode"), this);
+              QComboBox* DiscontinuousComboBox = new QComboBox(this);
+
+
+              DiscontinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
+
+              DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+              DiscontinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+              layout->addRow(DiscontinuousLabel, DiscontinuousComboBox);
+
+
+              // ----------------------Create End of Conversion Mode----------------------//
+
+             QLabel* EndConversionLabel = new QLabel(tr("End of Conversion Mode"), this);
+             QComboBox* EndConversionComboBox = new QComboBox(this);
+
+
+             EndConversionComboBox->addItems(QStringList() << "End of Single Conversion" << "End of sequence Conversion");
+
+             EndConversionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+             EndConversionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+             layout->addRow(EndConversionLabel, EndConversionComboBox);
+
+
+             // ----------------------Create Behavior Bit----------------------//
+
+            QLabel* BehaviorLabel = new QLabel(tr("Overrun Behavior"), this);
+            QComboBox* BehaviorComboBox = new QComboBox(this);
+
+
+            BehaviorComboBox->addItems(QStringList() << "Overrun Data Preserved" << "Overrun Data Overwritten");
+
+            BehaviorLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+            BehaviorComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+            layout->addRow(BehaviorLabel, BehaviorComboBox);
+
+
+
+            // ----------------------Create Left Bit----------------------//
+
+               QLabel* LeftBitLabel = new QLabel(tr("Left Bit Shift"), this);
+               QComboBox* LeftBitComboBox = new QComboBox(this);
+               LeftBitComboBox->addItems(QStringList() << "No Bit Shift" << "1 Bit Shift" << "2 Bit Shift"<<  "3 Bit Shift" << "4 Bit Shift" <<"5 Bit Shift" << "6 Bit Shift" <<"7 Bit Shift" <<"8 Bit Shift" <<"9 Bit Shift" <<"10 Bit Shift" <<"11 Bit Shift" << "12 Bit Shift" <<"13 Bit Shift" <<"14 Bit Shift" << "15 Bit Shift" );
+               LeftBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               LeftBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               //QSpacerItem* spacerItem = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+
+               layout->addRow(LeftBitLabel, LeftBitComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
+
+               // Create the vertical layout and add the form layout to it
+               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+               verticalLayout->addStretch();
+               verticalLayout->addLayout(layout);
+               verticalLayout->addStretch();
+
+               // Create the horizontal layout and add the vertical layout to it
+               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+               horizontalLayout->addStretch();
+               horizontalLayout->addLayout(verticalLayout);
+               horizontalLayout->addStretch();
+
+               // Set the widget layout to the horizontal layout
+
+               widget->setLayout(horizontalLayout);
+               widget->setGeometry(500, 500, 600, 500);
+
+               // ----------------------Save Configs in file----------------------//
+               QSettings settings("ADCConfigs.txt", QSettings::IniFormat);
+
+               settings.beginGroup("ADC1Configs");
+
+               settings.setValue("Channel",  ChannelComboBox->currentText());
+               settings.setValue("Resolution",  ResolutionComboBox->currentText());
+               settings.setValue("Scan",  ScanComboBox->currentText());
+               settings.setValue("Continuous",  ContinuousComboBox->currentText());
+               settings.setValue("Discontinuous",  DiscontinuousComboBox->currentText());
+               settings.setValue("EndConversion",  EndConversionComboBox->currentText());
+               settings.setValue("Behavior",  BehaviorComboBox->currentText());
+               settings.setValue("LeftBit",  LeftBitComboBox->currentText());
+               settings.endGroup();
+
+
+
+
+    }
+
+    void ADC3Config (){
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+                // Create Layout form for ADC
+                QFormLayout* layout = new QFormLayout(this);
+
+                // Create a QLabel for "DAC configurations" and center it horizontally
+                QLabel* titleLabel = new QLabel("ADC3 configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
+                QFontDatabase fontDatabase;
+                QStringList fontFamilies = fontDatabase.families();
+
+                // Choose the first available font as the best font
+                QString bestFont = fontFamilies.first();
+
+                // Create a font object with the best font and size
+                QFont font(bestFont, 15);
+
+                // Set the font and style sheet for the label
+                titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
+                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+                titleLabel->setAlignment(Qt::AlignCenter);
+
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
+
+
+
+                // ----------------------Create Channel Choices----------------------//
+
+               QLabel* ChannelLabel = new QLabel(tr("Select Channel"), this);
+               QComboBox* ChannelComboBox = new QComboBox(this);
+
+               ChannelComboBox->addItems(QStringList() << "IN2" << "IN3" << "IN4" <<"IN5" << "IN6" << "IN7" << "IN8" << "IN9" << "IN10" << "IN11" << "IN14" << "IN15" << "IN16" << "IN17" <<"IN18" <<"IN19");
+               // Create the second QComboBox and add it as an item to the first combo box
+
+
+               ChannelComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+               // Set the minimum width to 100 pixels
+               ChannelComboBox->setMinimumWidth(10);
+               ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+               layout->addRow(ChannelLabel, ChannelComboBox);
+
+               // ----------------------Create Resolution Mode----------------------//
+
+               QLabel* ResolutionLabel = new QLabel(tr("ADC Resolution Bit"), this);
+               QComboBox* ResolutionComboBox = new QComboBox(this);
+               ResolutionComboBox->addItems(QStringList() << "ADC 8-Bit Resolution" << "ADC 10-Bit Resolution" << "ADC 12-Bit Resolution" << "ADC 14-Bit Resolution" << "ADC 16-Bit Resolution"<< "ADC 12-Bit Optimized Resolution" << "ADC 14-Bit Optimized Resolution"  );
+               ResolutionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ResolutionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(ResolutionLabel, ResolutionComboBox);
+
+
+               // ----------------------Create Scan Mode----------------------//
+
+               QLabel* ScanLabel = new QLabel(tr("Scan Conversion Mode"), this);
+               QComboBox* ScanComboBox = new QComboBox(this);
+               ScanComboBox->addItems(QStringList() << "Disabled" );
+               ScanLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ScanComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(ScanLabel, ScanComboBox);
+
+
+               // ----------------------Create continuous Mode----------------------//
+
+               QLabel* ContinuousLabel = new QLabel(tr("Continuous Conversion Mode"), this);
+               QComboBox* ContinuousComboBox = new QComboBox(this);
+
+
+               ContinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
+
+               ContinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ContinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               layout->addRow(ContinuousLabel, ContinuousComboBox);
+
+
+               // ----------------------Create Discontinuous Mode----------------------//
+
+              QLabel* DiscontinuousLabel = new QLabel(tr("Discontinuous Conversion Mode"), this);
+              QComboBox* DiscontinuousComboBox = new QComboBox(this);
+
+
+              DiscontinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
+
+              DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+              DiscontinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+              layout->addRow(DiscontinuousLabel, DiscontinuousComboBox);
+
+
+              // ----------------------Create End of Conversion Mode----------------------//
+
+             QLabel* EndConversionLabel = new QLabel(tr("End of Conversion Mode"), this);
+             QComboBox* EndConversionComboBox = new QComboBox(this);
+
+
+             EndConversionComboBox->addItems(QStringList() << "End of Single Conversion" << "End of sequence Conversion");
+
+             EndConversionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+             EndConversionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+             layout->addRow(EndConversionLabel, EndConversionComboBox);
+
+
+             // ----------------------Create Behavior Bit----------------------//
+
+            QLabel* BehaviorLabel = new QLabel(tr("Overrun Behavior"), this);
+            QComboBox* BehaviorComboBox = new QComboBox(this);
+
+
+            BehaviorComboBox->addItems(QStringList() << "Overrun Data Preserved" << "Overrun Data Overwritten");
+
+            BehaviorLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+            BehaviorComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+            layout->addRow(BehaviorLabel, BehaviorComboBox);
+
+
+
+            // ----------------------Create Left Bit----------------------//
+
+               QLabel* LeftBitLabel = new QLabel(tr("Left Bit Shift"), this);
+               QComboBox* LeftBitComboBox = new QComboBox(this);
+               LeftBitComboBox->addItems(QStringList() << "No Bit Shift" << "1 Bit Shift" << "2 Bit Shift"<<  "3 Bit Shift" << "4 Bit Shift" <<"5 Bit Shift" << "6 Bit Shift" <<"7 Bit Shift" <<"8 Bit Shift" <<"9 Bit Shift" <<"10 Bit Shift" <<"11 Bit Shift" << "12 Bit Shift" <<"13 Bit Shift" <<"14 Bit Shift" << "15 Bit Shift" );
+               LeftBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               LeftBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               //QSpacerItem* spacerItem = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+
+               layout->addRow(LeftBitLabel, LeftBitComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
+
+               // Create the vertical layout and add the form layout to it
+               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+               verticalLayout->addStretch();
+               verticalLayout->addLayout(layout);
+               verticalLayout->addStretch();
+
+               // Create the horizontal layout and add the vertical layout to it
+               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+               horizontalLayout->addStretch();
+               horizontalLayout->addLayout(verticalLayout);
+               horizontalLayout->addStretch();
+
+               // Set the widget layout to the horizontal layout
+
+               widget->setLayout(horizontalLayout);
+               widget->setGeometry(500, 500, 600, 500);
+
+               // ----------------------Save Configs in file----------------------//
+               QSettings settings("ADCConfigs.txt", QSettings::IniFormat);
+
+               settings.beginGroup("ADC3Configs");
 
                settings.setValue("Channel",  ChannelComboBox->currentText());
                settings.setValue("Resolution",  ResolutionComboBox->currentText());
