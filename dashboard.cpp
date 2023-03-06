@@ -108,7 +108,13 @@ Dashboard::Dashboard(QWidget *parent) :
     InputCaptureMode->setCheckable(true);
 
 
+    // Checkable GPIO Mode Configurations
 
+    QAction *GPIO_OUTPUT = new QAction("GPIO_OUTPUT" , this);
+    GPIO_OUTPUT->setCheckable(true);
+
+    QAction *GPIO_INPUT = new QAction("GPIO_INPUT" , this);
+    GPIO_INPUT->setCheckable(true);
 
 
 
@@ -127,6 +133,8 @@ Dashboard::Dashboard(QWidget *parent) :
     QMenu *ADC = menuBar()->addMenu("&ADC");
     QMenu *DAC = menuBar()->addMenu("&DAC");
     QMenu *TIMER = menuBar()->addMenu("&Frequency Mesure");
+    QMenu *GPIO = menuBar()->addMenu("&GPIO");
+
     QFont font = menuBar()->font();
     // Create a QFont object and set its bold property to true
     font.setBold(true);
@@ -145,7 +153,7 @@ Dashboard::Dashboard(QWidget *parent) :
     QString style = "\
             QMenuBar {\
                 background-color: #868482;\
-                spacing: 50px;\
+                spacing: 35px;\
             }\
             QMenuBar::item {\
                 background-color: transparent;\
@@ -189,6 +197,8 @@ Dashboard::Dashboard(QWidget *parent) :
     ADC->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
     DAC->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
     TIMER->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+    GPIO->setStyleSheet("font: Arial 15px; color: white; background-color: #868482;");
+
 
     menuBar()->setFont(font);
     UART->setFont(font);
@@ -232,6 +242,12 @@ Dashboard::Dashboard(QWidget *parent) :
 
     TIMER->addAction(InputCaptureMode);
     UART->addSeparator();
+
+    GPIO->addAction(GPIO_OUTPUT);
+    GPIO->addSeparator();
+    GPIO->addAction(GPIO_INPUT);
+    GPIO->addSeparator();
+
 
 
     // Connect to the UART configurations

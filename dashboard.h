@@ -261,10 +261,7 @@ private slots :
                FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 9efaa1f00d52440c75a6513c72ccc594b583bc27
 
 
                layout->addRow(FlowControlLabel, FlowControlComboBox);
@@ -351,8 +348,6 @@ private slots :
 
 
 
-<<<<<<< HEAD
-=======
 
 
 
@@ -361,7 +356,6 @@ private slots :
 
 
 
->>>>>>> 9efaa1f00d52440c75a6513c72ccc594b583bc27
                // Create the QLabel and set its text and minimum height
                QLabel* footerLabel = new QLabel();
                footerLabel->setText("Footer Text");

@@ -33,6 +33,7 @@ void starting_screen::on_pushButton_startapplication_clicked()
     //passer à l'ecran uart
 
     //dashboard->show();
+    Uartscreen->show();
 
 
 //    Dashboard* dashboard = new Dashboard();
