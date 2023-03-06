@@ -35,8 +35,8 @@ void starting_screen::on_pushButton_startapplication_clicked()
     //dashboard->show();
 
 
-    Dashboard* dashboard = new Dashboard();
-    dashboard->show();
+//    Dashboard* dashboard = new Dashboard();
+//    dashboard->show();
     //this->hide();
 
     this->hide();

@@ -60,12 +60,6 @@ private slots :
                baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 9efaa1f00d52440c75a6513c72ccc594b583bc27
                layout->addRow(baudRateLabel, baudRateComboBox);
 
 
