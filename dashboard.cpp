@@ -365,8 +365,8 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the SPI configurations
-    connect(SPI1, &QAction::triggered, this, &Dashboard::SPIConfig);
-    connect(SPI2, &QAction::triggered, this, &Dashboard::SPIConfig);
+    connect(SPI1, &QAction::triggered, this, &Dashboard::SPI1Config);
+    connect(SPI2, &QAction::triggered, this, &Dashboard::SPI2Config);
     connect(SPI3, &QAction::triggered, this, &Dashboard::SPIConfig);
     connect(SPI4, &QAction::triggered, this, &Dashboard::SPIConfig);
 

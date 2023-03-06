@@ -40,9 +40,17 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    config1.png \
+    config2.png \
+    config3.png \
+    config4.png \
+    config5.png \
+    config6.png \
+    config7.png \
     connexion.png \
     file.txt \
     images/logo-actia.png \
-    images/logo-actia.png
+    images/logo-actia.png \
+    reglage.png
 
 

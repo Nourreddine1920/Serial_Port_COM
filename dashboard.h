@@ -47,6 +47,22 @@ private slots :
 
                 // Create a QLabel for "DAC configurations" and center it horizontally
                 QLabel* titleLabel = new QLabel("UART configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
                 QFontDatabase fontDatabase;
                 QStringList fontFamilies = fontDatabase.families();
 
@@ -58,14 +74,17 @@ private slots :
 
                 // Set the font and style sheet for the label
                 titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
-        //        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-        //        QFont titleFont("Helvetica", 10, QFont::Bold);
-        //        titleLabel->setFont(titleFont);
-                layout->addRow(titleLabel);
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
+
 
                // Create the baud rate label and combo box
 
@@ -411,8 +430,23 @@ private slots :
                 // Create Layout form
                 QFormLayout* layout = new QFormLayout(this);
 
-                // Create a QLabel for "DAC configurations" and center it horizontally
                 QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
                 QFontDatabase fontDatabase;
                 QStringList fontFamilies = fontDatabase.families();
 
@@ -424,14 +458,17 @@ private slots :
 
                 // Set the font and style sheet for the label
                 titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
-        //        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-        //        QFont titleFont("Helvetica", 10, QFont::Bold);
-        //        titleLabel->setFont(titleFont);
-                layout->addRow(titleLabel);
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
+
 
                // Create the baud rate label and combo box
 
@@ -777,8 +814,23 @@ private slots :
                 // Create Layout form
                 QFormLayout* layout = new QFormLayout(this);
 
-                // Create a QLabel for "DAC configurations" and center it horizontally
                 QLabel* titleLabel = new QLabel("UART5 configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
                 QFontDatabase fontDatabase;
                 QStringList fontFamilies = fontDatabase.families();
 
@@ -790,14 +842,17 @@ private slots :
 
                 // Set the font and style sheet for the label
                 titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
-        //        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-        //        QFont titleFont("Helvetica", 10, QFont::Bold);
-        //        titleLabel->setFont(titleFont);
-                layout->addRow(titleLabel);
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
+
 
                // Create the baud rate label and combo box
 
@@ -1143,8 +1198,23 @@ private slots :
                 // Create Layout form
                 QFormLayout* layout = new QFormLayout(this);
 
-                // Create a QLabel for "DAC configurations" and center it horizontally
                 QLabel* titleLabel = new QLabel("USART1 configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
                 QFontDatabase fontDatabase;
                 QStringList fontFamilies = fontDatabase.families();
 
@@ -1156,14 +1226,16 @@ private slots :
 
                 // Set the font and style sheet for the label
                 titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
-        //        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-        //        QFont titleFont("Helvetica", 10, QFont::Bold);
-        //        titleLabel->setFont(titleFont);
-                layout->addRow(titleLabel);
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
 
                // Create the baud rate label and combo box
 
@@ -1509,8 +1581,23 @@ private slots :
                 // Create Layout form
                 QFormLayout* layout = new QFormLayout(this);
 
-                // Create a QLabel for "DAC configurations" and center it horizontally
                 QLabel* titleLabel = new QLabel("USART2 configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
                 QFontDatabase fontDatabase;
                 QStringList fontFamilies = fontDatabase.families();
 
@@ -1522,14 +1609,17 @@ private slots :
 
                 // Set the font and style sheet for the label
                 titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
-        //        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-        //        QFont titleFont("Helvetica", 10, QFont::Bold);
-        //        titleLabel->setFont(titleFont);
-                layout->addRow(titleLabel);
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
+
 
                // Create the baud rate label and combo box
 
@@ -1877,7 +1967,56 @@ private slots :
 
 
                 // Create a QLabel for "DAC configurations" and center it horizontally
+//                QLabel* titleLabel = new QLabel("SPI configurations", this);
+//                QFontDatabase fontDatabase;
+//                QStringList fontFamilies = fontDatabase.families();
+
+//                // Choose the first available font as the best font
+//                QString bestFont = fontFamilies.first();
+
+//                // Create a font object with the best font and size
+//                QFont font(bestFont, 15);
+
+//                // Set the font and style sheet for the label
+//                titleLabel->setFont(font);
+//                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+//                titleLabel->setAlignment(Qt::AlignCenter);
+//        //        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+
+//        //        QFont titleFont("Helvetica", 10, QFont::Bold);
+//        //        titleLabel->setFont(titleFont);
+//                layout->addRow(titleLabel);
+
+
+//                QLabel* titleLabel = new QLabel(this);
+//                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+//                titleLabel->setPixmap(icon.scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
+//                titleLabel->setText("SPI Configurations");
+//                titleLabel->setStyleSheet("font-weight: bold; font-size: 20px; color: black;");
+//                titleLabel->setAlignment(Qt::AlignCenter);
+//                layout->addRow(titleLabel);
+
+                // Load the icon and scale it to an appropriate size
+                // Create a QLabel for "SPI configurations" and center it horizontally
                 QLabel* titleLabel = new QLabel("SPI configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
                 QFontDatabase fontDatabase;
                 QStringList fontFamilies = fontDatabase.families();
 
@@ -1889,14 +2028,19 @@ private slots :
 
                 // Set the font and style sheet for the label
                 titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
-        //        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-        //        QFont titleFont("Helvetica", 10, QFont::Bold);
-        //        titleLabel->setFont(titleFont);
-                layout->addRow(titleLabel);
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
+
+
+
 
                 // ----------------------Create Mode----------------------//
 
@@ -2000,15 +2144,31 @@ private slots :
 
 
     }
-    void I2CConfig (){
+    void SPI1Config (){
         QWidget *widget = new QWidget(this);
         setCentralWidget(widget);
 
-                // Create Layout form for I2C
+                // Create Layout form for SPI
                 QFormLayout* layout = new QFormLayout(this);
 
-                // Create a QLabel for "DAC configurations" and center it horizontally
-                QLabel* titleLabel = new QLabel("I2C configurations", this);
+
+                QLabel* titleLabel = new QLabel("SPI1 configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
                 QFontDatabase fontDatabase;
                 QStringList fontFamilies = fontDatabase.families();
 
@@ -2020,12 +2180,315 @@ private slots :
 
                 // Set the font and style sheet for the label
                 titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
 
-                layout->addRow(titleLabel);
 
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
+
+
+                // ----------------------Create Mode----------------------//
+
+               QLabel* ModeLabel = new QLabel(tr("Mode"), this);
+               QComboBox* ModeComboBox = new QComboBox(this);
+
+               ModeComboBox->addItems(QStringList() << "Full-Duplex Master" << "Full-Duplex Slave" << "Half-Duplex Master " << "Half-Duplex Slave" );
+               ModeComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+               // Set the minimum width to 100 pixels
+               ModeComboBox->setMinimumWidth(10);
+               ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+               layout->addRow(ModeLabel, ModeComboBox);
+
+               // ----------------------Create NSS----------------------//
+
+               QLabel* NSSLabel = new QLabel(tr("Hardware NSS Signal"), this);
+               QComboBox* NSSComboBox = new QComboBox(this);
+               NSSComboBox->addItems(QStringList() << "Disable" << "Hardware NSS Input Signal" << "Hardware NSS Output Signal");
+               NSSLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               NSSComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(NSSLabel, NSSComboBox);
+
+
+
+               // ----------------------Create Frame Format----------------------//
+
+               QLabel* FrameFormatLabel = new QLabel(tr("Frame Format"), this);
+               QComboBox* FrameFormatComboBox = new QComboBox(this);
+               FrameFormatComboBox->addItems(QStringList() << "Motorola" << "Texas Instruments");
+               FrameFormatLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FrameFormatComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(FrameFormatLabel, FrameFormatComboBox);
+
+
+               // ----------------------Create Data size----------------------//
+
+               QLabel* DataSizeLabel = new QLabel(tr("Data Size"), this);
+               QSpinBox* DataSizeSpinBox = new QSpinBox(this);
+               DataSizeSpinBox->setMinimum(4);
+               DataSizeSpinBox->setMaximum(32);
+
+               DataSizeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               DataSizeSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               layout->addRow(DataSizeLabel, DataSizeSpinBox);
+
+
+               // ----------------------Create First Bit----------------------//
+
+               QLabel* FirstBitLabel = new QLabel(tr("First Bit"), this);
+               QComboBox* FirstBitComboBox = new QComboBox(this);
+               FirstBitComboBox->addItems(QStringList() << "LSB" << "MSB"  );
+               FirstBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FirstBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(FirstBitLabel, FirstBitComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
+
+               // Create the vertical layout and add the form layout to it
+               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+               verticalLayout->addStretch();
+               verticalLayout->addLayout(layout);
+               verticalLayout->addStretch();
+
+               // Create the horizontal layout and add the vertical layout to it
+               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+               horizontalLayout->addStretch();
+               horizontalLayout->addLayout(verticalLayout);
+               horizontalLayout->addStretch();
+
+               // Set the widget layout to the horizontal layout
+
+               widget->setLayout(horizontalLayout);
+               widget->setGeometry(500, 500, 600, 500);
+
+               // ----------------------Save configs into a file----------------------//
+
+
+               QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+
+
+               settings.beginGroup("SPI1Configs");
+
+
+               settings.setValue("Mode",  ModeComboBox->currentText());
+               settings.setValue("NSS",  NSSComboBox->currentText());
+               settings.setValue("Frameformat",  FrameFormatComboBox->currentText());
+               settings.setValue("Datasize",  DataSizeSpinBox->value());
+               settings.setValue("Firstbit",  FirstBitComboBox->currentText());
+
+               settings.endGroup();
+
+
+
+
+
+    }
+    void SPI2Config (){
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+                // Create Layout form for SPI
+                QFormLayout* layout = new QFormLayout(this);
+
+
+                QLabel* titleLabel = new QLabel("SPI2 configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
+                QFontDatabase fontDatabase;
+                QStringList fontFamilies = fontDatabase.families();
+
+                // Choose the first available font as the best font
+                QString bestFont = fontFamilies.first();
+
+                // Create a font object with the best font and size
+                QFont font(bestFont, 15);
+
+                // Set the font and style sheet for the label
+                titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
+                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+                titleLabel->setAlignment(Qt::AlignCenter);
+
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
+
+
+                // ----------------------Create Mode----------------------//
+
+               QLabel* ModeLabel = new QLabel(tr("Mode"), this);
+               QComboBox* ModeComboBox = new QComboBox(this);
+
+               ModeComboBox->addItems(QStringList() << "Full-Duplex Master" << "Full-Duplex Slave" << "Half-Duplex Master " << "Half-Duplex Slave" );
+               ModeComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+               // Set the minimum width to 100 pixels
+               ModeComboBox->setMinimumWidth(10);
+               ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+               layout->addRow(ModeLabel, ModeComboBox);
+
+               // ----------------------Create NSS----------------------//
+
+               QLabel* NSSLabel = new QLabel(tr("Hardware NSS Signal"), this);
+               QComboBox* NSSComboBox = new QComboBox(this);
+               NSSComboBox->addItems(QStringList() << "Disable" << "Hardware NSS Input Signal" << "Hardware NSS Output Signal");
+               NSSLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               NSSComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(NSSLabel, NSSComboBox);
+
+
+
+               // ----------------------Create Frame Format----------------------//
+
+               QLabel* FrameFormatLabel = new QLabel(tr("Frame Format"), this);
+               QComboBox* FrameFormatComboBox = new QComboBox(this);
+               FrameFormatComboBox->addItems(QStringList() << "Motorola" << "Texas Instruments");
+               FrameFormatLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FrameFormatComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(FrameFormatLabel, FrameFormatComboBox);
+
+
+               // ----------------------Create Data size----------------------//
+
+               QLabel* DataSizeLabel = new QLabel(tr("Data Size"), this);
+               QSpinBox* DataSizeSpinBox = new QSpinBox(this);
+               DataSizeSpinBox->setMinimum(4);
+               DataSizeSpinBox->setMaximum(32);
+
+               DataSizeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               DataSizeSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               layout->addRow(DataSizeLabel, DataSizeSpinBox);
+
+
+               // ----------------------Create First Bit----------------------//
+
+               QLabel* FirstBitLabel = new QLabel(tr("First Bit"), this);
+               QComboBox* FirstBitComboBox = new QComboBox(this);
+               FirstBitComboBox->addItems(QStringList() << "LSB" << "MSB"  );
+               FirstBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+               FirstBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               layout->addRow(FirstBitLabel, FirstBitComboBox);
+               layout->setContentsMargins(0, 0, 0, 0);
+               layout->setSpacing(30);
+
+               // Create the vertical layout and add the form layout to it
+               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+               verticalLayout->addStretch();
+               verticalLayout->addLayout(layout);
+               verticalLayout->addStretch();
+
+               // Create the horizontal layout and add the vertical layout to it
+               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+               horizontalLayout->addStretch();
+               horizontalLayout->addLayout(verticalLayout);
+               horizontalLayout->addStretch();
+
+               // Set the widget layout to the horizontal layout
+
+               widget->setLayout(horizontalLayout);
+               widget->setGeometry(500, 500, 600, 500);
+
+               // ----------------------Save configs into a file----------------------//
+
+
+               QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+
+
+               settings.beginGroup("SPI2Configs");
+
+
+               settings.setValue("Mode",  ModeComboBox->currentText());
+               settings.setValue("NSS",  NSSComboBox->currentText());
+               settings.setValue("Frameformat",  FrameFormatComboBox->currentText());
+               settings.setValue("Datasize",  DataSizeSpinBox->value());
+               settings.setValue("Firstbit",  FirstBitComboBox->currentText());
+
+               settings.endGroup();
+
+
+
+
+
+    }
+    void I2CConfig (){
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+                // Create Layout form for I2C
+                QFormLayout* layout = new QFormLayout(this);
+
+                QLabel* titleLabel = new QLabel("I2C configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
+                QFontDatabase fontDatabase;
+                QStringList fontFamilies = fontDatabase.families();
+
+                // Choose the first available font as the best font
+                QString bestFont = fontFamilies.first();
+
+                // Create a font object with the best font and size
+                QFont font(bestFont, 15);
+
+                // Set the font and style sheet for the label
+                titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
+                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+                titleLabel->setAlignment(Qt::AlignCenter);
+
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
 
 
                 // ----------------------Create Timing----------------------//
@@ -2171,6 +2634,22 @@ private slots :
 
                 // Create a QLabel for "DAC configurations" and center it horizontally
                 QLabel* titleLabel = new QLabel("ADC configurations", this);
+
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
+
+                // Create a QHBoxLayout to hold the icon and the title label
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                // Set the font and style sheet for the title label
                 QFontDatabase fontDatabase;
                 QStringList fontFamilies = fontDatabase.families();
 
@@ -2182,14 +2661,16 @@ private slots :
 
                 // Set the font and style sheet for the label
                 titleLabel->setFont(font);
+                iconLabel->setFont(font);
+
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
-        //        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-        //        QFont titleFont("Helvetica", 10, QFont::Bold);
-        //        titleLabel->setFont(titleFont);
-                layout->addRow(titleLabel);
+
+                // Add the title label and the icon to the main layout
+                layout->addRow(titleLayout);
 
 
 
@@ -2348,6 +2829,22 @@ private slots :
 
         // Create a QLabel for "DAC configurations" and center it horizontally
         QLabel* titleLabel = new QLabel("DAC configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        // Create a QHBoxLayout to hold the icon and the title label
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+        // Set the font and style sheet for the title label
         QFontDatabase fontDatabase;
         QStringList fontFamilies = fontDatabase.families();
 
@@ -2359,15 +2856,16 @@ private slots :
 
         // Set the font and style sheet for the label
         titleLabel->setFont(font);
+        iconLabel->setFont(font);
+
         titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
         titleLabel->setAlignment(Qt::AlignCenter);
-//        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-//        QFont titleFont("Helvetica", 10, QFont::Bold);
-//        titleLabel->setFont(titleFont);
-        layout->addRow(titleLabel);
 
+        // Add the title label and the icon to the main layout
+        layout->addRow(titleLayout);
 
 
 
@@ -2553,6 +3051,22 @@ private slots :
 
         // Create a QLabel for "DAC configurations" and center it horizontally
         QLabel* titleLabel = new QLabel("GPIO Output configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        // Create a QHBoxLayout to hold the icon and the title label
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+        // Set the font and style sheet for the title label
         QFontDatabase fontDatabase;
         QStringList fontFamilies = fontDatabase.families();
 
@@ -2564,14 +3078,17 @@ private slots :
 
         // Set the font and style sheet for the label
         titleLabel->setFont(font);
+        iconLabel->setFont(font);
+
         titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
         titleLabel->setAlignment(Qt::AlignCenter);
-//        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-//        QFont titleFont("Helvetica", 10, QFont::Bold);
-//        titleLabel->setFont(titleFont);
-        layout->addRow(titleLabel);
+
+        // Add the title label and the icon to the main layout
+        layout->addRow(titleLayout);
+
 
         // --------------Select GPIO PIN--------------------//
 
@@ -2709,6 +3226,22 @@ private slots :
         QFormLayout* layout = new QFormLayout(this);
         // Create a QLabel for "DAC configurations" and center it horizontally
         QLabel* titleLabel = new QLabel("GPIO Input configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        // Create a QHBoxLayout to hold the icon and the title label
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+        // Set the font and style sheet for the title label
         QFontDatabase fontDatabase;
         QStringList fontFamilies = fontDatabase.families();
 
@@ -2720,14 +3253,17 @@ private slots :
 
         // Set the font and style sheet for the label
         titleLabel->setFont(font);
+        iconLabel->setFont(font);
+
         titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
         titleLabel->setAlignment(Qt::AlignCenter);
-//        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-//        QFont titleFont("Helvetica", 10, QFont::Bold);
-//        titleLabel->setFont(titleFont);
-        layout->addRow(titleLabel);
+
+        // Add the title label and the icon to the main layout
+        layout->addRow(titleLayout);
+
 
         // --------------Select GPIO PIN--------------------//
 
@@ -2830,6 +3366,22 @@ private slots :
         QFormLayout* layout = new QFormLayout(this);
         // Create a QLabel for "DAC configurations" and center it horizontally
         QLabel* titleLabel = new QLabel("Frequency Mesure configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        // Create a QHBoxLayout to hold the icon and the title label
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+        // Set the font and style sheet for the title label
         QFontDatabase fontDatabase;
         QStringList fontFamilies = fontDatabase.families();
 
@@ -2841,14 +3393,17 @@ private slots :
 
         // Set the font and style sheet for the label
         titleLabel->setFont(font);
+        iconLabel->setFont(font);
+
         titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
         titleLabel->setAlignment(Qt::AlignCenter);
-//        titleLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
 
-//        QFont titleFont("Helvetica", 10, QFont::Bold);
-//        titleLabel->setFont(titleFont);
-        layout->addRow(titleLabel);
+
+        // Add the title label and the icon to the main layout
+        layout->addRow(titleLayout);
+
 
         // --------------Select Channel --------------------//
 
