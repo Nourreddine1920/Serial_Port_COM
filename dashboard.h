@@ -976,6 +976,9 @@ private slots :
         widget->setLayout(horizontalLayout);
         widget->setGeometry(500, 500, 600, 500);
 
+        QSettings settings("file.txt", QSettings::IniFormat);
+
+
         // DAC Configs
         settings.beginGroup("SohwingDACConfigs");
 
@@ -992,20 +995,241 @@ private slots :
 
 
     }
-//    void Dashbord::onStopBitsComboBoxChanged(int index){
-//        // Retrieve the selected option
-//        QString stopBits = stopBitsComboBox->itemText(index);
+    void GPIOOUPUTConfig(){
 
-//        // Store the selected option in the settings file
-//        settings.setValue("stopBits", stopBits);
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
 
-//        // Retrieve the stored value and print to the console
-//        QString stopBitsConfig = settings.value("stopBits", stopBits).toString();
-//        qDebug() << "selected option:" << stopBits;
-//        qDebug() << "stopBits:" << stopBitsConfig;
-//    }
-//    void onStopBitsComboBoxChanged(int index);
 
+        QFormLayout* layout = new QFormLayout(this);
+
+        // --------------Select GPIO PIN--------------------//
+
+        QLabel* PINLabel = new QLabel(tr("GPIO Output PIN "), this);
+        QComboBox* PINComboBox = new QComboBox(this);
+
+        PINComboBox->addItems(QStringList() << "PG4" << "PG5" << "PG6" << "PG7" << "PG10" << "PG11" << "PG12" << "PG13" );
+
+
+        PINLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        PINComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(PINLabel, PINComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+        // --------------GPIO Mode selected for the OUT1--------------------//
+
+        QLabel* ModeLabel = new QLabel(tr("GPIO Mode "), this);
+        QComboBox* ModeComboBox = new QComboBox(this);
+
+        ModeComboBox->addItems(QStringList() << "Push-Pull" << "Open-Drain" );
+
+
+        ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(ModeLabel, ModeComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+        // --------------GPIO PULL UP -- DOWN --------------------//
+
+        QLabel* GPIOLabel = new QLabel(tr("GPIO Pull-up/Pull-down "), this);
+        QComboBox* GPIOComboBox = new QComboBox(this);
+
+        GPIOComboBox->addItems(QStringList() << "No Pull-up and No Pull-down" << "Pull-up" << "Pull-down" );
+
+
+        GPIOLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        GPIOComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(GPIOLabel, GPIOComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // --------------Maximum Output Speed for the GPIO OUTPUT--------------------//
+
+        QLabel* SpeedLabel = new QLabel(tr(" Maximum Output Speed "), this);
+        QComboBox* SpeedComboBox = new QComboBox(this);
+
+        SpeedComboBox->addItems(QStringList() << "Low" << "Meduim" << "High" << "Very High" );
+
+
+        SpeedLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        SpeedComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(SpeedLabel, SpeedComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // --------------User Label for the GPIO OUTPUT --------------------//
+
+        QLabel* UserLabel = new QLabel(tr(" User Label "), this);
+        QLineEdit* UserLineEdit = new QLineEdit(this);
+
+
+
+        UserLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        UserLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(UserLabel, UserLineEdit);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // Create the vertical layout and add the form layout to it
+        QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+        verticalLayout->addStretch();
+        verticalLayout->addLayout(layout);
+        verticalLayout->addStretch();
+
+        // Create the horizontal layout and add the vertical layout to it
+        QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+        horizontalLayout->addStretch();
+        horizontalLayout->addLayout(verticalLayout);
+        horizontalLayout->addStretch();
+
+        // Set the widget layout to the horizontal layout
+
+        widget->setLayout(horizontalLayout);
+        widget->setGeometry(500, 500, 600, 500);
+
+
+        QSettings settings("file.txt", QSettings::IniFormat);
+
+
+        // GPIO OUTPUT Configs
+        settings.beginGroup("GPIOOUTPUT");
+
+        settings.setValue("SelectedPIN",  PINComboBox->currentText());
+        settings.setValue("GPIOMode",  ModeComboBox->currentText());
+
+        settings.setValue("GPIOType",  GPIOComboBox->currentText());
+        settings.setValue("GPIOSpeedOUTPUT",  SpeedComboBox->currentText());
+        settings.setValue("UserLabel",  UserLineEdit->text());
+
+
+
+
+        settings.endGroup();
+
+
+        settings.beginGroup("GPIO OUTPUT ");
+        settings.remove("");
+        settings.endGroup();
+
+
+
+    }
+
+    void GPIOINPUTConfig(){
+
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+
+        QFormLayout* layout = new QFormLayout(this);
+
+        // --------------Select GPIO PIN--------------------//
+
+        QLabel* PINLabel = new QLabel(tr("GPIO Input PIN "), this);
+        QComboBox* PINComboBox = new QComboBox(this);
+
+        PINComboBox->addItems(QStringList() << "PG4" << "PG5" << "PG6" << "PG7" << "PG10" << "PG11" << "PG12" << "PG13" );
+
+
+        PINLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        PINComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(PINLabel, PINComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+        // --------------GPIO PULL UP -- DOWN --------------------//
+
+        QLabel* GPIOLabel = new QLabel(tr("GPIO Pull-up/Pull-down "), this);
+        QComboBox* GPIOComboBox = new QComboBox(this);
+
+        GPIOComboBox->addItems(QStringList() << "No Pull-up and No Pull-down" << "Pull-up" << "Pull-down" );
+
+
+        GPIOLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        GPIOComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(GPIOLabel, GPIOComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+
+
+        // --------------User Label for the GPIO OUTPUT --------------------//
+
+        QLabel* UserLabel = new QLabel(tr(" User Label "), this);
+        QLineEdit* UserLineEdit = new QLineEdit(this);
+
+
+
+        UserLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        UserLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(UserLabel, UserLineEdit);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // Create the vertical layout and add the form layout to it
+        QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+        verticalLayout->addStretch();
+        verticalLayout->addLayout(layout);
+        verticalLayout->addStretch();
+
+        // Create the horizontal layout and add the vertical layout to it
+        QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+        horizontalLayout->addStretch();
+        horizontalLayout->addLayout(verticalLayout);
+        horizontalLayout->addStretch();
+
+        // Set the widget layout to the horizontal layout
+
+        widget->setLayout(horizontalLayout);
+        widget->setGeometry(500, 500, 600, 500);
+
+        QSettings settings("file.txt", QSettings::IniFormat);
+
+
+        // GPIO OUTPUT Configs
+        settings.beginGroup("GPIOINPUT");
+
+        settings.setValue("SelectedPIN",  PINComboBox->currentText());
+
+        settings.setValue("GPIOType",  GPIOComboBox->currentText());
+        settings.setValue("UserLabel",  UserLineEdit->text());
+
+
+
+
+        settings.endGroup();
+
+
+        settings.beginGroup("GPIO INPUT ");
+        settings.remove("");
+        settings.endGroup();
+
+
+
+    }
 
 private:
     Ui::Dashboard *ui;

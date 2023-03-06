@@ -243,6 +243,11 @@ Dashboard::Dashboard(QWidget *parent) :
     TIMER->addAction(InputCaptureMode);
     UART->addSeparator();
 
+
+    // Connect to the GPIO configurations
+    connect(GPIO_OUTPUT, &QAction::triggered, this, &Dashboard::GPIOOUPUTConfig);
+    connect(GPIO_INPUT, &QAction::triggered, this, &Dashboard::GPIOINPUTConfig);
+
     GPIO->addAction(GPIO_OUTPUT);
     GPIO->addSeparator();
     GPIO->addAction(GPIO_INPUT);
@@ -357,23 +362,13 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 
-    connect(quit, &QAction::triggered, qApp, QApplication::quit);
+
+
+
+
+
 }
 
-//void Dashboard::onStopBitsComboBoxChanged(int index){
-//        // Retrieve the selected option
-//        QComboBox* stopBitsComboBox = new QComboBox(this);
-
-//        QString stopBits = stopBitsComboBox->itemText(index);
-
-//        // Store the selected option in the settings file
-//        settings.setValue("stopBits", stopBits);
-
-//        // Retrieve the stored value and print to the console
-//        QString stopBitsConfig = settings.value("stopBits", stopBits).toString();
-//        qDebug() << "selected option:" << stopBits;
-//        qDebug() << "stopBits:" << stopBitsConfig;
-//    }
 
 
 Dashboard::~Dashboard()
