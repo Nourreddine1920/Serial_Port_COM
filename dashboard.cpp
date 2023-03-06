@@ -325,16 +325,16 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the UART configurations
-    connect(UART4, &QAction::triggered, this, &Dashboard::UARTConfig);
-    connect(UART5, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(UART4, &QAction::triggered, this, &Dashboard::UART4Config);
+    connect(UART5, &QAction::triggered, this, &Dashboard::UART5Config);
     connect(UART7, &QAction::triggered, this, &Dashboard::UARTConfig);
     connect(UART8, &QAction::triggered, this, &Dashboard::UARTConfig);
 
     connect(UART9, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(USART1, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(USART1, &QAction::triggered, this, &Dashboard::USART1Config);
 
-    connect(USART2, &QAction::triggered, this, &Dashboard::UARTConfig);
+    connect(USART2, &QAction::triggered, this, &Dashboard::USART2Config);
 
     connect(USART6, &QAction::triggered, this, &Dashboard::UARTConfig);
 
