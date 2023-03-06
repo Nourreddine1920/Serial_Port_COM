@@ -53,35 +53,12 @@ private slots :
                     stringBaudRates.append(QString::number(baudRates.at(i)));
                 }
                baudRateComboBox->addItems(stringBaudRates);
-               QString Baudrates = baudRateComboBox->currentText();
 
                baudRateComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                baudRateComboBox->setMinimumWidth(10);
                baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-    //                int baudRateIndex = settings.value("UART/baudRateIndex", 0).toInt();
-
-    //               int parityIndex = settings.value("UART/parityIndex", 0).toInt();
-    //               int stopBitsIndex = settings.value("UART/stopBitsIndex", 0).toInt();
-    //               int dataBitsIndex = settings.value("UART/dataBitsIndex", 0).toInt();
-    //               int flowControlIndex = settings.value("UART/flowControlIndex", 0).toInt();
-    //               baudRateComboBox->setCurrentIndex(baudRateIndex);
-               // Save the selected baud rate when changed
-//               int selectedIndex = settings.value("MyWidget/SelectedIndex", 0).toInt();
-//               baudRateComboBox->setCurrentIndex(selectedIndex);
-//    //               qDebug() << "selectedIndex:" << selectedIndex;
-
-
-
-
-//                connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index) {
-//                        baudRateComboBox->setCurrentIndex(index);
-//                        settings.setValue("UART/baudRateIndex", index);
-
-//                   });
-
-//    ;
 
                layout->addRow(baudRateLabel, baudRateComboBox);
 
@@ -175,11 +152,6 @@ private slots :
                FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-    //               FlowControlComboBox->setStyleSheet("QComboBox {"
-
-    //                                       "  font-weight: bold;"
-    //                                       "  border: 1px solid black;"
-    //                                       "}");
 
 
                layout->addRow(FlowControlLabel, FlowControlComboBox);
@@ -229,21 +201,6 @@ private slots :
 
                settings.endGroup();
 
-
-
-
-
-
-    //               QString baudRate = settings.value("baudRate").toString();
-    //               QString parity = settings.value("parity").toString();
-    //               QString dataBits = settings.value("dataBits").toString();
-    //               QString flowControl = settings.value("flowControl").toString();
-
-    //               qDebug() << "baudRate:" << baudRate;
-    //               qDebug() << "parity:" << parity;
-    //               qDebug() << "stopBits:" << stopBits;
-    //               qDebug() << "dataBits:" << dataBits;
-    //               qDebug() << "flowControl:" << flowControl;
 
 
 
