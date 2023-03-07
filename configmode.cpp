@@ -138,7 +138,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
     returnButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 
 
-
+    connect(returnButton, &QToolButton::clicked, this, &ConfigMode::returnDashboard);
 
 
 
@@ -473,6 +473,13 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
 
+}
+
+void ConfigMode::returnDashboard()
+{
+    Dashboard *dashboard = new Dashboard();
+    dashboard->show();
+    this->hide();
 }
 
 ConfigMode::~ConfigMode()

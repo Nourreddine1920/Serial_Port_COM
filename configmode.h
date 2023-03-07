@@ -17,6 +17,10 @@ public:
 
 private:
     Ui::ConfigMode *ui;
+
+public slots :
+    void returnDashboard();
+
 };
 
 #endif // CONFIGMODE_H

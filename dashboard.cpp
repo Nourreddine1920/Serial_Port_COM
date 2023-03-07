@@ -463,12 +463,7 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 }
-//void Dashboard::openNewUi()
-//{
-//    // Create a new instance of your UI and show it
-//    NewUi *newUi = new NewUi(this);
-//    newUi->show();
-//}
+
 
 void Dashboard::showConfigMode()
 {
