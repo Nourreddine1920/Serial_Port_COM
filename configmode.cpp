@@ -1,17 +1,18 @@
+#include "configmode.h"
+#include "ui_configmode.h"
 #include "dashboard.h"
-#include "ui_dashboard.h"
 #include <QIcon>
 #include <QCheckBox>
 #include <QWidgetAction>
 #include <QToolButton>
-#include "configmode.h"
 
-Dashboard::Dashboard(QWidget *parent) :
+ConfigMode::ConfigMode(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::Dashboard)
+    ui(new Ui::ConfigMode)
 {
     ui->setupUi(this);
-    QWidget::setWindowTitle("IPs Configurations ");
+
+    QWidget::setWindowTitle("ConfigMode");
 
     //-------------------------IPs Configurations-------------------------//
 
@@ -121,14 +122,22 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Create a QToolButton for the "Connect" button
     QToolButton *connectButton = new QToolButton(this);
-    connectButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/connexion.png"));
-    connectButton->setText(tr("&Connect"));
+    connectButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/send.png"));
+    connectButton->setText(tr("&Send Configs"));
     connectButton->setStyleSheet("font: Helvetica gras 20px; padding: 18px; width: 500px;");
     connectButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 
 
     // Connect the QToolButton's clicked() signal to a slot that will open the new UI
-    connect(connectButton, &QToolButton::clicked, this, &Dashboard::showConfigMode);
+//    connect(connectButton, &QToolButton::clicked, this, &Dashboard::showConfigMode);
+
+    QToolButton *returnButton = new QToolButton(this);
+    returnButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/back.png"));
+    returnButton->setText(tr("&Return"));
+    returnButton->setStyleSheet("font: Helvetica gras 20px; padding: 18px; width: 500px;");
+    returnButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+
 
 
 
@@ -152,6 +161,7 @@ Dashboard::Dashboard(QWidget *parent) :
     QMenu *GPIO = menuBar()->addMenu("&GPIO");
     // Add the QToolButton to the menu bar
     menuBar()->setCornerWidget(connectButton, Qt::TopRightCorner);
+    menuBar()->setCornerWidget(returnButton , Qt::TopLeftCorner);
 
     QFont font = menuBar()->font();
     // Create a QFont object and set its bold property to true
@@ -206,7 +216,7 @@ Dashboard::Dashboard(QWidget *parent) :
             QString style = "\
                 QMenuBar {\
                     background-color: #868482;\
-                    spacing: 20px;\
+                    spacing: 7px;\
                 }\
                 QMenuBar::item {\
                     background-color: transparent;\
@@ -260,6 +270,8 @@ Dashboard::Dashboard(QWidget *parent) :
             // Set the style sheet for the menu bar and button
             menuBar()->setStyleSheet(style);
             connectButton->setStyleSheet(style);
+            returnButton->setStyleSheet(style);
+
 
 //    menuBar()->setStyleSheet(style);
 //    logo->setStyleSheet(style);
@@ -327,20 +339,20 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the UART configurations
-    connect(UART4, &QAction::triggered, this, &Dashboard::UART4Config);
-    connect(UART5, &QAction::triggered, this, &Dashboard::UART5Config);
-    connect(UART7, &QAction::triggered, this, &Dashboard::UARTConfig);
-    connect(UART8, &QAction::triggered, this, &Dashboard::UARTConfig);
+//    connect(UART4, &QAction::triggered, this, &Dashboard::UART4Config);
+//    connect(UART5, &QAction::triggered, this, &Dashboard::UART5Config);
+//    connect(UART7, &QAction::triggered, this, &Dashboard::UARTConfig);
+//    connect(UART8, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(UART9, &QAction::triggered, this, &Dashboard::UARTConfig);
+//    connect(UART9, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(USART1, &QAction::triggered, this, &Dashboard::USART1Config);
+//    connect(USART1, &QAction::triggered, this, &Dashboard::USART1Config);
 
-    connect(USART2, &QAction::triggered, this, &Dashboard::USART2Config);
+//    connect(USART2, &QAction::triggered, this, &Dashboard::USART2Config);
 
-    connect(USART6, &QAction::triggered, this, &Dashboard::UARTConfig);
+//    connect(USART6, &QAction::triggered, this, &Dashboard::UARTConfig);
 
-    connect(USART10, &QAction::triggered, this,&Dashboard::UARTConfig);
+//    connect(USART10, &QAction::triggered, this,&Dashboard::UARTConfig);
 
 
     //-------------------------Connect to the SPI configurations-------------------------//
@@ -367,14 +379,14 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the SPI configurations
-    connect(SPI1, &QAction::triggered, this, &Dashboard::SPI1Config);
-    connect(SPI2, &QAction::triggered, this, &Dashboard::SPI2Config);
-    connect(SPI3, &QAction::triggered, this, &Dashboard::SPIConfig);
-    connect(SPI4, &QAction::triggered, this, &Dashboard::SPIConfig);
+//    connect(SPI1, &QAction::triggered, this, &Dashboard::SPI1Config);
+//    connect(SPI2, &QAction::triggered, this, &Dashboard::SPI2Config);
+//    connect(SPI3, &QAction::triggered, this, &Dashboard::SPIConfig);
+//    connect(SPI4, &QAction::triggered, this, &Dashboard::SPIConfig);
 
-    connect(SPI5, &QAction::triggered, this, &Dashboard::SPIConfig);
+//    connect(SPI5, &QAction::triggered, this, &Dashboard::SPIConfig);
 
-    connect(SPI6, &QAction::triggered, this, &Dashboard::SPIConfig);
+//    connect(SPI6, &QAction::triggered, this, &Dashboard::SPIConfig);
 
     //-------------------------Connect to the I2C configurations-------------------------//
 
@@ -396,12 +408,12 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect to the I2C configurations
-    connect(I2C1, &QAction::triggered, this, &Dashboard::I2C1Config);
-    connect(I2C2, &QAction::triggered, this, &Dashboard::I2C2Config);
-    connect(I2C3, &QAction::triggered, this, &Dashboard::I2CConfig);
-    connect(I2C4, &QAction::triggered, this, &Dashboard::I2CConfig);
+//    connect(I2C1, &QAction::triggered, this, &Dashboard::I2C1Config);
+//    connect(I2C2, &QAction::triggered, this, &Dashboard::I2C2Config);
+//    connect(I2C3, &QAction::triggered, this, &Dashboard::I2CConfig);
+//    connect(I2C4, &QAction::triggered, this, &Dashboard::I2CConfig);
 
-    connect(I2C5, &QAction::triggered, this, &Dashboard::I2CConfig);
+//    connect(I2C5, &QAction::triggered, this, &Dashboard::I2CConfig);
 
 
     //-------------------------Connect to the ADC configurations-------------------------//
@@ -419,9 +431,9 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 
-    connect(ADC1, &QAction::triggered, this, &Dashboard::ADC1Config);
-    connect(ADC2, &QAction::triggered, this, &Dashboard::ADCConfig);
-    connect(ADC3, &QAction::triggered, this, &Dashboard::ADC3Config);
+//    connect(ADC1, &QAction::triggered, this, &Dashboard::ADC1Config);
+//    connect(ADC2, &QAction::triggered, this, &Dashboard::ADCConfig);
+//    connect(ADC3, &QAction::triggered, this, &Dashboard::ADC3Config);
 
 
     //-------------------------Connect to the DAC configurations-------------------------//
@@ -431,7 +443,7 @@ Dashboard::Dashboard(QWidget *parent) :
     DAC->addSeparator();
 
 
-    connect(DAC1, &QAction::triggered, this, &Dashboard::DACConfig);
+//    connect(DAC1, &QAction::triggered, this, &Dashboard::DACConfig);
 
 
     //-------------------------Connect to the GPIO configurations-------------------------//
@@ -443,8 +455,8 @@ Dashboard::Dashboard(QWidget *parent) :
     GPIO->addSeparator();
 
 
-    connect(GPIO_OUTPUT, &QAction::triggered, this, &Dashboard::GPIOOUPUTConfig);
-    connect(GPIO_INPUT, &QAction::triggered, this, &Dashboard::GPIOINPUTConfig);
+//    connect(GPIO_OUTPUT, &QAction::triggered, this, &Dashboard::GPIOOUPUTConfig);
+//    connect(GPIO_INPUT, &QAction::triggered, this, &Dashboard::GPIOINPUTConfig);
 
 
     //-------------------------Connect to the TIMER configurations-------------------------//
@@ -453,8 +465,7 @@ Dashboard::Dashboard(QWidget *parent) :
     TIMER->addSeparator();
 
     // Connect to the TIMER configurations
-    connect(InputCaptureMode, &QAction::triggered, this, &Dashboard::FrequencyMesureConfig);
-
+//    connect(InputCaptureMode, &QAction::triggered, this, &Dashboard::FrequencyMesureConfig);
 
 
 
@@ -463,22 +474,8 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 }
-//void Dashboard::openNewUi()
-//{
-//    // Create a new instance of your UI and show it
-//    NewUi *newUi = new NewUi(this);
-//    newUi->show();
-//}
 
-void Dashboard::showConfigMode()
-{
-    ConfigMode *configMode = new ConfigMode();
-    configMode->show();
-    this->hide();
-}
-
-
-Dashboard::~Dashboard()
+ConfigMode::~ConfigMode()
 {
     delete ui;
 }

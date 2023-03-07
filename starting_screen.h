@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "uart.h"
+#include "dashboard.h"
 
 
 namespace Ui {
@@ -23,6 +24,7 @@ private slots:
 private:
     Ui::starting_screen *ui;
     Uart *Uartscreen ;
+    Dashboard *dashboard ;
 };
 
 #endif // STARTING_SCREEN_H
