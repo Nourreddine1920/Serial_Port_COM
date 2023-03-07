@@ -4580,6 +4580,41 @@ private slots :
 
                layout->addRow(ChannelLabel, ChannelComboBox);
 
+               // ----------------------- Save Channel Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+               QString ChannelConfig = settings.value("Channel", "").toString();
+//                QString stopBitsConfig;
+               // Set the selected option in the combo box
+
+               int indexChannel = ChannelComboBox->findText(ChannelConfig);
+               if (indexChannel != -1)
+                   ChannelComboBox->setCurrentIndex(indexChannel);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString Channel; // declare stopBits outside of the lambda
+
+               connect(ChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Channel](int indexChannel){
+                   // Retrieve the selected option
+                   QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+
+                   QString Channel = ChannelComboBox->itemText(indexChannel);
+                   settings.beginGroup("ADC1Configs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("Channel", Channel);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString ChannelConfig = settings.value("Channel" , Channel).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << Channel;
+                   qDebug() << "Channel:" << ChannelConfig;
+               });
+
                // ----------------------Create Resolution Mode----------------------//
 
                QLabel* ResolutionLabel = new QLabel(tr("ADC Resolution Bit"), this);
@@ -4591,6 +4626,43 @@ private slots :
                layout->addRow(ResolutionLabel, ResolutionComboBox);
 
 
+               // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+               QString ResolutionConfig = settings.value("Resolution", "").toString();
+//                QString stopBitsConfig;
+               // Set the selected option in the combo box
+
+               int indexResolution = ResolutionComboBox->findText(ResolutionConfig);
+               if (indexResolution != -1)
+                   ResolutionComboBox->setCurrentIndex(indexResolution);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString Resolution; // declare stopBits outside of the lambda
+
+               connect(ResolutionComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Resolution](int indexResolution){
+                   // Retrieve the selected option
+                   QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+
+                   QString Resolution = ResolutionComboBox->itemText(indexResolution);
+                   settings.beginGroup("ADC1Configs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("Resolution", Resolution);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString ResolutionConfig = settings.value("Resolution" , Resolution).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << Resolution;
+                   qDebug() << "Resolution:" << ResolutionConfig;
+               });
+
+
+
                // ----------------------Create Scan Mode----------------------//
 
                QLabel* ScanLabel = new QLabel(tr("Scan Conversion Mode"), this);
@@ -4600,6 +4672,42 @@ private slots :
                ScanComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(ScanLabel, ScanComboBox);
+
+               // ----------------------- Save Scan Mode Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+               QString ScanConfig = settings.value("Scan", "").toString();
+//                QString stopBitsConfig;
+               // Set the selected option in the combo box
+
+               int indexScan = ScanComboBox->findText(ScanConfig);
+               if (indexScan != -1)
+                   ScanComboBox->setCurrentIndex(indexScan);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString Scan; // declare stopBits outside of the lambda
+
+               connect(ScanComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Scan](int indexScan){
+                   // Retrieve the selected option
+                   QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+
+                   QString Scan = ScanComboBox->itemText(indexScan);
+                   settings.beginGroup("ADC1Configs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("Scan", Scan);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString ScanConfig = settings.value("Scan" , Scan).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << Scan;
+                   qDebug() << "Scan:" << ScanConfig;
+               });
+
 
 
                // ----------------------Create continuous Mode----------------------//
@@ -4614,6 +4722,41 @@ private slots :
                ContinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
                layout->addRow(ContinuousLabel, ContinuousComboBox);
 
+               // ----------------------- Save Continuous Mode Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+               QString ContinuousConfig = settings.value("Continuous", "").toString();
+//                QString stopBitsConfig;
+               // Set the selected option in the combo box
+
+               int indexContinuous = ContinuousComboBox->findText(ContinuousConfig);
+               if (indexContinuous != -1)
+                   ContinuousComboBox->setCurrentIndex(indexContinuous);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString Continuous; // declare stopBits outside of the lambda
+
+               connect(ContinuousComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Continuous](int indexContinuous){
+                   // Retrieve the selected option
+                   QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+
+                   QString Continuous = ContinuousComboBox->itemText(indexContinuous);
+                   settings.beginGroup("ADC1Configs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("Continuous", Continuous);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString ContinuousConfig = settings.value("Continuous" , Continuous).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << Continuous;
+                   qDebug() << "Continuous:" << ContinuousConfig;
+               });
+
 
                // ----------------------Create Discontinuous Mode----------------------//
 
@@ -4625,6 +4768,43 @@ private slots :
 
               DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
               DiscontinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+              // ----------------------- Save Discontinuous Mode Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+              QString DiscontinuousConfig = settings.value("Discontinuous", "").toString();
+//                QString stopBitsConfig;
+              // Set the selected option in the combo box
+
+              int indexDiscontinuous = DiscontinuousComboBox->findText(DiscontinuousConfig);
+              if (indexDiscontinuous != -1)
+                  DiscontinuousComboBox->setCurrentIndex(indexDiscontinuous);
+
+              // Connect the combo box to the slot
+   //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+              QString Discontinuous; // declare stopBits outside of the lambda
+
+              connect(DiscontinuousComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Discontinuous](int indexDiscontinuous){
+                  // Retrieve the selected option
+                  QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+
+                  QString Discontinuous = DiscontinuousComboBox->itemText(indexDiscontinuous);
+                  settings.beginGroup("ADC1Configs");
+
+
+                  // Store the selected option in the settings file
+                  settings.setValue("Discontinuous", Discontinuous);
+                  settings.endGroup();
+
+                  // Retrieve the stored value and print to the console
+                  QString DiscontinuousConfig = settings.value("Discontinuous" , Discontinuous).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                  qDebug() << "selected option:" << Discontinuous;
+                  qDebug() << "Discontinuous:" << DiscontinuousConfig;
+              });
+
               layout->addRow(DiscontinuousLabel, DiscontinuousComboBox);
 
 
@@ -4641,6 +4821,42 @@ private slots :
              layout->addRow(EndConversionLabel, EndConversionComboBox);
 
 
+             // ----------------------- Save End of Conversion Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+             QString EndConversionConfig = settings.value("EndConversion", "").toString();
+//                QString stopBitsConfig;
+             // Set the selected option in the combo box
+
+             int indexEndConversion = EndConversionComboBox->findText(EndConversionConfig);
+             if (indexEndConversion != -1)
+                 EndConversionComboBox->setCurrentIndex(indexEndConversion);
+
+             // Connect the combo box to the slot
+  //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+             QString EndConversion; // declare stopBits outside of the lambda
+
+             connect(EndConversionComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&EndConversion](int indexEndConversion){
+                 // Retrieve the selected option
+                 QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+
+                 QString EndConversion = EndConversionComboBox->itemText(indexEndConversion);
+                 settings.beginGroup("ADC1Configs");
+
+
+                 // Store the selected option in the settings file
+                 settings.setValue("EndConversion", EndConversion);
+                 settings.endGroup();
+
+                 // Retrieve the stored value and print to the console
+                 QString EndConversionConfig = settings.value("EndConversion" , EndConversion).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                 qDebug() << "selected option:" << EndConversion;
+                 qDebug() << "EndConversion:" << EndConversionConfig;
+             });
+
+
              // ----------------------Create Behavior Bit----------------------//
 
             QLabel* BehaviorLabel = new QLabel(tr("Overrun Behavior"), this);
@@ -4654,6 +4870,42 @@ private slots :
             layout->addRow(BehaviorLabel, BehaviorComboBox);
 
 
+            // ----------------------- Save Behavior Bit Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+            QString BehaviorConfig = settings.value("Behavior", "").toString();
+//                QString stopBitsConfig;
+            // Set the selected option in the combo box
+
+            int indexBehavior = BehaviorComboBox->findText(BehaviorConfig);
+            if (indexBehavior != -1)
+                BehaviorComboBox->setCurrentIndex(indexBehavior);
+
+            // Connect the combo box to the slot
+ //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+            QString Behavior; // declare stopBits outside of the lambda
+
+            connect(BehaviorComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Behavior](int indexBehavior){
+                // Retrieve the selected option
+                QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+
+                QString Behavior = BehaviorComboBox->itemText(indexBehavior);
+                settings.beginGroup("ADC1Configs");
+
+
+                // Store the selected option in the settings file
+                settings.setValue("Behavior", Behavior);
+                settings.endGroup();
+
+                // Retrieve the stored value and print to the console
+                QString BehaviorConfig = settings.value("Behavior" , Behavior).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                qDebug() << "selected option:" << Behavior;
+                qDebug() << "Behavior:" << BehaviorConfig;
+            });
+
+
 
             // ----------------------Create Left Bit----------------------//
 
@@ -4663,8 +4915,40 @@ private slots :
                LeftBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                LeftBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-               //QSpacerItem* spacerItem = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+               // ----------------------- Save Left Bit Choices configs into a ADCConfig.txt-----------------------------------//
 
+
+               QString LeftBitConfig = settings.value("LeftBit", "").toString();
+//                QString stopBitsConfig;
+               // Set the selected option in the combo box
+
+               int indexLeftBit = LeftBitComboBox->findText(LeftBitConfig);
+               if (indexLeftBit != -1)
+                   LeftBitComboBox->setCurrentIndex(indexLeftBit);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString LeftBit; // declare stopBits outside of the lambda
+
+               connect(LeftBitComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&LeftBit](int indexLeftBit){
+                   // Retrieve the selected option
+                   QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+
+                   QString LeftBit = LeftBitComboBox->itemText(indexLeftBit);
+                   settings.beginGroup("ADC1Configs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("LeftBit", LeftBit);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString LeftBitConfig = settings.value("LeftBit" , LeftBit).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << LeftBit;
+                   qDebug() << "LeftBit:" << LeftBitConfig;
+               });
 
                layout->addRow(LeftBitLabel, LeftBitComboBox);
                layout->setContentsMargins(0, 0, 0, 0);
@@ -4687,20 +4971,6 @@ private slots :
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
 
-               // ----------------------Save Configs in file----------------------//
-               QSettings settings("ADCConfigs.txt", QSettings::IniFormat);
-
-               settings.beginGroup("ADC1Configs");
-
-               settings.setValue("Channel",  ChannelComboBox->currentText());
-               settings.setValue("Resolution",  ResolutionComboBox->currentText());
-               settings.setValue("Scan",  ScanComboBox->currentText());
-               settings.setValue("Continuous",  ContinuousComboBox->currentText());
-               settings.setValue("Discontinuous",  DiscontinuousComboBox->currentText());
-               settings.setValue("EndConversion",  EndConversionComboBox->currentText());
-               settings.setValue("Behavior",  BehaviorComboBox->currentText());
-               settings.setValue("LeftBit",  LeftBitComboBox->currentText());
-               settings.endGroup();
 
 
 
