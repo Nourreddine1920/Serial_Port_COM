@@ -90,6 +90,33 @@ private slots :
 
                QLabel* baudRateLabel = new QLabel(tr("Baud Rate"), this);
                QComboBox* baudRateComboBox = new QComboBox(this);
+//               baudRateComboBox->setStyleSheet("QComboBox {"
+//                                       "background-color: white;"
+//                                       "border: 1px solid gray;"
+//                                       "border-radius: 3px;"
+//                                       "padding: 1px 18px 1px 3px;"
+//                                       "min-width: 6em;"
+//                                       "}"
+//                                       "QComboBox::drop-down {"
+//                                       "subcontrol-origin: padding;"
+//                                       "subcontrol-position: top right;"
+//                                       "width: 15px;"
+//                                       "border-left-width: 1px;"
+//                                       "border-left-color: gray;"
+//                                       "border-left-style: solid;"
+//                                       "border-top-right-radius: 3px;"
+//                                       "border-bottom-right-radius: 3px;"
+//                                       "}"
+//                                       "QComboBox::down-arrow {"
+//                                       "image: url(:/images/down_arrow.png);"
+//                                       "}"
+//                                       "QComboBox QAbstractItemView {"
+//                                       "background-color: white;"
+//                                       "border: 1px solid gray;"
+//                                       "selection-background-color: lightgray;"
+//                                       "}"
+//                                       );
+
                QList<qint32> baudRates = info.standardBaudRates(); // What baudrates does my computer support ?
                QList<QString> stringBaudRates;
                 for(int i = 0 ; i < baudRates.size() ; i++){

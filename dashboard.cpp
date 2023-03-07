@@ -122,6 +122,7 @@ Dashboard::Dashboard(QWidget *parent) :
     QToolButton *connectButton = new QToolButton(this);
     connectButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/connexion.png"));
     connectButton->setText(tr("&Connect"));
+    connectButton->setStyleSheet("font: Helvetica gras 20px; padding: 18px; width: 500px;");
     connectButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 
 
