@@ -28,7 +28,7 @@
       <widget class="QLabel" name="label_titre">
        <property name="font">
         <font>
-         <family>Goudy Old Style</family>
+         <family>Rockwell</family>
          <pointsize>20</pointsize>
          <bold>true</bold>
          <underline>false</underline>
@@ -36,6 +36,9 @@
        </property>
        <property name="text">
         <string>WELCOME APPLICATION</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
