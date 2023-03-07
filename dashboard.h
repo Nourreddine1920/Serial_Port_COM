@@ -3734,6 +3734,42 @@ private slots :
 
                layout->addRow(TimingLabel, TimingComboBox);
 
+
+               // ----------------------- Save Timing configs into a I2CConfig.txt-----------------------------------//
+
+
+               QString TimingConfig = settings.value("Timing", "").toString();
+//                QString stopBitsConfig;
+               // Set the selected option in the combo box
+
+               int indexTiming = TimingComboBox->findText(TimingConfig);
+               if (indexTiming != -1)
+                   TimingComboBox->setCurrentIndex(indexTiming);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString Timing; // declare stopBits outside of the lambda
+
+               connect(TimingComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Timing](int indexTiming){
+                   // Retrieve the selected option
+                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                   QString Timing = TimingComboBox->itemText(indexTiming);
+                   settings.beginGroup("I2C2Configs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("Timing", Timing);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString TimingConfig = settings.value("Timing" , Timing).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << Timing;
+                   qDebug() << "Timing:" << TimingConfig;
+               });
+
                // ----------------------Create Speed Mode----------------------//
 
                QLabel* SpeedLabel = new QLabel(tr("I2C Speed Mode"), this);
@@ -3745,21 +3781,87 @@ private slots :
                layout->addRow(SpeedLabel, SpeedComboBox);
 
 
+
+               // ----------------------- Save Speed configs into a I2CConfig.txt-----------------------------------//
+
+
+               QString SpeedConfig = settings.value("Speed", "").toString();
+//                QString stopBitsConfig;
+               // Set the selected option in the combo box
+
+               int indexSpeed = SpeedComboBox->findText(SpeedConfig);
+               if (indexSpeed != -1)
+                   SpeedComboBox->setCurrentIndex(indexSpeed);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString Speed; // declare stopBits outside of the lambda
+
+               connect(SpeedComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Speed](int indexSpeed){
+                   // Retrieve the selected option
+                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                   QString Speed = SpeedComboBox->itemText(indexSpeed);
+                   settings.beginGroup("I2C2Configs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("Speed", Speed);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString SpeedConfig = settings.value("Speed" , Speed).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << Speed;
+                   qDebug() << "Speed:" << SpeedConfig;
+               });
+
+
                // ----------------------Create Frequency Speed----------------------//
 
                QLabel* FrequencyLabel = new QLabel(tr("Speed Frequency"), this);
                QComboBox* FrequencyComboBox = new QComboBox(this);
                FrequencyComboBox->addItems(QStringList() << "200 KHz" << "400 KHz " << "1 MHz");
-
-
-
-
-
-
                FrequencyLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FrequencyComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(FrequencyLabel, FrequencyComboBox);
+
+               // ----------------------- Save Frequency configs into a I2CConfig.txt-----------------------------------//
+
+
+               QString FrequencyConfig = settings.value("Frequency", "").toString();
+//                QString stopBitsConfig;
+               // Set the selected option in the combo box
+
+               int indexFrequency = FrequencyComboBox->findText(FrequencyConfig);
+               if (indexFrequency != -1)
+                   FrequencyComboBox->setCurrentIndex(indexFrequency);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString Frequency; // declare stopBits outside of the lambda
+
+               connect(FrequencyComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Frequency](int indexFrequency){
+                   // Retrieve the selected option
+                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                   QString Frequency = FrequencyComboBox->itemText(indexFrequency);
+                   settings.beginGroup("I2C2Configs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("Frequency", Frequency);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString FrequencyConfig = settings.value("Frequency" , Frequency).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << Frequency;
+                   qDebug() << "Frequency:" << FrequencyConfig;
+               });
 
 
                // ----------------------Create Rise Edge----------------------//
@@ -3774,6 +3876,35 @@ private slots :
                layout->addRow(RiseLabel, RiseSpinBox);
 
 
+               //---------------------Save configuration into SPIConfig.txt---------------------------//
+
+
+               QString RiseConfig = settings.value("Rise", "").toString();
+               // Set the selected value in the spin box
+               RiseSpinBox->setValue(RiseConfig.toInt());
+
+               // Connect the spin box to the slot
+               QString Rise; // declare Rise outside of the lambda
+               connect(RiseSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Rise](int value){
+                   // Retrieve the selected value
+                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                   QString Rise = QString::number(value);
+                   settings.beginGroup("I2C2Configs");
+
+                   // Store the selected value in the settings file
+                   settings.setValue("Rise", Rise);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString RiseConfig = settings.value("Rise" , Rise).toString();
+                   qDebug() << "selected value:" << Rise;
+                   qDebug() << "Rise:" << RiseConfig;
+               });
+
+
+
+
                // ----------------------Create Fall edge----------------------//
 
                QLabel* FallLabel = new QLabel(tr("Fall Time"), this);
@@ -3784,6 +3915,34 @@ private slots :
                FallLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FallSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
                layout->addRow(FallLabel, FallSpinBox);
+
+
+               //---------------------Save configuration into SPIConfig.txt---------------------------//
+
+
+               QString FallConfig = settings.value("Fall", "").toString();
+               // Set the selected value in the spin box
+               FallSpinBox->setValue(FallConfig.toInt());
+
+               // Connect the spin box to the slot
+               QString Fall; // declare Fall outside of the lambda
+               connect(FallSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Fall](int value){
+                   // Retrieve the selected value
+                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                   QString Fall = QString::number(value);
+                   settings.beginGroup("I2C2Configs");
+
+                   // Store the selected value in the settings file
+                   settings.setValue("Fall", Fall);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString FallConfig = settings.value("Fall" , Fall).toString();
+                   qDebug() << "selected value:" << Fall;
+                   qDebug() << "Fall:" << FallConfig;
+               });
+
 
 
                // ----------------------Create Converter----------------------//
@@ -3797,6 +3956,35 @@ private slots :
                ConverterSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
                layout->addRow(ConverterLabel, ConverterSpinBox);
 
+
+               //---------------------Save configuration into SPIConfig.txt---------------------------//
+
+
+               QString ConverterConfig = settings.value("Converter", "").toString();
+               // Set the selected value in the spin box
+               ConverterSpinBox->setValue(ConverterConfig.toInt());
+
+               // Connect the spin box to the slot
+               QString Converter; // declare Converter outside of the lambda
+               connect(ConverterSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Converter](int value){
+                   // Retrieve the selected value
+                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                   QString Converter = QString::number(value);
+                   settings.beginGroup("I2C2Configs");
+
+                   // Store the selected value in the settings file
+                   settings.setValue("Converter", Converter);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString ConverterConfig = settings.value("Converter" , Converter).toString();
+                   qDebug() << "selected value:" << Converter;
+                   qDebug() << "Converter:" << ConverterConfig;
+               });
+
+
+
                // ----------------------Create Analog Filter----------------------//
 
                QLabel* AnalogFilterLabel = new QLabel(tr("Analog Filter"), this);
@@ -3805,8 +3993,40 @@ private slots :
                AnalogFilterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                AnalogFilterComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-               //QSpacerItem* spacerItem = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+               // ----------------------- Save Analog Filter configs into a I2CConfig.txt-----------------------------------//
 
+
+               QString AnalogFilterConfig = settings.value("AnalogFilter", "").toString();
+//                QString stopBitsConfig;
+               // Set the selected option in the combo box
+
+               int indexAnalogFilter = AnalogFilterComboBox->findText(AnalogFilterConfig);
+               if (indexAnalogFilter != -1)
+                   AnalogFilterComboBox->setCurrentIndex(indexAnalogFilter);
+
+               // Connect the combo box to the slot
+    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+               QString AnalogFilter; // declare stopBits outside of the lambda
+
+               connect(AnalogFilterComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AnalogFilter](int indexAnalogFilter){
+                   // Retrieve the selected option
+                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                   QString AnalogFilter = AnalogFilterComboBox->itemText(indexAnalogFilter);
+                   settings.beginGroup("I2C2Configs");
+
+
+                   // Store the selected option in the settings file
+                   settings.setValue("AnalogFilter", AnalogFilter);
+                   settings.endGroup();
+
+                   // Retrieve the stored value and print to the console
+                   QString AnalogFilterConfig = settings.value("AnalogFilter" , AnalogFilter).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                   qDebug() << "selected option:" << AnalogFilter;
+                   qDebug() << "AnalogFilter:" << AnalogFilterConfig;
+               });
 
                layout->addRow(AnalogFilterLabel, AnalogFilterComboBox);
                layout->setContentsMargins(0, 0, 0, 0);
@@ -3828,27 +4048,6 @@ private slots :
 
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
-
-
-               // ----------------------Save configs into file ----------------------//
-
-               QSettings settings("I2CConfigs.txt", QSettings::IniFormat);
-
-
-
-               settings.beginGroup("I2C2Configs");
-
-               settings.setValue("Timing",  TimingComboBox->currentText());
-               settings.setValue("I2CSpeedMode",  SpeedComboBox->currentText());
-               settings.setValue("SpeedFrequency",  FrequencyComboBox->currentText());
-               settings.setValue("RiseTime",  RiseSpinBox->value());
-               settings.setValue("FallTime",  FallSpinBox->value());
-               settings.setValue("CoefficientofDigitalConverter",  ConverterSpinBox->value());
-               settings.setValue("Analogfilter",  AnalogFilterComboBox->currentText());
-
-
-
-               settings.endGroup();
 
 
 
