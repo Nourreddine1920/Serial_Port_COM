@@ -13,6 +13,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    configmode.cpp \
     dashboard.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
     uartips.cpp
 
 HEADERS += \
+    configmode.h \
     dashboard.h \
     mainwindow.h \
     starting_screen.h \
@@ -28,6 +30,7 @@ HEADERS += \
     uartips.h
 
 FORMS += \
+    configmode.ui \
     dashboard.ui \
     mainwindow.ui \
     starting_screen.ui \
@@ -40,6 +43,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    back.png \
     config1.png \
     config2.png \
     config3.png \
@@ -51,6 +55,9 @@ DISTFILES += \
     file.txt \
     images/logo-actia.png \
     images/logo-actia.png \
-    reglage.png
+    reglage.png \
+    return-button.png \
+    return.png \
+    send.png
 
 

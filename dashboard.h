@@ -15,6 +15,7 @@
 #include <QDesktopServices>
 #include <QFileInfo>
 #include <QFontDatabase>
+#include "configmode.h"
 
 
 
@@ -4762,6 +4763,10 @@ private slots :
 private:
     Ui::Dashboard *ui;
     QSerialPortInfo info;
+
+public slots :
+    void showConfigMode();
+
 
 
 };
