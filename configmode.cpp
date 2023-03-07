@@ -339,7 +339,87 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
     // Connect to the UART configurations
-//    connect(UART4, &QAction::triggered, this, &Dashboard::UART4Config);
+//    connect(UART4, &QAction::triggered, this, &ConfigMode::UART4ShowingConfig);
+//    connect(UART4, &QAction::triggered, this, [=]() {
+//        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+
+//        // Create your QListWidget and add your items to it
+//        QListWidget* configList = new QListWidget(this);
+//        configList->clear();
+//        settings.beginGroup("UART4Configs");
+
+//        QString baudrate;
+//        QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
+
+//        QListWidgetItem* baudRateItem = new QListWidgetItem("Baud Rate: " +BaudrateConfig , configList);
+//        configList->addItem(baudRateItem);
+//        qDebug() << "baudrate:" << baudRateItem;
+//        qDebug() << "baudrateconfig:" << BaudrateConfig;
+//        settings.endGroup();
+
+//        // Create a QVBoxLayout to center your QListWidget in your UI
+//        QVBoxLayout* layout = new QVBoxLayout;
+//        layout->addWidget(configList);
+//        layout->setAlignment(Qt::AlignCenter);
+//        setLayout(layout);
+
+//        // Style your QListWidget with a stylesheet
+//        QString styleSheet = "QListWidget {"
+//                             "border: 1px solid gray;"
+//                             "border-radius: 3px;"
+//                             "background-color: #f5f5f5;"
+//                             "padding: 5px;"
+//                             "}";
+//        configList->setStyleSheet(styleSheet);
+
+
+//    });
+
+    connect(UART4, &QAction::triggered, this, [=]() {
+
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("UART4Configs");
+
+        QString baudrate;
+        QString Parity;
+        QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
+        QString ParityConfig = settings.value("Parity" , Parity).toString();
+
+
+        QListWidgetItem* baudRateItem = new QListWidgetItem("Baud Rate: " +BaudrateConfig , configList);
+        QListWidgetItem* ParityItem = new QListWidgetItem("Parity: " +ParityConfig , configList);
+
+        configList->addItem(baudRateItem);
+        configList->addItem(ParityItem);
+        configList->show();
+
+        qDebug() << "baudrate:" << baudRateItem;
+        qDebug() << "Parity:" << ParityItem;
+        settings.endGroup();
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    });
+
 //    connect(UART5, &QAction::triggered, this, &Dashboard::UART5Config);
 //    connect(UART7, &QAction::triggered, this, &Dashboard::UARTConfig);
 //    connect(UART8, &QAction::triggered, this, &Dashboard::UARTConfig);
