@@ -320,19 +320,54 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
 
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("UART4 Configurations"), configList);
 
-        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("Baud Rate: ") +BaudrateConfig , configList);
-        QListWidgetItem* ParityItem = new QListWidgetItem(tr("Parity: ") +ParityConfig , configList);
-        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("stopBits: ") +stopBitsConfig , configList);
-        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("DataBits: ") +DataBitsConfig , configList);
-        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("FlowControl: ") +FlowControlConfig , configList);
+        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("•  Baud Rate     :     ") +BaudrateConfig , configList);
+        QListWidgetItem* ParityItem = new QListWidgetItem(tr("•  Parity       :  ") +ParityConfig , configList);
+        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("•  stopBits     :    ") +stopBitsConfig , configList);
+        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("•  DataBits     :    ") +DataBitsConfig , configList);
+        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("•  FlowControl    :    ") +FlowControlConfig , configList);
 
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        baudRateItem->setFont(QFont("Helvetica", 13));
+        baudRateItem->setTextAlignment(Qt::TopLeftCorner);
+        ParityItem->setFont(QFont("Helvetica", 13));
+        ParityItem->setTextAlignment(Qt::TopLeftCorner);
+        stopBitsItem->setFont(QFont("Helvetica", 13));
+        stopBitsItem->setTextAlignment(Qt::TopLeftCorner);
+        DataBitsItem->setFont(QFont("Helvetica", 13));
+        DataBitsItem->setTextAlignment(Qt::TopLeftCorner);
+        FlowControlItem->setFont(QFont("Helvetica", 13));
+        FlowControlItem->setTextAlignment(Qt::TopLeftCorner);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
 
         configList->addItem(baudRateItem);
         configList->addItem(ParityItem);
         configList->addItem(stopBitsItem);
         configList->addItem(DataBitsItem);
         configList->addItem(FlowControlItem);
+
 
 
         configList->show();
@@ -490,13 +525,47 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
 
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("USART1 Configurations"), configList);
 
-        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("Baud Rate: ") +BaudrateConfig , configList);
-        QListWidgetItem* ParityItem = new QListWidgetItem(tr("Parity: ") +ParityConfig , configList);
-        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("stopBits: ") +stopBitsConfig , configList);
-        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("DataBits: ") +DataBitsConfig , configList);
-        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("FlowControl: ") +FlowControlConfig , configList);
+        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("•  Baud Rate     :     ") +BaudrateConfig , configList);
+        QListWidgetItem* ParityItem = new QListWidgetItem(tr("•  Parity       :  ") +ParityConfig , configList);
+        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("•  stopBits     :    ") +stopBitsConfig , configList);
+        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("•  DataBits     :    ") +DataBitsConfig , configList);
+        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("•  FlowControl    :    ") +FlowControlConfig , configList);
 
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        baudRateItem->setFont(QFont("Helvetica", 13));
+        baudRateItem->setTextAlignment(Qt::TopLeftCorner);
+        ParityItem->setFont(QFont("Helvetica", 13));
+        ParityItem->setTextAlignment(Qt::TopLeftCorner);
+        stopBitsItem->setFont(QFont("Helvetica", 13));
+        stopBitsItem->setTextAlignment(Qt::TopLeftCorner);
+        DataBitsItem->setFont(QFont("Helvetica", 13));
+        DataBitsItem->setTextAlignment(Qt::TopLeftCorner);
+        FlowControlItem->setFont(QFont("Helvetica", 13));
+        FlowControlItem->setTextAlignment(Qt::TopLeftCorner);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
 
         configList->addItem(baudRateItem);
         configList->addItem(ParityItem);
@@ -579,13 +648,48 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
 
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("USART2 Configurations"), configList);
 
-        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("Baud Rate: ") +BaudrateConfig , configList);
-        QListWidgetItem* ParityItem = new QListWidgetItem(tr("Parity: ") +ParityConfig , configList);
-        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("stopBits: ") +stopBitsConfig , configList);
-        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("DataBits: ") +DataBitsConfig , configList);
-        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("FlowControl: ") +FlowControlConfig , configList);
 
+        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("•  Baud Rate     :     ") +BaudrateConfig , configList);
+        QListWidgetItem* ParityItem = new QListWidgetItem(tr("•  Parity       :  ") +ParityConfig , configList);
+        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("•  stopBits     :    ") +stopBitsConfig , configList);
+        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("•  DataBits     :    ") +DataBitsConfig , configList);
+        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("•  FlowControl    :    ") +FlowControlConfig , configList);
+
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        baudRateItem->setFont(QFont("Helvetica", 13));
+        baudRateItem->setTextAlignment(Qt::TopLeftCorner);
+        ParityItem->setFont(QFont("Helvetica", 13));
+        ParityItem->setTextAlignment(Qt::TopLeftCorner);
+        stopBitsItem->setFont(QFont("Helvetica", 13));
+        stopBitsItem->setTextAlignment(Qt::TopLeftCorner);
+        DataBitsItem->setFont(QFont("Helvetica", 13));
+        DataBitsItem->setTextAlignment(Qt::TopLeftCorner);
+        FlowControlItem->setFont(QFont("Helvetica", 13));
+        FlowControlItem->setTextAlignment(Qt::TopLeftCorner);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
 
         configList->addItem(baudRateItem);
         configList->addItem(ParityItem);
@@ -594,10 +698,9 @@ ConfigMode::ConfigMode(QWidget *parent) :
         configList->addItem(FlowControlItem);
 
 
+
         configList->show();
 
-        qDebug() << "baudrate:" << baudRateItem;
-        qDebug() << "Parity:" << ParityItem;
         settings.endGroup();
 
         // Create Layout form
@@ -706,6 +809,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
         QString FirstbitConfig = settings.value("Firstbit" , Firstbit).toString();
 
 
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("SPI1 Configurations"), configList);
 
 
         QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode Selected: ") +ModeConfig , configList);
@@ -715,11 +819,46 @@ ConfigMode::ConfigMode(QWidget *parent) :
         QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
 
 
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        ModeItem->setFont(QFont("Helvetica", 12));
+        ModeItem->setTextAlignment(Qt::AlignCenter);
+        NSSItem->setFont(QFont("Helvetica", 12));
+        NSSItem->setTextAlignment(Qt::AlignCenter);
+        FrameformatItem->setFont(QFont("Helvetica", 12));
+        FrameformatItem->setTextAlignment(Qt::AlignCenter);
+        DatasizeItem->setFont(QFont("Helvetica", 12));
+        DatasizeItem->setTextAlignment(Qt::AlignCenter);
+        FirstbitItem->setFont(QFont("Helvetica", 12));
+        FirstbitItem->setTextAlignment(Qt::AlignCenter);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
         configList->addItem(ModeItem);
         configList->addItem(NSSItem);
         configList->addItem(FrameformatItem);
         configList->addItem(DatasizeItem);
         configList->addItem(FirstbitItem);
+
 
 
         configList->show();
@@ -794,6 +933,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
         QString FirstbitConfig = settings.value("Firstbit" , Firstbit).toString();
 
 
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("SPI2 Configurations"), configList);
 
 
         QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode Selected: ") +ModeConfig , configList);
@@ -802,6 +942,39 @@ ConfigMode::ConfigMode(QWidget *parent) :
         QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
         QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
 
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        ModeItem->setFont(QFont("Helvetica", 12));
+        ModeItem->setTextAlignment(Qt::AlignCenter);
+        NSSItem->setFont(QFont("Helvetica", 12));
+        NSSItem->setTextAlignment(Qt::AlignCenter);
+        FrameformatItem->setFont(QFont("Helvetica", 12));
+        FrameformatItem->setTextAlignment(Qt::AlignCenter);
+        DatasizeItem->setFont(QFont("Helvetica", 12));
+        DatasizeItem->setTextAlignment(Qt::AlignCenter);
+        FirstbitItem->setFont(QFont("Helvetica", 12));
+        FirstbitItem->setTextAlignment(Qt::AlignCenter);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
 
         configList->addItem(ModeItem);
         configList->addItem(NSSItem);
@@ -886,7 +1059,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
 
-        QListWidgetItem* titleItem = new QListWidgetItem(tr("SPI Configurations"), configList);
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("SPI3 Configurations"), configList);
 
         QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode: ") +ModeConfig , configList);
         QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
@@ -932,7 +1105,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
         FirstbitItem->setTextAlignment(Qt::AlignCenter);
 
 
-        configList->setSpacing(10);
+        configList->setSpacing(15);
         configList->addItem(titleItem);
 
         configList->addItem(ModeItem);
@@ -975,7 +1148,10 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
 
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 4px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 2px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setFixedHeight(450);
+//        configList->setFixedWidth(550);
+
 
 
 
