@@ -699,7 +699,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
         QString Datasize;
         QString Firstbit;
 
-        QString ModeConfig = settings.value("Mode" , Mode).toString();
+        QString ModeConfig = settings.value("Mode Selected" , Mode).toString();
         QString NSSConfig = settings.value("NSS" , NSS).toString();
         QString FrameformatConfig = settings.value("Frameformat" , Frameformat).toString();
         QString DatasizeConfig = settings.value("Datasize" , Datasize).toString();
@@ -796,7 +796,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
 
-        QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode: ") +ModeConfig , configList);
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode Selected: ") +ModeConfig , configList);
         QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
         QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("Frameformat: ") +FrameformatConfig , configList);
         QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
@@ -813,6 +813,9 @@ ConfigMode::ConfigMode(QWidget *parent) :
         configList->show();
 
         settings.endGroup();
+
+//        ModeItem->set("font: bold 15px; color: black; background-color: white;");
+
 
         // Create Layout form
         QFormLayout* layout = new QFormLayout(this);
@@ -883,6 +886,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
 
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("SPI Configurations"), configList);
 
         QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode: ") +ModeConfig , configList);
         QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
@@ -890,6 +894,46 @@ ConfigMode::ConfigMode(QWidget *parent) :
         QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
         QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
 
+
+//        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+//        // Create a QLabel for the icon and set its size
+//        QLabel* iconLabel = new QLabel(this);
+//        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+//        iconLabel->setFixedSize(30, 30);
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        ModeItem->setFont(QFont("Helvetica", 12));
+        ModeItem->setTextAlignment(Qt::AlignCenter);
+        NSSItem->setFont(QFont("Helvetica", 12));
+        NSSItem->setTextAlignment(Qt::AlignCenter);
+        FrameformatItem->setFont(QFont("Helvetica", 12));
+        FrameformatItem->setTextAlignment(Qt::AlignCenter);
+        DatasizeItem->setFont(QFont("Helvetica", 12));
+        DatasizeItem->setTextAlignment(Qt::AlignCenter);
+        FirstbitItem->setFont(QFont("Helvetica", 12));
+        FirstbitItem->setTextAlignment(Qt::AlignCenter);
+
+
+        configList->setSpacing(10);
+        configList->addItem(titleItem);
 
         configList->addItem(ModeItem);
         configList->addItem(NSSItem);
@@ -931,7 +975,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
 
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 4px solid #ccc; padding: 5px;text-align: center;");
 
 
 

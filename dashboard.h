@@ -2282,6 +2282,23 @@ private slots :
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
 
+               QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+               qDebug() << "Settings file path: " << settings.fileName();
+
+
+
+               settings.beginGroup("SPIConfigs");
+
+               settings.setValue("Mode",  Mode);
+               settings.setValue("NSS",  NSS);
+               settings.setValue("Frameformat",  Frameformat);
+               settings.setValue("Datasize",  DataSize);
+               settings.setValue("Firstbit",  Firstbit);
+
+               settings.endGroup();
+
+
 
 
 
@@ -2578,6 +2595,22 @@ private slots :
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
 
+               QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+               qDebug() << "Settings file path: " << settings.fileName();
+
+
+
+               settings.beginGroup("SPI1Configs");
+
+               settings.setValue("Mode",  Mode);
+               settings.setValue("NSS",  NSS);
+               settings.setValue("Frameformat",  Frameformat);
+               settings.setValue("Datasize",  DataSize);
+               settings.setValue("Firstbit",  Firstbit);
+
+               settings.endGroup();
+
 
 
 
@@ -2873,6 +2906,22 @@ private slots :
 
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
+
+               QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+               qDebug() << "Settings file path: " << settings.fileName();
+
+
+
+               settings.beginGroup("SPI2Configs");
+
+               settings.setValue("Mode",  Mode);
+               settings.setValue("NSS",  NSS);
+               settings.setValue("Frameformat",  Frameformat);
+               settings.setValue("Datasize",  DataSize);
+               settings.setValue("Firstbit",  Firstbit);
+
+               settings.endGroup();
 
 
 
@@ -3273,6 +3322,26 @@ private slots :
                widget->setGeometry(500, 500, 600, 500);
 
 
+               QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+               qDebug() << "Settings file path: " << settings.fileName();
+
+
+
+               settings.beginGroup("I2CConfigs");
+
+               settings.setValue("Timing",  Timing);
+               settings.setValue("Speed",  Speed);
+               settings.setValue("Frequency",  Frequency);
+               settings.setValue("Rise",  Rise);
+               settings.setValue("Fall",  Fall);
+               settings.setValue("Converter",  Converter);
+               settings.setValue("AnalogFilter",  AnalogFilter);
+
+
+               settings.endGroup();
+
+
 
 
     }
@@ -3668,6 +3737,28 @@ private slots :
 
 
 
+               QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+               qDebug() << "Settings file path: " << settings.fileName();
+
+
+
+               settings.beginGroup("I2C1Configs");
+
+               settings.setValue("Timing",  Timing);
+               settings.setValue("Speed",  Speed);
+               settings.setValue("Frequency",  Frequency);
+               settings.setValue("Rise",  Rise);
+               settings.setValue("Fall",  Fall);
+               settings.setValue("Converter",  Converter);
+               settings.setValue("AnalogFilter",  AnalogFilter);
+
+
+               settings.endGroup();
+
+
+
+
 
 
     }
@@ -4048,6 +4139,27 @@ private slots :
 
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
+
+
+               QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+               qDebug() << "Settings file path: " << settings.fileName();
+
+
+
+               settings.beginGroup("I2C2Configs");
+
+               settings.setValue("Timing",  Timing);
+               settings.setValue("Speed",  Speed);
+               settings.setValue("Frequency",  Frequency);
+               settings.setValue("Rise",  Rise);
+               settings.setValue("Fall",  Fall);
+               settings.setValue("Converter",  Converter);
+               settings.setValue("AnalogFilter",  AnalogFilter);
+
+
+               settings.endGroup();
+
 
 
 
@@ -4511,6 +4623,28 @@ private slots :
                widget->setGeometry(500, 500, 600, 500);
 
 
+               QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+
+               qDebug() << "Settings file path: " << settings.fileName();
+
+
+
+               settings.beginGroup("ADCConfigs");
+
+               settings.setValue("Channel",  Channel);
+               settings.setValue("Resolution",  Resolution);
+               settings.setValue("Scan",  ScanComboBox->currentText());
+               settings.setValue("Continuous",  Continuous);
+               settings.setValue("Discontinuous",  Discontinuous);
+               settings.setValue("EndConversion",  EndConversion);
+               settings.setValue("Behavior",  Behavior);
+               settings.setValue("LeftBit",  LeftBit);
+
+
+               settings.endGroup();
+
+
+
     }
 
     void ADC1Config (){
@@ -4970,6 +5104,27 @@ private slots :
 
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
+
+
+               QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+
+               qDebug() << "Settings file path: " << settings.fileName();
+
+
+
+               settings.beginGroup("ADC1Configs");
+
+               settings.setValue("Channel",  Channel);
+               settings.setValue("Resolution",  Resolution);
+               settings.setValue("Scan",  ScanComboBox->currentText());
+               settings.setValue("Continuous",  Continuous);
+               settings.setValue("Discontinuous",  Discontinuous);
+               settings.setValue("EndConversion",  EndConversion);
+               settings.setValue("Behavior",  Behavior);
+               settings.setValue("LeftBit",  LeftBit);
+
+
+               settings.endGroup();
 
 
 
@@ -5440,6 +5595,26 @@ private slots :
 
                widget->setLayout(horizontalLayout);
                widget->setGeometry(500, 500, 600, 500);
+
+               QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+
+               qDebug() << "Settings file path: " << settings.fileName();
+
+
+
+               settings.beginGroup("ADC3Configs");
+
+               settings.setValue("Channel",  Channel);
+               settings.setValue("Resolution",  Resolution);
+               settings.setValue("Scan",  ScanComboBox->currentText());
+               settings.setValue("Continuous",  Continuous);
+               settings.setValue("Discontinuous",  Discontinuous);
+               settings.setValue("EndConversion",  EndConversion);
+               settings.setValue("Behavior",  Behavior);
+               settings.setValue("LeftBit",  LeftBit);
+
+
+               settings.endGroup();
 
 
 
