@@ -1183,6 +1183,144 @@ ConfigMode::ConfigMode(QWidget *parent) :
     I2C->addAction(I2C5);
     I2C->addSeparator();
 
+    connect(I2C1, &QAction::triggered, this, [=]() {
+
+        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("I2C1Configs");
+
+        QString Timing;
+        QString Speed;
+        QString Frequency;
+        QString Rise;
+        QString Fall;
+        QString Converter;
+        QString AnalogFilter;
+
+
+
+        QString TimingConfig = settings.value("Timing" , Timing).toString();
+        QString SpeedConfig = settings.value("Speed" , Speed).toString();
+        QString FrequencyConfig = settings.value("Frequency" , Frequency).toString();
+        QString RiseConfig = settings.value("Rise" , Rise).toString();
+        QString FallConfig = settings.value("Fall" , Fall).toString();
+        QString ConverterConfig = settings.value("Converter" , Converter).toString();
+        QString AnalogFilterConfig = settings.value("AnalogFilter" , AnalogFilter).toString();
+
+
+
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("I2C1 Configurations"), configList);
+
+
+        QListWidgetItem* TimingItem = new QListWidgetItem(tr("•  Timing     :     ") +TimingConfig , configList);
+        QListWidgetItem* SpeedItem = new QListWidgetItem(tr("•  Speed       :  ") +SpeedConfig , configList);
+        QListWidgetItem* FrequencyItem = new QListWidgetItem(tr("•  Frequency     :    ") +FrequencyConfig , configList);
+        QListWidgetItem* RiseItem = new QListWidgetItem(tr("•  Rise     :    ") +RiseConfig , configList);
+        QListWidgetItem* FallItem = new QListWidgetItem(tr("•  Fall    :    ") +FallConfig , configList);
+        QListWidgetItem* ConverterItem = new QListWidgetItem(tr("•  Converter    :    ") +ConverterConfig , configList);
+        QListWidgetItem* AnalogFilterItem = new QListWidgetItem(tr("•  AnalogFilter    :    ") +AnalogFilterConfig , configList);
+
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        TimingItem->setFont(QFont("Helvetica", 13));
+        TimingItem->setTextAlignment(Qt::TopLeftCorner);
+        SpeedItem->setFont(QFont("Helvetica", 13));
+        SpeedItem->setTextAlignment(Qt::TopLeftCorner);
+        FrequencyItem->setFont(QFont("Helvetica", 13));
+        FrequencyItem->setTextAlignment(Qt::TopLeftCorner);
+        RiseItem->setFont(QFont("Helvetica", 13));
+        RiseItem->setTextAlignment(Qt::TopLeftCorner);
+        FallItem->setFont(QFont("Helvetica", 13));
+        FallItem->setTextAlignment(Qt::TopLeftCorner);
+        ConverterItem->setFont(QFont("Helvetica", 13));
+        ConverterItem->setTextAlignment(Qt::TopLeftCorner);
+        AnalogFilterItem->setFont(QFont("Helvetica", 13));
+        AnalogFilterItem->setTextAlignment(Qt::TopLeftCorner);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
+        configList->addItem(TimingItem);
+        configList->addItem(SpeedItem);
+        configList->addItem(FrequencyItem);
+        configList->addItem(RiseItem);
+        configList->addItem(FallItem);
+        configList->addItem(ConverterItem);
+        configList->addItem(AnalogFilterItem);
+
+
+
+
+        configList->show();
+
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    });
+
 
     // Connect to the I2C configurations
 //    connect(I2C1, &QAction::triggered, this, &Dashboard::I2C1Config);
