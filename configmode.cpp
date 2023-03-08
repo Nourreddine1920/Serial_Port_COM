@@ -169,48 +169,6 @@ ConfigMode::ConfigMode(QWidget *parent) :
     menuBar()->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     QBoxLayout *layout = new QBoxLayout(QBoxLayout::LeftToRight);
     menuBar()->setLayout(layout);
-    // Create a QPixmap with your logo image
-    // Create a logo QLabel and set its style sheet
-//    QLabel *logo = new QLabel(this);
-//    logo->setPixmap(QPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/images/logo-actia.png").scaledToHeight(30));
-//    logo->setObjectName("logo");
-
-
-
-
-
-//    QString style = "\
-//            QMenuBar {\
-//                background-color: #868482;\
-//                spacing: 20px;\
-//            }\
-//            QMenuBar::item {\
-//                background-color: transparent;\
-//                padding: 15px ;\
-//                width : 500px;\
-//                margin: 2px;\
-//                border: 5px;\
-//                font : Helvetica gras 20px;\
-//                color: #FFFFFF;\
-//            }\
-//            QMenuBar::item:selected {\
-//                background-color:#328930;\
-//            }\
-//            QMenu {\
-//                background-color: #444444;\
-//                border: none;\
-//                padding: 6px 10px;\
-//            }\
-//            QMenu::item {\
-//                background-color: transparent;\
-//                padding: 4px 20px;\
-//                margin: 0px;\
-//                border: none;\
-//                color: #FFFFFF;\
-//            }\
-//            QMenu::item:selected {\
-//                background-color: #328930;\
-//            }";
 
             // Create a QString with your menu bar and QToolButton styles
             QString style = "\
@@ -338,42 +296,6 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
 
-    // Connect to the UART configurations
-//    connect(UART4, &QAction::triggered, this, &ConfigMode::UART4ShowingConfig);
-//    connect(UART4, &QAction::triggered, this, [=]() {
-//        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
-
-//        // Create your QListWidget and add your items to it
-//        QListWidget* configList = new QListWidget(this);
-//        configList->clear();
-//        settings.beginGroup("UART4Configs");
-
-//        QString baudrate;
-//        QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
-
-//        QListWidgetItem* baudRateItem = new QListWidgetItem("Baud Rate: " +BaudrateConfig , configList);
-//        configList->addItem(baudRateItem);
-//        qDebug() << "baudrate:" << baudRateItem;
-//        qDebug() << "baudrateconfig:" << BaudrateConfig;
-//        settings.endGroup();
-
-//        // Create a QVBoxLayout to center your QListWidget in your UI
-//        QVBoxLayout* layout = new QVBoxLayout;
-//        layout->addWidget(configList);
-//        layout->setAlignment(Qt::AlignCenter);
-//        setLayout(layout);
-
-//        // Style your QListWidget with a stylesheet
-//        QString styleSheet = "QListWidget {"
-//                             "border: 1px solid gray;"
-//                             "border-radius: 3px;"
-//                             "background-color: #f5f5f5;"
-//                             "padding: 5px;"
-//                             "}";
-//        configList->setStyleSheet(styleSheet);
-
-
-//    });
 
     connect(UART4, &QAction::triggered, this, [=]() {
 
@@ -386,25 +308,239 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
         QString baudrate;
         QString Parity;
+        QString stopBits;
+        QString DataBits;
+        QString FlowControl;
+
         QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
         QString ParityConfig = settings.value("Parity" , Parity).toString();
+        QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
+        QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
+        QString FlowControlConfig = settings.value("FlowControl" , FlowControl).toString();
 
 
-        QListWidgetItem* baudRateItem = new QListWidgetItem("Baud Rate: " +BaudrateConfig , configList);
-        QListWidgetItem* ParityItem = new QListWidgetItem("Parity: " +ParityConfig , configList);
+
+
+        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("Baud Rate: ") +BaudrateConfig , configList);
+        QListWidgetItem* ParityItem = new QListWidgetItem(tr("Parity: ") +ParityConfig , configList);
+        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("stopBits: ") +stopBitsConfig , configList);
+        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("DataBits: ") +DataBitsConfig , configList);
+        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("FlowControl: ") +FlowControlConfig , configList);
+
 
         configList->addItem(baudRateItem);
         configList->addItem(ParityItem);
+        configList->addItem(stopBitsItem);
+        configList->addItem(DataBitsItem);
+        configList->addItem(FlowControlItem);
+
+
         configList->show();
 
         qDebug() << "baudrate:" << baudRateItem;
         qDebug() << "Parity:" << ParityItem;
         settings.endGroup();
 
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
         // create a widget to hold the list and add it to a layout
         QWidget* centralWidget = new QWidget(this);
         QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
         layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    });
+    connect(UART5, &QAction::triggered, this, [=]() {
+
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+
+        settings.beginGroup("UART5Configs");
+
+        QString baudrate;
+        QString Parity;
+        QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
+        QString ParityConfig = settings.value("Parity" , Parity).toString();
+        settings.endGroup();
+
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART5 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        // Create a QHBoxLayout to hold the icon and the title label
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 15);
+
+        // Set the font and style sheet for the label
+        titleLabel->setFont(font);
+        iconLabel->setFont(font);
+
+        titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+        titleLabel->setAlignment(Qt::AlignCenter);
+
+
+        // Add the title label and the icon to the main layout
+        layout->addRow(titleLayout);
+
+
+       // Create the baud rate label and combo box
+
+       QLabel* baudRateLabel = new QLabel(tr("Baud Rate"), this);
+       baudRateLabel->setText(BaudrateConfig);
+
+
+
+
+       baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+
+       layout->addRow(baudRateLabel);
+
+
+
+//        QListWidgetItem* baudRateItem = new QListWidgetItem("Baud Rate: " +BaudrateConfig , configList);
+//        QListWidgetItem* ParityItem = new QListWidgetItem("Parity: " +ParityConfig , configList);
+
+
+
+//        qDebug() << "baudrate:" << baudRateItem;
+//        qDebug() << "Parity:" << ParityItem;
+
+
+    });
+
+    connect(USART1, &QAction::triggered, this, [=]() {
+
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("USART1Configs");
+
+        QString baudrate;
+        QString Parity;
+        QString stopBits;
+        QString DataBits;
+        QString FlowControl;
+
+        QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
+        QString ParityConfig = settings.value("Parity" , Parity).toString();
+        QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
+        QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
+        QString FlowControlConfig = settings.value("FlowControl" , FlowControl).toString();
+
+
+
+
+        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("Baud Rate: ") +BaudrateConfig , configList);
+        QListWidgetItem* ParityItem = new QListWidgetItem(tr("Parity: ") +ParityConfig , configList);
+        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("stopBits: ") +stopBitsConfig , configList);
+        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("DataBits: ") +DataBitsConfig , configList);
+        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("FlowControl: ") +FlowControlConfig , configList);
+
+
+        configList->addItem(baudRateItem);
+        configList->addItem(ParityItem);
+        configList->addItem(stopBitsItem);
+        configList->addItem(DataBitsItem);
+        configList->addItem(FlowControlItem);
+
+
+        configList->show();
+
+        qDebug() << "baudrate:" << baudRateItem;
+        qDebug() << "Parity:" << ParityItem;
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
         configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
@@ -420,6 +556,94 @@ ConfigMode::ConfigMode(QWidget *parent) :
         setCentralWidget(centralWidget);
     });
 
+    connect(USART2, &QAction::triggered, this, [=]() {
+
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("USART2Configs");
+
+        QString baudrate;
+        QString Parity;
+        QString stopBits;
+        QString DataBits;
+        QString FlowControl;
+
+        QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
+        QString ParityConfig = settings.value("Parity" , Parity).toString();
+        QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
+        QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
+        QString FlowControlConfig = settings.value("FlowControl" , FlowControl).toString();
+
+
+
+
+        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("Baud Rate: ") +BaudrateConfig , configList);
+        QListWidgetItem* ParityItem = new QListWidgetItem(tr("Parity: ") +ParityConfig , configList);
+        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("stopBits: ") +stopBitsConfig , configList);
+        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("DataBits: ") +DataBitsConfig , configList);
+        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("FlowControl: ") +FlowControlConfig , configList);
+
+
+        configList->addItem(baudRateItem);
+        configList->addItem(ParityItem);
+        configList->addItem(stopBitsItem);
+        configList->addItem(DataBitsItem);
+        configList->addItem(FlowControlItem);
+
+
+        configList->show();
+
+        qDebug() << "baudrate:" << baudRateItem;
+        qDebug() << "Parity:" << ParityItem;
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    });
 //    connect(UART5, &QAction::triggered, this, &Dashboard::UART5Config);
 //    connect(UART7, &QAction::triggered, this, &Dashboard::UARTConfig);
 //    connect(UART8, &QAction::triggered, this, &Dashboard::UARTConfig);
@@ -459,14 +683,267 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
     // Connect to the SPI configurations
-//    connect(SPI1, &QAction::triggered, this, &Dashboard::SPI1Config);
-//    connect(SPI2, &QAction::triggered, this, &Dashboard::SPI2Config);
-//    connect(SPI3, &QAction::triggered, this, &Dashboard::SPIConfig);
-//    connect(SPI4, &QAction::triggered, this, &Dashboard::SPIConfig);
 
-//    connect(SPI5, &QAction::triggered, this, &Dashboard::SPIConfig);
+    connect(SPI1, &QAction::triggered, this, [=]() {
 
-//    connect(SPI6, &QAction::triggered, this, &Dashboard::SPIConfig);
+        QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("SPI1Configs");
+
+        QString Mode;
+        QString NSS;
+        QString Frameformat;
+        QString Datasize;
+        QString Firstbit;
+
+        QString ModeConfig = settings.value("Mode" , Mode).toString();
+        QString NSSConfig = settings.value("NSS" , NSS).toString();
+        QString FrameformatConfig = settings.value("Frameformat" , Frameformat).toString();
+        QString DatasizeConfig = settings.value("Datasize" , Datasize).toString();
+        QString FirstbitConfig = settings.value("Firstbit" , Firstbit).toString();
+
+
+
+
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode Selected: ") +ModeConfig , configList);
+        QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
+        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("Frameformat: ") +FrameformatConfig , configList);
+        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
+        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
+
+
+        configList->addItem(ModeItem);
+        configList->addItem(NSSItem);
+        configList->addItem(FrameformatItem);
+        configList->addItem(DatasizeItem);
+        configList->addItem(FirstbitItem);
+
+
+        configList->show();
+
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    });
+
+
+    connect(SPI2, &QAction::triggered, this, [=]() {
+
+        QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("SPI2Configs");
+
+        QString Mode;
+        QString NSS;
+        QString Frameformat;
+        QString Datasize;
+        QString Firstbit;
+
+        QString ModeConfig = settings.value("Mode" , Mode).toString();
+        QString NSSConfig = settings.value("NSS" , NSS).toString();
+        QString FrameformatConfig = settings.value("Frameformat" , Frameformat).toString();
+        QString DatasizeConfig = settings.value("Datasize" , Datasize).toString();
+        QString FirstbitConfig = settings.value("Firstbit" , Firstbit).toString();
+
+
+
+
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode: ") +ModeConfig , configList);
+        QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
+        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("Frameformat: ") +FrameformatConfig , configList);
+        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
+        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
+
+
+        configList->addItem(ModeItem);
+        configList->addItem(NSSItem);
+        configList->addItem(FrameformatItem);
+        configList->addItem(DatasizeItem);
+        configList->addItem(FirstbitItem);
+
+
+        configList->show();
+
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    });
+
+
+    connect(SPI3, &QAction::triggered, this, [=]() {
+
+        QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("SPIConfigs");
+
+        QString Mode;
+        QString NSS;
+        QString Frameformat;
+        QString Datasize;
+        QString Firstbit;
+
+        QString ModeConfig = settings.value("Mode" , Mode).toString();
+        QString NSSConfig = settings.value("NSS" , NSS).toString();
+        QString FrameformatConfig = settings.value("Frameformat" , Frameformat).toString();
+        QString DatasizeConfig = settings.value("Datasize" , Datasize).toString();
+        QString FirstbitConfig = settings.value("Firstbit" , Firstbit).toString();
+
+
+
+
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode: ") +ModeConfig , configList);
+        QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
+        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("Frameformat: ") +FrameformatConfig , configList);
+        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
+        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
+
+
+        configList->addItem(ModeItem);
+        configList->addItem(NSSItem);
+        configList->addItem(FrameformatItem);
+        configList->addItem(DatasizeItem);
+        configList->addItem(FirstbitItem);
+
+        configList->show();
+
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    });
 
     //-------------------------Connect to the I2C configurations-------------------------//
 
