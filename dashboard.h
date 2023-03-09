@@ -6945,9 +6945,7 @@ private slots :
 
         settings.endGroup();
 
-        settings.beginGroup("GPIOINTPUTConfigs");
-        settings.remove("");
-        settings.endGroup();
+
 
 
 
@@ -7018,6 +7016,45 @@ private slots :
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
 
+
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString ChannelConfig = settings.value("Channel", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexChannel = ChannelComboBox->findText(ChannelConfig);
+        if (indexChannel != -1)
+            ChannelComboBox->setCurrentIndex(indexChannel);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Channel; // declare stopBits outside of the lambda
+
+        connect(ChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Channel](int indexChannel){
+            // Retrieve the selected option
+            QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
+
+            QString Channel = ChannelComboBox->itemText(indexChannel);
+            settings.beginGroup("FrequencyMesureConfigs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Channel", Channel);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString ChannelConfig = settings.value("Channel" , Channel).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Channel;
+            qDebug() << "Channel:" << ChannelConfig;
+        });
+
+
+
         // --------------Prescaler for Frequency Mesure--------------------//
 
         QLabel* PrescalerLabel = new QLabel(tr("Prescaler"), this);
@@ -7036,6 +7073,33 @@ private slots :
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
 
+        //---------------------Save configuration into FrequencyMesure.txt---------------------------//
+
+
+        QString PrescalerConfig = settings.value("Prescaler", "").toString();
+        // Set the selected value in the spin box
+        PrescalerSpinBox->setValue(PrescalerConfig.toInt());
+
+        // Connect the spin box to the slot
+        QString Prescaler; // declare Prescaler outside of the lambda
+        connect(PrescalerSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Prescaler](int value){
+            // Retrieve the selected value
+            QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
+
+            QString Prescaler = QString::number(value);
+            settings.beginGroup("FrequencyMesureConfigs");
+
+            // Store the selected value in the settings file
+            settings.setValue("Prescaler", Prescaler);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString PrescalerConfig = settings.value("Prescaler" , Prescaler).toString();
+            qDebug() << "selected value:" << Prescaler;
+            qDebug() << "Prescaler:" << PrescalerConfig;
+        });
+
+
         // --------------Counter Mode--------------------//
 
         QLabel* CounterLabel = new QLabel(tr("Counter Mode"), this);
@@ -7051,6 +7115,42 @@ private slots :
         layout->addRow(CounterLabel, CounterComboBox);
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
+
+        // ----------------------- Save Counter configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString CounterConfig = settings.value("Counter", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexCounter = CounterComboBox->findText(CounterConfig);
+        if (indexCounter != -1)
+            CounterComboBox->setCurrentIndex(indexCounter);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Counter; // declare stopBits outside of the lambda
+
+        connect(CounterComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Counter](int indexCounter){
+            // Retrieve the selected option
+            QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
+
+            QString Counter = CounterComboBox->itemText(indexCounter);
+            settings.beginGroup("FrequencyMesureConfigs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Counter", Counter);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString CounterConfig = settings.value("Counter" , Counter).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Counter;
+            qDebug() << "Counter:" << CounterConfig;
+        });
+
 
 
         // --------------Counter Periode === AutoReload--------------------//
@@ -7068,6 +7168,34 @@ private slots :
         layout->addRow(AutoReloadLabel, AutoReloadSpinBox);
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
+
+
+        //---------------------Save configuration into FrequencyMesure.txt---------------------------//
+
+
+        QString AutoReloadConfig = settings.value("AutoReload", "").toString();
+        // Set the selected value in the spin box
+        AutoReloadSpinBox->setValue(AutoReloadConfig.toInt());
+
+        // Connect the spin box to the slot
+        QString AutoReload; // declare AutoReload outside of the lambda
+        connect(AutoReloadSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&AutoReload](int value){
+            // Retrieve the selected value
+            QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
+
+            QString AutoReload = QString::number(value);
+            settings.beginGroup("FrequencyMesureConfigs");
+
+            // Store the selected value in the settings file
+            settings.setValue("AutoReload", AutoReload);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString AutoReloadConfig = settings.value("AutoReload" , AutoReload).toString();
+            qDebug() << "selected value:" << AutoReload;
+            qDebug() << "AutoReload:" << AutoReloadConfig;
+        });
+
 
 
         // --------------Inetrnal Clock Division --------------------//
@@ -7088,6 +7216,43 @@ private slots :
         layout->setSpacing(30);
 
 
+        // ----------------------- Save Counter configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString ClockConfig = settings.value("Clock", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexClock = ClockComboBox->findText(ClockConfig);
+        if (indexClock != -1)
+            ClockComboBox->setCurrentIndex(indexClock);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Clock; // declare stopBits outside of the lambda
+
+        connect(ClockComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Clock](int indexClock){
+            // Retrieve the selected option
+            QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
+
+            QString Clock = ClockComboBox->itemText(indexClock);
+            settings.beginGroup("FrequencyMesureConfigs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Clock", Clock);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString ClockConfig = settings.value("Clock" , Clock).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Clock;
+            qDebug() << "Clock:" << ClockConfig;
+        });
+
+
+
 
         // --------------Repitition Counter --------------------//
 
@@ -7106,6 +7271,34 @@ private slots :
         layout->setSpacing(30);
 
 
+        //---------------------Save configuration into FrequencyMesure.txt---------------------------//
+
+
+        QString RepititionConfig = settings.value("Repitition", "").toString();
+        // Set the selected value in the spin box
+        RepititionSpinBox->setValue(RepititionConfig.toInt());
+
+        // Connect the spin box to the slot
+        QString Repitition; // declare Repitition outside of the lambda
+        connect(RepititionSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Repitition](int value){
+            // Retrieve the selected value
+            QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
+
+            QString Repitition = QString::number(value);
+            settings.beginGroup("FrequencyMesureConfigs");
+
+            // Store the selected value in the settings file
+            settings.setValue("Repitition", Repitition);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString RepititionConfig = settings.value("Repitition" , Repitition).toString();
+            qDebug() << "selected value:" << Repitition;
+            qDebug() << "Repitition:" << RepititionConfig;
+        });
+
+
+
         // --------------Auto-Reload Preload --------------------//
 
         QLabel* PreloadLabel = new QLabel(tr("Auto-Reload Preload"), this);
@@ -7122,6 +7315,44 @@ private slots :
         layout->addRow(PreloadLabel, PreloadComboBox);
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
+
+
+        // ----------------------- Save Counter configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString PreloadConfig = settings.value("Preload", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexPreload = PreloadComboBox->findText(PreloadConfig);
+        if (indexPreload != -1)
+            PreloadComboBox->setCurrentIndex(indexPreload);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Preload; // declare stopBits outside of the lambda
+
+        connect(PreloadComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Preload](int indexPreload){
+            // Retrieve the selected option
+            QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
+
+            QString Preload = PreloadComboBox->itemText(indexPreload);
+            settings.beginGroup("FrequencyMesureConfigs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Preload", Preload);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString PreloadConfig = settings.value("Preload" , Preload).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Preload;
+            qDebug() << "Preload:" << PreloadConfig;
+        });
+
+
 
 
 
@@ -7143,20 +7374,20 @@ private slots :
         widget->setGeometry(500, 500, 600, 500);
 
 
-        QSettings settings("file.txt", QSettings::IniFormat);
+        QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
 
 
         // GPIO OUTPUT Configs
-        settings.beginGroup("FrequencyMesure");
+        settings.beginGroup("FrequencyMesureConfigs");
 
-        settings.setValue("Channel",  ChannelComboBox->currentText());
-        settings.setValue("Prescaler",  PrescalerSpinBox->value());
+        settings.setValue("Channel",  Channel);
+        settings.setValue("Prescaler",  Prescaler);
 
-        settings.setValue("CounterMode",  CounterComboBox->currentText());
-        settings.setValue("CounterPeriod",  AutoReloadSpinBox->value());
-        settings.setValue("InetrnalClock",  ClockComboBox->currentText());
-        settings.setValue("RepititionCounter",  RepititionSpinBox->value());
-        settings.setValue("Auto-Reload",  PreloadComboBox->currentText());
+        settings.setValue("Counter",  Counter);
+        settings.setValue("AutoReload",  AutoReload);
+        settings.setValue("Clock",  Clock);
+        settings.setValue("Repitition",  Repitition);
+        settings.setValue("Preload",  Preload);
 
 
 
