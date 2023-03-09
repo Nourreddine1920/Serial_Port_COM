@@ -14,112 +14,6 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
     QWidget::setWindowTitle("ConfigMode");
 
-    //-------------------------IPs Configurations-------------------------//
-
-//    // Checkable UART Configurations
-//    auto *UART4 = new QAction("UART4", this);
-//    //QAction *action = new QAction("Checkable Action", menuBar());
-
-////    UART4->setCheckable(true);
-
-
-//    QAction *UART5 = new QAction("&UART5", this);
-////    UART5->setCheckable(true);
-
-//    QAction *UART7 = new QAction("&UART7", this);
-////    UART7->setCheckable(true);
-
-//    QAction *UART8 = new QAction("&UART8", this);
-////    UART8->setCheckable(true);
-
-//    QAction *UART9 = new QAction("&UART9", this);
-////    UART9->setCheckable(true);
-
-//    QAction *USART1 = new QAction("&USART1", this);
-////    USART1->setCheckable(true);
-
-
-//    QAction *USART2 = new QAction("&USART2", this);
-////    USART2->setCheckable(true);
-
-//    QAction *USART6 = new QAction("&USART6", this);
-////    USART6->setCheckable(true);
-
-//    QAction *USART10 = new QAction("&USART10", this);
-////    USART10->setCheckable(true);
-
-
-
-//    // Checkable SPI Configurations
-//    QAction *SPI1 = new QAction("SPI1", this);
-//    SPI1->setCheckable(true);
-
-
-//    QAction *SPI2 = new QAction("&SPI2", this);
-//    SPI2->setCheckable(true);
-
-//    QAction *SPI3 = new QAction("&SPI3", this);
-//    SPI3->setCheckable(true);
-
-//    QAction *SPI4 = new QAction("&SPI4", this);
-//    SPI4->setCheckable(true);
-
-//    QAction *SPI5 = new QAction("&SPI5", this);
-//    SPI5->setCheckable(true);
-
-//    QAction *SPI6 = new QAction("&SPI6", this);
-//    SPI6->setCheckable(true);
-
-//    // Checkable I2C Configurations
-//    QAction *I2C1 = new QAction("I2C1", this);
-//    I2C1->setCheckable(true);
-
-
-//    QAction *I2C2 = new QAction("&I2C2", this);
-//    I2C2->setCheckable(true);
-
-//    QAction *I2C3 = new QAction("&I2C3", this);
-//    I2C3->setCheckable(true);
-
-//    QAction *I2C4 = new QAction("&I2C4", this);
-//    I2C4->setCheckable(true);
-
-//    QAction *I2C5 = new QAction("&I2C5", this);
-//    I2C5->setCheckable(true);
-
-//    // Checkable ADC Configurations
-//    QAction *ADC1 = new QAction("ADC1", this);
-//    ADC1->setCheckable(true);
-
-
-//    QAction *ADC2 = new QAction("&ADC2", this);
-//    ADC2->setCheckable(true);
-
-//    QAction *ADC3 = new QAction("&ADC3", this);
-//    ADC3->setCheckable(true);
-
-
-
-//    // Checkable DAC Configurations
-//    QAction *DAC1 = new QAction("DAC1", this);
-//    DAC1->setCheckable(true);
-
-
-
-//    // Checkable Input Capture Mode Configurations
-//    QAction *InputCaptureMode = new QAction("Input Capture Mode" , this);
-//    InputCaptureMode->setCheckable(true);
-
-
-//    // Checkable GPIO Mode Configurations
-
-//    QAction *GPIO_OUTPUT = new QAction("GPIO_OUTPUT" , this);
-//    GPIO_OUTPUT->setCheckable(true);
-
-//    QAction *GPIO_INPUT = new QAction("GPIO_INPUT" , this);
-//    GPIO_INPUT->setCheckable(true);
-
-
     // Create a QToolButton for the "Connect" button
     QToolButton *connectButton = new QToolButton(this);
     connectButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/send.png"));
@@ -255,185 +149,6 @@ ConfigMode::ConfigMode(QWidget *parent) :
     menuBar()->setFont(font);
     UART->setFont(font);
 
-    //-------------------------Connect to the UART configurations-------------------------//
-
-//    UART->addAction(UART4);
-//    //UART->addAction(action);
-
-//    UART->addSeparator();
-//    //UART->setIcon(QIcon::fromTheme("document-open"));
-//    //UART->setIcon(style()->standardIcon(QStyle::SP_FileDialogContentsView));
-
-
-
-//    UART->addAction(UART5);
-//    UART->addSeparator();
-
-//    UART->addAction(UART7);
-//    UART->addSeparator();
-
-//    UART->addAction(UART8);
-//    UART->addSeparator();
-
-//    UART->addAction(UART9);
-//    UART->addSeparator();
-
-
-//    UART->addAction(USART1);
-//    UART->addSeparator();
-
-//    UART->addAction(USART2);
-//    UART->addSeparator();
-
-//    UART->addAction(USART6);
-//    UART->addSeparator();
-
-//    UART->addAction(USART10);
-//    UART->addSeparator();
-
-
-
-
-
-
-
-
-
-
-
-
-////    connect(UART5, &QAction::triggered, this, &Dashboard::UART5Config);
-////    connect(UART7, &QAction::triggered, this, &Dashboard::UARTConfig);
-////    connect(UART8, &QAction::triggered, this, &Dashboard::UARTConfig);
-
-////    connect(UART9, &QAction::triggered, this, &Dashboard::UARTConfig);
-
-////    connect(USART1, &QAction::triggered, this, &Dashboard::USART1Config);
-
-////    connect(USART2, &QAction::triggered, this, &Dashboard::USART2Config);
-
-////    connect(USART6, &QAction::triggered, this, &Dashboard::UARTConfig);
-
-////    connect(USART10, &QAction::triggered, this,&Dashboard::UARTConfig);
-
-
-//    //-------------------------Connect to the SPI configurations-------------------------//
-
-//    SPI->addAction(SPI1);
-//    SPI->addSeparator();
-
-//    SPI->addAction(SPI2);
-//    SPI->addSeparator();
-
-//    SPI->addAction(SPI3);
-//    SPI->addSeparator();
-
-//    SPI->addAction(SPI4);
-//    SPI->addSeparator();
-
-//    SPI->addAction(SPI5);
-//    SPI->addSeparator();
-
-
-//    SPI->addAction(SPI6);
-//    SPI->addSeparator();
-
-
-
-
-
-
-//    connect(SPI3, &QAction::triggered, this, [=]() {
-
-
-//    });
-
-//    //-------------------------Connect to the I2C configurations-------------------------//
-
-//    // Available I2C IPs
-//    I2C->addAction(I2C1);
-//    I2C->addSeparator();
-
-//    I2C->addAction(I2C2);
-//    I2C->addSeparator();
-
-//    I2C->addAction(I2C3);
-//    I2C->addSeparator();
-
-//    I2C->addAction(I2C4);
-//    I2C->addSeparator();
-
-//    I2C->addAction(I2C5);
-//    I2C->addSeparator();
-
-
-
-//    // Connect to the I2C configurations
-////    connect(I2C1, &QAction::triggered, this, &Dashboard::I2C1Config);
-////    connect(I2C2, &QAction::triggered, this, &Dashboard::I2C2Config);
-////    connect(I2C3, &QAction::triggered, this, &Dashboard::I2CConfig);
-////    connect(I2C4, &QAction::triggered, this, &Dashboard::I2CConfig);
-
-////    connect(I2C5, &QAction::triggered, this, &Dashboard::I2CConfig);
-
-
-//    //-------------------------Connect to the ADC configurations-------------------------//
-
-
-//    ADC->addAction(ADC1);
-//    ADC->addSeparator();
-
-//    ADC->addAction(ADC2);
-//    ADC->addSeparator();
-
-//    ADC->addAction(ADC3);
-//    ADC->addSeparator();
-
-
-
-
-////    connect(ADC1, &QAction::triggered, this, &Dashboard::ADC1Config);
-////    connect(ADC2, &QAction::triggered, this, &Dashboard::ADCConfig);
-////    connect(ADC3, &QAction::triggered, this, &Dashboard::ADC3Config);
-
-
-//    //-------------------------Connect to the DAC configurations-------------------------//
-
-
-//    DAC->addAction(DAC1);
-//    DAC->addSeparator();
-
-
-////    connect(DAC1, &QAction::triggered, this, &Dashboard::DACConfig);
-
-
-//    //-------------------------Connect to the GPIO configurations-------------------------//
-
-
-//    GPIO->addAction(GPIO_OUTPUT);
-//    GPIO->addSeparator();
-//    GPIO->addAction(GPIO_INPUT);
-//    GPIO->addSeparator();
-
-
-////    connect(GPIO_OUTPUT, &QAction::triggered, this, &Dashboard::GPIOOUPUTConfig);
-////    connect(GPIO_INPUT, &QAction::triggered, this, &Dashboard::GPIOINPUTConfig);
-
-
-//    //-------------------------Connect to the TIMER configurations-------------------------//
-
-//    TIMER->addAction(InputCaptureMode);
-//    TIMER->addSeparator();
-
-//    // Connect to the TIMER configurations
-////    connect(InputCaptureMode, &QAction::triggered, this, &Dashboard::FrequencyMesureConfig);
-
-
-
-
-
-
-
 }
 
 void ConfigMode::returnDashboard()
@@ -449,9 +164,6 @@ void ConfigMode::returnDashboard()
     dashboard->show();
     this->hide();
 }
-
-
-
 
 
 void ConfigMode::addActionToMenu(QString menuItem, QString actionName)
@@ -507,13 +219,13 @@ void ConfigMode::addActionToMenu(QString menuItem, QString actionName)
       else if(action->text()=="I2C1") {
           connect (action ,&QAction::triggered , this , &ConfigMode::showI2C1config);
       }
-      else if(action->text()=="I2C2") {
+      else if(action->text()=="&I2C2") {
           connect (action ,&QAction::triggered , this , &ConfigMode::showI2C2config);
       }
       else if(action->text()=="ADC1") {
           connect (action ,&QAction::triggered , this , &ConfigMode::showADC1config);
       }
-      else if(action->text()=="ADC3") {
+      else if(action->text()=="&ADC3") {
           connect (action ,&QAction::triggered , this , &ConfigMode::showADC3config);
       }
 

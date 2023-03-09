@@ -137,107 +137,107 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Connect the QToolButton's clicked() signal to a slot that will open the new UI
-//    connect(connectButton, &QToolButton::clicked, this, &Dashboard::showConfigMode);
-    connect(connectButton, &QToolButton::clicked, [&]() {
-                QSettings settings("configSelection", QSettings::IniFormat);
-                QString actionUART4 ;
-                QString TimingConfig = settings.value("actionUART4" , actionUART4).toString();
-                qDebug() << "selected uart:" << actionUART4;
-                qDebug() << "configselected:" << TimingConfig;
+    connect(connectButton, &QToolButton::clicked, this, &Dashboard::showConfigMode);
+//    connect(connectButton, &QToolButton::clicked, [&]() {
+//                QSettings settings("configSelection", QSettings::IniFormat);
+//                QString actionUART4 ;
+//                QString TimingConfig = settings.value("actionUART4" , actionUART4).toString();
+//                qDebug() << "selected uart:" << actionUART4;
+//                qDebug() << "configselected:" << TimingConfig;
 
 
-                ConfigMode *configMode = new ConfigMode();
-
-
-
-
-
-
-                QSet<QString> addedUartOptions;
-                    QSet<QString> addedI2COptions;
-                    QSet<QString> addedSPIOptions;
-                    QSet<QString> addedADCOptions;
-                    QSet<QString> addedDACOptions;
-                    QSet<QString> addedGPIOOptions;
-                    QSet<QString> addedTIMEROptions;
-
-
-                    // Parcourir chaque élément sélectionné
-                    for (int i = 0; i < selectedUartOptionsStatic.size(); i++) {
-                        QString uartOption = selectedUartOptionsStatic.at(i);
-                        if (!addedUartOptions.contains(uartOption)) {
-                              configMode->addActionToMenu("&UART", uartOption);
-                              addedUartOptions.insert(uartOption);
-
-
-                               }
-
-
-
-
-                    }
+//                ConfigMode *configMode = new ConfigMode();
 
 
 
 
 
 
-                    for (int i = 0; i < selectedI2COptionsStatic.size(); i++) {
-                        QString I2COption = selectedI2COptionsStatic.at(i);
-                        // Vérifier si l'élément a déjà été ajouté pour I2C
-                              if (!addedI2COptions.contains(I2COption)) {
-                                  configMode->addActionToMenu("&I2C", I2COption);
-                                  addedI2COptions.insert(I2COption);
-                              }
-                    }
-                    for (int i = 0; i < selectedSPIOptionsStatic.size(); i++) {
-                        QString SPIOption = selectedSPIOptionsStatic.at(i);
-                              if (!addedSPIOptions.contains(SPIOption)) {
-                                  configMode->addActionToMenu("&SPI", SPIOption);
-                                  addedSPIOptions.insert(SPIOption);
-                              }
-                    }
+//                QSet<QString> addedUartOptions;
+//                    QSet<QString> addedI2COptions;
+//                    QSet<QString> addedSPIOptions;
+//                    QSet<QString> addedADCOptions;
+//                    QSet<QString> addedDACOptions;
+//                    QSet<QString> addedGPIOOptions;
+//                    QSet<QString> addedTIMEROptions;
 
-                    for (int i = 0; i < selectedADCOptionsStatic.size(); i++) {
-                        QString ADCOption = selectedADCOptionsStatic.at(i);
-                        if (!addedADCOptions.contains(ADCOption)) {
-                           configMode->addActionToMenu("&ADC", ADCOption);
-                            addedADCOptions.insert(ADCOption);
-                        }
 
-                    }
+//                    // Parcourir chaque élément sélectionné
+//                    for (int i = 0; i < selectedUartOptionsStatic.size(); i++) {
+//                        QString uartOption = selectedUartOptionsStatic.at(i);
+//                        if (!addedUartOptions.contains(uartOption)) {
+//                              configMode->addActionToMenu("&UART", uartOption);
+//                              addedUartOptions.insert(uartOption);
 
-                    for (int i = 0; i < selectedDACOptionsStatic.size(); i++) {
-                        QString DACOption = selectedDACOptionsStatic.at(i);
-                        if (!addedDACOptions.contains(DACOption)) {
-                           configMode->addActionToMenu("&DAC", DACOption);
-                            addedDACOptions.insert(DACOption);
-                        }
-                    }
 
-                    for (int i = 0; i < selectedGPIOOptionsStatic.size(); i++) {
-                        QString GPIOOption = selectedGPIOOptionsStatic.at(i);
-                        if (!addedGPIOOptions.contains(GPIOOption)) {
-                           configMode->addActionToMenu("&GPIO", GPIOOption);
-                            addedGPIOOptions.insert(GPIOOption);
-                        }
-                    }
-
-                    for (int i = 0; i < selectedTIMEROptionsStatic.size(); i++) {
-                        QString TIMEROption = selectedTIMEROptionsStatic.at(i);
-                        if (!addedTIMEROptions.contains(TIMEROption)) {
-                          configMode->addActionToMenu("&Frequency Mesure", TIMEROption);
-                            addedTIMEROptions.insert(TIMEROption);
-                        }
-
-                    }
-                configMode->show();
-                this->hide();
+//                               }
 
 
 
 
-    });
+//                    }
+
+
+
+
+
+
+//                    for (int i = 0; i < selectedI2COptionsStatic.size(); i++) {
+//                        QString I2COption = selectedI2COptionsStatic.at(i);
+//                        // Vérifier si l'élément a déjà été ajouté pour I2C
+//                              if (!addedI2COptions.contains(I2COption)) {
+//                                  configMode->addActionToMenu("&I2C", I2COption);
+//                                  addedI2COptions.insert(I2COption);
+//                              }
+//                    }
+//                    for (int i = 0; i < selectedSPIOptionsStatic.size(); i++) {
+//                        QString SPIOption = selectedSPIOptionsStatic.at(i);
+//                              if (!addedSPIOptions.contains(SPIOption)) {
+//                                  configMode->addActionToMenu("&SPI", SPIOption);
+//                                  addedSPIOptions.insert(SPIOption);
+//                              }
+//                    }
+
+//                    for (int i = 0; i < selectedADCOptionsStatic.size(); i++) {
+//                        QString ADCOption = selectedADCOptionsStatic.at(i);
+//                        if (!addedADCOptions.contains(ADCOption)) {
+//                           configMode->addActionToMenu("&ADC", ADCOption);
+//                            addedADCOptions.insert(ADCOption);
+//                        }
+
+//                    }
+
+//                    for (int i = 0; i < selectedDACOptionsStatic.size(); i++) {
+//                        QString DACOption = selectedDACOptionsStatic.at(i);
+//                        if (!addedDACOptions.contains(DACOption)) {
+//                           configMode->addActionToMenu("&DAC", DACOption);
+//                            addedDACOptions.insert(DACOption);
+//                        }
+//                    }
+
+//                    for (int i = 0; i < selectedGPIOOptionsStatic.size(); i++) {
+//                        QString GPIOOption = selectedGPIOOptionsStatic.at(i);
+//                        if (!addedGPIOOptions.contains(GPIOOption)) {
+//                           configMode->addActionToMenu("&GPIO", GPIOOption);
+//                            addedGPIOOptions.insert(GPIOOption);
+//                        }
+//                    }
+
+//                    for (int i = 0; i < selectedTIMEROptionsStatic.size(); i++) {
+//                        QString TIMEROption = selectedTIMEROptionsStatic.at(i);
+//                        if (!addedTIMEROptions.contains(TIMEROption)) {
+//                          configMode->addActionToMenu("&Frequency Mesure", TIMEROption);
+//                            addedTIMEROptions.insert(TIMEROption);
+//                        }
+
+//                    }
+//                configMode->show();
+//                this->hide();
+
+
+
+
+//    });
 
 
 
@@ -279,38 +279,6 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 
-//    QString style = "\
-//            QMenuBar {\
-//                background-color: #868482;\
-//                spacing: 20px;\
-//            }\
-//            QMenuBar::item {\
-//                background-color: transparent;\
-//                padding: 15px ;\
-//                width : 500px;\
-//                margin: 2px;\
-//                border: 5px;\
-//                font : Helvetica gras 20px;\
-//                color: #FFFFFF;\
-//            }\
-//            QMenuBar::item:selected {\
-//                background-color:#328930;\
-//            }\
-//            QMenu {\
-//                background-color: #444444;\
-//                border: none;\
-//                padding: 6px 10px;\
-//            }\
-//            QMenu::item {\
-//                background-color: transparent;\
-//                padding: 4px 20px;\
-//                margin: 0px;\
-//                border: none;\
-//                color: #FFFFFF;\
-//            }\
-//            QMenu::item:selected {\
-//                background-color: #328930;\
-//            }";
 
             // Create a QString with your menu bar and QToolButton styles
             QString style = "\
