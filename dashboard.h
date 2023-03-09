@@ -6418,9 +6418,27 @@ private:
     Ui::Dashboard *ui;
     QSerialPortInfo info;
     ConfigMode *ConfigScreen ;
+    QToolButton *connectButton;
+//         QList<QString> selectedUartOptions;
+    static QStringList selectedUartOptionsStatic;
+    static QStringList selectedI2COptionsStatic;
+    static QStringList selectedSPIOptionsStatic;
+    static QStringList selectedADCOptionsStatic;
+    static QStringList selectedDACOptionsStatic;
+    static QStringList selectedGPIOOptionsStatic;
+    static QStringList selectedTIMEROptionsStatic;
+
 
 public slots :
     void showConfigMode();
+    void onUartOptionSelected();
+
+       void onI2COptionSelected();
+       void onSPIOptionSelected();
+       void onADCOptionSelected();
+       void onDACOptionSelected();
+       void onGPIOOptionSelected();
+       void onTIMEROptionSelected();
 
 
 

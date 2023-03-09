@@ -37,472 +37,864 @@ private:
 
 public slots :
     void returnDashboard();
-    void UART4ShowingConfig(){
-//        QWidget *widget = new QWidget(this);
-//        setCentralWidget(widget);
-
+    void addActionToMenu(QString menuItem, QString actionName);
+private slots :
+    void showUART4config(){
+                QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
-//                // Create Layout form
-//                QFormLayout* layout = new QFormLayout(this);
-
-//                // Create a QLabel for "DAC configurations" and center it horizontally
-//                QLabel* titleLabel = new QLabel("UART configurations", this);
-
-//                // Load the icon image
-//                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
-
-//                // Create a QLabel for the icon and set its size
-//                QLabel* iconLabel = new QLabel(this);
-//                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-//                iconLabel->setFixedSize(30, 30);
-
-//                // Create a QHBoxLayout to hold the icon and the title label
-//                QHBoxLayout* titleLayout = new QHBoxLayout();
-//                titleLayout->addWidget(iconLabel);
-//                titleLayout->addWidget(titleLabel);
-//                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+                // create the list widget
+                QListWidget* configList = new QListWidget(this);
+                configList->clear();
+                settings.beginGroup("UART4Configs");
 
-//                // Set the font and style sheet for the title label
-//                QFontDatabase fontDatabase;
-//                QStringList fontFamilies = fontDatabase.families();
+                QString baudrate;
+                QString Parity;
+                QString stopBits;
+                QString DataBits;
+                QString FlowControl;
 
-//                // Choose the first available font as the best font
-//                QString bestFont = fontFamilies.first();
+                QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
+                QString ParityConfig = settings.value("Parity" , Parity).toString();
+                QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
+                QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
+                QString FlowControlConfig = settings.value("FlowControl" , FlowControl).toString();
 
-//                // Create a font object with the best font and size
-//                QFont font(bestFont, 15);
 
-//                // Set the font and style sheet for the label
-//                titleLabel->setFont(font);
-//                iconLabel->setFont(font);
 
-//                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-////                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+                QListWidgetItem* titleItem = new QListWidgetItem(tr("UART4 Configurations"), configList);
 
-//                titleLabel->setAlignment(Qt::AlignCenter);
+                QListWidgetItem* baudRateItem = new QListWidgetItem(tr("•  Baud Rate     :     ") +BaudrateConfig , configList);
+                QListWidgetItem* ParityItem = new QListWidgetItem(tr("•  Parity       :  ") +ParityConfig , configList);
+                QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("•  stopBits     :    ") +stopBitsConfig , configList);
+                QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("•  DataBits     :    ") +DataBitsConfig , configList);
+                QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("•  FlowControl    :    ") +FlowControlConfig , configList);
 
 
-//                // Add the title label and the icon to the main layout
-//                layout->addRow(titleLayout);
+                // Set the font and style sheet for the title label
+                QFontDatabase fontDatabase;
+                QStringList fontFamilies = fontDatabase.families();
 
+                // Choose the first available font as the best font
+                QString bestFont = fontFamilies.first();
 
-//               // Create the baud rate label and combo box
+                // Create a font object with the best font and size
+                QFont font(bestFont, 18);
 
-//               QLabel* baudRateLabel = new QLabel(tr("Baud Rate"), this);
-//               QComboBox* baudRateComboBox = new QComboBox(this);
-////               baudRateComboBox->setStyleSheet("QComboBox {"
-////                                       "background-color: white;"
-////                                       "border: 1px solid gray;"
-////                                       "border-radius: 3px;"
-////                                       "padding: 1px 18px 1px 3px;"
-////                                       "min-width: 6em;"
-////                                       "}"
-////                                       "QComboBox::drop-down {"
-////                                       "subcontrol-origin: padding;"
-////                                       "subcontrol-position: top right;"
-////                                       "width: 15px;"
-////                                       "border-left-width: 1px;"
-////                                       "border-left-color: gray;"
-////                                       "border-left-style: solid;"
-////                                       "border-top-right-radius: 3px;"
-////                                       "border-bottom-right-radius: 3px;"
-////                                       "}"
-////                                       "QComboBox::down-arrow {"
-////                                       "image: url(:/images/down_arrow.png);"
-////                                       "}"
-////                                       "QComboBox QAbstractItemView {"
-////                                       "background-color: white;"
-////                                       "border: 1px solid gray;"
-////                                       "selection-background-color: lightgray;"
-////                                       "}"
-////                                       );
+                titleItem->setFont(font);
+                titleItem->setTextAlignment(Qt::TopLeftCorner);
+                QBrush gray(Qt::gray);
+                QBrush white(Qt::white);
 
-//               QList<qint32> baudRates = info.standardBaudRates(); // What baudrates does my computer support ?
-//               QList<QString> stringBaudRates;
-//                for(int i = 0 ; i < baudRates.size() ; i++){
-//                    stringBaudRates.append(QString::number(baudRates.at(i)));
-//                }
-//               baudRateComboBox->addItems(stringBaudRates);
+                titleItem->setBackground(gray);
+                titleItem->setForeground(white);
 
-//               baudRateComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-//               // Set the minimum width to 100 pixels
-//               baudRateComboBox->setMinimumWidth(10);
-//               baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-//               baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+                baudRateItem->setFont(QFont("Helvetica", 13));
+                baudRateItem->setTextAlignment(Qt::TopLeftCorner);
+                ParityItem->setFont(QFont("Helvetica", 13));
+                ParityItem->setTextAlignment(Qt::TopLeftCorner);
+                stopBitsItem->setFont(QFont("Helvetica", 13));
+                stopBitsItem->setTextAlignment(Qt::TopLeftCorner);
+                DataBitsItem->setFont(QFont("Helvetica", 13));
+                DataBitsItem->setTextAlignment(Qt::TopLeftCorner);
+                FlowControlItem->setFont(QFont("Helvetica", 13));
+                FlowControlItem->setTextAlignment(Qt::TopLeftCorner);
 
-//               layout->addRow(baudRateLabel, baudRateComboBox);
 
+                configList->setSpacing(15);
+                configList->addItem(titleItem);
 
+                configList->addItem(baudRateItem);
+                configList->addItem(ParityItem);
+                configList->addItem(stopBitsItem);
+                configList->addItem(DataBitsItem);
+                configList->addItem(FlowControlItem);
 
-//               // ----------------------- Save Baudrate configs into a file.txt-----------------------------------//
 
 
-//               QString BaudrateConfig = settings.value("Baudrate", "").toString();
-////                QString stopBitsConfig;
-//               // Set the selected option in the combo box
+                configList->show();
 
-//               int indexBaudrate = baudRateComboBox->findText(BaudrateConfig);
-//               if (indexBaudrate != -1)
-//                   baudRateComboBox->setCurrentIndex(indexBaudrate);
+                qDebug() << "baudrate:" << baudRateItem;
+                qDebug() << "Parity:" << ParityItem;
+                settings.endGroup();
 
-//               // Connect the combo box to the slot
-//    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-//               QString Baudrate; // declare stopBits outside of the lambda
+                // Create Layout form
+                QFormLayout* layout = new QFormLayout(this);
 
-//               connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Baudrate](int indexBaudrate){
-//                   // Retrieve the selected option
-//                   QSettings settings("file.txt", QSettings::IniFormat);
+                // Create a QLabel for "DAC configurations" and center it horizontally
+                QLabel* titleLabel = new QLabel("UART4 configurations", this);
 
-//                   QString Baudrate = baudRateComboBox->itemText(indexBaudrate);
-//                   settings.beginGroup("UARTConfigs");
+                // Load the icon image
+                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
 
+                // Create a QLabel for the icon and set its size
+                QLabel* iconLabel = new QLabel(this);
+                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                iconLabel->setFixedSize(30, 30);
 
-//                   // Store the selected option in the settings file
-//                   settings.setValue("Baudrate", Baudrate);
-//                   settings.endGroup();
+                QHBoxLayout* titleLayout = new QHBoxLayout();
+                titleLayout->addWidget(iconLabel);
+                titleLayout->addWidget(titleLabel);
+                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
 
-//                   // Retrieve the stored value and print to the console
-//                   QString BaudrateConfig = settings.value("Baudrate" , Baudrate).toString();
-////                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
-//                   qDebug() << "selected option:" << Baudrate;
-//                   qDebug() << "Baudrate:" << BaudrateConfig;
-//               });
+                // create a widget to hold the list and add it to a layout
+                QWidget* centralWidget = new QWidget(this);
+                QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+                layout1->addWidget(configList);
+                layout1->setAlignment(Qt::AlignHCenter);
+                layout->addRow(titleLayout);
+                layout->addRow(layout1);
 
 
-//               // Create the parity label and combo box
 
-//               QLabel* parityLabel = new QLabel(tr("Parity"), this);
-//               QComboBox* parityComboBox = new QComboBox(this);
-//               parityComboBox->addItems(QStringList() << "None" << "Odd" << "Even");
-//               parityLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-//               parityComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        //        configList->setStyleSheet("background-color: white; font-size: 14px;");
+                configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
-//               layout->addRow(parityLabel, parityComboBox);
 
 
-//               // ----------------------- Save Pqrity configs into a file.txt-----------------------------------//
+        //        layout1->addRow(configList);
+        //        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+        //                                  "QListWidget::item { padding: 5px; }"
+        //                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
 
 
-//               QString ParityConfig = settings.value("Parity", "").toString();
-////                QString stopBitsConfig;
-//               // Set the selected option in the combo box
-
-//               int indexParity = parityComboBox->findText(ParityConfig);
-//               if (indexParity != -1)
-//                   parityComboBox->setCurrentIndex(indexParity);
-
-//               // Connect the combo box to the slot
-//    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-//               QString Parity; // declare stopBits outside of the lambda
-
-//               connect(parityComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Parity](int indexParity){
-//                   // Retrieve the selected option
-//                   QSettings settings("file.txt", QSettings::IniFormat);
-
-//                   QString Parity = parityComboBox->itemText(indexParity);
-//                   settings.beginGroup("UARTConfigs");
-
-
-//                   // Store the selected option in the settings file
-//                   settings.setValue("Parity", Parity);
-//                   settings.endGroup();
-
-//                   // Retrieve the stored value and print to the console
-//                   QString ParityConfig = settings.value("Parity" , Parity).toString();
-////                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-//                   qDebug() << "selected option:" << Parity;
-//                   qDebug() << "Parity:" << ParityConfig;
-//               });
-
-
-
-
-
-//               // Create the stop bits label and combo box
-
-//               QLabel* stopBitsLabel = new QLabel(tr("Stop Bits"), this);
-//               QComboBox* stopBitsComboBox = new QComboBox(this);
-//               stopBitsComboBox->addItem("1 Bits");
-//               stopBitsComboBox->addItem("1,5 Bits");
-//               stopBitsComboBox->addItem("2 Bits");
-
-//               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-//               stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-//               layout->addRow(stopBitsLabel, stopBitsComboBox);
-
-
-//               // Connect the combo box to the slot
-
-//             //--------------------------- Save Stop Bits Configs into a file.txt -------------------------//
-
-//               QString stopBitsConfig = settings.value("stopBits", "").toString();
-//               // Set the selected option in the combo box
-
-//               int index = stopBitsComboBox->findText(stopBitsConfig);
-//               if (index != -1)
-//                   stopBitsComboBox->setCurrentIndex(index);
-
-//               QString stopBits; // declare stopBits outside of the lambda
-
-//               // Connect the combo box to the slot
-
-//               connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&stopBits](int index){
-//                   // Retrieve the selected option
-//                   QSettings settings("file.txt", QSettings::IniFormat);
-
-//                   QString stopBits = stopBitsComboBox->itemText(index);
-//                   settings.beginGroup("UARTConfigs");
-
-
-//                   // Store the selected option in the settings file
-//                   settings.setValue("stopBits", stopBits);
-//                   settings.endGroup();
-
-//                   // Retrieve the stored value and print to the console
-//                   QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
-
-//                   qDebug() << "selected option:" << stopBits;
-//                   qDebug() << "stopBits:" << stopBitsConfig;
-//               });
-
-
-
-
-
-
-
-
-
-
-
-
-//               // Create the data bits label and combo box
-
-//               QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
-//               QComboBox* DataBitsComboBox = new QComboBox(this);
-//               DataBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
-//               DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-//               DataBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-//               // ----------------------- Save DataBits configs into a file.txt-----------------------------------//
-
-
-//               QString DataBitsConfig = settings.value("DataBits", "").toString();
-////                QString stopBitsConfig;
-//               // Set the selected option in the combo box
-
-//               int indexDataBits = DataBitsComboBox->findText(DataBitsConfig);
-//               if (indexDataBits != -1)
-//                   DataBitsComboBox->setCurrentIndex(indexDataBits);
-
-//               // Connect the combo box to the slot
-//    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-//               QString DataBits; // declare stopBits outside of the lambda
-
-//               connect(DataBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DataBits](int indexDataBits){
-//                   // Retrieve the selected option
-//                   QSettings settings("file.txt", QSettings::IniFormat);
-
-//                   QString DataBits = DataBitsComboBox->itemText(indexDataBits);
-//                   settings.beginGroup("UARTConfigs");
-
-
-//                   // Store the selected option in the settings file
-//                   settings.setValue("DataBits", DataBits);
-//                   settings.endGroup();
-
-//                   // Retrieve the stored value and print to the console
-//                   QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
-////                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-//                   qDebug() << "selected option:" << DataBits;
-//                   qDebug() << "DataBits:" << DataBitsConfig;
-//               });
-
-//               // Create the flow control label and combo box
-
-//               layout->addRow(DataBitsLabel, DataBitsComboBox);
-//               QLabel* FlowControlLabel = new QLabel(tr("Flow Control"), this);
-//               QComboBox* FlowControlComboBox = new QComboBox(this);
-//               FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control " );
-//               FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-//               FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-
-
-
-//               layout->addRow(FlowControlLabel, FlowControlComboBox);
-//               layout->setContentsMargins(0, 0, 0, 0);
-//               layout->setSpacing(30);
-
-
-//               //--------------------------- Save Stop Bits Configs into a file.txt -------------------------//
-
-//                 QString FlowControlConfig = settings.value("FlowControl", "").toString();
-//                 // Set the selected option in the combo box
-
-//                 int indexFlowControl = FlowControlComboBox->findText(FlowControlConfig);
-//                 if (indexFlowControl != -1)
-//                     FlowControlComboBox->setCurrentIndex(indexFlowControl);
-
-//                 QString FlowControl; // declare FlowControl outside of the lambda
-
-//                 // Connect the combo box to the slot
-
-//                 connect(FlowControlComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&FlowControl](int indexFlowControl){
-//                     // Retrieve the selected option
-//                     QSettings settings("file.txt", QSettings::IniFormat);
-
-//                     QString FlowControl = FlowControlComboBox->itemText(indexFlowControl);
-//                     settings.beginGroup("UARTConfigs");
-
-
-//                     // Store the selected option in the settings file
-//                     settings.setValue("FlowControl", FlowControl);
-//                     settings.endGroup();
-
-//                     // Retrieve the stored value and print to the console
-//                     QString FlowControlConfig = settings.value("FlowControl" , FlowControl).toString();
-
-//                     qDebug() << "selected option:" << FlowControl;
-//                     qDebug() << "FlowControl:" << FlowControlConfig;
-//                 });
-
-//               // Create the vertical layout and add the form layout to it
-//               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
-//               verticalLayout->addStretch();
-//               verticalLayout->addLayout(layout);
-//               verticalLayout->addStretch();
-
-//               // Create the horizontal layout and add the vertical layout to it
-//               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
-//               horizontalLayout->addStretch();
-//               horizontalLayout->addLayout(verticalLayout);
-//               horizontalLayout->addStretch();
-
-//               // Set the widget layout to the horizontal layout
-
-//               widget->setLayout(horizontalLayout);
-//               widget->setGeometry(500, 500, 600, 500);
-//               widget->setStyleSheet("QFormLayout {"
-//                                         "  background-color: gray;"
-//                                         "  border: 2px solid black;"
-//                                         "  padding: 10px;"
-//                                         "}"
-//                                         "QLineEdit {"
-//                                         "  background-color: white;"
-//                                         "  border: 1px solid black;"
-//                                         "  padding: 5px;"
-//                                         "}");
-
-//               QSettings settings("file.txt", QSettings::IniFormat);
-
-//               qDebug() << "Settings file path: " << settings.fileName();
-
-
-
-//               settings.beginGroup("UARTConfigs");
-
-//               settings.setValue("Baudrate",  Baudrate);
-//               settings.setValue("stopBits",  stopBits);
-//               settings.setValue("DataBits",  DataBits);
-//               settings.setValue("FlowControl",  FlowControl);
-//               settings.setValue("Parity",  Parity);
-
-//               settings.endGroup();
-
-
-
-
-
-
-
-
-
-
-
-
-
-//               // Create the QLabel and set its text and minimum height
-//               QLabel* footerLabel = new QLabel();
-//               footerLabel->setText("Footer Text");
-//               footerLabel->setMinimumHeight(40);
-
-
-
-//               // Add the QLabel to the QHBoxLayout and center it
-//               //layout->addWidget(footerLabel, 0, Qt::AlignHCenter);
-
-//               // Set the size of the QWidget
-//               widget->setGeometry(100, 100, 400, 300);
-//        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
-
-//        QListWidget* configList = new QListWidget(this);
-//        configList->clear(); // clear the list
-
-//         // create a new item for each selected configuration option
-//        QString Baudrate; // declare stopBits outside of the lambda
-//        QString Parity;
-
-//         QListWidgetItem* baudRateItem = new QListWidgetItem("Baud Rate: " +  settings.value("Baudrate" ,Baudrate).toString(), configList);
-//         QListWidgetItem* parityItem = new QListWidgetItem("Parity: " + settings.value("Parity" ,Parity).toString(), configList);
-//         settings.beginGroup("UART4Configs");
-
-//         qDebug() << "selected option:" << baudRateItem;
-//         qDebug() << "selected option:" << parityItem;
-
-//         QString BaudrateConfig = settings.value("Baudrate" , Baudrate).toString();
-//         qDebug() << "baudrate option:" << BaudrateConfig;
-
-//         settings.endGroup();
-
-         QSettings settings("UARTConfig.txt", QSettings::IniFormat);
-         QListWidget* configList = new QListWidget(this);
-         configList->clear();
-
-         // get baudrate value from settings file
-                  settings.beginGroup("UART4Configs");
-
-         QString baudRate = settings.value("Baudrate").toString();
-                  qDebug() << "baudrate option:" << baudRate;
-
-                  settings.endGroup();
-
-
-         // create list item with baudrate value
-         QListWidgetItem* baudRateItem = new QListWidgetItem("Baud Rate: " + baudRate, configList);
-
-         qDebug() << "baudrate:" << baudRateItem;
-
-
-         // add item to list widget
-         configList->addItem(baudRateItem);
-
-
-
-
-
-
-//         // set the font and style for the items
-//         QFont itemFont("Arial", 12);
-//         itemFont.setBold(true);
-//         baudRateItem->setFont(itemFont);
-//         parityItem->setFont(itemFont);
-////         baudRateItem->setTextColor(QColor("#328930")); // set the color of the text
-////         parityItem->setTextColor(QColor("#328930"));
-
-//         // add the items to the list
-//         configList->addItem(baudRateItem);
-//         configList->addItem(parityItem);
-
-
-
+                // set the central widget of the main window to the layout
+                setCentralWidget(centralWidget);
 
 
     }
+    void showUART5config(){
+                              QListWidget* configList = new QListWidget(this);
+                              configList->clear();
+                                      QListWidgetItem* titleItem = new QListWidgetItem(tr("I2C1 Configurations"), configList);
+
+
+                                      QListWidgetItem* TimingItem = new QListWidgetItem(tr("•  Timing     :     ") , configList);
+                                      QListWidgetItem* SpeedItem = new QListWidgetItem(tr("•  Speed       :  ") , configList);
+                                      QListWidgetItem* FrequencyItem = new QListWidgetItem(tr("•  Frequency     :    ")  , configList);
+                                      QListWidgetItem* RiseItem = new QListWidgetItem(tr("•  Rise     :    ") , configList);
+                                      QListWidgetItem* FallItem = new QListWidgetItem(tr("•  Fall    :    ")  , configList);
+                                      QListWidgetItem* ConverterItem = new QListWidgetItem(tr("•  Converter    :    ")  , configList);
+                                      QListWidgetItem* AnalogFilterItem = new QListWidgetItem(tr("•  AnalogFilter    :    ") , configList);
+
+
+                                      // Set the font and style sheet for the title label
+                                      QFontDatabase fontDatabase;
+                                      QStringList fontFamilies = fontDatabase.families();
+
+                                      // Choose the first available font as the best font
+                                      QString bestFont = fontFamilies.first();
+
+                                      // Create a font object with the best font and size
+                                      QFont font(bestFont, 18);
+
+                                      titleItem->setFont(font);
+                                      titleItem->setTextAlignment(Qt::TopLeftCorner);
+                                      QBrush gray(Qt::gray);
+                                      QBrush white(Qt::white);
+
+                                      titleItem->setBackground(gray);
+                                      titleItem->setForeground(white);
+
+                                      TimingItem->setFont(QFont("Helvetica", 13));
+                                      TimingItem->setTextAlignment(Qt::TopLeftCorner);
+                                      SpeedItem->setFont(QFont("Helvetica", 13));
+                                      SpeedItem->setTextAlignment(Qt::TopLeftCorner);
+                                      FrequencyItem->setFont(QFont("Helvetica", 13));
+                                      FrequencyItem->setTextAlignment(Qt::TopLeftCorner);
+                                      RiseItem->setFont(QFont("Helvetica", 13));
+                                      RiseItem->setTextAlignment(Qt::TopLeftCorner);
+                                      FallItem->setFont(QFont("Helvetica", 13));
+                                      FallItem->setTextAlignment(Qt::TopLeftCorner);
+                                      ConverterItem->setFont(QFont("Helvetica", 13));
+                                      ConverterItem->setTextAlignment(Qt::TopLeftCorner);
+                                      AnalogFilterItem->setFont(QFont("Helvetica", 13));
+                                      AnalogFilterItem->setTextAlignment(Qt::TopLeftCorner);
+
+
+                                      configList->setSpacing(15);
+                                      configList->addItem(titleItem);
+
+                                      configList->addItem(TimingItem);
+                                      configList->addItem(SpeedItem);
+                                      configList->addItem(FrequencyItem);
+                                      configList->addItem(RiseItem);
+                                      configList->addItem(FallItem);
+                                      configList->addItem(ConverterItem);
+                                      configList->addItem(AnalogFilterItem);
+
+
+
+
+                                      configList->show();
+
+                                      settings.endGroup();
+
+                                      // Create Layout form
+                                      QFormLayout* layout = new QFormLayout(this);
+
+                                      // Create a QLabel for "DAC configurations" and center it horizontally
+                                      QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+                                      // Load the icon image
+                                      QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                                      // Create a QLabel for the icon and set its size
+                                      QLabel* iconLabel = new QLabel(this);
+                                      iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                                      iconLabel->setFixedSize(30, 30);
+
+                                      QHBoxLayout* titleLayout = new QHBoxLayout();
+                                      titleLayout->addWidget(iconLabel);
+                                      titleLayout->addWidget(titleLabel);
+                                      titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+                                      // create a widget to hold the list and add it to a layout
+                                      QWidget* centralWidget = new QWidget(this);
+                                      QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+                                      layout1->addWidget(configList);
+                                      layout1->setAlignment(Qt::AlignHCenter);
+                                      layout->addRow(titleLayout);
+                                      layout->addRow(layout1);
+
+
+
+                              //        configList->setStyleSheet("background-color: white; font-size: 14px;");
+                                      configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+                              //        layout1->addRow(configList);
+                              //        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+                              //                                  "QListWidget::item { padding: 5px; }"
+                              //                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+                                      // set the central widget of the main window to the layout
+                                      setCentralWidget(centralWidget);
+
+
+    }
+    void showUSART1config(){
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("USART1Configs");
+
+        QString baudrate;
+        QString Parity;
+        QString stopBits;
+        QString DataBits;
+        QString FlowControl;
+
+        QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
+        QString ParityConfig = settings.value("Parity" , Parity).toString();
+        QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
+        QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
+        QString FlowControlConfig = settings.value("FlowControl" , FlowControl).toString();
+
+
+
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("USART1 Configurations"), configList);
+
+        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("•  Baud Rate     :     ") +BaudrateConfig , configList);
+        QListWidgetItem* ParityItem = new QListWidgetItem(tr("•  Parity       :  ") +ParityConfig , configList);
+        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("•  stopBits     :    ") +stopBitsConfig , configList);
+        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("•  DataBits     :    ") +DataBitsConfig , configList);
+        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("•  FlowControl    :    ") +FlowControlConfig , configList);
+
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        baudRateItem->setFont(QFont("Helvetica", 13));
+        baudRateItem->setTextAlignment(Qt::TopLeftCorner);
+        ParityItem->setFont(QFont("Helvetica", 13));
+        ParityItem->setTextAlignment(Qt::TopLeftCorner);
+        stopBitsItem->setFont(QFont("Helvetica", 13));
+        stopBitsItem->setTextAlignment(Qt::TopLeftCorner);
+        DataBitsItem->setFont(QFont("Helvetica", 13));
+        DataBitsItem->setTextAlignment(Qt::TopLeftCorner);
+        FlowControlItem->setFont(QFont("Helvetica", 13));
+        FlowControlItem->setTextAlignment(Qt::TopLeftCorner);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
+        configList->addItem(baudRateItem);
+        configList->addItem(ParityItem);
+        configList->addItem(stopBitsItem);
+        configList->addItem(DataBitsItem);
+        configList->addItem(FlowControlItem);
+
+
+        configList->show();
+
+        qDebug() << "baudrate:" << baudRateItem;
+        qDebug() << "Parity:" << ParityItem;
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    }
+    void showUSART2config(){
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("USART2Configs");
+
+        QString baudrate;
+        QString Parity;
+        QString stopBits;
+        QString DataBits;
+        QString FlowControl;
+
+        QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
+        QString ParityConfig = settings.value("Parity" , Parity).toString();
+        QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
+        QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
+        QString FlowControlConfig = settings.value("FlowControl" , FlowControl).toString();
+
+
+
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("USART2 Configurations"), configList);
+
+
+        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("•  Baud Rate     :     ") +BaudrateConfig , configList);
+        QListWidgetItem* ParityItem = new QListWidgetItem(tr("•  Parity       :  ") +ParityConfig , configList);
+        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("•  stopBits     :    ") +stopBitsConfig , configList);
+        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("•  DataBits     :    ") +DataBitsConfig , configList);
+        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("•  FlowControl    :    ") +FlowControlConfig , configList);
+
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        baudRateItem->setFont(QFont("Helvetica", 13));
+        baudRateItem->setTextAlignment(Qt::TopLeftCorner);
+        ParityItem->setFont(QFont("Helvetica", 13));
+        ParityItem->setTextAlignment(Qt::TopLeftCorner);
+        stopBitsItem->setFont(QFont("Helvetica", 13));
+        stopBitsItem->setTextAlignment(Qt::TopLeftCorner);
+        DataBitsItem->setFont(QFont("Helvetica", 13));
+        DataBitsItem->setTextAlignment(Qt::TopLeftCorner);
+        FlowControlItem->setFont(QFont("Helvetica", 13));
+        FlowControlItem->setTextAlignment(Qt::TopLeftCorner);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
+        configList->addItem(baudRateItem);
+        configList->addItem(ParityItem);
+        configList->addItem(stopBitsItem);
+        configList->addItem(DataBitsItem);
+        configList->addItem(FlowControlItem);
+
+
+
+        configList->show();
+
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    }
+    void showSPI1config(){
+        QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("SPI1Configs");
+
+        QString Mode;
+        QString NSS;
+        QString Frameformat;
+        QString Datasize;
+        QString Firstbit;
+
+        QString ModeConfig = settings.value("Mode Selected" , Mode).toString();
+        QString NSSConfig = settings.value("NSS" , NSS).toString();
+        QString FrameformatConfig = settings.value("Frameformat" , Frameformat).toString();
+        QString DatasizeConfig = settings.value("Datasize" , Datasize).toString();
+        QString FirstbitConfig = settings.value("Firstbit" , Firstbit).toString();
+
+
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("SPI1 Configurations"), configList);
+
+
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode Selected: ") +ModeConfig , configList);
+        QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
+        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("Frameformat: ") +FrameformatConfig , configList);
+        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
+        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
+
+
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        ModeItem->setFont(QFont("Helvetica", 12));
+        ModeItem->setTextAlignment(Qt::AlignCenter);
+        NSSItem->setFont(QFont("Helvetica", 12));
+        NSSItem->setTextAlignment(Qt::AlignCenter);
+        FrameformatItem->setFont(QFont("Helvetica", 12));
+        FrameformatItem->setTextAlignment(Qt::AlignCenter);
+        DatasizeItem->setFont(QFont("Helvetica", 12));
+        DatasizeItem->setTextAlignment(Qt::AlignCenter);
+        FirstbitItem->setFont(QFont("Helvetica", 12));
+        FirstbitItem->setTextAlignment(Qt::AlignCenter);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
+        configList->addItem(ModeItem);
+        configList->addItem(NSSItem);
+        configList->addItem(FrameformatItem);
+        configList->addItem(DatasizeItem);
+        configList->addItem(FirstbitItem);
+
+
+
+        configList->show();
+
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    }
+    void showSPI2config(){
+        QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("SPI2Configs");
+
+        QString Mode;
+        QString NSS;
+        QString Frameformat;
+        QString Datasize;
+        QString Firstbit;
+
+        QString ModeConfig = settings.value("Mode" , Mode).toString();
+        QString NSSConfig = settings.value("NSS" , NSS).toString();
+        QString FrameformatConfig = settings.value("Frameformat" , Frameformat).toString();
+        QString DatasizeConfig = settings.value("Datasize" , Datasize).toString();
+        QString FirstbitConfig = settings.value("Firstbit" , Firstbit).toString();
+
+
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("SPI2 Configurations"), configList);
+
+
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode Selected: ") +ModeConfig , configList);
+        QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
+        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("Frameformat: ") +FrameformatConfig , configList);
+        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
+        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
+
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        ModeItem->setFont(QFont("Helvetica", 12));
+        ModeItem->setTextAlignment(Qt::AlignCenter);
+        NSSItem->setFont(QFont("Helvetica", 12));
+        NSSItem->setTextAlignment(Qt::AlignCenter);
+        FrameformatItem->setFont(QFont("Helvetica", 12));
+        FrameformatItem->setTextAlignment(Qt::AlignCenter);
+        DatasizeItem->setFont(QFont("Helvetica", 12));
+        DatasizeItem->setTextAlignment(Qt::AlignCenter);
+        FirstbitItem->setFont(QFont("Helvetica", 12));
+        FirstbitItem->setTextAlignment(Qt::AlignCenter);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
+        configList->addItem(ModeItem);
+        configList->addItem(NSSItem);
+        configList->addItem(FrameformatItem);
+        configList->addItem(DatasizeItem);
+        configList->addItem(FirstbitItem);
+
+
+        configList->show();
+
+        settings.endGroup();
+
+//        ModeItem->set("font: bold 15px; color: black; background-color: white;");
+
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    }
+    void showSPI3config(){
+        QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("SPIConfigs");
+
+        QString Mode;
+        QString NSS;
+        QString Frameformat;
+        QString Datasize;
+        QString Firstbit;
+
+        QString ModeConfig = settings.value("Mode" , Mode).toString();
+        QString NSSConfig = settings.value("NSS" , NSS).toString();
+        QString FrameformatConfig = settings.value("Frameformat" , Frameformat).toString();
+        QString DatasizeConfig = settings.value("Datasize" , Datasize).toString();
+        QString FirstbitConfig = settings.value("Firstbit" , Firstbit).toString();
+
+
+
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("SPI3 Configurations"), configList);
+
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode: ") +ModeConfig , configList);
+        QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
+        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("Frameformat: ") +FrameformatConfig , configList);
+        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
+        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
+
+
+//        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+//        // Create a QLabel for the icon and set its size
+//        QLabel* iconLabel = new QLabel(this);
+//        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+//        iconLabel->setFixedSize(30, 30);
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        ModeItem->setFont(QFont("Helvetica", 12));
+        ModeItem->setTextAlignment(Qt::AlignCenter);
+        NSSItem->setFont(QFont("Helvetica", 12));
+        NSSItem->setTextAlignment(Qt::AlignCenter);
+        FrameformatItem->setFont(QFont("Helvetica", 12));
+        FrameformatItem->setTextAlignment(Qt::AlignCenter);
+        DatasizeItem->setFont(QFont("Helvetica", 12));
+        DatasizeItem->setTextAlignment(Qt::AlignCenter);
+        FirstbitItem->setFont(QFont("Helvetica", 12));
+        FirstbitItem->setTextAlignment(Qt::AlignCenter);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
+        configList->addItem(ModeItem);
+        configList->addItem(NSSItem);
+        configList->addItem(FrameformatItem);
+        configList->addItem(DatasizeItem);
+        configList->addItem(FirstbitItem);
+
+        configList->show();
+
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 2px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setFixedHeight(450);
+//        configList->setFixedWidth(550);
+
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    }
+    void showI2C1config(){}
+    void showI2C2config(){}
+    void showADC1config(){}
+    void showADC3config(){}
+
+
+
 
 };
 
