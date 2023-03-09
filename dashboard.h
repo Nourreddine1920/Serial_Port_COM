@@ -6476,6 +6476,44 @@ private slots :
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
 
+
+
+        // ----------------------- Save PIN Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString PINConfig = settings.value("PIN", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexPIN = PINComboBox->findText(PINConfig);
+        if (indexPIN != -1)
+            PINComboBox->setCurrentIndex(indexPIN);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString PIN; // declare stopBits outside of the lambda
+
+        connect(PINComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&PIN](int indexPIN){
+            // Retrieve the selected option
+            QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+
+            QString PIN = PINComboBox->itemText(indexPIN);
+            settings.beginGroup("GPIOOUTPUTConfigs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("PIN", PIN);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString PINConfig = settings.value("PIN" , PIN).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << PIN;
+            qDebug() << "PIN:" << PINConfig;
+        });
+
+
         // --------------GPIO Mode selected for the OUT1--------------------//
 
         QLabel* ModeLabel = new QLabel(tr("GPIO Mode "), this);
@@ -6491,6 +6529,43 @@ private slots :
         layout->addRow(ModeLabel, ModeComboBox);
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
+
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString ModeConfig = settings.value("Mode", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexMode = ModeComboBox->findText(ModeConfig);
+        if (indexMode != -1)
+            ModeComboBox->setCurrentIndex(indexMode);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Mode; // declare stopBits outside of the lambda
+
+        connect(ModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Mode](int indexMode){
+            // Retrieve the selected option
+            QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+
+            QString Mode = ModeComboBox->itemText(indexMode);
+            settings.beginGroup("GPIOOUTPUTConfigs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Mode", Mode);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString ModeConfig = settings.value("Mode" , Mode).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Mode;
+            qDebug() << "Mode:" << ModeConfig;
+        });
+
 
         // --------------GPIO PULL UP -- DOWN --------------------//
 
@@ -6509,6 +6584,45 @@ private slots :
         layout->setSpacing(30);
 
 
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString GPIOConfig = settings.value("GPIO", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexGPIO = GPIOComboBox->findText(GPIOConfig);
+        if (indexGPIO != -1)
+            GPIOComboBox->setCurrentIndex(indexGPIO);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString GPIO; // declare stopBits outside of the lambda
+
+        connect(GPIOComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&GPIO](int indexGPIO){
+            // Retrieve the selected option
+            QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+
+            QString GPIO = GPIOComboBox->itemText(indexGPIO);
+            settings.beginGroup("GPIOOUTPUTConfigs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("GPIO", GPIO);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString GPIOConfig = settings.value("GPIO" , GPIO).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << GPIO;
+            qDebug() << "GPIO:" << GPIOConfig;
+        });
+
+
+
+
         // --------------Maximum Output Speed for the GPIO OUTPUT--------------------//
 
         QLabel* SpeedLabel = new QLabel(tr(" Maximum Output Speed "), this);
@@ -6524,6 +6638,45 @@ private slots :
         layout->addRow(SpeedLabel, SpeedComboBox);
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
+
+
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString SpeedConfig = settings.value("Speed", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexSpeed = SpeedComboBox->findText(SpeedConfig);
+        if (indexSpeed != -1)
+            SpeedComboBox->setCurrentIndex(indexSpeed);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Speed; // declare stopBits outside of the lambda
+
+        connect(SpeedComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Speed](int indexSpeed){
+            // Retrieve the selected option
+            QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+
+            QString Speed = SpeedComboBox->itemText(indexSpeed);
+            settings.beginGroup("GPIOOUTPUTConfigs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Speed", Speed);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString SpeedConfig = settings.value("Speed" , Speed).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Speed;
+            qDebug() << "Speed:" << SpeedConfig;
+        });
+
+
 
 
         // --------------User Label for the GPIO OUTPUT --------------------//
@@ -6560,17 +6713,17 @@ private slots :
         widget->setGeometry(500, 500, 600, 500);
 
 
-        QSettings settings("file.txt", QSettings::IniFormat);
+        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
 
         // GPIO OUTPUT Configs
-        settings.beginGroup("GPIOOUTPUT");
+        settings.beginGroup("GPIOOUTPUTConfigs");
 
-        settings.setValue("SelectedPIN",  PINComboBox->currentText());
-        settings.setValue("GPIOMode",  ModeComboBox->currentText());
+        settings.setValue("PIN",  PIN);
+        settings.setValue("Mode",  Mode);
 
-        settings.setValue("GPIOType",  GPIOComboBox->currentText());
-        settings.setValue("GPIOSpeedOUTPUT",  SpeedComboBox->currentText());
+        settings.setValue("GPIO",  GPIO);
+        settings.setValue("Speed",  Speed);
         settings.setValue("UserLabel",  UserLineEdit->text());
 
 
@@ -6579,9 +6732,6 @@ private slots :
         settings.endGroup();
 
 
-        settings.beginGroup("GPIO OUTPUT ");
-        settings.remove("");
-        settings.endGroup();
 
 
 
@@ -6651,6 +6801,43 @@ private slots :
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
 
+
+        // ----------------------- Save PIN Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString PINConfig = settings.value("PIN", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexPIN = PINComboBox->findText(PINConfig);
+        if (indexPIN != -1)
+            PINComboBox->setCurrentIndex(indexPIN);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString PIN; // declare stopBits outside of the lambda
+
+        connect(PINComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&PIN](int indexPIN){
+            // Retrieve the selected option
+            QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+
+            QString PIN = PINComboBox->itemText(indexPIN);
+            settings.beginGroup("GPIOINPUTConfigs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("PIN", PIN);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString PINConfig = settings.value("PIN" , PIN).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << PIN;
+            qDebug() << "PIN:" << PINConfig;
+        });
+
+
         // --------------GPIO PULL UP -- DOWN --------------------//
 
         QLabel* GPIOLabel = new QLabel(tr("GPIO Pull-up/Pull-down "), this);
@@ -6666,6 +6853,45 @@ private slots :
         layout->addRow(GPIOLabel, GPIOComboBox);
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
+
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString GPIOConfig = settings.value("GPIO", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexGPIO = GPIOComboBox->findText(GPIOConfig);
+        if (indexGPIO != -1)
+            GPIOComboBox->setCurrentIndex(indexGPIO);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString GPIO; // declare stopBits outside of the lambda
+
+        connect(GPIOComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&GPIO](int indexGPIO){
+            // Retrieve the selected option
+            QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+
+            QString GPIO = GPIOComboBox->itemText(indexGPIO);
+            settings.beginGroup("GPIOINPUTConfigs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("GPIO", GPIO);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString GPIOConfig = settings.value("GPIO" , GPIO).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << GPIO;
+            qDebug() << "GPIO:" << GPIOConfig;
+        });
+
+
+
 
 
 
@@ -6703,15 +6929,15 @@ private slots :
         widget->setLayout(horizontalLayout);
         widget->setGeometry(500, 500, 600, 500);
 
-        QSettings settings("file.txt", QSettings::IniFormat);
+        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
 
         // GPIO OUTPUT Configs
-        settings.beginGroup("GPIOINPUT");
+        settings.beginGroup("GPIOINPUTConfigs");
 
-        settings.setValue("SelectedPIN",  PINComboBox->currentText());
+        settings.setValue("PIN",  PIN);
 
-        settings.setValue("GPIOType",  GPIOComboBox->currentText());
+        settings.setValue("GPIO",  GPIO);
         settings.setValue("UserLabel",  UserLineEdit->text());
 
 
@@ -6719,10 +6945,11 @@ private slots :
 
         settings.endGroup();
 
-
-        settings.beginGroup("GPIO INPUT ");
+        settings.beginGroup("GPIOINTPUTConfigs");
         settings.remove("");
         settings.endGroup();
+
+
 
 
 
