@@ -5683,6 +5683,43 @@ private slots :
         ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
         layout->addRow(ChannelLabel, ChannelComboBox);
 
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString ChannelConfig = settings.value("Channel", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexChannel = ChannelComboBox->findText(ChannelConfig);
+        if (indexChannel != -1)
+            ChannelComboBox->setCurrentIndex(indexChannel);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Channel; // declare stopBits outside of the lambda
+
+        connect(ChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Channel](int indexChannel){
+            // Retrieve the selected option
+            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+            QString Channel = ChannelComboBox->itemText(indexChannel);
+            settings.beginGroup("DAC1Configs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Channel", Channel);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString ChannelConfig = settings.value("Channel" , Channel).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Channel;
+            qDebug() << "Channel:" << ChannelConfig;
+        });
+
+
         // --------------OUT2 Connected to--------------------//
 
         QLabel* Channel2Label = new QLabel(tr("OUT2 Connected to "), this);
@@ -5696,12 +5733,50 @@ private slots :
         layout->setSpacing(30);
 
 
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString Channel2Config = settings.value("Channel2", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexChannel2 = Channel2ComboBox->findText(Channel2Config);
+        if (indexChannel2 != -1)
+            Channel2ComboBox->setCurrentIndex(indexChannel2);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Channel2; // declare stopBits outside of the lambda
+
+        connect(Channel2ComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Channel2](int indexChannel2){
+            // Retrieve the selected option
+            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+            QString Channel2 = Channel2ComboBox->itemText(indexChannel2);
+            settings.beginGroup("DAC2Configs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Channel2", Channel2);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString Channel2Config = settings.value("Channel2" , Channel2).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Channel2;
+            qDebug() << "Channel2:" << Channel2Config;
+        });
+
+
+
         // --------------Connection between two widgets Channel1 & Channel2--------------------//
 
         connect(ChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                this, &Dashboard::ShowingDACConfigs);
+                this, &Dashboard::ShowingDAC1Configs);
         connect(Channel2ComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                this, &Dashboard::ShowingDACConfigs);
+                this, &Dashboard::ShowingDAC2Configs);
 
 
         // Create the vertical layout and add the form layout to it
@@ -5733,7 +5808,7 @@ private slots :
 
     // Layout Form the DAC Configuration
 
-    void ShowingDACConfigs(){
+    void ShowingDAC1Configs(){
 
         QWidget *widget = new QWidget(this);
         setCentralWidget(widget);
@@ -5796,6 +5871,43 @@ private slots :
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
 
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString ModeConfig = settings.value("Mode", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexMode = ModeComboBox->findText(ModeConfig);
+        if (indexMode != -1)
+            ModeComboBox->setCurrentIndex(indexMode);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Mode; // declare stopBits outside of the lambda
+
+        connect(ModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Mode](int indexMode){
+            // Retrieve the selected option
+            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+            QString Mode = ModeComboBox->itemText(indexMode);
+            settings.beginGroup("DAC1Configs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Mode", Mode);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString ModeConfig = settings.value("Mode" , Mode).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Mode;
+            qDebug() << "Mode:" << ModeConfig;
+        });
+
+
         // --------------Output Buffer for the OUT1--------------------//
 
         QLabel* BufferLabel = new QLabel(tr(" Output Buffer "), this);
@@ -5813,9 +5925,47 @@ private slots :
         layout->setSpacing(30);
 
 
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString BufferConfig = settings.value("Buffer", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexBuffer = BufferComboBox->findText(BufferConfig);
+        if (indexBuffer != -1)
+            BufferComboBox->setCurrentIndex(indexBuffer);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Buffer; // declare stopBits outside of the lambda
+
+        connect(BufferComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Buffer](int indexBuffer){
+            // Retrieve the selected option
+            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+            QString Buffer = BufferComboBox->itemText(indexBuffer);
+            settings.beginGroup("DAC1Configs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Buffer", Buffer);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString BufferConfig = settings.value("Buffer" , Buffer).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Buffer;
+            qDebug() << "Buffer:" << BufferConfig;
+        });
+
+
+
         // --------------Trigger for the OUT1--------------------//
 
-        QLabel* TriggerLabel = new QLabel(tr(" Trigger "), this);
+        QLabel* TriggerLabel = new QLabel(tr("Trigger"), this);
         QComboBox* TriggerComboBox = new QComboBox(this);
 
         TriggerComboBox->addItems(QStringList() << "None" << "TIMER1 Trigger OUT event " << "TIMER1 Trigger OUT event " << "TIMER1 Trigger OUT event " << "TIMER2 Trigger OUT event " << "TIMER4 Trigger OUT event " << "TIMER5 Trigger OUT event " << "TIMER6 Trigger OUT event " << "TIMER7 Trigger OUT event " << "TIMER8 Trigger OUT event " << "TIMER15 Trigger OUT event" << "LPTIMER1 Trigger OUT event" << "LPTIMER2 Trigger OUT event" << "Software Trigger");
@@ -5828,6 +5978,43 @@ private slots :
         layout->addRow(TriggerLabel, TriggerComboBox);
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
+
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString TriggerConfig = settings.value("Trigger", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexTrigger = TriggerComboBox->findText(TriggerConfig);
+        if (indexTrigger != -1)
+            TriggerComboBox->setCurrentIndex(indexTrigger);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Trigger; // declare stopBits outside of the lambda
+
+        connect(TriggerComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Trigger](int indexTrigger){
+            // Retrieve the selected option
+            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+            QString Trigger = TriggerComboBox->itemText(indexTrigger);
+            settings.beginGroup("DAC1Configs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Trigger", Trigger);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString TriggerConfig = settings.value("Trigger" , Trigger).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Trigger;
+            qDebug() << "Trigger:" << TriggerConfig;
+        });
+
 
 
         // --------------Trimming for the OUT1--------------------//
@@ -5847,6 +6034,44 @@ private slots :
         layout->setSpacing(30);
 
 
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString TrimmingConfig = settings.value("Trimming", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexTrimming = TrimmingComboBox->findText(TrimmingConfig);
+        if (indexTrimming != -1)
+            TrimmingComboBox->setCurrentIndex(indexTrimming);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Trimming; // declare stopBits outside of the lambda
+
+        connect(TrimmingComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Trimming](int indexTrimming){
+            // Retrieve the selected option
+            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+            QString Trimming = TrimmingComboBox->itemText(indexTrimming);
+            settings.beginGroup("DAC1Configs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Trimming", Trimming);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString TrimmingConfig = settings.value("Trimming" , Trimming).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Trimming;
+            qDebug() << "Trimming:" << TrimmingConfig;
+        });
+
+
+
         // Create the vertical layout and add the form layout to it
         QVBoxLayout* verticalLayout = new QVBoxLayout(this);
         verticalLayout->addStretch();
@@ -5864,16 +6089,16 @@ private slots :
         widget->setLayout(horizontalLayout);
         widget->setGeometry(500, 500, 600, 500);
 
-        QSettings settings("file.txt", QSettings::IniFormat);
+        QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
 
         // DAC Configs
-        settings.beginGroup("SohwingDACConfigs");
+        settings.beginGroup("DAC1Configs");
 
-        settings.setValue("ModeDAC",  ModeComboBox->currentText());
-        settings.setValue("Buffer",  BufferComboBox->currentText());
-        settings.setValue("Trigger",  TriggerComboBox->currentText());
-        settings.setValue("Trimming",  TrimmingComboBox->currentText());
+        settings.setValue("Mode",  Mode);
+        settings.setValue("Buffer",  Buffer);
+        settings.setValue("Trigger",  Trigger);
+        settings.setValue("Trimming",  Trimming);
 
 
 
@@ -5883,6 +6108,309 @@ private slots :
 
 
     }
+
+    void ShowingDAC2Configs(){
+
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+
+        QFormLayout* layout = new QFormLayout(this);
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("DAC Showing configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        // Create a QHBoxLayout to hold the icon and the title label
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 15);
+
+        // Set the font and style sheet for the label
+        titleLabel->setFont(font);
+        iconLabel->setFont(font);
+
+        titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+        titleLabel->setAlignment(Qt::AlignCenter);
+
+
+        // Add the title label and the icon to the main layout
+        layout->addRow(titleLayout);
+
+        // --------------Mode selected for the OUT1--------------------//
+
+        QLabel* ModeLabel = new QLabel(tr("Mode selected"), this);
+        QComboBox* ModeComboBox = new QComboBox(this);
+
+        ModeComboBox->addItems(QStringList() << "Normal Mode" << "Sample and Hold Mode" );
+
+
+        ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(ModeLabel, ModeComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString ModeConfig = settings.value("Mode", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexMode = ModeComboBox->findText(ModeConfig);
+        if (indexMode != -1)
+            ModeComboBox->setCurrentIndex(indexMode);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Mode; // declare stopBits outside of the lambda
+
+        connect(ModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Mode](int indexMode){
+            // Retrieve the selected option
+            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+            QString Mode = ModeComboBox->itemText(indexMode);
+            settings.beginGroup("DAC2Configs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Mode", Mode);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString ModeConfig = settings.value("Mode" , Mode).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Mode;
+            qDebug() << "Mode:" << ModeConfig;
+        });
+
+
+        // --------------Output Buffer for the OUT1--------------------//
+
+        QLabel* BufferLabel = new QLabel(tr(" Output Buffer "), this);
+        QComboBox* BufferComboBox = new QComboBox(this);
+
+        BufferComboBox->addItems(QStringList() << "Enable" << "Disable" );
+
+
+        BufferLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        BufferComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(BufferLabel, BufferComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString BufferConfig = settings.value("Buffer", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexBuffer = BufferComboBox->findText(BufferConfig);
+        if (indexBuffer != -1)
+            BufferComboBox->setCurrentIndex(indexBuffer);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Buffer; // declare stopBits outside of the lambda
+
+        connect(BufferComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Buffer](int indexBuffer){
+            // Retrieve the selected option
+            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+            QString Buffer = BufferComboBox->itemText(indexBuffer);
+            settings.beginGroup("DAC2Configs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Buffer", Buffer);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString BufferConfig = settings.value("Buffer" , Buffer).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Buffer;
+            qDebug() << "Buffer:" << BufferConfig;
+        });
+
+
+
+        // --------------Trigger for the OUT1--------------------//
+
+        QLabel* TriggerLabel = new QLabel(tr("Trigger"), this);
+        QComboBox* TriggerComboBox = new QComboBox(this);
+
+        TriggerComboBox->addItems(QStringList() << "None" << "TIMER1 Trigger OUT event " << "TIMER1 Trigger OUT event " << "TIMER1 Trigger OUT event " << "TIMER2 Trigger OUT event " << "TIMER4 Trigger OUT event " << "TIMER5 Trigger OUT event " << "TIMER6 Trigger OUT event " << "TIMER7 Trigger OUT event " << "TIMER8 Trigger OUT event " << "TIMER15 Trigger OUT event" << "LPTIMER1 Trigger OUT event" << "LPTIMER2 Trigger OUT event" << "Software Trigger");
+
+
+        TriggerLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        TriggerComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(TriggerLabel, TriggerComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString TriggerConfig = settings.value("Trigger", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexTrigger = TriggerComboBox->findText(TriggerConfig);
+        if (indexTrigger != -1)
+            TriggerComboBox->setCurrentIndex(indexTrigger);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Trigger; // declare stopBits outside of the lambda
+
+        connect(TriggerComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Trigger](int indexTrigger){
+            // Retrieve the selected option
+            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+            QString Trigger = TriggerComboBox->itemText(indexTrigger);
+            settings.beginGroup("DAC2Configs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Trigger", Trigger);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString TriggerConfig = settings.value("Trigger" , Trigger).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Trigger;
+            qDebug() << "Trigger:" << TriggerConfig;
+        });
+
+
+
+        // --------------Trimming for the OUT1--------------------//
+
+        QLabel* TrimmingLabel = new QLabel(tr(" Trimming "), this);
+        QComboBox* TrimmingComboBox = new QComboBox(this);
+
+        TrimmingComboBox->addItems(QStringList() << "Factory Trimming" << "User Trimming" );
+
+
+        TrimmingLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        TrimmingComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+        layout->addRow(TrimmingLabel, TrimmingComboBox);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString TrimmingConfig = settings.value("Trimming", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexTrimming = TrimmingComboBox->findText(TrimmingConfig);
+        if (indexTrimming != -1)
+            TrimmingComboBox->setCurrentIndex(indexTrimming);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Trimming; // declare stopBits outside of the lambda
+
+        connect(TrimmingComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Trimming](int indexTrimming){
+            // Retrieve the selected option
+            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+            QString Trimming = TrimmingComboBox->itemText(indexTrimming);
+            settings.beginGroup("DAC2Configs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Trimming", Trimming);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString TrimmingConfig = settings.value("Trimming" , Trimming).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Trimming;
+            qDebug() << "Trimming:" << TrimmingConfig;
+        });
+
+
+
+        // Create the vertical layout and add the form layout to it
+        QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+        verticalLayout->addStretch();
+        verticalLayout->addLayout(layout);
+        verticalLayout->addStretch();
+
+        // Create the horizontal layout and add the vertical layout to it
+        QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+        horizontalLayout->addStretch();
+        horizontalLayout->addLayout(verticalLayout);
+        horizontalLayout->addStretch();
+
+        // Set the widget layout to the horizontal layout
+
+        widget->setLayout(horizontalLayout);
+        widget->setGeometry(500, 500, 600, 500);
+
+        QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+
+        // DAC Configs
+        settings.beginGroup("DAC2Configs");
+
+        settings.setValue("Mode",  Mode);
+        settings.setValue("Buffer",  Buffer);
+        settings.setValue("Trigger",  Trigger);
+        settings.setValue("Trimming",  Trimming);
+
+
+
+
+        settings.endGroup();
+
+
+
+    }
+
+
     void GPIOOUPUTConfig(){
 
         QWidget *widget = new QWidget(this);
