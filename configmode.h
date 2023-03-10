@@ -82,7 +82,7 @@ private slots :
 
                 titleItem->setFont(font);
                 titleItem->setTextAlignment(Qt::TopLeftCorner);
-                QBrush gray(Qt::gray);
+                QBrush gray(Qt::darkGreen);
                 QBrush white(Qt::white);
 
                 titleItem->setBackground(gray);
@@ -148,7 +148,7 @@ private slots :
 
 
         //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-                configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+                configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -206,7 +206,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -272,7 +272,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -329,7 +329,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -394,7 +394,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -451,7 +451,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -515,7 +515,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -573,7 +573,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -692,7 +692,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -821,7 +821,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -950,7 +950,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -1021,7 +1021,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1086,7 +1086,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -1157,7 +1157,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1224,7 +1224,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -1298,7 +1298,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1365,7 +1365,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -1439,7 +1439,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1500,7 +1500,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -1565,7 +1565,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1617,7 +1617,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -1676,7 +1676,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1758,7 +1758,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -1829,7 +1829,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1911,7 +1911,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -1982,7 +1982,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -2067,7 +2067,7 @@ private slots :
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::gray);
+        QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
 
         titleItem->setBackground(gray);
@@ -2142,7 +2142,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 

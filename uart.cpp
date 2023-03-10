@@ -235,6 +235,34 @@ void Uart::on_btnConnect_clicked()
                 exit(1);
                 }
 
+
+
+                QByteArray buffer;
+                const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+                QByteArray data = serialPort->readAll();
+                buffer.append(data);
+                qDebug() << "Received message:" << data;
+                ui->textBrowser->setTextColor(Qt::blue); // Receieved data's color is blue.
+                ui->textBrowser->append(data);
+
+
+                       // Check if buffer exceeds maximum size
+
+
+                       // Check if buffer contains a complete message
+//                       const char MESSAGE_TERMINATOR = '\n'; // Replace with your desired message terminator
+//                       int messageEndIndex = buffer.indexOf(MESSAGE_TERMINATOR);
+//                       if (messageEndIndex != -1)
+//                       {
+//                           QByteArray message = buffer.left(messageEndIndex);
+//                           buffer.remove(0, messageEndIndex + 1); // Remove the message and the terminator from the buffer
+
+                           // Process the message here
+
+//                       }
+
        // }
                 Dashboard* dashboard = new Dashboard();
                 dashboard->show();
@@ -243,17 +271,43 @@ void Uart::on_btnConnect_clicked()
 
 }
 // Recieve msg from UART application
+//void Uart::recieveMessage(){
+//    QByteArray dataBA = serialPort->readAll();
+//    QString data(dataBA);
+//    buffer.append(data);
+//    //int index = buffer.indexOf(code);
+//    //if(index != -1){
+//        //QString message = buffer.mid(0,index);
+//        ui->textBrowser->setTextColor(Qt::blue); // Receieved message's color is blue.
+//        ui->textBrowser->append(buffer);
+//        //buffer.remove(0,index+codeSize);
+//      // }
+
+//}
 void Uart::recieveMessage(){
-    QByteArray dataBA = serialPort->readAll();
-    QString data(dataBA);
-    buffer.append(data);
-    int index = buffer.indexOf(code);
-    if(index != -1){
-        QString message = buffer.mid(0,index);
-        ui->textBrowser->setTextColor(Qt::blue); // Receieved message's color is blue.
-        ui->textBrowser->append(message);
-        buffer.remove(0,index+codeSize);
-       }
+    QByteArray buffer;
+    const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+           QByteArray data = serialPort->readAll();
+           buffer.append(data);
+           qDebug() << "Received message:" << data;
+
+
+           // Check if buffer exceeds maximum size
+
+
+           // Check if buffer contains a complete message
+           const char MESSAGE_TERMINATOR = '\n'; // Replace with your desired message terminator
+           int messageEndIndex = buffer.indexOf(MESSAGE_TERMINATOR);
+           if (messageEndIndex != -1)
+           {
+               QByteArray message = buffer.left(messageEndIndex);
+               buffer.remove(0, messageEndIndex + 1); // Remove the message and the terminator from the buffer
+
+               // Process the message here
+               qDebug() << "Received message:" << message;
+           }
 
 }
 // Disconnect Button
@@ -295,19 +349,19 @@ void Uart::on_btnSendMsg_clicked()
     ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
     ui->textBrowser->append(message);
     // Set text color to dark green
-    ui->textBrowser->setTextColor(Qt::darkGreen);
+//    ui->textBrowser->setTextColor(Qt::darkGreen);
 
     // Set background color to light gray
-    ui->textBrowser->setStyleSheet("background-color: #f0f0f0;");
+//    ui->textBrowser->setStyleSheet("background-color: #f0f0f0;");
 
     // Set font family, size, and weight
-    ui->textBrowser->setFont(QFont("Arial", 12, QFont::Bold));
+//    ui->textBrowser->setFont(QFont("Arial", 12, QFont::Bold));
 
     // Set text alignment to center
-    ui->textBrowser->setAlignment(Qt::AlignCenter);
+//    ui->textBrowser->setAlignment(Qt::AlignCenter);
 
     // Add padding to the text browser
-    ui->textBrowser->setStyleSheet("padding: 10px;");
+//    ui->textBrowser->setStyleSheet("padding: 10px;");
     serialPort->write(data);
 
 
