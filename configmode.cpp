@@ -241,7 +241,7 @@ void ConfigMode::returnDashboard()
           connect (action ,&QAction::triggered , this , &ConfigMode::showGPIOINPUTconfig);
       }
       else if(action->text()=="Input Capture Mode") {
-          connect (action ,&QAction::triggered , this , &ConfigMode::showADC3config);
+          connect (action ,&QAction::triggered , this , &ConfigMode::showFrequencyMesureconfig);
       }
 
 

@@ -1996,6 +1996,167 @@ private slots :
         setCentralWidget(centralWidget);
     }
 
+    void showFrequencyMesureconfig(){
+        QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("FrequencyMesureConfigs");
+//        settings.beginGroup("DAC2Configs");
+
+        QString Channel;
+        QString Prescaler;
+        QString Counter;
+        QString AutoReload;
+        QString Clock;
+        QString Repitition;
+        QString Preload;
+
+
+
+
+
+        QString ChannelConfig = settings.value("Channel" , Channel).toString();
+
+        QString PrescalerConfig = settings.value("Prescaler" , Prescaler).toString();
+        QString CounterLabelConfig = settings.value("Counter" , Counter).toString();
+        QString AutoReloadLabelConfig = settings.value("AutoReload" , AutoReload).toString();
+        QString ClockLabelConfig = settings.value("Clock" , Clock).toString();
+        QString RepititionConfig = settings.value("Repitition" , Repitition).toString();
+        QString PreloadConfig = settings.value("Preload" , Preload).toString();
+
+        qDebug() << "selected option:" << PrescalerConfig;
+        qDebug() << "selected option:" << CounterLabelConfig;
+        qDebug() << "selected option:" << AutoReloadLabelConfig;
+        qDebug() << "selected option:" << ClockLabelConfig;
+
+
+
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("Frequency Mesure Configurations"), configList);
+
+
+        QListWidgetItem* ChannelItem = new QListWidgetItem(tr("•  Channel OUT1     :     ") +ChannelConfig , configList);
+
+        QListWidgetItem* PrescalerItem = new QListWidgetItem(tr("•  Prescaler     :    ") +PrescalerConfig , configList);
+        QListWidgetItem* CounterLabelItem = new QListWidgetItem(tr("•  Counter Label    :    ") +CounterLabelConfig , configList);
+        QListWidgetItem* AutoReloadLabelItem = new QListWidgetItem(tr("•  AutoReload Label    :    ") +AutoReloadLabelConfig , configList);
+        QListWidgetItem* ClockLabelItem = new QListWidgetItem(tr("•  Clock Label    :    ") +ClockLabelConfig , configList);
+        QListWidgetItem* RepititionItem = new QListWidgetItem(tr("•  Repitition   :    ") +RepititionConfig , configList);
+        QListWidgetItem* PreloadItem = new QListWidgetItem(tr("•  Preload    :    ") +PreloadConfig , configList);
+
+
+
+
+
+        qDebug() << "Prescaler option:" << ChannelItem;
+        qDebug() << "Prescaler option:" << PrescalerItem;
+        qDebug() << "Prescaler option:" << CounterLabelItem;
+        qDebug() << "Prescaler option:" << AutoReloadLabelItem;
+        qDebug() << "Prescaler option:" << ClockLabelItem;
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        ChannelItem->setFont(QFont("Helvetica", 13));
+        ChannelItem->setTextAlignment(Qt::TopLeftCorner);
+//        Channel2Item->setFont(QFont("Helvetica", 13));
+//        Channel2Item->setTextAlignment(Qt::TopLeftCorner);
+        PrescalerItem->setFont(QFont("Helvetica", 13));
+        PrescalerItem->setTextAlignment(Qt::TopLeftCorner);
+        CounterLabelItem->setFont(QFont("Helvetica", 13));
+        CounterLabelItem->setTextAlignment(Qt::TopLeftCorner);
+        AutoReloadLabelItem->setFont(QFont("Helvetica", 13));
+        AutoReloadLabelItem->setTextAlignment(Qt::TopLeftCorner);
+        ClockLabelItem->setFont(QFont("Helvetica", 13));
+        ClockLabelItem->setTextAlignment(Qt::TopLeftCorner);
+        RepititionItem->setFont(QFont("Helvetica", 13));
+        RepititionItem->setTextAlignment(Qt::TopLeftCorner);
+        PreloadItem->setFont(QFont("Helvetica", 13));
+        PreloadItem->setTextAlignment(Qt::TopLeftCorner);
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
+        configList->addItem(ChannelItem);
+
+        configList->addItem(PrescalerItem);
+        configList->addItem(CounterLabelItem);
+        configList->addItem(AutoReloadLabelItem);
+        configList->addItem(ClockLabelItem);
+        configList->addItem(RepititionItem);
+        configList->addItem(PreloadItem);
+
+
+
+
+        configList->show();
+
+        settings.endGroup();
+//        settings.endGroup();
+
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    }
+
+
 
 
 
