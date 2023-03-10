@@ -95,7 +95,7 @@ MainWindow::~MainWindow()
 void MainWindow::start_Loading()
 {
 for (int value = ui->progressBar->minimum();value<= ui->progressBar->maximum();value++){
-QThread::msleep(100);
+QThread::msleep(30);
 ui->progressBar->setValue(value);
 ui->label_value->setText(QString::number(value)+"%");
 qApp->processEvents(QEventLoop::EventLoopExec);

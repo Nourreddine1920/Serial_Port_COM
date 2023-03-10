@@ -26,109 +26,216 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Checkable UART Configurations
     auto *UART4 = new QAction("UART4", this);
-    //QAction *action = new QAction("Checkable Action", menuBar());
+  // QAction *action = new QAction("Checkable Action", menuBar());
 
-//    UART4->setCheckable(true);
+    UART4->setCheckable(true);
+    if (selectedUartOptionsStatic.contains("UART4")) {
+        UART4->setChecked(true);
+    }
+
+
+
+
+
 
 
     QAction *UART5 = new QAction("&UART5", this);
-//    UART5->setCheckable(true);
+    UART5->setCheckable(true);
+    if (selectedUartOptionsStatic.contains("&UART5")) {
+        UART5->setChecked(true);
+    }
+
+
 
     QAction *UART7 = new QAction("&UART7", this);
-//    UART7->setCheckable(true);
+    UART7->setCheckable(true);
+    if (selectedUartOptionsStatic.contains("&UART7")) {
+        UART7->setChecked(true);
+    }
+
 
     QAction *UART8 = new QAction("&UART8", this);
-//    UART8->setCheckable(true);
+    UART8->setCheckable(true);
+    if (selectedUartOptionsStatic.contains("&UART8")) {
+        UART8->setChecked(true);
+    }
+
 
     QAction *UART9 = new QAction("&UART9", this);
-//    UART9->setCheckable(true);
+    UART9->setCheckable(true);
+    if (selectedUartOptionsStatic.contains("&UART9")) {
+        UART9->setChecked(true);
+    }
 
     QAction *USART1 = new QAction("&USART1", this);
-//    USART1->setCheckable(true);
+    USART1->setCheckable(true);
+    if (selectedUartOptionsStatic.contains("&USART1")) {
+        USART1->setChecked(true);
+    }
 
 
     QAction *USART2 = new QAction("&USART2", this);
-//    USART2->setCheckable(true);
+   USART2->setCheckable(true);
+   if (selectedUartOptionsStatic.contains("&USART2")) {
+       USART2->setChecked(true);
+   }
 
     QAction *USART6 = new QAction("&USART6", this);
-//    USART6->setCheckable(true);
+    USART6->setCheckable(true);
+    if (selectedUartOptionsStatic.contains("&USART6")) {
+        USART6->setChecked(true);
+    }
 
     QAction *USART10 = new QAction("&USART10", this);
-//    USART10->setCheckable(true);
+    USART10->setCheckable(true);
+    if (selectedUartOptionsStatic.contains("&USART10")) {
+        USART10->setChecked(true);
+    }
+
+
+
 
 
 
     // Checkable SPI Configurations
     QAction *SPI1 = new QAction("SPI1", this);
     SPI1->setCheckable(true);
+    if (selectedSPIOptionsStatic.contains("SPI1")) {
+        SPI1->setChecked(true);
+    }
+
 
 
     QAction *SPI2 = new QAction("&SPI2", this);
     SPI2->setCheckable(true);
+    if (selectedSPIOptionsStatic.contains("&SPI2")) {
+        SPI2->setChecked(true);
+    }
+
 
     QAction *SPI3 = new QAction("&SPI3", this);
     SPI3->setCheckable(true);
+    if (selectedSPIOptionsStatic.contains("&SPI3")) {
+        SPI3->setChecked(true);
+    }
+
 
     QAction *SPI4 = new QAction("&SPI4", this);
     SPI4->setCheckable(true);
+    if (selectedSPIOptionsStatic.contains("&SPI4")) {
+        SPI4->setChecked(true);
+    }
+
 
     QAction *SPI5 = new QAction("&SPI5", this);
     SPI5->setCheckable(true);
+    if (selectedSPIOptionsStatic.contains("&SPI5")) {
+        SPI5->setChecked(true);
+    }
+
 
     QAction *SPI6 = new QAction("&SPI6", this);
     SPI6->setCheckable(true);
+    if (selectedSPIOptionsStatic.contains("&SPI6")) {
+        SPI6->setChecked(true);
+    }
+
 
     // Checkable I2C Configurations
     QAction *I2C1 = new QAction("I2C1", this);
     I2C1->setCheckable(true);
+    if (selectedI2COptionsStatic.contains("I2C1")) {
+        I2C1->setChecked(true);
+    }
+
 
 
     QAction *I2C2 = new QAction("&I2C2", this);
     I2C2->setCheckable(true);
+    if (selectedI2COptionsStatic.contains("&I2C2")) {
+        I2C2->setChecked(true);
+    }
+
 
     QAction *I2C3 = new QAction("&I2C3", this);
     I2C3->setCheckable(true);
+    if (selectedI2COptionsStatic.contains("&I2C3")) {
+        I2C3->setChecked(true);
+    }
 
     QAction *I2C4 = new QAction("&I2C4", this);
     I2C4->setCheckable(true);
+    if (selectedI2COptionsStatic.contains("&I2C4")) {
+        I2C4->setChecked(true);
+    }
 
     QAction *I2C5 = new QAction("&I2C5", this);
     I2C5->setCheckable(true);
+    if (selectedI2COptionsStatic.contains("&I2C5")) {
+        I2C5->setChecked(true);
+    }
 
     // Checkable ADC Configurations
     QAction *ADC1 = new QAction("ADC1", this);
     ADC1->setCheckable(true);
+    if (selectedADCOptionsStatic.contains("ADC1")) {
+        ADC1->setChecked(true);
+    }
 
 
     QAction *ADC2 = new QAction("&ADC2", this);
     ADC2->setCheckable(true);
+    if (selectedADCOptionsStatic.contains("&ADC2")) {
+        ADC2->setChecked(true);
+    }
+
 
     QAction *ADC3 = new QAction("&ADC3", this);
     ADC3->setCheckable(true);
+    if (selectedADCOptionsStatic.contains("&ADC3")) {
+        ADC3->setChecked(true);
+    }
+
 
 
 
     // Checkable DAC Configurations
-    QAction *DAC_OUT1 = new QAction("DAC1 OUT1", this);
+    QAction *DAC_OUT1 = new QAction("DAC_OUT1", this);
     DAC_OUT1->setCheckable(true);
-
-    QAction *DAC_OUT2 = new QAction("DAC1 OUT2", this);
+    if (selectedDACOptionsStatic.contains("DAC_OUT1")) {
+        DAC_OUT1->setChecked(true);
+    }
+    QAction *DAC_OUT2 = new QAction("DAC_OUT2", this);
     DAC_OUT2->setCheckable(true);
+    if (selectedDACOptionsStatic.contains("DAC_OUT2")) {
+        DAC_OUT2->setChecked(true);
+    }
+
+
 
 
     // Checkable Input Capture Mode Configurations
     QAction *InputCaptureMode = new QAction("Input Capture Mode" , this);
     InputCaptureMode->setCheckable(true);
+    if (selectedTIMEROptionsStatic.contains("Input Capture Mode")) {
+       InputCaptureMode->setChecked(true);
+    }
+
 
 
     // Checkable GPIO Mode Configurations
 
     QAction *GPIO_OUTPUT = new QAction("GPIO_OUTPUT" , this);
     GPIO_OUTPUT->setCheckable(true);
+    if (selectedGPIOOptionsStatic.contains("GPIO_OUTPUT")) {
+       GPIO_OUTPUT->setChecked(true);
+    }
 
-    QAction *GPIO_INPUT = new QAction("GPIO_INPUT" , this);
+    QAction *GPIO_INPUT = new QAction("&GPIO_INPUT" , this);
     GPIO_INPUT->setCheckable(true);
-
+    if (selectedGPIOOptionsStatic.contains("&GPIO_INPUT")) {
+       GPIO_INPUT->setChecked(true);
+    }
 
     // Create a QToolButton for the "Connect" button
     QToolButton *connectButton = new QToolButton(this);
@@ -673,18 +780,44 @@ void Dashboard::showConfigMode()
 }
 void Dashboard::onUartOptionSelected()
 {
-   QAction *action = qobject_cast<QAction *>(sender());
-    if (action) {
-     selectedUartOptionsStatic.append(action->text());
 
-    }
+ QAction *action = qobject_cast<QAction *>(sender());
+       if (action) {
+        QString uartOption = action->text();
+        // Vérifier si l'option UART est déjà sélectionnée
+        if ( selectedUartOptionsStatic.contains(uartOption)) {
+            // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+             selectedUartOptionsStatic.removeOne(uartOption);
+            action->setChecked(false);
+
+        } else {
+            // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+             selectedUartOptionsStatic.append(uartOption);
+            action->setChecked(true);
+
+        }
+
+       }
+
 
 }
 void Dashboard::onI2COptionSelected()
 {
    QAction *action = qobject_cast<QAction *>(sender());
     if (action) {
-      selectedI2COptionsStatic.append(action->text());
+        QString I2COption = action->text();
+
+        if ( selectedI2COptionsStatic.contains(I2COption)) {
+
+             selectedI2COptionsStatic.removeOne(I2COption);
+            action->setChecked(false);
+
+        } else {
+
+             selectedI2COptionsStatic.append(I2COption);
+            action->setChecked(true);
+
+        }
 
     }
 }
@@ -693,7 +826,19 @@ void Dashboard::onSPIOptionSelected()
 {
    QAction *action = qobject_cast<QAction *>(sender());
     if (action) {
-      selectedSPIOptionsStatic.append(action->text());
+        QString SPIOption = action->text();
+        // Vérifier si l'option UART est déjà sélectionnée
+        if ( selectedSPIOptionsStatic.contains(SPIOption)) {
+            // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+             selectedSPIOptionsStatic.removeOne(SPIOption);
+            action->setChecked(false);
+
+        } else {
+            // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+             selectedSPIOptionsStatic.append(SPIOption);
+            action->setChecked(true);
+
+        }
 
     }
 }
@@ -702,7 +847,19 @@ void Dashboard::onADCOptionSelected()
 {
    QAction *action = qobject_cast<QAction *>(sender());
     if (action) {
-      selectedADCOptionsStatic.append(action->text());
+        QString ADCOption = action->text();
+        // Vérifier si l'option UART est déjà sélectionnée
+        if ( selectedADCOptionsStatic.contains(ADCOption)) {
+            // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+             selectedADCOptionsStatic.removeOne(ADCOption);
+            action->setChecked(false);
+
+        } else {
+            // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+             selectedADCOptionsStatic.append(ADCOption);
+            action->setChecked(true);
+
+        }
 
     }
 }
@@ -711,7 +868,19 @@ void Dashboard::onDACOptionSelected()
 {
    QAction *action = qobject_cast<QAction *>(sender());
     if (action) {
-      selectedDACOptionsStatic.append(action->text());
+        QString DACOption = action->text();
+        // Vérifier si l'option UART est déjà sélectionnée
+        if ( selectedDACOptionsStatic.contains(DACOption)) {
+            // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+             selectedDACOptionsStatic.removeOne(DACOption);
+            action->setChecked(false);
+
+        } else {
+            // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+             selectedDACOptionsStatic.append(DACOption);
+            action->setChecked(true);
+
+        }
 
     }
 }
@@ -719,7 +888,19 @@ void Dashboard::onGPIOOptionSelected()
 {
    QAction *action = qobject_cast<QAction *>(sender());
     if (action) {
-      selectedGPIOOptionsStatic.append(action->text());
+        QString GPIOOption = action->text();
+        // Vérifier si l'option UART est déjà sélectionnée
+        if ( selectedGPIOOptionsStatic.contains(GPIOOption)) {
+            // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+             selectedGPIOOptionsStatic.removeOne(GPIOOption);
+            action->setChecked(false);
+
+        } else {
+            // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+             selectedGPIOOptionsStatic.append(GPIOOption);
+            action->setChecked(true);
+
+        }
 
     }
 }
@@ -728,11 +909,22 @@ void Dashboard::onTIMEROptionSelected()
 {
    QAction *action = qobject_cast<QAction *>(sender());
     if (action) {
-      selectedTIMEROptionsStatic.append(action->text());
+        QString TIMEROption = action->text();
+        // Vérifier si l'option UART est déjà sélectionnée
+        if ( selectedTIMEROptionsStatic.contains(TIMEROption)) {
+            // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+             selectedTIMEROptionsStatic.removeOne(TIMEROption);
+            action->setChecked(false);
+
+        } else {
+            // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+             selectedTIMEROptionsStatic.append(TIMEROption);
+            action->setChecked(true);
+
+        }
 
     }
 }
-
 
 Dashboard::~Dashboard()
 {
