@@ -7419,12 +7419,12 @@ public slots :
     void showConfigMode();
     void onUartOptionSelected();
 
-       void onI2COptionSelected();
-       void onSPIOptionSelected();
-       void onADCOptionSelected();
-       void onDACOptionSelected();
-       void onGPIOOptionSelected();
-       void onTIMEROptionSelected();
+    void onI2COptionSelected();
+    void onSPIOptionSelected();
+    void onADCOptionSelected();
+    void onDACOptionSelected();
+    void onGPIOOptionSelected();
+    void onTIMEROptionSelected();
 
 
 

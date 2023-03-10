@@ -166,7 +166,7 @@ void ConfigMode::returnDashboard()
 }
 
 
-void ConfigMode::addActionToMenu(QString menuItem, QString actionName)
+    void ConfigMode::addActionToMenu(QString menuItem, QString actionName)
 {
     // Recherche du menu correspondant au menuItem
     QList<QMenu *> menus = menuBar()->findChildren<QMenu *>();
@@ -226,6 +226,15 @@ void ConfigMode::addActionToMenu(QString menuItem, QString actionName)
           connect (action ,&QAction::triggered , this , &ConfigMode::showADC1config);
       }
       else if(action->text()=="&ADC3") {
+          connect (action ,&QAction::triggered , this , &ConfigMode::showADC3config);
+      }
+      else if(action->text()=="GPIO_OUTPUT") {
+          connect (action ,&QAction::triggered , this , &ConfigMode::showGPIOOUTPUTconfig);
+      }
+      else if(action->text()=="GPIO_INPUT") {
+          connect (action ,&QAction::triggered , this , &ConfigMode::showGPIOINPUTconfig);
+      }
+      else if(action->text()=="Input Capture Mode") {
           connect (action ,&QAction::triggered , this , &ConfigMode::showADC3config);
       }
 

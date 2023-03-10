@@ -1454,6 +1454,256 @@ private slots :
     }
 
 
+    void showGPIOOUTPUTconfig(){
+        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("GPIOOUTPUTConfigs");
+
+        QString PIN;
+        QString Mode;
+        QString GPIO;
+        QString Speed;
+
+        QString UserLabel;
+
+
+
+
+        QString PINConfig = settings.value("PIN" , PIN).toString();
+        QString ModeConfig = settings.value("Mode" , Mode).toString();
+        QString GPIOConfig = settings.value("GPIO" , GPIO).toString();
+        QString SpeedConfig = settings.value("Speed" , Speed).toString();
+        QString UserLabelConfig = settings.value("UserLabel" , UserLabel).toString();
+
+
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("GPIO OUTPUT Configurations"), configList);
+
+
+        QListWidgetItem* PINItem = new QListWidgetItem(tr("•  PIN     :     ") +PINConfig , configList);
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("•  Mode       :  ") +ModeConfig , configList);
+        QListWidgetItem* GPIOItem = new QListWidgetItem(tr("•  GPIO     :    ") +GPIOConfig , configList);
+        QListWidgetItem* SpeedItem = new QListWidgetItem(tr("•  Speed     :    ") +SpeedConfig , configList);
+        QListWidgetItem* UserLabelItem = new QListWidgetItem(tr("•  UserLabel    :    ") +UserLabelConfig , configList);
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        PINItem->setFont(QFont("Helvetica", 13));
+        PINItem->setTextAlignment(Qt::TopLeftCorner);
+        ModeItem->setFont(QFont("Helvetica", 13));
+        ModeItem->setTextAlignment(Qt::TopLeftCorner);
+        GPIOItem->setFont(QFont("Helvetica", 13));
+        GPIOItem->setTextAlignment(Qt::TopLeftCorner);
+        SpeedItem->setFont(QFont("Helvetica", 13));
+        SpeedItem->setTextAlignment(Qt::TopLeftCorner);
+        UserLabelItem->setFont(QFont("Helvetica", 13));
+        UserLabelItem->setTextAlignment(Qt::TopLeftCorner);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
+        configList->addItem(PINItem);
+        configList->addItem(ModeItem);
+        configList->addItem(GPIOItem);
+        configList->addItem(SpeedItem);
+        configList->addItem(UserLabelItem);
+
+
+
+
+        configList->show();
+
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    }
+    void showGPIOINPUTconfig(){
+        QSettings settings("GPIOOUTPUTConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("GPIOOUTPUTConfigs");
+
+        QString PIN;
+        QString Mode;
+        QString GPIO;
+        QString Speed;
+
+        QString UserLabel;
+
+
+
+
+        QString PINConfig = settings.value("PIN" , PIN).toString();
+        QString ModeConfig = settings.value("Mode" , Mode).toString();
+        QString GPIOConfig = settings.value("GPIO" , GPIO).toString();
+        QString SpeedConfig = settings.value("Speed" , Speed).toString();
+        QString UserLabelConfig = settings.value("UserLabel" , UserLabel).toString();
+
+
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("ADC3 Configurations"), configList);
+
+
+        QListWidgetItem* PINItem = new QListWidgetItem(tr("•  PIN     :     ") +PINConfig , configList);
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("•  Mode       :  ") +ModeConfig , configList);
+        QListWidgetItem* GPIOItem = new QListWidgetItem(tr("•  GPIO     :    ") +GPIOConfig , configList);
+        QListWidgetItem* SpeedItem = new QListWidgetItem(tr("•  Speed     :    ") +SpeedConfig , configList);
+        QListWidgetItem* UserLabelItem = new QListWidgetItem(tr("•  UserLabel    :    ") +UserLabelConfig , configList);
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        PINItem->setFont(QFont("Helvetica", 13));
+        PINItem->setTextAlignment(Qt::TopLeftCorner);
+        ModeItem->setFont(QFont("Helvetica", 13));
+        ModeItem->setTextAlignment(Qt::TopLeftCorner);
+        GPIOItem->setFont(QFont("Helvetica", 13));
+        GPIOItem->setTextAlignment(Qt::TopLeftCorner);
+        SpeedItem->setFont(QFont("Helvetica", 13));
+        SpeedItem->setTextAlignment(Qt::TopLeftCorner);
+        UserLabelItem->setFont(QFont("Helvetica", 13));
+        UserLabelItem->setTextAlignment(Qt::TopLeftCorner);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
+        configList->addItem(PINItem);
+        configList->addItem(ModeItem);
+        configList->addItem(GPIOItem);
+        configList->addItem(SpeedItem);
+        configList->addItem(UserLabelItem);
+
+
+
+
+        configList->show();
+
+        settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    }
+
+
 
 
 };
