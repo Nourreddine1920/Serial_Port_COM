@@ -228,16 +228,16 @@ void ConfigMode::returnDashboard()
       else if(action->text()=="&ADC3") {
           connect (action ,&QAction::triggered , this , &ConfigMode::showADC3config);
       }
-      else if(action->text()=="DAC1 OUT1") {
+      else if(action->text()=="DAC_OUT1") {
           connect (action ,&QAction::triggered , this , &ConfigMode::showDACOUT1config);
       }
-      else if(action->text()=="DAC1 OUT2") {
+      else if(action->text()=="DAC_OUT2") {
           connect (action ,&QAction::triggered , this , &ConfigMode::showDACOUT2config);
       }
       else if(action->text()=="GPIO_OUTPUT") {
           connect (action ,&QAction::triggered , this , &ConfigMode::showGPIOOUTPUTconfig);
       }
-      else if(action->text()=="GPIO_INPUT") {
+      else if(action->text()=="&GPIO_INPUT") {
           connect (action ,&QAction::triggered , this , &ConfigMode::showGPIOINPUTconfig);
       }
       else if(action->text()=="Input Capture Mode") {
