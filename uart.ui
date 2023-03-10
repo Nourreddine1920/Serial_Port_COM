@@ -14,26 +14,6 @@
    <string>Uart</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="UartConfig">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>20</y>
-      <width>176</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Tw Cen MT Condensed Extra Bold</family>
-      <pointsize>13</pointsize>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>UART Configuration</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>

@@ -6,6 +6,15 @@
 #include <QToolButton>
 #include "configmode.h"
 
+
+QStringList Dashboard::selectedUartOptionsStatic; // initialisation de la variable statique
+QStringList Dashboard::selectedI2COptionsStatic; // initialisation de la variable statique
+QStringList Dashboard::selectedSPIOptionsStatic; // initialisation de la variable statique
+QStringList Dashboard::selectedADCOptionsStatic; // initialisation de la variable statique
+QStringList Dashboard::selectedDACOptionsStatic; // initialisation de la variable statique
+QStringList Dashboard::selectedGPIOOptionsStatic; // initialisation de la variable statique
+QStringList Dashboard::selectedTIMEROptionsStatic; // initialisation de la variable statique
+
 Dashboard::Dashboard(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Dashboard)
@@ -100,9 +109,11 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Checkable DAC Configurations
-    QAction *DAC1 = new QAction("DAC1", this);
-    DAC1->setCheckable(true);
+    QAction *DAC_OUT1 = new QAction("DAC1 OUT1", this);
+    DAC_OUT1->setCheckable(true);
 
+    QAction *DAC_OUT2 = new QAction("DAC1 OUT2", this);
+    DAC_OUT2->setCheckable(true);
 
 
     // Checkable Input Capture Mode Configurations
@@ -129,6 +140,107 @@ Dashboard::Dashboard(QWidget *parent) :
 
     // Connect the QToolButton's clicked() signal to a slot that will open the new UI
     connect(connectButton, &QToolButton::clicked, this, &Dashboard::showConfigMode);
+//    connect(connectButton, &QToolButton::clicked, [&]() {
+//                QSettings settings("configSelection", QSettings::IniFormat);
+//                QString actionUART4 ;
+//                QString TimingConfig = settings.value("actionUART4" , actionUART4).toString();
+//                qDebug() << "selected uart:" << actionUART4;
+//                qDebug() << "configselected:" << TimingConfig;
+
+
+//                ConfigMode *configMode = new ConfigMode();
+
+
+
+
+
+
+//                QSet<QString> addedUartOptions;
+//                    QSet<QString> addedI2COptions;
+//                    QSet<QString> addedSPIOptions;
+//                    QSet<QString> addedADCOptions;
+//                    QSet<QString> addedDACOptions;
+//                    QSet<QString> addedGPIOOptions;
+//                    QSet<QString> addedTIMEROptions;
+
+
+//                    // Parcourir chaque élément sélectionné
+//                    for (int i = 0; i < selectedUartOptionsStatic.size(); i++) {
+//                        QString uartOption = selectedUartOptionsStatic.at(i);
+//                        if (!addedUartOptions.contains(uartOption)) {
+//                              configMode->addActionToMenu("&UART", uartOption);
+//                              addedUartOptions.insert(uartOption);
+
+
+//                               }
+
+
+
+
+//                    }
+
+
+
+
+
+
+//                    for (int i = 0; i < selectedI2COptionsStatic.size(); i++) {
+//                        QString I2COption = selectedI2COptionsStatic.at(i);
+//                        // Vérifier si l'élément a déjà été ajouté pour I2C
+//                              if (!addedI2COptions.contains(I2COption)) {
+//                                  configMode->addActionToMenu("&I2C", I2COption);
+//                                  addedI2COptions.insert(I2COption);
+//                              }
+//                    }
+//                    for (int i = 0; i < selectedSPIOptionsStatic.size(); i++) {
+//                        QString SPIOption = selectedSPIOptionsStatic.at(i);
+//                              if (!addedSPIOptions.contains(SPIOption)) {
+//                                  configMode->addActionToMenu("&SPI", SPIOption);
+//                                  addedSPIOptions.insert(SPIOption);
+//                              }
+//                    }
+
+//                    for (int i = 0; i < selectedADCOptionsStatic.size(); i++) {
+//                        QString ADCOption = selectedADCOptionsStatic.at(i);
+//                        if (!addedADCOptions.contains(ADCOption)) {
+//                           configMode->addActionToMenu("&ADC", ADCOption);
+//                            addedADCOptions.insert(ADCOption);
+//                        }
+
+//                    }
+
+//                    for (int i = 0; i < selectedDACOptionsStatic.size(); i++) {
+//                        QString DACOption = selectedDACOptionsStatic.at(i);
+//                        if (!addedDACOptions.contains(DACOption)) {
+//                           configMode->addActionToMenu("&DAC", DACOption);
+//                            addedDACOptions.insert(DACOption);
+//                        }
+//                    }
+
+//                    for (int i = 0; i < selectedGPIOOptionsStatic.size(); i++) {
+//                        QString GPIOOption = selectedGPIOOptionsStatic.at(i);
+//                        if (!addedGPIOOptions.contains(GPIOOption)) {
+//                           configMode->addActionToMenu("&GPIO", GPIOOption);
+//                            addedGPIOOptions.insert(GPIOOption);
+//                        }
+//                    }
+
+//                    for (int i = 0; i < selectedTIMEROptionsStatic.size(); i++) {
+//                        QString TIMEROption = selectedTIMEROptionsStatic.at(i);
+//                        if (!addedTIMEROptions.contains(TIMEROption)) {
+//                          configMode->addActionToMenu("&Frequency Mesure", TIMEROption);
+//                            addedTIMEROptions.insert(TIMEROption);
+//                        }
+
+//                    }
+//                configMode->show();
+//                this->hide();
+
+
+
+
+//    });
+
 
 
 
@@ -169,38 +281,6 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 
-//    QString style = "\
-//            QMenuBar {\
-//                background-color: #868482;\
-//                spacing: 20px;\
-//            }\
-//            QMenuBar::item {\
-//                background-color: transparent;\
-//                padding: 15px ;\
-//                width : 500px;\
-//                margin: 2px;\
-//                border: 5px;\
-//                font : Helvetica gras 20px;\
-//                color: #FFFFFF;\
-//            }\
-//            QMenuBar::item:selected {\
-//                background-color:#328930;\
-//            }\
-//            QMenu {\
-//                background-color: #444444;\
-//                border: none;\
-//                padding: 6px 10px;\
-//            }\
-//            QMenu::item {\
-//                background-color: transparent;\
-//                padding: 4px 20px;\
-//                margin: 0px;\
-//                border: none;\
-//                color: #FFFFFF;\
-//            }\
-//            QMenu::item:selected {\
-//                background-color: #328930;\
-//            }";
 
             // Create a QString with your menu bar and QToolButton styles
             QString style = "\
@@ -427,11 +507,14 @@ Dashboard::Dashboard(QWidget *parent) :
     //-------------------------Connect to the DAC configurations-------------------------//
 
 
-    DAC->addAction(DAC1);
+    DAC->addAction(DAC_OUT1);
+    DAC->addSeparator();
+    DAC->addAction(DAC_OUT2);
     DAC->addSeparator();
 
 
-    connect(DAC1, &QAction::triggered, this, &Dashboard::DACConfig);
+    connect(DAC_OUT1, &QAction::triggered, this, &Dashboard::DACOUT1Config);
+    connect(DAC_OUT2, &QAction::triggered, this, &Dashboard::DACOUT2Config);
 
 
     //-------------------------Connect to the GPIO configurations-------------------------//
@@ -457,24 +540,197 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
 
+    //--------------------------Different IP selection for ConfigMode UI----------------------//
 
+        connect(UART4, &QAction::triggered, this, &Dashboard::onUartOptionSelected);
+        connect(UART5, &QAction::triggered, this, &Dashboard::onUartOptionSelected);
+        connect(UART7, &QAction::triggered, this, &Dashboard::onUartOptionSelected);
+        connect(UART8, &QAction::triggered, this, &Dashboard::onUartOptionSelected);
+        connect(UART9, &QAction::triggered, this, &Dashboard::onUartOptionSelected);
+        connect(USART1, &QAction::triggered, this, &Dashboard::onUartOptionSelected);
+        connect(USART2, &QAction::triggered, this, &Dashboard::onUartOptionSelected);
+        connect(USART6, &QAction::triggered, this, &Dashboard::onUartOptionSelected);
+        connect(USART10, &QAction::triggered, this, &Dashboard::onUartOptionSelected);
+
+        connect(I2C1, &QAction::triggered, this, &Dashboard::onI2COptionSelected);
+        connect(I2C2, &QAction::triggered, this, &Dashboard::onI2COptionSelected);
+        connect(I2C3, &QAction::triggered, this, &Dashboard::onI2COptionSelected);
+        connect(I2C4, &QAction::triggered, this, &Dashboard::onI2COptionSelected);
+        connect(I2C5, &QAction::triggered, this, &Dashboard::onI2COptionSelected);
+
+
+
+       connect(SPI1, &QAction::triggered, this, &Dashboard::onSPIOptionSelected);
+       connect(SPI2, &QAction::triggered, this, &Dashboard::onSPIOptionSelected);
+       connect(SPI3, &QAction::triggered, this, &Dashboard::onSPIOptionSelected);
+       connect(SPI4, &QAction::triggered, this, &Dashboard::onSPIOptionSelected);
+       connect(SPI5, &QAction::triggered, this, &Dashboard::onSPIOptionSelected);
+       connect(SPI6, &QAction::triggered, this, &Dashboard::onSPIOptionSelected);
+
+       connect(ADC1, &QAction::triggered, this, &Dashboard::onADCOptionSelected);
+       connect(ADC2, &QAction::triggered, this, &Dashboard::onADCOptionSelected);
+       connect(ADC3, &QAction::triggered, this, &Dashboard::onADCOptionSelected);
+
+       connect(DAC_OUT1, &QAction::triggered, this, &Dashboard::onDACOptionSelected);
+       connect(DAC_OUT2, &QAction::triggered, this, &Dashboard::onDACOptionSelected);
+
+
+      connect(GPIO_OUTPUT, &QAction::triggered, this, &Dashboard::onGPIOOptionSelected);
+      connect(GPIO_INPUT, &QAction::triggered, this, &Dashboard::onGPIOOptionSelected);
+
+      connect(InputCaptureMode, &QAction::triggered, this, &Dashboard::onTIMEROptionSelected);
 
 
 
 
 }
-//void Dashboard::openNewUi()
-//{
-//    // Create a new instance of your UI and show it
-//    NewUi *newUi = new NewUi(this);
-//    newUi->show();
-//}
+
 
 void Dashboard::showConfigMode()
 {
     ConfigMode *configMode = new ConfigMode();
+    QSet<QString> addedUartOptions;
+        QSet<QString> addedI2COptions;
+        QSet<QString> addedSPIOptions;
+        QSet<QString> addedADCOptions;
+        QSet<QString> addedDACOptions;
+        QSet<QString> addedGPIOOptions;
+        QSet<QString> addedTIMEROptions;
+
+
+        // Parcourir chaque élément sélectionné
+        for (int i = 0; i < selectedUartOptionsStatic.size(); i++) {
+            QString uartOption = selectedUartOptionsStatic.at(i);
+            if (!addedUartOptions.contains(uartOption)) {
+                  configMode->addActionToMenu("&UART", uartOption);
+                  addedUartOptions.insert(uartOption);
+
+
+                   }
+
+
+
+
+        }
+
+
+
+
+
+
+        for (int i = 0; i < selectedI2COptionsStatic.size(); i++) {
+            QString I2COption = selectedI2COptionsStatic.at(i);
+            // Vérifier si l'élément a déjà été ajouté pour I2C
+                  if (!addedI2COptions.contains(I2COption)) {
+                      configMode->addActionToMenu("&I2C", I2COption);
+                      addedI2COptions.insert(I2COption);
+                  }
+        }
+        for (int i = 0; i < selectedSPIOptionsStatic.size(); i++) {
+            QString SPIOption = selectedSPIOptionsStatic.at(i);
+                  if (!addedSPIOptions.contains(SPIOption)) {
+                      configMode->addActionToMenu("&SPI", SPIOption);
+                      addedSPIOptions.insert(SPIOption);
+                  }
+        }
+
+        for (int i = 0; i < selectedADCOptionsStatic.size(); i++) {
+            QString ADCOption = selectedADCOptionsStatic.at(i);
+            if (!addedADCOptions.contains(ADCOption)) {
+               configMode->addActionToMenu("&ADC", ADCOption);
+                addedADCOptions.insert(ADCOption);
+            }
+
+        }
+
+        for (int i = 0; i < selectedDACOptionsStatic.size(); i++) {
+            QString DACOption = selectedDACOptionsStatic.at(i);
+            if (!addedDACOptions.contains(DACOption)) {
+               configMode->addActionToMenu("&DAC", DACOption);
+                addedDACOptions.insert(DACOption);
+            }
+        }
+
+        for (int i = 0; i < selectedGPIOOptionsStatic.size(); i++) {
+            QString GPIOOption = selectedGPIOOptionsStatic.at(i);
+            if (!addedGPIOOptions.contains(GPIOOption)) {
+               configMode->addActionToMenu("&GPIO", GPIOOption);
+                addedGPIOOptions.insert(GPIOOption);
+            }
+        }
+
+        for (int i = 0; i < selectedTIMEROptionsStatic.size(); i++) {
+            QString TIMEROption = selectedTIMEROptionsStatic.at(i);
+            if (!addedTIMEROptions.contains(TIMEROption)) {
+              configMode->addActionToMenu("&Frequency Mesure", TIMEROption);
+                addedTIMEROptions.insert(TIMEROption);
+            }
+
+        }
+
     configMode->show();
     this->hide();
+}
+void Dashboard::onUartOptionSelected()
+{
+   QAction *action = qobject_cast<QAction *>(sender());
+    if (action) {
+     selectedUartOptionsStatic.append(action->text());
+
+    }
+
+}
+void Dashboard::onI2COptionSelected()
+{
+   QAction *action = qobject_cast<QAction *>(sender());
+    if (action) {
+      selectedI2COptionsStatic.append(action->text());
+
+    }
+}
+
+void Dashboard::onSPIOptionSelected()
+{
+   QAction *action = qobject_cast<QAction *>(sender());
+    if (action) {
+      selectedSPIOptionsStatic.append(action->text());
+
+    }
+}
+
+void Dashboard::onADCOptionSelected()
+{
+   QAction *action = qobject_cast<QAction *>(sender());
+    if (action) {
+      selectedADCOptionsStatic.append(action->text());
+
+    }
+}
+
+void Dashboard::onDACOptionSelected()
+{
+   QAction *action = qobject_cast<QAction *>(sender());
+    if (action) {
+      selectedDACOptionsStatic.append(action->text());
+
+    }
+}
+void Dashboard::onGPIOOptionSelected()
+{
+   QAction *action = qobject_cast<QAction *>(sender());
+    if (action) {
+      selectedGPIOOptionsStatic.append(action->text());
+
+    }
+}
+
+void Dashboard::onTIMEROptionSelected()
+{
+   QAction *action = qobject_cast<QAction *>(sender());
+    if (action) {
+      selectedTIMEROptionsStatic.append(action->text());
+
+    }
 }
 
 

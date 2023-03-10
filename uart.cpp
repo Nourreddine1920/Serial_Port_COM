@@ -3,6 +3,8 @@
 #include<QtSerialPort/QSerialPort>
 #include<QMessageBox>
 #include "dashboard.h"
+#include <QFontDatabase>
+
 
 
 Uart::Uart(QWidget *parent)
@@ -16,7 +18,65 @@ Uart::Uart(QWidget *parent)
 
     QWidget::setWindowTitle("UART Configurations ");
 
+
+
+
+
+
+//    QLabel* label = new QLabel(this);
+//    label->setText("UART Configurations");
+
+//    label->setPixmap(QPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/config4.png"));
+//    label->setStyleSheet("QLabel { background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 5px; padding: 5px; }"
+//                         "QLabel::scaledContents { align: center; }");
+
+    QString styleSheet1 =
+        "QLabel {"
+        "    background-color: white;"
+        "    border: none;"
+        "    color: black;"
+        "    padding: 15px 32px;"
+        "    text-align: center;"
+        "    text-decoration: none;"
+        "    font-size: 20px;"
+        "    margin: 4px 2px;"
+        "    border-radius: 10px;"
+        "}"
+       ;
+
+
+
+    // Add the title label and the icon to the main layout
+
+
 //    QWidget::setFixedSize(QSize(411,511));
+
+    QString styleSheet =
+        "QPushButton {"
+        "    background-color: gray;"
+        "    border: none;"
+        "    color: white;"
+        "    padding: 3px 3px;"
+        "    text-align: center;"
+        "    text-decoration: none;"
+        "    font-size: 12px;"
+        "    margin: 4px 2px;"
+        "    border-radius: 10px;"
+        "}"
+        ""
+        "QPushButton:hover {"
+        "    background-color: #3e8e41;"
+        "}";
+    ui->btnDisconnect->setStyleSheet(styleSheet);
+    ui->btnConnect->setStyleSheet(styleSheet);
+    ui->btnClear->setStyleSheet(styleSheet);
+    ui->btnRefresh->setStyleSheet(styleSheet);
+    ui->btnSendMsg->setStyleSheet(styleSheet);
+
+
+//    ui->UartConfig->setStyleSheet(styleSheet1);
+
+
 
 
     // Ports
@@ -61,6 +121,24 @@ Uart::Uart(QWidget *parent)
     ui->comboBox_2->addItem("No Flow Control");
     ui->comboBox_2->addItem("Hardware Flow Control");
     ui->comboBox_2->addItem("Software Flow Control");
+
+    ui->label->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+    ui->comboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->label_4->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+    ui->comboBox_4->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->label_3->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+    ui->comboBox_3->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->label_5->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+    ui->comboBox_5->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->label_6->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+    ui->comboBox_6->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->label_2->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+    ui->comboBox_2->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->label_8->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+    ui->lineEdit_2->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->lineEdit_3->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
 
 }
 
@@ -149,13 +227,41 @@ void Uart::on_btnConnect_clicked()
                 //connect(&serialPort,SIGNAL(readyRead()),this,SLOT(recieveMessage()));
                 if(serialPort->open(QIODevice::ReadWrite)){
                 QMessageBox::information(this,"COM ouverte","connexion OK sur"+ portName);
-                //serialPort->write("Hello\n");
+                //serialPort->write("Hello/n");
 
                 }else{
                 //probleme d'ouverure du port serie
                 QMessageBox::critical(this,"Erreur sur port"+QString(portName),serialPort->errorString());
                 exit(1);
                 }
+
+
+
+                QByteArray buffer;
+                const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+                QByteArray data = serialPort->readAll();
+                buffer.append(data);
+                qDebug() << "Received message:" << data;
+                ui->textBrowser->setTextColor(Qt::blue); // Receieved data's color is blue.
+                ui->textBrowser->append(data);
+
+
+                       // Check if buffer exceeds maximum size
+
+
+                       // Check if buffer contains a complete message
+//                       const char MESSAGE_TERMINATOR = '\n'; // Replace with your desired message terminator
+//                       int messageEndIndex = buffer.indexOf(MESSAGE_TERMINATOR);
+//                       if (messageEndIndex != -1)
+//                       {
+//                           QByteArray message = buffer.left(messageEndIndex);
+//                           buffer.remove(0, messageEndIndex + 1); // Remove the message and the terminator from the buffer
+
+                           // Process the message here
+
+//                       }
 
        // }
                 Dashboard* dashboard = new Dashboard();
@@ -165,17 +271,43 @@ void Uart::on_btnConnect_clicked()
 
 }
 // Recieve msg from UART application
+//void Uart::recieveMessage(){
+//    QByteArray dataBA = serialPort->readAll();
+//    QString data(dataBA);
+//    buffer.append(data);
+//    //int index = buffer.indexOf(code);
+//    //if(index != -1){
+//        //QString message = buffer.mid(0,index);
+//        ui->textBrowser->setTextColor(Qt::blue); // Receieved message's color is blue.
+//        ui->textBrowser->append(buffer);
+//        //buffer.remove(0,index+codeSize);
+//      // }
+
+//}
 void Uart::recieveMessage(){
-    QByteArray dataBA = serialPort->readAll();
-    QString data(dataBA);
-    buffer.append(data);
-    int index = buffer.indexOf(code);
-    if(index != -1){
-        QString message = buffer.mid(0,index);
-        ui->textBrowser->setTextColor(Qt::blue); // Receieved message's color is blue.
-        ui->textBrowser->append(message);
-        buffer.remove(0,index+codeSize);
-       }
+    QByteArray buffer;
+    const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+           QByteArray data = serialPort->readAll();
+           buffer.append(data);
+           qDebug() << "Received message:" << data;
+
+
+           // Check if buffer exceeds maximum size
+
+
+           // Check if buffer contains a complete message
+           const char MESSAGE_TERMINATOR = '\n'; // Replace with your desired message terminator
+           int messageEndIndex = buffer.indexOf(MESSAGE_TERMINATOR);
+           if (messageEndIndex != -1)
+           {
+               QByteArray message = buffer.left(messageEndIndex);
+               buffer.remove(0, messageEndIndex + 1); // Remove the message and the terminator from the buffer
+
+               // Process the message here
+               qDebug() << "Received message:" << message;
+           }
 
 }
 // Disconnect Button
@@ -183,6 +315,7 @@ void Uart::on_btnDisconnect_clicked()
 {
 
     serialPort->close();
+
 
 
 }
@@ -215,6 +348,20 @@ void Uart::on_btnSendMsg_clicked()
     QByteArray data = message.toUtf8();
     ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
     ui->textBrowser->append(message);
+    // Set text color to dark green
+//    ui->textBrowser->setTextColor(Qt::darkGreen);
+
+    // Set background color to light gray
+//    ui->textBrowser->setStyleSheet("background-color: #f0f0f0;");
+
+    // Set font family, size, and weight
+//    ui->textBrowser->setFont(QFont("Arial", 12, QFont::Bold));
+
+    // Set text alignment to center
+//    ui->textBrowser->setAlignment(Qt::AlignCenter);
+
+    // Add padding to the text browser
+//    ui->textBrowser->setStyleSheet("padding: 10px;");
     serialPort->write(data);
 
 
