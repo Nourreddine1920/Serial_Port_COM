@@ -14,31 +14,54 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QLabel" name="label_titre">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>80</y>
-      <width>461</width>
-      <height>211</height>
+      <x>10</x>
+      <y>111</y>
+      <width>581</width>
+      <height>81</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <pointsize>30</pointsize>
+      <bold>true</bold>
+      <underline>false</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>WELCOME APPLICATION 👋</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>293</y>
+      <width>581</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QLabel" name="label_titre">
+      <widget class="QLabel" name="label_value">
        <property name="font">
         <font>
-         <family>Rockwell</family>
+         <family>Arial Rounded MT Bold</family>
          <pointsize>20</pointsize>
          <bold>true</bold>
-         <underline>false</underline>
         </font>
        </property>
        <property name="text">
-        <string>WELCOME APPLICATION</string>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
+        <string>0</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -46,35 +69,14 @@
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QLabel" name="label_value">
-         <property name="font">
-          <font>
-           <family>Arial Rounded MT Bold</family>
-           <pointsize>20</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>0</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QProgressBar" name="progressBar">
-         <property name="value">
-          <number>0</number>
-         </property>
-         <property name="textVisible">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QProgressBar" name="progressBar">
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>

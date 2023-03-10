@@ -45,6 +45,24 @@ Uart::Uart(QWidget *parent)
        ;
 
 
+    // Set the font and style sheet for the title label
+    QFontDatabase fontDatabase;
+    QStringList fontFamilies = fontDatabase.families();
+
+    // Choose the first available font as the best font
+    QString bestFont = fontFamilies.first();
+
+    // Create a font object with the best font and size
+    QFont font(bestFont, 15);
+
+    // Set the font and style sheet for the label
+    ui->label_7->setFont(font);
+
+    ui->label_7->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+    ui->label_7->setAlignment(Qt::AlignCenter);
+
+
 
     // Add the title label and the icon to the main layout
 
@@ -67,8 +85,24 @@ Uart::Uart(QWidget *parent)
         "QPushButton:hover {"
         "    background-color: #3e8e41;"
         "}";
-    ui->btnDisconnect->setStyleSheet(styleSheet);
-    ui->btnConnect->setStyleSheet(styleSheet);
+    QString styleSheet2 =
+        "QPushButton {"
+        "    background-color: gray;"
+        "    border: none;"
+        "    color: white;"
+        "    padding: 3px 3px;"
+        "    text-align: center;"
+        "    text-decoration: none;"
+        "    font-size: 14px;"
+        "    margin: 4px 2px;"
+        "    border-radius: 10px;"
+        "}"
+        ""
+        "QPushButton:hover {"
+        "    background-color: #3e8e41;"
+        "}";
+    ui->btnDisconnect->setStyleSheet(styleSheet2);
+    ui->btnConnect->setStyleSheet(styleSheet2);
     ui->btnClear->setStyleSheet(styleSheet);
     ui->btnRefresh->setStyleSheet(styleSheet);
     ui->btnSendMsg->setStyleSheet(styleSheet);
