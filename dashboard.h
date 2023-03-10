@@ -5621,17 +5621,204 @@ private slots :
 
 
     }
-    void DACConfig (){
+//    void DACConfig (){
+//        QWidget *widget = new QWidget(this);
+//        setCentralWidget(widget);
+
+//        // Create Layout form for DAC
+//        QFormLayout* layout = new QFormLayout(this);
+
+
+
+//        // Create a QLabel for "DAC configurations" and center it horizontally
+//        QLabel* titleLabel = new QLabel("DAC configurations", this);
+
+//        // Load the icon image
+//        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+//        // Create a QLabel for the icon and set its size
+//        QLabel* iconLabel = new QLabel(this);
+//        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+//        iconLabel->setFixedSize(30, 30);
+
+//        // Create a QHBoxLayout to hold the icon and the title label
+//        QHBoxLayout* titleLayout = new QHBoxLayout();
+//        titleLayout->addWidget(iconLabel);
+//        titleLayout->addWidget(titleLabel);
+//        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+//        // Set the font and style sheet for the title label
+//        QFontDatabase fontDatabase;
+//        QStringList fontFamilies = fontDatabase.families();
+
+//        // Choose the first available font as the best font
+//        QString bestFont = fontFamilies.first();
+
+//        // Create a font object with the best font and size
+//        QFont font(bestFont, 15);
+
+//        // Set the font and style sheet for the label
+//        titleLabel->setFont(font);
+//        iconLabel->setFont(font);
+
+//        titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+////                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+//        titleLabel->setAlignment(Qt::AlignCenter);
+
+
+//        // Add the title label and the icon to the main layout
+//        layout->addRow(titleLayout);
+
+
+
+
+
+//        // -----------------OUT1 Connected to-----------------//
+
+//        QLabel* ChannelLabel = new QLabel(tr("OUT1 Connected to "), this);
+//        QComboBox* ChannelComboBox = new QComboBox(this);
+//        ChannelComboBox->addItems(QStringList() << "Disable" << "Only External Pin" << "Only on Chip Analog Peripherals" <<"Both external Pin and on Chip Analog" );
+//        ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+//        ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+//        layout->addRow(ChannelLabel, ChannelComboBox);
+
+
+//        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+//        QString ChannelConfig = settings.value("Channel", "").toString();
+////                QString stopBitsConfig;
+//        // Set the selected option in the combo box
+
+//        int indexChannel = ChannelComboBox->findText(ChannelConfig);
+//        if (indexChannel != -1)
+//            ChannelComboBox->setCurrentIndex(indexChannel);
+
+//        // Connect the combo box to the slot
+////           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+//        QString Channel; // declare stopBits outside of the lambda
+
+//        connect(ChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Channel](int indexChannel){
+//            // Retrieve the selected option
+//            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+//            QString Channel = ChannelComboBox->itemText(indexChannel);
+//            settings.beginGroup("DAC1Configs");
+
+
+//            // Store the selected option in the settings file
+//            settings.setValue("Channel", Channel);
+//            settings.endGroup();
+
+//            // Retrieve the stored value and print to the console
+//            QString ChannelConfig = settings.value("Channel" , Channel).toString();
+////                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+//            qDebug() << "selected option:" << Channel;
+//            qDebug() << "Channel:" << ChannelConfig;
+//        });
+
+
+//        // --------------OUT2 Connected to--------------------//
+
+//        QLabel* Channel2Label = new QLabel(tr("OUT2 Connected to "), this);
+//        QComboBox* Channel2ComboBox = new QComboBox(this);
+//        Channel2ComboBox->addItems(QStringList() << "Disable" << "Only External Pin" << "Only on Chip Analog Peripherals" <<"Both external Pin and on Chip Analog" );
+//        Channel2Label->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+//        Channel2ComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+//        layout->addRow(Channel2Label, Channel2ComboBox);
+
+//        layout->setContentsMargins(0, 0, 0, 0);
+//        layout->setSpacing(30);
+
+
+
+//        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+//        QString Channel2Config = settings.value("Channel2", "").toString();
+////                QString stopBitsConfig;
+//        // Set the selected option in the combo box
+
+//        int indexChannel2 = Channel2ComboBox->findText(Channel2Config);
+//        if (indexChannel2 != -1)
+//            Channel2ComboBox->setCurrentIndex(indexChannel2);
+
+//        // Connect the combo box to the slot
+////           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+//        QString Channel2; // declare stopBits outside of the lambda
+
+//        connect(Channel2ComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Channel2](int indexChannel2){
+//            // Retrieve the selected option
+//            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+//            QString Channel2 = Channel2ComboBox->itemText(indexChannel2);
+//            settings.beginGroup("DAC2Configs");
+
+
+//            // Store the selected option in the settings file
+//            settings.setValue("Channel2", Channel2);
+//            settings.endGroup();
+
+//            // Retrieve the stored value and print to the console
+//            QString Channel2Config = settings.value("Channel2" , Channel2).toString();
+////                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+//            qDebug() << "selected option:" << Channel2;
+//            qDebug() << "Channel2:" << Channel2Config;
+//        });
+
+
+
+//        // --------------Connection between two widgets Channel1 & Channel2--------------------//
+
+////        connect(ChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+////                this, &Dashboard::ShowingDAC1Configs);
+////        connect(Channel2ComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+////                this, &Dashboard::ShowingDAC2Configs);
+
+
+//        // Create the vertical layout and add the form layout to it
+//        QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+////        verticalLayout->addWidget(titleLabel);
+//        verticalLayout->addStretch();
+//        verticalLayout->addLayout(layout);
+//        verticalLayout->addStretch();
+
+//        // Create the horizontal layout and add the vertical layout to it
+//        QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+//        horizontalLayout->addStretch();
+//        horizontalLayout->addLayout(verticalLayout);
+//        horizontalLayout->addStretch();
+
+//        // Set the widget layout to the horizontal layout
+//        widget->setLayout(horizontalLayout);
+//        widget->setGeometry(500, 500, 600, 500);
+
+//        // Saving DAC Configs into a file
+//        QSettings settings("DACConfig.txt", QSettings::IniFormat);
+//        settings.beginGroup("DAC1Configs");
+//        settings.setValue("Channel",  Channel);
+//        settings.endGroup();
+//        settings.beginGroup("DAC2Configs");
+//        settings.setValue("Channel2",  Channel2);
+//        settings.endGroup();
+//    }
+
+
+
+    // Layout Form the DAC Configuration
+
+    void DACOUT1Config(){
+
         QWidget *widget = new QWidget(this);
         setCentralWidget(widget);
 
-        // Create Layout form for DAC
+
         QFormLayout* layout = new QFormLayout(this);
-
-
-
         // Create a QLabel for "DAC configurations" and center it horizontally
-        QLabel* titleLabel = new QLabel("DAC configurations", this);
+        QLabel* titleLabel = new QLabel("DAC OUT1 configurations", this);
 
         // Load the icon image
         QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
@@ -5669,8 +5856,6 @@ private slots :
 
         // Add the title label and the icon to the main layout
         layout->addRow(titleLayout);
-
-
 
 
 
@@ -5718,142 +5903,6 @@ private slots :
             qDebug() << "selected option:" << Channel;
             qDebug() << "Channel:" << ChannelConfig;
         });
-
-
-        // --------------OUT2 Connected to--------------------//
-
-        QLabel* Channel2Label = new QLabel(tr("OUT2 Connected to "), this);
-        QComboBox* Channel2ComboBox = new QComboBox(this);
-        Channel2ComboBox->addItems(QStringList() << "Disable" << "Only External Pin" << "Only on Chip Analog Peripherals" <<"Both external Pin and on Chip Analog" );
-        Channel2Label->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        Channel2ComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-        layout->addRow(Channel2Label, Channel2ComboBox);
-
-        layout->setContentsMargins(0, 0, 0, 0);
-        layout->setSpacing(30);
-
-
-
-        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
-
-
-        QString Channel2Config = settings.value("Channel2", "").toString();
-//                QString stopBitsConfig;
-        // Set the selected option in the combo box
-
-        int indexChannel2 = Channel2ComboBox->findText(Channel2Config);
-        if (indexChannel2 != -1)
-            Channel2ComboBox->setCurrentIndex(indexChannel2);
-
-        // Connect the combo box to the slot
-//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-        QString Channel2; // declare stopBits outside of the lambda
-
-        connect(Channel2ComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Channel2](int indexChannel2){
-            // Retrieve the selected option
-            QSettings settings("DACConfig.txt", QSettings::IniFormat);
-
-            QString Channel2 = Channel2ComboBox->itemText(indexChannel2);
-            settings.beginGroup("DAC2Configs");
-
-
-            // Store the selected option in the settings file
-            settings.setValue("Channel2", Channel2);
-            settings.endGroup();
-
-            // Retrieve the stored value and print to the console
-            QString Channel2Config = settings.value("Channel2" , Channel2).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-            qDebug() << "selected option:" << Channel2;
-            qDebug() << "Channel2:" << Channel2Config;
-        });
-
-
-
-        // --------------Connection between two widgets Channel1 & Channel2--------------------//
-
-        connect(ChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                this, &Dashboard::ShowingDAC1Configs);
-        connect(Channel2ComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                this, &Dashboard::ShowingDAC2Configs);
-
-
-        // Create the vertical layout and add the form layout to it
-        QVBoxLayout* verticalLayout = new QVBoxLayout(this);
-//        verticalLayout->addWidget(titleLabel);
-        verticalLayout->addStretch();
-        verticalLayout->addLayout(layout);
-        verticalLayout->addStretch();
-
-        // Create the horizontal layout and add the vertical layout to it
-        QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
-        horizontalLayout->addStretch();
-        horizontalLayout->addLayout(verticalLayout);
-        horizontalLayout->addStretch();
-
-        // Set the widget layout to the horizontal layout
-        widget->setLayout(horizontalLayout);
-        widget->setGeometry(500, 500, 600, 500);
-
-        // Saving DAC Configs into a file
-        QSettings settings("file.txt", QSettings::IniFormat);
-        settings.beginGroup("DACConfigs");
-        settings.setValue("Channel",  ChannelComboBox->currentText());
-        settings.setValue("Channel2",  Channel2ComboBox->currentText());
-        settings.endGroup();
-    }
-
-
-
-    // Layout Form the DAC Configuration
-
-    void ShowingDAC1Configs(){
-
-        QWidget *widget = new QWidget(this);
-        setCentralWidget(widget);
-
-
-        QFormLayout* layout = new QFormLayout(this);
-        // Create a QLabel for "DAC configurations" and center it horizontally
-        QLabel* titleLabel = new QLabel("DAC Showing configurations", this);
-
-        // Load the icon image
-        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
-
-        // Create a QLabel for the icon and set its size
-        QLabel* iconLabel = new QLabel(this);
-        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-        iconLabel->setFixedSize(30, 30);
-
-        // Create a QHBoxLayout to hold the icon and the title label
-        QHBoxLayout* titleLayout = new QHBoxLayout();
-        titleLayout->addWidget(iconLabel);
-        titleLayout->addWidget(titleLabel);
-        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
-
-        // Set the font and style sheet for the title label
-        QFontDatabase fontDatabase;
-        QStringList fontFamilies = fontDatabase.families();
-
-        // Choose the first available font as the best font
-        QString bestFont = fontFamilies.first();
-
-        // Create a font object with the best font and size
-        QFont font(bestFont, 15);
-
-        // Set the font and style sheet for the label
-        titleLabel->setFont(font);
-        iconLabel->setFont(font);
-
-        titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-
-        titleLabel->setAlignment(Qt::AlignCenter);
-
-
-        // Add the title label and the icon to the main layout
-        layout->addRow(titleLayout);
 
         // --------------Mode selected for the OUT1--------------------//
 
@@ -6094,6 +6143,7 @@ private slots :
 
         // DAC Configs
         settings.beginGroup("DAC1Configs");
+        settings.setValue("Channel" , Channel);
 
         settings.setValue("Mode",  Mode);
         settings.setValue("Buffer",  Buffer);
@@ -6103,13 +6153,17 @@ private slots :
 
 
 
+
+
         settings.endGroup();
+
+
 
 
 
     }
 
-    void ShowingDAC2Configs(){
+    void DACOUT2Config(){
 
         QWidget *widget = new QWidget(this);
         setCentralWidget(widget);
@@ -6117,7 +6171,7 @@ private slots :
 
         QFormLayout* layout = new QFormLayout(this);
         // Create a QLabel for "DAC configurations" and center it horizontally
-        QLabel* titleLabel = new QLabel("DAC Showing configurations", this);
+        QLabel* titleLabel = new QLabel("DAC OUT2 configurations", this);
 
         // Load the icon image
         QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
@@ -6155,6 +6209,58 @@ private slots :
 
         // Add the title label and the icon to the main layout
         layout->addRow(titleLayout);
+
+
+
+        // --------------OUT2 Connected to--------------------//
+
+        QLabel* Channel2Label = new QLabel(tr("OUT2 Connected to "), this);
+        QComboBox* Channel2ComboBox = new QComboBox(this);
+        Channel2ComboBox->addItems(QStringList() << "Disable" << "Only External Pin" << "Only on Chip Analog Peripherals" <<"Both external Pin and on Chip Analog" );
+        Channel2Label->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+        Channel2ComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        layout->addRow(Channel2Label, Channel2ComboBox);
+
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(30);
+
+
+
+        // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
+
+
+        QString Channel2Config = settings.value("Channel2", "").toString();
+//                QString stopBitsConfig;
+        // Set the selected option in the combo box
+
+        int indexChannel2 = Channel2ComboBox->findText(Channel2Config);
+        if (indexChannel2 != -1)
+            Channel2ComboBox->setCurrentIndex(indexChannel2);
+
+        // Connect the combo box to the slot
+//           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+        QString Channel2; // declare stopBits outside of the lambda
+
+        connect(Channel2ComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Channel2](int indexChannel2){
+            // Retrieve the selected option
+            QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+            QString Channel2 = Channel2ComboBox->itemText(indexChannel2);
+            settings.beginGroup("DAC2Configs");
+
+
+            // Store the selected option in the settings file
+            settings.setValue("Channel2", Channel2);
+            settings.endGroup();
+
+            // Retrieve the stored value and print to the console
+            QString Channel2Config = settings.value("Channel2" , Channel2).toString();
+//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+            qDebug() << "selected option:" << Channel2;
+            qDebug() << "Channel2:" << Channel2Config;
+        });
+
 
         // --------------Mode selected for the OUT1--------------------//
 
@@ -6395,6 +6501,7 @@ private slots :
 
         // DAC Configs
         settings.beginGroup("DAC2Configs");
+        settings.setValue("Channel2" , Channel2);
 
         settings.setValue("Mode",  Mode);
         settings.setValue("Buffer",  Buffer);
@@ -6405,6 +6512,9 @@ private slots :
 
 
         settings.endGroup();
+
+
+
 
 
 
@@ -6694,6 +6804,27 @@ private slots :
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(30);
 
+        // Retrieve the stored value and set it as the text of the line edit widget
+        QString GPIOOUTPUTConfig = settings.value("User" , "").toString();
+
+        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+        QString User = settings.value("User", "").toString();
+        UserLineEdit->setText(User);
+
+        // Connect the line edit widget to a lambda function that stores the entered text in the settings file
+        connect(UserLineEdit, &QLineEdit::editingFinished, this, [=,&User]() {
+            QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+
+            QString User = UserLineEdit->text();
+            settings.beginGroup("GPIOOUTPUTConfigs");
+            settings.setValue("User", User);
+            settings.endGroup();
+            QString GPIOOUTPUTConfig = settings.value("User" , User).toString();
+
+            qDebug() << "User:" << User;
+        });
+
+
 
         // Create the vertical layout and add the form layout to it
         QVBoxLayout* verticalLayout = new QVBoxLayout(this);
@@ -6713,7 +6844,7 @@ private slots :
         widget->setGeometry(500, 500, 600, 500);
 
 
-        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+//        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
 
         // GPIO OUTPUT Configs
@@ -6724,7 +6855,7 @@ private slots :
 
         settings.setValue("GPIO",  GPIO);
         settings.setValue("Speed",  Speed);
-        settings.setValue("UserLabel",  UserLineEdit->text());
+        settings.setValue("User",  User);
 
 
 
@@ -6912,6 +7043,27 @@ private slots :
         layout->setSpacing(30);
 
 
+        // Retrieve the stored value and set it as the text of the line edit widget
+        QString GPIOINPUTConfig = settings.value("User" , "").toString();
+
+        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+        QString User = settings.value("User", "").toString();
+        UserLineEdit->setText(User);
+
+        // Connect the line edit widget to a lambda function that stores the entered text in the settings file
+        connect(UserLineEdit, &QLineEdit::editingFinished, this, [=,&User]() {
+            QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+
+            QString User = UserLineEdit->text();
+            settings.beginGroup("GPIOINPUTConfigs");
+            settings.setValue("User", User);
+            settings.endGroup();
+            QString GPIOINPUTConfig = settings.value("User" , User).toString();
+
+            qDebug() << "User:" << User;
+        });
+
+
         // Create the vertical layout and add the form layout to it
         QVBoxLayout* verticalLayout = new QVBoxLayout(this);
         verticalLayout->addStretch();
@@ -6929,7 +7081,7 @@ private slots :
         widget->setLayout(horizontalLayout);
         widget->setGeometry(500, 500, 600, 500);
 
-        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+//        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
 
         // GPIO OUTPUT Configs
@@ -6938,7 +7090,7 @@ private slots :
         settings.setValue("PIN",  PIN);
 
         settings.setValue("GPIO",  GPIO);
-        settings.setValue("UserLabel",  UserLineEdit->text());
+        settings.setValue("User",  User);
 
 
 

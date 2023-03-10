@@ -109,9 +109,11 @@ Dashboard::Dashboard(QWidget *parent) :
 
 
     // Checkable DAC Configurations
-    QAction *DAC1 = new QAction("DAC1", this);
-    DAC1->setCheckable(true);
+    QAction *DAC_OUT1 = new QAction("DAC1 OUT1", this);
+    DAC_OUT1->setCheckable(true);
 
+    QAction *DAC_OUT2 = new QAction("DAC1 OUT2", this);
+    DAC_OUT2->setCheckable(true);
 
 
     // Checkable Input Capture Mode Configurations
@@ -505,11 +507,14 @@ Dashboard::Dashboard(QWidget *parent) :
     //-------------------------Connect to the DAC configurations-------------------------//
 
 
-    DAC->addAction(DAC1);
+    DAC->addAction(DAC_OUT1);
+    DAC->addSeparator();
+    DAC->addAction(DAC_OUT2);
     DAC->addSeparator();
 
 
-    connect(DAC1, &QAction::triggered, this, &Dashboard::DACConfig);
+    connect(DAC_OUT1, &QAction::triggered, this, &Dashboard::DACOUT1Config);
+    connect(DAC_OUT2, &QAction::triggered, this, &Dashboard::DACOUT2Config);
 
 
     //-------------------------Connect to the GPIO configurations-------------------------//
@@ -566,7 +571,9 @@ Dashboard::Dashboard(QWidget *parent) :
        connect(ADC2, &QAction::triggered, this, &Dashboard::onADCOptionSelected);
        connect(ADC3, &QAction::triggered, this, &Dashboard::onADCOptionSelected);
 
-       connect(DAC1, &QAction::triggered, this, &Dashboard::onDACOptionSelected);
+       connect(DAC_OUT1, &QAction::triggered, this, &Dashboard::onDACOptionSelected);
+       connect(DAC_OUT2, &QAction::triggered, this, &Dashboard::onDACOptionSelected);
+
 
       connect(GPIO_OUTPUT, &QAction::triggered, this, &Dashboard::onGPIOOptionSelected);
       connect(GPIO_INPUT, &QAction::triggered, this, &Dashboard::onGPIOOptionSelected);

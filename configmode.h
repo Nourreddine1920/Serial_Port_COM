@@ -432,11 +432,11 @@ private slots :
         QListWidgetItem* titleItem = new QListWidgetItem(tr("USART2 Configurations"), configList);
 
 
-        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("•  Baud Rate     :     ") +BaudrateConfig , configList);
-        QListWidgetItem* ParityItem = new QListWidgetItem(tr("•  Parity       :  ") +ParityConfig , configList);
-        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("•  stopBits     :    ") +stopBitsConfig , configList);
-        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("•  DataBits     :    ") +DataBitsConfig , configList);
-        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("•  FlowControl    :    ") +FlowControlConfig , configList);
+        QListWidgetItem* baudRateItem = new QListWidgetItem(tr("•  Baud Rate  :  ") +BaudrateConfig , configList);
+        QListWidgetItem* ParityItem = new QListWidgetItem(tr("•  Parity  :  ") +ParityConfig , configList);
+        QListWidgetItem* stopBitsItem = new QListWidgetItem(tr("•  stopBits  :  ") +stopBitsConfig , configList);
+        QListWidgetItem* DataBitsItem = new QListWidgetItem(tr("•  DataBits  :  ") +DataBitsConfig , configList);
+        QListWidgetItem* FlowControlItem = new QListWidgetItem(tr("•  FlowControl  :  ") +FlowControlConfig , configList);
 
 
         // Set the font and style sheet for the title label
@@ -552,11 +552,12 @@ private slots :
         QListWidgetItem* titleItem = new QListWidgetItem(tr("SPI1 Configurations"), configList);
 
 
-        QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode Selected: ") +ModeConfig , configList);
-        QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
-        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("Frameformat: ") +FrameformatConfig , configList);
-        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
-        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("•  Mode  :  ") +ModeConfig , configList);
+        QListWidgetItem* NSSItem = new QListWidgetItem(tr("•  NSS  :  ") +NSSConfig , configList);
+        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("•  Frameformat  :  ") +FrameformatConfig , configList);
+        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("•  Datasize  :  ") +DatasizeConfig , configList);
+        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("•  Firstbit  :  ") +FirstbitConfig , configList);
+
 
 
 
@@ -579,15 +580,15 @@ private slots :
         titleItem->setForeground(white);
 
         ModeItem->setFont(QFont("Helvetica", 12));
-        ModeItem->setTextAlignment(Qt::AlignCenter);
+        ModeItem->setTextAlignment(Qt::TopLeftCorner);
         NSSItem->setFont(QFont("Helvetica", 12));
-        NSSItem->setTextAlignment(Qt::AlignCenter);
+        NSSItem->setTextAlignment(Qt::TopLeftCorner);
         FrameformatItem->setFont(QFont("Helvetica", 12));
-        FrameformatItem->setTextAlignment(Qt::AlignCenter);
+        FrameformatItem->setTextAlignment(Qt::TopLeftCorner);
         DatasizeItem->setFont(QFont("Helvetica", 12));
-        DatasizeItem->setTextAlignment(Qt::AlignCenter);
+        DatasizeItem->setTextAlignment(Qt::TopLeftCorner);
         FirstbitItem->setFont(QFont("Helvetica", 12));
-        FirstbitItem->setTextAlignment(Qt::AlignCenter);
+        FirstbitItem->setTextAlignment(Qt::TopLeftCorner);
 
 
         configList->setSpacing(15);
@@ -636,7 +637,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -672,12 +673,11 @@ private slots :
 
         QListWidgetItem* titleItem = new QListWidgetItem(tr("SPI2 Configurations"), configList);
 
-
-        QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode Selected: ") +ModeConfig , configList);
-        QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
-        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("Frameformat: ") +FrameformatConfig , configList);
-        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
-        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("•  Mode  : ") +ModeConfig , configList);
+        QListWidgetItem* NSSItem = new QListWidgetItem(tr("•  NSS  : ") +NSSConfig , configList);
+        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("•  Frameformat  : ") +FrameformatConfig , configList);
+        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("•  Datasize  : ") +DatasizeConfig , configList);
+        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("•  Firstbit  : ") +FirstbitConfig , configList);
 
 
         // Set the font and style sheet for the title label
@@ -699,15 +699,15 @@ private slots :
         titleItem->setForeground(white);
 
         ModeItem->setFont(QFont("Helvetica", 12));
-        ModeItem->setTextAlignment(Qt::AlignCenter);
+        ModeItem->setTextAlignment(Qt::TopLeftCorner);
         NSSItem->setFont(QFont("Helvetica", 12));
-        NSSItem->setTextAlignment(Qt::AlignCenter);
+        NSSItem->setTextAlignment(Qt::TopLeftCorner);
         FrameformatItem->setFont(QFont("Helvetica", 12));
-        FrameformatItem->setTextAlignment(Qt::AlignCenter);
+        FrameformatItem->setTextAlignment(Qt::TopLeftCorner);
         DatasizeItem->setFont(QFont("Helvetica", 12));
-        DatasizeItem->setTextAlignment(Qt::AlignCenter);
+        DatasizeItem->setTextAlignment(Qt::TopLeftCorner);
         FirstbitItem->setFont(QFont("Helvetica", 12));
-        FirstbitItem->setTextAlignment(Qt::AlignCenter);
+        FirstbitItem->setTextAlignment(Qt::TopLeftCorner);
 
 
         configList->setSpacing(15);
@@ -758,7 +758,7 @@ private slots :
 
 
 //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -795,11 +795,11 @@ private slots :
 
         QListWidgetItem* titleItem = new QListWidgetItem(tr("SPI3 Configurations"), configList);
 
-        QListWidgetItem* ModeItem = new QListWidgetItem(tr("Mode: ") +ModeConfig , configList);
-        QListWidgetItem* NSSItem = new QListWidgetItem(tr("NSS: ") +NSSConfig , configList);
-        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("Frameformat: ") +FrameformatConfig , configList);
-        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("Datasize: ") +DatasizeConfig , configList);
-        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("Firstbit: ") +FirstbitConfig , configList);
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("•  Mode  : ") +ModeConfig , configList);
+        QListWidgetItem* NSSItem = new QListWidgetItem(tr("•  NSS  : ") +NSSConfig , configList);
+        QListWidgetItem* FrameformatItem = new QListWidgetItem(tr("•  Frameformat  : ") +FrameformatConfig , configList);
+        QListWidgetItem* DatasizeItem = new QListWidgetItem(tr("•  Datasize  : ") +DatasizeConfig , configList);
+        QListWidgetItem* FirstbitItem = new QListWidgetItem(tr("•  Firstbit  : ") +FirstbitConfig , configList);
 
 
 //        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
@@ -828,15 +828,15 @@ private slots :
         titleItem->setForeground(white);
 
         ModeItem->setFont(QFont("Helvetica", 12));
-        ModeItem->setTextAlignment(Qt::AlignCenter);
+        ModeItem->setTextAlignment(Qt::TopLeftCorner);
         NSSItem->setFont(QFont("Helvetica", 12));
-        NSSItem->setTextAlignment(Qt::AlignCenter);
+        NSSItem->setTextAlignment(Qt::TopLeftCorner);
         FrameformatItem->setFont(QFont("Helvetica", 12));
-        FrameformatItem->setTextAlignment(Qt::AlignCenter);
+        FrameformatItem->setTextAlignment(Qt::TopLeftCorner);
         DatasizeItem->setFont(QFont("Helvetica", 12));
-        DatasizeItem->setTextAlignment(Qt::AlignCenter);
+        DatasizeItem->setTextAlignment(Qt::TopLeftCorner);
         FirstbitItem->setFont(QFont("Helvetica", 12));
-        FirstbitItem->setTextAlignment(Qt::AlignCenter);
+        FirstbitItem->setTextAlignment(Qt::TopLeftCorner);
 
 
         configList->setSpacing(15);
@@ -1467,7 +1467,7 @@ private slots :
         QString GPIO;
         QString Speed;
 
-        QString UserLabel;
+        QString User;
 
 
 
@@ -1476,7 +1476,7 @@ private slots :
         QString ModeConfig = settings.value("Mode" , Mode).toString();
         QString GPIOConfig = settings.value("GPIO" , GPIO).toString();
         QString SpeedConfig = settings.value("Speed" , Speed).toString();
-        QString UserLabelConfig = settings.value("UserLabel" , UserLabel).toString();
+        QString UserLabelConfig = settings.value("User" , User).toString();
 
 
         QListWidgetItem* titleItem = new QListWidgetItem(tr("GPIO OUTPUT Configurations"), configList);
@@ -1579,38 +1579,31 @@ private slots :
         setCentralWidget(centralWidget);
     }
     void showGPIOINPUTconfig(){
-        QSettings settings("GPIOOUTPUTConfig.txt", QSettings::IniFormat);
+        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("GPIOOUTPUTConfigs");
+        settings.beginGroup("GPIOINPUTConfigs");
 
         QString PIN;
-        QString Mode;
         QString GPIO;
-        QString Speed;
-
-        QString UserLabel;
+        QString User;
 
 
 
 
         QString PINConfig = settings.value("PIN" , PIN).toString();
-        QString ModeConfig = settings.value("Mode" , Mode).toString();
         QString GPIOConfig = settings.value("GPIO" , GPIO).toString();
-        QString SpeedConfig = settings.value("Speed" , Speed).toString();
-        QString UserLabelConfig = settings.value("UserLabel" , UserLabel).toString();
+        QString UserLabelConfig = settings.value("User" , User).toString();
 
 
-        QListWidgetItem* titleItem = new QListWidgetItem(tr("ADC3 Configurations"), configList);
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("GPIO INPUT Configurations"), configList);
 
 
         QListWidgetItem* PINItem = new QListWidgetItem(tr("•  PIN     :     ") +PINConfig , configList);
-        QListWidgetItem* ModeItem = new QListWidgetItem(tr("•  Mode       :  ") +ModeConfig , configList);
         QListWidgetItem* GPIOItem = new QListWidgetItem(tr("•  GPIO     :    ") +GPIOConfig , configList);
-        QListWidgetItem* SpeedItem = new QListWidgetItem(tr("•  Speed     :    ") +SpeedConfig , configList);
-        QListWidgetItem* UserLabelItem = new QListWidgetItem(tr("•  UserLabel    :    ") +UserLabelConfig , configList);
+        QListWidgetItem* UserLabelItem = new QListWidgetItem(tr("•  User Label    :    ") +UserLabelConfig , configList);
 
         // Set the font and style sheet for the title label
         QFontDatabase fontDatabase;
@@ -1632,12 +1625,8 @@ private slots :
 
         PINItem->setFont(QFont("Helvetica", 13));
         PINItem->setTextAlignment(Qt::TopLeftCorner);
-        ModeItem->setFont(QFont("Helvetica", 13));
-        ModeItem->setTextAlignment(Qt::TopLeftCorner);
         GPIOItem->setFont(QFont("Helvetica", 13));
         GPIOItem->setTextAlignment(Qt::TopLeftCorner);
-        SpeedItem->setFont(QFont("Helvetica", 13));
-        SpeedItem->setTextAlignment(Qt::TopLeftCorner);
         UserLabelItem->setFont(QFont("Helvetica", 13));
         UserLabelItem->setTextAlignment(Qt::TopLeftCorner);
 
@@ -1646,9 +1635,7 @@ private slots :
         configList->addItem(titleItem);
 
         configList->addItem(PINItem);
-        configList->addItem(ModeItem);
         configList->addItem(GPIOItem);
-        configList->addItem(SpeedItem);
         configList->addItem(UserLabelItem);
 
 
@@ -1657,6 +1644,312 @@ private slots :
         configList->show();
 
         settings.endGroup();
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    }
+    void showDACOUT1config(){
+        QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("DAC1Configs");
+//        settings.beginGroup("DAC2Configs");
+
+        QString Channel;
+        QString Mode;
+        QString Buffer;
+        QString Trigger;
+        QString Trimming;
+
+//        QString Channel2;
+
+
+
+
+        QString ChannelConfig = settings.value("Channel" , Channel).toString();
+//        QString Channel2Config = settings.value("Channel2" , Channel2).toString();
+
+        QString ModeConfig = settings.value("Mode" , Mode).toString();
+        QString BufferLabelConfig = settings.value("Buffer" , Buffer).toString();
+        QString TriggerLabelConfig = settings.value("Trigger" , Trigger).toString();
+        QString TrimmingLabelConfig = settings.value("Trimming" , Trimming).toString();
+
+        qDebug() << "selected option:" << ModeConfig;
+        qDebug() << "selected option:" << BufferLabelConfig;
+        qDebug() << "selected option:" << TriggerLabelConfig;
+        qDebug() << "selected option:" << TrimmingLabelConfig;
+
+
+
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("DAC OUT1 Configurations"), configList);
+
+
+        QListWidgetItem* ChannelItem = new QListWidgetItem(tr("•  Channel OUT1     :     ") +ChannelConfig , configList);
+//        QListWidgetItem* Channel2Item = new QListWidgetItem(tr("•  Channel OUT2     :     ") +Channel2Config , configList);
+
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("•  Mode     :    ") +ModeConfig , configList);
+        QListWidgetItem* BufferLabelItem = new QListWidgetItem(tr("•  Buffer Label    :    ") +BufferLabelConfig , configList);
+        QListWidgetItem* TriggerLabelItem = new QListWidgetItem(tr("•  Trigger Label    :    ") +TriggerLabelConfig , configList);
+        QListWidgetItem* TrimmingLabelItem = new QListWidgetItem(tr("•  Trimming Label    :    ") +TrimmingLabelConfig , configList);
+
+
+
+
+
+        qDebug() << "Mode option:" << ChannelItem;
+//        qDebug() << "Mode option:" << Channel2Item;
+        qDebug() << "Mode option:" << ModeItem;
+        qDebug() << "Mode option:" << BufferLabelItem;
+        qDebug() << "Mode option:" << TriggerLabelItem;
+        qDebug() << "Mode option:" << TrimmingLabelItem;
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        ChannelItem->setFont(QFont("Helvetica", 13));
+        ChannelItem->setTextAlignment(Qt::TopLeftCorner);
+//        Channel2Item->setFont(QFont("Helvetica", 13));
+//        Channel2Item->setTextAlignment(Qt::TopLeftCorner);
+        ModeItem->setFont(QFont("Helvetica", 13));
+        ModeItem->setTextAlignment(Qt::TopLeftCorner);
+        BufferLabelItem->setFont(QFont("Helvetica", 13));
+        BufferLabelItem->setTextAlignment(Qt::TopLeftCorner);
+        TriggerLabelItem->setFont(QFont("Helvetica", 13));
+        TriggerLabelItem->setTextAlignment(Qt::TopLeftCorner);
+        TrimmingLabelItem->setFont(QFont("Helvetica", 13));
+        TrimmingLabelItem->setTextAlignment(Qt::TopLeftCorner);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
+        configList->addItem(ChannelItem);
+//        configList->addItem(Channel2Item);
+
+        configList->addItem(ModeItem);
+        configList->addItem(BufferLabelItem);
+        configList->addItem(TriggerLabelItem);
+        configList->addItem(TrimmingLabelItem);
+
+
+
+
+        configList->show();
+
+        settings.endGroup();
+//        settings.endGroup();
+
+
+        // Create Layout form
+        QFormLayout* layout = new QFormLayout(this);
+
+        // Create a QLabel for "DAC configurations" and center it horizontally
+        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+
+        // Load the icon image
+        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+        // Create a QLabel for the icon and set its size
+        QLabel* iconLabel = new QLabel(this);
+        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setFixedSize(30, 30);
+
+        QHBoxLayout* titleLayout = new QHBoxLayout();
+        titleLayout->addWidget(iconLabel);
+        titleLayout->addWidget(titleLabel);
+        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+
+        // create a widget to hold the list and add it to a layout
+        QWidget* centralWidget = new QWidget(this);
+        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+        layout1->addWidget(configList);
+        layout1->setAlignment(Qt::AlignHCenter);
+        layout->addRow(titleLayout);
+        layout->addRow(layout1);
+
+
+
+//        configList->setStyleSheet("background-color: white; font-size: 14px;");
+        configList->setStyleSheet("background-color: white; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+//        layout1->addRow(configList);
+//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+//                                  "QListWidget::item { padding: 5px; }"
+//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+        // set the central widget of the main window to the layout
+        setCentralWidget(centralWidget);
+    }
+    void showDACOUT2config(){
+        QSettings settings("DACConfig.txt", QSettings::IniFormat);
+
+        // create the list widget
+        QListWidget* configList = new QListWidget(this);
+        configList->clear();
+        settings.beginGroup("DAC2Configs");
+//        settings.beginGroup("DAC2Configs");
+
+        QString Channel2;
+        QString Mode;
+        QString Buffer;
+        QString Trigger;
+        QString Trimming;
+
+//        QString Channel22;
+
+
+
+
+        QString Channel2Config = settings.value("Channel2" , Channel2).toString();
+//        QString Channel22Config = settings.value("Channel22" , Channel22).toString();
+
+        QString ModeConfig = settings.value("Mode" , Mode).toString();
+        QString BufferLabelConfig = settings.value("Buffer" , Buffer).toString();
+        QString TriggerLabelConfig = settings.value("Trigger" , Trigger).toString();
+        QString TrimmingLabelConfig = settings.value("Trimming" , Trimming).toString();
+
+        qDebug() << "selected option:" << ModeConfig;
+        qDebug() << "selected option:" << BufferLabelConfig;
+        qDebug() << "selected option:" << TriggerLabelConfig;
+        qDebug() << "selected option:" << TrimmingLabelConfig;
+
+
+
+        QListWidgetItem* titleItem = new QListWidgetItem(tr("DAC OUT2 Configurations"), configList);
+
+
+        QListWidgetItem* Channel2Item = new QListWidgetItem(tr("•  Channel2 OUT1     :     ") +Channel2Config , configList);
+//        QListWidgetItem* Channel22Item = new QListWidgetItem(tr("•  Channel2 OUT2     :     ") +Channel22Config , configList);
+
+        QListWidgetItem* ModeItem = new QListWidgetItem(tr("•  Mode     :    ") +ModeConfig , configList);
+        QListWidgetItem* BufferLabelItem = new QListWidgetItem(tr("•  Buffer Label    :    ") +BufferLabelConfig , configList);
+        QListWidgetItem* TriggerLabelItem = new QListWidgetItem(tr("•  Trigger Label    :    ") +TriggerLabelConfig , configList);
+        QListWidgetItem* TrimmingLabelItem = new QListWidgetItem(tr("•  Trimming Label    :    ") +TrimmingLabelConfig , configList);
+
+
+
+
+
+        qDebug() << "Mode option:" << Channel2Item;
+//        qDebug() << "Mode option:" << Channel22Item;
+        qDebug() << "Mode option:" << ModeItem;
+        qDebug() << "Mode option:" << BufferLabelItem;
+        qDebug() << "Mode option:" << TriggerLabelItem;
+        qDebug() << "Mode option:" << TrimmingLabelItem;
+
+        // Set the font and style sheet for the title label
+        QFontDatabase fontDatabase;
+        QStringList fontFamilies = fontDatabase.families();
+
+        // Choose the first available font as the best font
+        QString bestFont = fontFamilies.first();
+
+        // Create a font object with the best font and size
+        QFont font(bestFont, 18);
+
+        titleItem->setFont(font);
+        titleItem->setTextAlignment(Qt::TopLeftCorner);
+        QBrush gray(Qt::gray);
+        QBrush white(Qt::white);
+
+        titleItem->setBackground(gray);
+        titleItem->setForeground(white);
+
+        Channel2Item->setFont(QFont("Helvetica", 13));
+        Channel2Item->setTextAlignment(Qt::TopLeftCorner);
+//        Channel22Item->setFont(QFont("Helvetica", 13));
+//        Channel22Item->setTextAlignment(Qt::TopLeftCorner);
+        ModeItem->setFont(QFont("Helvetica", 13));
+        ModeItem->setTextAlignment(Qt::TopLeftCorner);
+        BufferLabelItem->setFont(QFont("Helvetica", 13));
+        BufferLabelItem->setTextAlignment(Qt::TopLeftCorner);
+        TriggerLabelItem->setFont(QFont("Helvetica", 13));
+        TriggerLabelItem->setTextAlignment(Qt::TopLeftCorner);
+        TrimmingLabelItem->setFont(QFont("Helvetica", 13));
+        TrimmingLabelItem->setTextAlignment(Qt::TopLeftCorner);
+
+
+        configList->setSpacing(15);
+        configList->addItem(titleItem);
+
+        configList->addItem(Channel2Item);
+//        configList->addItem(Channel2Item);
+
+        configList->addItem(ModeItem);
+        configList->addItem(BufferLabelItem);
+        configList->addItem(TriggerLabelItem);
+        configList->addItem(TrimmingLabelItem);
+
+
+
+
+        configList->show();
+
+        settings.endGroup();
+//        settings.endGroup();
+
 
         // Create Layout form
         QFormLayout* layout = new QFormLayout(this);
