@@ -4,6 +4,7 @@
 #include<QMessageBox>
 #include "dashboard.h"
 #include <QFontDatabase>
+#include <QSettings>
 
 
 
@@ -271,12 +272,17 @@ void Uart::on_btnConnect_clicked()
 
 
 
+
+
+
+
                 QByteArray buffer;
                 const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
 
 
                 QByteArray data = serialPort->readAll();
                 buffer.append(data);
+//                QString message(data);
                 qDebug() << "Received message:" << data;
                 ui->textBrowser->setTextColor(Qt::blue); // Receieved data's color is blue.
                 ui->textBrowser->append(data);
@@ -297,10 +303,10 @@ void Uart::on_btnConnect_clicked()
 
 //                       }
 
-       // }
-                Dashboard* dashboard = new Dashboard();
-                dashboard->show();
-                this->hide();
+       // }/*
+//                Dashboard* dashboard = new Dashboard();
+//                dashboard->show();
+//                this->hide();
 
 
 }
@@ -325,7 +331,7 @@ void Uart::recieveMessage(){
 
            QByteArray data = serialPort->readAll();
            buffer.append(data);
-           qDebug() << "Received message:" << data;
+//           qDebug() << "Received message:" << data;
 
 
            // Check if buffer exceeds maximum size
@@ -340,7 +346,7 @@ void Uart::recieveMessage(){
                buffer.remove(0, messageEndIndex + 1); // Remove the message and the terminator from the buffer
 
                // Process the message here
-               qDebug() << "Received message:" << message;
+//               qDebug() << "Received message:" << message;
            }
 
 }
@@ -378,10 +384,10 @@ void Uart::on_btnClear_clicked()
 
 void Uart::on_btnSendMsg_clicked()
 {
-    QString message = ui->lineEdit_3->text();
-    QByteArray data = message.toUtf8();
-    ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
-    ui->textBrowser->append(message);
+//    QString message = ui->lineEdit_3->text();
+//    QByteArray data = message.toUtf8();
+//    ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
+//    ui->textBrowser->append(message);
     // Set text color to dark green
 //    ui->textBrowser->setTextColor(Qt::darkGreen);
 
@@ -396,7 +402,107 @@ void Uart::on_btnSendMsg_clicked()
 
     // Add padding to the text browser
 //    ui->textBrowser->setStyleSheet("padding: 10px;");
-    serialPort->write(data);
+//    serialPort->write(data);
+
+
+    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+    settings.beginGroup("UART4Configs");
+
+    QString baudrate;
+    QString Parity;
+    QString stopBits;
+    QString DataBits;
+    QString FlowControl;
+
+    QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
+    QString ParityConfig = settings.value("Parity" , Parity).toString();
+    QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
+    QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
+    QString FlowControlConfig = settings.value("FlowControl" , FlowControl).toString();
+    settings.endGroup();
+
+    struct Message {
+        uint8_t id; // Message ID
+        uint16_t length; // Length of the payload
+        uint8_t *payload; // Pointer to the payload data
+    };
+
+    // Define the message ID and payload
+    uint8_t messageIPID = 0x01;
+    char delimiter[2] = "-";
+
+    uint8_t messageBaudID = 0x02;
+    uint8_t messageParityID = 0x03;
+    uint8_t messageStopID = 0x04;
+    uint8_t messageDataID = 0x05;
+    uint8_t messageFlowID = 0x06;
+
+    QByteArray dataBaud = BaudrateConfig.toUtf8();
+    QByteArray dataparity = ParityConfig.toUtf8();
+    QByteArray datastop = stopBitsConfig.toUtf8();
+    QByteArray databits = DataBitsConfig.toUtf8();
+    QByteArray dataflow = FlowControlConfig.toUtf8();
+
+
+
+//    QByteArray checking = "\n";
+
+
+//    QByteArray payloadData = "This is my payload data";
+
+    // Create a message packet
+    QByteArray packet;
+//    packet.append(messageIPID);
+//    packet.append(delimiter);
+
+
+//    packet.append(messageBaudID);
+//    packet.append(delimiter);
+
+    packet.append(dataBaud);
+
+    packet.append(delimiter);
+    packet.append(messageParityID);
+    packet.append(delimiter);
+
+    packet.append(dataparity);
+
+    packet.append(delimiter);
+    packet.append(messageStopID);
+    packet.append(delimiter);
+
+    packet.append(datastop);
+    packet.append(delimiter);
+
+    packet.append(messageDataID);
+    packet.append(delimiter);
+
+    packet.append(databits);
+    packet.append(delimiter);
+
+    packet.append(messageFlowID);
+    packet.append(delimiter);
+
+    packet.append(dataflow);
+
+//    packet.append(checking);
+
+
+    // Write the packet to the serial port
+//    QString baud="AT+BAUD4\r\n";
+//    serialPort->write("AT+BAUD4\r\n"); // Change to 9600 baud rate
+//    qDebug() << " message:" << baud;
+
+
+        serialPort->write(packet); // Change to 9600 baud rate
+        qDebug() << " packet:" << packet;
+
+
+
+//    serialPort->write(packet);
+        ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
+        ui->textBrowser->append(packet);
+
 
 
 }
