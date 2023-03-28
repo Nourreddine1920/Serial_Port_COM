@@ -5,6 +5,7 @@
 #include <QCheckBox>
 #include <QWidgetAction>
 #include <QToolButton>
+#include"uart.h"
 
 ConfigMode::ConfigMode(QWidget *parent) :
     QMainWindow(parent),
@@ -23,7 +24,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
 
     // Connect the QToolButton's clicked() signal to a slot that will open the new UI
-//    connect(connectButton, &QToolButton::clicked, this, &Dashboard::showConfigMode);
+    connect(connectButton, &QToolButton::clicked, this, &ConfigMode::sendframe);
 
     QToolButton *returnButton = new QToolButton(this);
     returnButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/back.png"));
@@ -255,6 +256,549 @@ void ConfigMode::returnDashboard()
 
 
 }
+
+    void ConfigMode::sendframe()
+     {
+
+
+
+          Uart* uart = Uart::getInstance();
+         QSerialPort* serialPort = uart->getSerialPort();
+
+         QList<QMenu*> menus = menuBar()->findChildren<QMenu*>();
+         QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+          QSettings settingsSPI("SPIConfig.txt", QSettings::IniFormat);
+          char delimiter2[2] = ",";
+          char delimiter1[2] = "|";
+
+          QByteArray packet;
+
+          QByteArray DelimPacket;
+
+
+
+          QByteArray packet1;
+
+          QByteArray packet2;
+          QByteArray packet3;
+
+
+          bool uart4Found = false;
+          bool uart5Found = false;
+          bool spi1Found = false;
+          bool spi2Found = false;
+
+
+
+          packet.clear();  // clear the existing packet to start fresh
+          packet1.clear();  // clear the existing packet to start fresh
+          packet2.clear();  // clear the existing packet to start fresh
+
+
+
+
+
+         for (auto menu : menus) {
+         // if (menu->title() == "Devices") { // Change "Devices" to the name of the menu that contains the devices
+         QList<QAction*> actions = menu->actions();
+
+         for (auto action : actions) {
+         QString deviceName = action->text();
+
+
+         qDebug() << " aaaa:" << deviceName;
+
+
+//        packet.clear();  // clear the existing packet to start fresh
+
+
+        if (deviceName.startsWith("UART4")) {
+
+            qDebug() << " device:" << deviceName;
+
+            uart4Found = true;
+
+
+
+         settings.beginGroup("UART4Configs");
+
+         QString baudrate;
+         QString Parity;
+         QString stopBits;
+         QString DataBits;
+         QString FlowControl;
+
+         QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
+         QString ParityConfig = settings.value("Parity" , Parity).toString();
+         QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
+         QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
+         QString FlowControlConfig = settings.value("FlowControl" , FlowControl).toString();
+         settings.endGroup();
+         qDebug() << " stopBits:" << stopBitsConfig;
+
+         // Define the message ID and payload
+         uint8_t messageIPID = 0x01;
+
+         uint8_t messageBaudID = 0x02;
+         uint8_t messageParityID = 0x03;
+         uint8_t messageStopID = 0x04;
+         uint8_t messageDataID = 0x05;
+         uint8_t messageFlowID = 0x06;
+
+         QByteArray dataBaud = BaudrateConfig.toUtf8();
+         QByteArray dataparity = ParityConfig.toUtf8();
+         QByteArray datastop = stopBitsConfig.toUtf8();
+         QByteArray databits = DataBitsConfig.toUtf8();
+         QByteArray dataflow = FlowControlConfig.toUtf8();
+
+    //     // Create a message packet
+//             packet.append(messageIPID);
+//             packet.append(delimiter1);
+
+
+             packet.append(messageBaudID);
+             packet.append(delimiter1);
+
+             packet.append(dataBaud);
+
+             packet.append(delimiter1);
+             packet.append(messageParityID);
+             packet.append(delimiter1);
+
+             packet.append(dataparity);
+
+             packet.append(delimiter1);
+             packet.append(messageStopID);
+             packet.append(delimiter1);
+
+             packet.append(datastop);
+             packet.append(delimiter1);
+
+             packet.append(messageDataID);
+             packet.append(delimiter1);
+
+             packet.append(databits);
+             packet.append(delimiter1);
+
+             packet.append(messageFlowID);
+             packet.append(delimiter1);
+
+             packet.append(dataflow);
+             packet.append(delimiter2);
+
+
+//             serialPort->write(packet);
+
+
+}
+//        else if ((!deviceName.startsWith("&UART")) && (!deviceName.startsWith("UART4"))) {
+//            // Create a message packet containing only a comma
+//            qDebug() << "cccc" << !deviceName.startsWith("UART4");
+//            qDebug() << "In else block";
+////            packet.clear();  // clear the existing packet to start fresh
+//            if (!packet.contains(",")) {
+
+//               packet.append(",");
+//            }        }
+
+//        packet1.clear();  // clear the existing packet to start fresh
+
+        if (deviceName.startsWith("&UART5")) {
+
+             qDebug() << "check" << deviceName.startsWith("&UART5");
+            qDebug() << " device:" << deviceName;
+
+            uart5Found = true;
+
+
+            settings.beginGroup("UART5Configs");
+
+            QString baudrate1;
+            QString Parity1;
+            QString stopBits1;
+            QString DataBits1;
+            QString FlowControl1;
+
+            QString BaudrateConfig1 = settings.value("Baudrate" , baudrate1).toString();
+            QString ParityConfig1 = settings.value("Parity" , Parity1).toString();
+            QString stopBitsConfig1 = settings.value("stopBits" , stopBits1).toString();
+            QString DataBitsConfig1 = settings.value("DataBits" , DataBits1).toString();
+            QString FlowControlConfig1 = settings.value("FlowControl" , FlowControl1).toString();
+            settings.endGroup();
+
+
+            // Define the message ID and payload
+            uint8_t messageIPID1 = 0x01;
+
+            uint8_t messageBaudID1 = 0x1;
+            uint8_t messageParityID1 = 0x03;
+            uint8_t messageStopID1 = 0x04;
+            uint8_t messageDataID1 = 0x05;
+            uint8_t messageFlowID1 = 0x06;
+
+            QByteArray dataBaud1 = BaudrateConfig1.toUtf8();
+            QByteArray dataparity1 = ParityConfig1.toUtf8();
+            QByteArray datastop1 = stopBitsConfig1.toUtf8();
+            QByteArray databits1 = DataBitsConfig1.toUtf8();
+            QByteArray dataflow1 = FlowControlConfig1.toUtf8();
+
+
+
+        //    QByteArray checking = "\n";
+
+
+        //    QByteArray payloadData = "This is my payload data";
+
+            // Create a message packet
+        //    packet.append(messageIPID);
+        //    packet.append(delimiter);
+
+//            packet1.append(delimiter2);
+
+            packet1.append(messageBaudID1);
+            packet1.append(delimiter1);
+
+            packet1.append(dataBaud1);
+
+            packet1.append(delimiter1);
+            packet1.append(messageParityID1);
+            packet1.append(delimiter1);
+
+            packet1.append(dataparity1);
+
+            packet1.append(delimiter1);
+            packet1.append(messageStopID1);
+            packet1.append(delimiter1);
+
+            packet1.append(datastop1);
+            packet1.append(delimiter1);
+
+            packet1.append(messageDataID1);
+            packet1.append(delimiter1);
+
+            packet1.append(databits1);
+            packet1.append(delimiter1);
+
+            packet1.append(messageFlowID1);
+            packet1.append(delimiter1);
+
+            packet1.append(dataflow1);
+            packet1.append(delimiter2);
+
+
+
+//            serialPort->write(packet1);
+        }
+
+//        else if (deviceName.startsWith("&UART")){
+//            // Create a message packet containing only a comma
+//            qDebug() << "In else block";
+////            packet.clear();  // clear the existing packet to start fresh
+//            if (!packet1.contains(",")) {
+
+//               packet1.append(",");
+//            }
+//        }
+
+//        packet2.clear();  // clear the existing packet to start fresh
+
+        if (deviceName.startsWith("SPI1")) {
+
+            qDebug() << " device:" << deviceName;
+
+            spi1Found = true;
+
+
+            settingsSPI.beginGroup("SPI1Configs");
+
+            QString Mode;
+            QString NSS;
+            QString DataSize;
+            QString FirstBit;
+
+            QString ModeConfig1 = settingsSPI.value("Mode" , Mode).toString();
+            QString NSSConfig1 = settingsSPI.value("NSS" , NSS).toString();
+            QString DataSizeConfig1 = settingsSPI.value("DataSize" , DataSize).toString();
+            QString FirstBitConfig1 = settingsSPI.value("FirstBit" , FirstBit).toString();
+            settingsSPI.endGroup();
+
+
+            qDebug() << " Mode:" << ModeConfig1;
+
+            // Define the message ID and payload
+    //        uint8_t messageIPID1 = 0x01;
+    //        char delimiter1[2] = "|";
+
+            uint8_t messageModeID = 0x8;
+            uint8_t messageNSSID = 0x03;
+            uint8_t messageDataSizeID = 0x04;
+            uint8_t messageFirstBitID = 0x05;
+
+            QByteArray dataMode = ModeConfig1.toUtf8();
+            QByteArray dataNSS = NSSConfig1.toUtf8();
+            QByteArray dataSize = DataSizeConfig1.toUtf8();
+            QByteArray dataFirstbits = FirstBitConfig1.toUtf8();
+
+
+
+        //    QByteArray checking = "\n";
+
+
+        //    QByteArray payloadData = "This is my payload data";
+
+            // Create a message packet
+        //    packet.append(messageIPID);
+        //    packet.append(delimiter);
+//            packet2.append(delimiter2);
+
+
+            packet2.append(messageModeID);
+            packet2.append(delimiter1);
+
+            packet2.append(dataMode);
+
+            packet2.append(delimiter1);
+            packet2.append(messageNSSID);
+            packet2.append(delimiter1);
+
+            packet2.append(dataNSS);
+
+            packet2.append(delimiter1);
+            packet2.append(messageDataSizeID);
+            packet2.append(delimiter1);
+
+            packet2.append(dataSize);
+            packet2.append(delimiter1);
+
+            packet2.append(messageFirstBitID);
+            packet2.append(delimiter1);
+
+            packet2.append(dataFirstbits);
+            packet2.append(delimiter2);
+
+
+//            serialPort->write(packet2);
+
+        }
+
+
+        if (deviceName.startsWith("&SPI2")) {
+
+            qDebug() << " device:" << deviceName;
+
+            spi2Found = true;
+
+
+            settingsSPI.beginGroup("SPI2Configs");
+
+            QString Mode;
+            QString NSS;
+            QString DataSize;
+            QString FirstBit;
+
+            QString ModeConfig1 = settingsSPI.value("Mode" , Mode).toString();
+            QString NSSConfig1 = settingsSPI.value("NSS" , NSS).toString();
+            QString DataSizeConfig1 = settingsSPI.value("DataSize" , DataSize).toString();
+            QString FirstBitConfig1 = settingsSPI.value("FirstBit" , FirstBit).toString();
+            settingsSPI.endGroup();
+
+
+            qDebug() << " Mode:" << ModeConfig1;
+
+            // Define the message ID and payload
+    //        uint8_t messageIPID1 = 0x01;
+    //        char delimiter1[2] = "|";
+
+            uint8_t messageModeID = 0x9;
+            uint8_t messageNSSID = 0x03;
+            uint8_t messageDataSizeID = 0x04;
+            uint8_t messageFirstBitID = 0x05;
+
+            QByteArray dataMode = ModeConfig1.toUtf8();
+            QByteArray dataNSS = NSSConfig1.toUtf8();
+            QByteArray dataSize = DataSizeConfig1.toUtf8();
+            QByteArray dataFirstbits = FirstBitConfig1.toUtf8();
+
+
+
+        //    QByteArray checking = "\n";
+
+
+        //    QByteArray payloadData = "This is my payload data";
+
+            // Create a message packet
+        //    packet.append(messageIPID);
+        //    packet.append(delimiter);
+//            packet2.append(delimiter2);
+
+
+            packet3.append(messageModeID);
+            packet3.append(delimiter1);
+
+            packet3.append(dataMode);
+
+            packet3.append(delimiter1);
+            packet3.append(messageNSSID);
+            packet3.append(delimiter1);
+
+            packet3.append(dataNSS);
+
+            packet3.append(delimiter1);
+            packet3.append(messageDataSizeID);
+            packet3.append(delimiter1);
+
+            packet3.append(dataSize);
+            packet3.append(delimiter1);
+
+            packet3.append(messageFirstBitID);
+            packet3.append(delimiter1);
+
+            packet3.append(dataFirstbits);
+//            packet2.append(delimiter2);
+
+
+//            serialPort->write(packet2);
+
+        }
+
+
+
+//        else if (deviceName.startsWith("&SPI")){
+//            if (!packet2.contains(",")) {
+////                packet2.clear();  // clear the existing packet to start fresh
+
+//                packet2.append(",");
+//            }
+
+//        }
+//        qDebug() << " bbbbbbbbbbbb:" << deviceName;
+
+
+//        }
+//        else if (deviceName.startsWith("")) {
+//            // Create a message packet containing only a comma
+////          packet.clear();  // clear the existing packet to start fresh
+////          packet1.clear();  // clear the existing packet to start fresh
+
+////                packet2.clear();  // clear the existing packet to start fresh
+//            if (packet.contains(",")) {
+
+//                packet.append(",");
+
+//            }
+//            if (packet1.contains(",")) {
+//                packet1.append(",");
+
+
+//            }
+//            if (packet2.contains(",")) {
+//                packet2.append(",");
+
+
+//            }
+
+
+//        }
+
+
+//        if (deviceName!="UART4"){
+
+//                if (packet.contains(",")) {
+
+//                    packet.clear();  // clear the existing packet to start fresh
+
+
+//                    packet.append(",");
+
+//                }
+
+//        }
+
+
+//        if (deviceName!="&UART5"){
+
+//                if (packet1.contains(",")) {
+//                    packet1.clear();  // clear the existing packet to start fresh
+
+//                    packet1.append(",");
+
+//                }
+
+//         }
+
+//        if (deviceName!="SPI1"){
+
+//                if (packet2.contains(",")) {
+
+//                    packet2.clear();  // clear the existing packet to start fresh
+
+
+//                    packet2.append(",");
+
+//                }
+
+//         }
+
+
+//        serialPort->write(packet);
+//        serialPort->write(packet1);
+
+//        serialPort->write(packet2);
+
+
+
+        }}
+
+         if (!uart4Found) {
+         packet.append(delimiter2);
+//         serialPort->write(packet);
+         }
+
+         if (!uart5Found) {
+         packet1.append(delimiter2);
+//         serialPort->write(packet1);
+         }
+         if (!spi1Found) {
+         packet2.append(delimiter2);
+//         serialPort->write(packet2);
+         }
+
+         if (!spi2Found) {
+         packet3.append(delimiter2);
+//         serialPort->write(packet2);
+         }
+
+         QByteArray concatenated = packet + packet1 + packet2 + packet3;
+
+
+         qint64 bytesWritten = serialPort->write(concatenated);
+
+         qDebug() << "concatenated" << concatenated;
+
+
+         if (bytesWritten == -1) {
+                 qDebug() << "Failed to write to serial port";
+             } else if (bytesWritten != concatenated.size()) {
+                 qDebug() << "Failed to write all bytes to serial port";
+             } else {
+                 qDebug() << "Data sent successfully";
+             }
+
+
+
+
+         qDebug() << " packet:" << packet;
+         qDebug() << " packet1:" << packet1;
+         qDebug() << " packet2:" << packet2;
+         qDebug() << " packet3:" << packet3;
+
+         qDebug() << " delimpacket:" << DelimPacket;
+
+
+
+
+
+     }
 
 ConfigMode::~ConfigMode()
 {

@@ -16,6 +16,9 @@ class Uart : public QMainWindow
 
 public:
     Uart(QWidget *parent = nullptr);
+    QSerialPort *getSerialPort() const;
+     static Uart* getInstance();
+
 
     ~Uart();
 
@@ -42,6 +45,7 @@ private:
     QString code;
     int codeSize;
     QString buffer;
+    static Uart* instance;
 
 
 };
