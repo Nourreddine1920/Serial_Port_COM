@@ -654,7 +654,7 @@ void ConfigMode::returnDashboard()
             packet3.append(delimiter1);
 
             packet3.append(dataFirstbits);
-//            packet2.append(delimiter2);
+            packet3.append(delimiter2);
 
 
 //            serialPort->write(packet2);
@@ -770,7 +770,7 @@ void ConfigMode::returnDashboard()
 
          QByteArray concatenated = packet + packet1 + packet2 + packet3;
 
-
+        concatenated.append("\n");
          qint64 bytesWritten = serialPort->write(concatenated);
 
          qDebug() << "concatenated" << concatenated;
