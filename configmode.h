@@ -38,6 +38,7 @@ private:
 public slots :
     void returnDashboard();
     void addActionToMenu(QString menuItem, QString actionName);
+    void sendframe();
 private slots :
     void showUART4config(){
                 QSettings settings("UARTConfig.txt", QSettings::IniFormat);

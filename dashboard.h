@@ -609,9 +609,9 @@ private slots :
 
                QLabel* stopBitsLabel = new QLabel(tr("Stop Bits"), this);
                QComboBox* stopBitsComboBox = new QComboBox(this);
-               stopBitsComboBox->addItem("1 Bits");
-               stopBitsComboBox->addItem("1,5 Bits");
-               stopBitsComboBox->addItem("2 Bits");
+               stopBitsComboBox->addItem("1");
+               stopBitsComboBox->addItem("1,5");
+               stopBitsComboBox->addItem("2");
 
                stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
@@ -993,9 +993,9 @@ private slots :
 
                QLabel* stopBitsLabel = new QLabel(tr("Stop Bits"), this);
                QComboBox* stopBitsComboBox = new QComboBox(this);
-               stopBitsComboBox->addItem("1 Bits");
-               stopBitsComboBox->addItem("1,5 Bits");
-               stopBitsComboBox->addItem("2 Bits");
+               stopBitsComboBox->addItem("1");
+               stopBitsComboBox->addItem("1,5");
+               stopBitsComboBox->addItem("2");
 
                stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
@@ -1096,7 +1096,7 @@ private slots :
                layout->addRow(DataBitsLabel, DataBitsComboBox);
                QLabel* FlowControlLabel = new QLabel(tr("Flow Control"), this);
                QComboBox* FlowControlComboBox = new QComboBox(this);
-               FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control " );
+               FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control" );
                FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
