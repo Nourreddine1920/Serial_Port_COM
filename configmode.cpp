@@ -654,7 +654,7 @@ void ConfigMode::returnDashboard()
             packet3.append(delimiter1);
 
             packet3.append(dataFirstbits);
-            packet3.append(delimiter2);
+//            packet3.append(delimiter2);
 
 
 //            serialPort->write(packet2);
@@ -785,7 +785,22 @@ void ConfigMode::returnDashboard()
              }
 
 
+         QByteArray responseData = serialPort->readAll();
+         QString response = QString::fromLocal8Bit(responseData);
+//         QByteArray responseData = serialPort->readAll();
+//         QString response = QString::fromUtf8(responseData.data(), responseData.size() - 1); // remove last character
 
+         // QByteArray buffer;
+         // buffer.append(responseData);
+
+
+
+         while(serialPort->waitForReadyRead())
+         {
+         // if(response.contains("UART4 configured successfully")){
+         qDebug() << "response" <<response ;
+         QMessageBox::information(this,"configuration",response);
+}
 
          qDebug() << " packet:" << packet;
          qDebug() << " packet1:" << packet1;
