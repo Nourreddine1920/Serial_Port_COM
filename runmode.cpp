@@ -200,7 +200,7 @@ for (auto m : menus) {
 
    qDebug() << "actionUART4:" << ActionConfig;
 
-//  connect (action ,&QAction::triggered , this , &ConfigMode::showUART4config);
+  connect (action ,&QAction::triggered , this , &Runmode::showUART4Run);
 }
   else if(action->text()=="&UART5") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showUART5config);
@@ -212,7 +212,7 @@ for (auto m : menus) {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showUSART2config);
   }
   else if(action->text()=="SPI1") {
-//      connect (action ,&QAction::triggered , this , &ConfigMode::showSPI1config);
+      connect (action ,&QAction::triggered , this , &Runmode::showSPI1Run);
   }
   else if(action->text()=="&SPI2") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showSPI2config);
