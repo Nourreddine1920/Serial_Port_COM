@@ -31,6 +31,14 @@ class Dashboard : public QMainWindow
 public:
     explicit Dashboard(QWidget *parent = nullptr);
     QSettings settings  ;
+    static QStringList selectedUartOptionsStatic;
+    static QStringList selectedI2COptionsStatic;
+    static QStringList selectedSPIOptionsStatic;
+    static QStringList selectedADCOptionsStatic;
+    static QStringList selectedDACOptionsStatic;
+    static QStringList selectedGPIOOptionsStatic;
+    static QStringList selectedTIMEROptionsStatic;
+
 
     ~Dashboard();
 private slots :
@@ -7558,13 +7566,6 @@ private:
     ConfigMode *ConfigScreen ;
     QToolButton *connectButton;
 //         QList<QString> selectedUartOptions;
-    static QStringList selectedUartOptionsStatic;
-    static QStringList selectedI2COptionsStatic;
-    static QStringList selectedSPIOptionsStatic;
-    static QStringList selectedADCOptionsStatic;
-    static QStringList selectedDACOptionsStatic;
-    static QStringList selectedGPIOOptionsStatic;
-    static QStringList selectedTIMEROptionsStatic;
 
 
 public slots :

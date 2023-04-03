@@ -17,6 +17,7 @@ SOURCES += \
     dashboard.cpp \
     main.cpp \
     mainwindow.cpp \
+    runmode.cpp \
     starting_screen.cpp \
     uart.cpp \
     uartips.cpp
@@ -25,6 +26,7 @@ HEADERS += \
     configmode.h \
     dashboard.h \
     mainwindow.h \
+    runmode.h \
     starting_screen.h \
     uart.h \
     uartips.h
@@ -33,6 +35,7 @@ FORMS += \
     configmode.ui \
     dashboard.ui \
     mainwindow.ui \
+    runmode.ui \
     starting_screen.ui \
     uart.ui \
     uartips.ui
@@ -43,6 +46,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    antivirus.png \
     back.png \
     config1.png \
     config2.png \
@@ -52,6 +56,9 @@ DISTFILES += \
     config6.png \
     config7.png \
     connexion.png \
+    debug.png \
+    debug1.png \
+    debugging.png \
     file.txt \
     images/logo-actia.png \
     images/logo-actia.png \

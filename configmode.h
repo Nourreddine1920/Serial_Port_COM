@@ -33,12 +33,29 @@ public:
 private:
     Ui::ConfigMode *ui;
     QSerialPortInfo info;
+//    static QStringList selectedUartOptionsStatic;
+//    static QStringList selectedI2COptionsStatic;
+//    static QStringList selectedSPIOptionsStatic;
+//    static QStringList selectedADCOptionsStatic;
+//    static QStringList selectedDACOptionsStatic;
+//    static QStringList selectedGPIOOptionsStatic;
+//    static QStringList selectedTIMEROptionsStatic;
+
 
 
 public slots :
     void returnDashboard();
     void addActionToMenu(QString menuItem, QString actionName);
     void sendframe();
+//    void onUartOptionSelected();
+
+//    void onI2COptionSelected();
+//    void onSPIOptionSelected();
+//    void onADCOptionSelected();
+//    void onDACOptionSelected();
+//    void onGPIOOptionSelected();
+//    void onTIMEROptionSelected();
+
 private slots :
     void showUART4config(){
                 QSettings settings("UARTConfig.txt", QSettings::IniFormat);

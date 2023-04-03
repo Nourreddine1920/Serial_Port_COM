@@ -6,6 +6,16 @@
 #include <QWidgetAction>
 #include <QToolButton>
 #include"uart.h"
+#include "runmode.h"
+
+//QStringList ConfigMode::selectedUartOptionsStatic; // initialisation de la variable statique
+//QStringList ConfigMode::selectedI2COptionsStatic; // initialisation de la variable statique
+//QStringList ConfigMode::selectedSPIOptionsStatic; // initialisation de la variable statique
+//QStringList ConfigMode::selectedADCOptionsStatic; // initialisation de la variable statique
+//QStringList ConfigMode::selectedDACOptionsStatic; // initialisation de la variable statique
+//QStringList ConfigMode::selectedGPIOOptionsStatic; // initialisation de la variable statique
+//QStringList ConfigMode::selectedTIMEROptionsStatic; // initialisation de la variable statique
+
 
 ConfigMode::ConfigMode(QWidget *parent) :
     QMainWindow(parent),
@@ -770,7 +780,7 @@ void ConfigMode::returnDashboard()
 
          QByteArray concatenated = packet + packet1 + packet2 + packet3;
 
-        concatenated.append("\n");
+         concatenated.append("\n");
          qint64 bytesWritten = serialPort->write(concatenated);
 
          qDebug() << "concatenated" << concatenated;
@@ -785,8 +795,8 @@ void ConfigMode::returnDashboard()
              }
 
 
-         QByteArray responseData = serialPort->readAll();
-         QString response = QString::fromLocal8Bit(responseData);
+//         QByteArray responseData = serialPort->readAll();
+//         QString response = QString::fromLocal8Bit(responseData);
 //         QByteArray responseData = serialPort->readAll();
 //         QString response = QString::fromUtf8(responseData.data(), responseData.size() - 1); // remove last character
 
@@ -795,12 +805,12 @@ void ConfigMode::returnDashboard()
 
 
 
-         while(serialPort->waitForReadyRead())
-         {
-         // if(response.contains("UART4 configured successfully")){
-         qDebug() << "response" <<response ;
-         QMessageBox::information(this,"configuration",response);
-}
+//         while(serialPort->waitForReadyRead())
+//         {
+//         // if(response.contains("UART4 configured successfully")){
+//         qDebug() << "response" <<response ;
+//         QMessageBox::information(this,"configuration",response);
+//}
 
          qDebug() << " packet:" << packet;
          qDebug() << " packet1:" << packet1;
@@ -810,10 +820,250 @@ void ConfigMode::returnDashboard()
          qDebug() << " delimpacket:" << DelimPacket;
 
 
+         /*------------------------------------- Go to Run Mode -----------------------------------------------*/
+
+         Runmode* runmode = new Runmode();
+
+
+         QSet<QString> addedUartOptions;
+             QSet<QString> addedI2COptions;
+             QSet<QString> addedSPIOptions;
+             QSet<QString> addedADCOptions;
+             QSet<QString> addedDACOptions;
+             QSet<QString> addedGPIOOptions;
+             QSet<QString> addedTIMEROptions;
+
+
+             // Parcourir chaque élément sélectionné
+             for (int i = 0; i < Dashboard::selectedUartOptionsStatic.size(); i++) {
+                 QString uartOption = Dashboard::selectedUartOptionsStatic.at(i);
+                 if (!addedUartOptions.contains(uartOption)) {
+                       runmode->addActionToMenu("&UART", uartOption);
+                       addedUartOptions.insert(uartOption);
+
+
+                        }
+
+
+
+
+             }
+
+
+
+
+
+
+             for (int i = 0; i < Dashboard::selectedI2COptionsStatic.size(); i++) {
+                 QString I2COption = Dashboard::selectedI2COptionsStatic.at(i);
+                 // Vérifier si l'élément a déjà été ajouté pour I2C
+                       if (!addedI2COptions.contains(I2COption)) {
+                           runmode->addActionToMenu("&I2C", I2COption);
+                           addedI2COptions.insert(I2COption);
+                       }
+             }
+             for (int i = 0; i < Dashboard::selectedSPIOptionsStatic.size(); i++) {
+                 QString SPIOption = Dashboard::selectedSPIOptionsStatic.at(i);
+                       if (!addedSPIOptions.contains(SPIOption)) {
+                           runmode->addActionToMenu("&SPI", SPIOption);
+                           addedSPIOptions.insert(SPIOption);
+                       }
+             }
+
+             for (int i = 0; i < Dashboard::selectedADCOptionsStatic.size(); i++) {
+                 QString ADCOption = Dashboard::selectedADCOptionsStatic.at(i);
+                 if (!addedADCOptions.contains(ADCOption)) {
+                    runmode->addActionToMenu("&ADC", ADCOption);
+                     addedADCOptions.insert(ADCOption);
+                 }
+
+             }
+
+             for (int i = 0; i < Dashboard::selectedDACOptionsStatic.size(); i++) {
+                 QString DACOption = Dashboard::selectedDACOptionsStatic.at(i);
+                 if (!addedDACOptions.contains(DACOption)) {
+                    runmode->addActionToMenu("&DAC", DACOption);
+                     addedDACOptions.insert(DACOption);
+                 }
+             }
+
+             for (int i = 0; i < Dashboard::selectedGPIOOptionsStatic.size(); i++) {
+                 QString GPIOOption = Dashboard::selectedGPIOOptionsStatic.at(i);
+                 if (!addedGPIOOptions.contains(GPIOOption)) {
+                    runmode->addActionToMenu("&GPIO", GPIOOption);
+                     addedGPIOOptions.insert(GPIOOption);
+                 }
+             }
+
+             for (int i = 0; i < Dashboard::selectedTIMEROptionsStatic.size(); i++) {
+                 QString TIMEROption = Dashboard::selectedTIMEROptionsStatic.at(i);
+                 if (!addedTIMEROptions.contains(TIMEROption)) {
+                   runmode->addActionToMenu("&Frequency Mesure", TIMEROption);
+                     addedTIMEROptions.insert(TIMEROption);
+                 }
+
+             }
+
+
+         runmode->show();
+         this->hide();
+
+
+
 
 
 
      }
+
+
+//    void ConfigMode::onUartOptionSelected()
+//    {
+
+//     QAction *action = qobject_cast<QAction *>(sender());
+//           if (action) {
+//            QString uartOption = action->text();
+//            // Vérifier si l'option UART est déjà sélectionnée
+//            if ( selectedUartOptionsStatic.contains(uartOption)) {
+//                // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+//                 selectedUartOptionsStatic.removeOne(uartOption);
+//                action->setChecked(false);
+
+//            } else {
+//                // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+//                 selectedUartOptionsStatic.append(uartOption);
+//                action->setChecked(true);
+
+//            }
+
+//           }
+
+
+//    }
+//    void ConfigMode::onI2COptionSelected()
+//    {
+//       QAction *action = qobject_cast<QAction *>(sender());
+//        if (action) {
+//            QString I2COption = action->text();
+
+//            if ( selectedI2COptionsStatic.contains(I2COption)) {
+
+//                 selectedI2COptionsStatic.removeOne(I2COption);
+//                action->setChecked(false);
+
+//            } else {
+
+//                 selectedI2COptionsStatic.append(I2COption);
+//                action->setChecked(true);
+
+//            }
+
+//        }
+//    }
+
+//    void ConfigMode::onSPIOptionSelected()
+//    {
+//       QAction *action = qobject_cast<QAction *>(sender());
+//        if (action) {
+//            QString SPIOption = action->text();
+//            // Vérifier si l'option UART est déjà sélectionnée
+//            if ( selectedSPIOptionsStatic.contains(SPIOption)) {
+//                // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+//                 selectedSPIOptionsStatic.removeOne(SPIOption);
+//                action->setChecked(false);
+
+//            } else {
+//                // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+//                 selectedSPIOptionsStatic.append(SPIOption);
+//                action->setChecked(true);
+
+//            }
+
+//        }
+//    }
+
+//    void ConfigMode::onADCOptionSelected()
+//    {
+//       QAction *action = qobject_cast<QAction *>(sender());
+//        if (action) {
+//            QString ADCOption = action->text();
+//            // Vérifier si l'option UART est déjà sélectionnée
+//            if ( selectedADCOptionsStatic.contains(ADCOption)) {
+//                // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+//                 selectedADCOptionsStatic.removeOne(ADCOption);
+//                action->setChecked(false);
+
+//            } else {
+//                // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+//                 selectedADCOptionsStatic.append(ADCOption);
+//                action->setChecked(true);
+
+//            }
+
+//        }
+//    }
+
+//    void ConfigMode::onDACOptionSelected()
+//    {
+//       QAction *action = qobject_cast<QAction *>(sender());
+//        if (action) {
+//            QString DACOption = action->text();
+//            // Vérifier si l'option UART est déjà sélectionnée
+//            if ( selectedDACOptionsStatic.contains(DACOption)) {
+//                // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+//                 selectedDACOptionsStatic.removeOne(DACOption);
+//                action->setChecked(false);
+
+//            } else {
+//                // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+//                 selectedDACOptionsStatic.append(DACOption);
+//                action->setChecked(true);
+
+//            }
+
+//        }
+//    }
+//    void ConfigMode::onGPIOOptionSelected()
+//    {
+//       QAction *action = qobject_cast<QAction *>(sender());
+//        if (action) {
+//            QString GPIOOption = action->text();
+//            // Vérifier si l'option UART est déjà sélectionnée
+//            if ( selectedGPIOOptionsStatic.contains(GPIOOption)) {
+//                // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+//                 selectedGPIOOptionsStatic.removeOne(GPIOOption);
+//                action->setChecked(false);
+
+//            } else {
+//                // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+//                 selectedGPIOOptionsStatic.append(GPIOOption);
+//                action->setChecked(true);
+
+//            }
+
+//        }
+//    }
+
+//    void ConfigMode::onTIMEROptionSelected()
+//    {
+//       QAction *action = qobject_cast<QAction *>(sender());
+//        if (action) {
+//            QString TIMEROption = action->text();
+//            // Vérifier si l'option UART est déjà sélectionnée
+//            if ( selectedTIMEROptionsStatic.contains(TIMEROption)) {
+//                // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+//                 selectedTIMEROptionsStatic.removeOne(TIMEROption);
+//                action->setChecked(false);
+
+//            } else {
+//                // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+//                 selectedTIMEROptionsStatic.append(TIMEROption);
+//                action->setChecked(true);
+
+//            }
+
+//        }
+//    }
+
 
 ConfigMode::~ConfigMode()
 {
