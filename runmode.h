@@ -77,17 +77,19 @@ private slots :
 //        button1->setStyleSheet("QPushButton { background-color: #33b5e5; color: white; }");
 //        button2->setStyleSheet("QPushButton { background-color: #33b5e5; color: white; }");
 
-
-        label->setStyleSheet("font: bold 15px; color: black;");
+        QFont font("Segoe UI");
+        label->setFont(font);
+        label->setStyleSheet("font: bold 13px; color: #328930;");
         lineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
         button1->setStyleSheet(styleSheet2);
         button2->setStyleSheet(styleSheet2);
+        textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
 
 
         // Connect the "send message" button to a slot
         connect(button1, &QPushButton::clicked, [=]() {
             QString message = lineEdit->text();
-            textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+//            textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
             textBrowser->setTextColor(Qt::darkGreen);
 
             textBrowser->append(message);
@@ -140,8 +142,11 @@ private slots :
         layout->addWidget(sendDataEdit);
         layout->addWidget(receivedDataLabel);
         layout->addWidget(receivedDataBrowser);
-        layout->addWidget(sendButton);
-        layout->addWidget(receiveButton);
+        auto buttonLayout = new QHBoxLayout();
+        buttonLayout->addWidget(sendButton);
+        buttonLayout->addWidget(receiveButton);
+        layout->addLayout(buttonLayout);
+
 
         // Set some styling properties for the controls
 
@@ -166,15 +171,15 @@ private slots :
         receivedDataLabel->setFont(font);
 
 
-        sendDataLabel->setStyleSheet("font: bold 13px; color: black;");
-        receivedDataLabel->setStyleSheet("font: bold 13px; color: black;");
+        sendDataLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        receivedDataLabel->setStyleSheet("font: bold 13px; color: #328930;");
         // Create a label widget and set its font to Noto Sans
 //        QFont font("Noto Sans");
         DataOrderLabel->setFont(font);
         BitOrderLabel->setFont(font);
 
-        DataOrderLabel->setStyleSheet("font: bold 13px; color: black;");
-        BitOrderLabel->setStyleSheet("font: bold 13px; color: black;");
+        DataOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        BitOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
 
         sendDataEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
@@ -185,7 +190,6 @@ private slots :
         receiveButton->setStyleSheet(styleSheet2);
 
         receivedDataBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
-        receivedDataBrowser->setTextColor(Qt::darkGreen);
 
 
 
@@ -199,12 +203,121 @@ private slots :
             QString sendData = sendDataEdit->text();
             // Code to send data using the SPI interface
             QString receivedData = "Received data";
+            receivedDataBrowser->setTextColor(Qt::darkGreen);
+
             receivedDataBrowser->append(sendData);
         });
         connect(receiveButton, &QPushButton::clicked, this, [receivedDataBrowser](){
             // Code to receive data using the SPI interface
             QString receivedData = "Showing data";
+            receivedDataBrowser->setTextColor(Qt::Key_Bluetooth);
+
             receivedDataBrowser->append(receivedData);
+        });
+
+    }
+
+    void showI2C1Run(){
+        // Create a widget for I2C
+        // Create a widget for I2C
+        QWidget* i2cWidget = new QWidget();
+        setCentralWidget(i2cWidget);
+
+        QVBoxLayout* i2cLayout = new QVBoxLayout(i2cWidget);
+
+        // Create a QLabel to display the I2C device address
+        QLabel* deviceAddressLabel = new QLabel("I2C Device Address:", i2cWidget);
+        QLineEdit* deviceAddressLineEdit = new QLineEdit(i2cWidget);
+        deviceAddressLineEdit->setPlaceholderText("Enter the device address");
+
+        // Create a QComboBox to select the I2C register to access
+        QLabel* registerLabel = new QLabel("Register:", i2cWidget);
+        QComboBox* registerComboBox = new QComboBox(i2cWidget);
+        registerComboBox->addItem("Register 1");
+        registerComboBox->addItem("Register 2");
+        registerComboBox->addItem("Register 3");
+
+        // Create a QLineEdit to enter the data to write to the selected I2C register
+        QLabel* dataLabel = new QLabel("Data:", i2cWidget);
+        QLineEdit* dataLineEdit = new QLineEdit(i2cWidget);
+        dataLineEdit->setPlaceholderText("Enter the data to write");
+
+        // Create a QPushButton to initiate the I2C read operation
+        QPushButton* readButton = new QPushButton("Read", i2cWidget);
+
+        // Create a QPushButton to initiate the I2C write operation
+        QPushButton* writeButton = new QPushButton("Write", i2cWidget);
+
+        // Create a QTextBrowser to display the I2C read data
+        QTextBrowser* dataTextBrowser = new QTextBrowser(i2cWidget);
+
+        // Add the components to the layout
+        i2cLayout->addWidget(deviceAddressLabel);
+        i2cLayout->addWidget(deviceAddressLineEdit);
+        i2cLayout->addWidget(registerLabel);
+        i2cLayout->addWidget(registerComboBox);
+        i2cLayout->addWidget(dataLabel);
+        i2cLayout->addWidget(dataLineEdit);
+        i2cLayout->addWidget(dataTextBrowser);
+        auto buttonLayout = new QHBoxLayout();
+        buttonLayout->addWidget(readButton);
+        buttonLayout->addWidget(writeButton);
+        i2cLayout->addLayout(buttonLayout);
+
+        // adding some styles to the widget
+
+
+        QString styleSheet2 =
+            "QPushButton {"
+            "    background-color: gray;"
+            "    border: none;"
+            "    color: white;"
+            "    padding: 3px 3px;"
+            "    text-align: center;"
+            "    text-decoration: none;"
+            "    font-size: 14px;"
+            "    margin: 4px 2px;"
+            "    border-radius: 10px;"
+            "}"
+            ""
+            "QPushButton:hover {"
+            "    background-color: #3e8e41;"
+            "}";
+        QFont font("Segoe UI");
+
+        readButton->setStyleSheet(styleSheet2);
+        writeButton->setStyleSheet(styleSheet2);
+        dataLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+        registerLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        dataLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        registerComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color:#899499; background-color: white;");
+        // Set the layout for the widget
+        i2cWidget->setLayout(i2cLayout);
+
+        // Connect the signals and slots
+        QObject::connect(readButton, &QPushButton::clicked, [deviceAddressLineEdit, registerComboBox, dataTextBrowser]() {
+            // Read data from the selected I2C register
+            QString deviceAddress = deviceAddressLineEdit->text();
+            QString registerName = registerComboBox->currentText();
+            // Code to read data from I2C and update dataTextBrowser with the result
+
+            dataTextBrowser->append("No Data Coming");
+
+        });
+
+        QObject::connect(writeButton, &QPushButton::clicked, [deviceAddressLineEdit, registerComboBox, dataLineEdit, dataTextBrowser]() {
+            // Write data to the selected I2C register
+            QString deviceAddress = deviceAddressLineEdit->text();
+            QString registerName = registerComboBox->currentText();
+            QString data = dataLineEdit->text();
+
+            dataTextBrowser->append(deviceAddress);
+            dataTextBrowser->append(registerName);
+            dataTextBrowser->append(data);
+
+            // Code to write data to I2C and update dataTextBrowser with the result
         });
 
     }

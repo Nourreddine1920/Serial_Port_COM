@@ -916,29 +916,29 @@ void ConfigMode::returnDashboard()
      }
 
 
-//    void ConfigMode::onUartOptionSelected()
-//    {
+    void ConfigMode::onUartOptionSelected()
+    {
 
-//     QAction *action = qobject_cast<QAction *>(sender());
-//           if (action) {
-//            QString uartOption = action->text();
-//            // Vérifier si l'option UART est déjà sélectionnée
-//            if ( selectedUartOptionsStatic.contains(uartOption)) {
-//                // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
-//                 selectedUartOptionsStatic.removeOne(uartOption);
-//                action->setChecked(false);
+     QAction *action = qobject_cast<QAction *>(sender());
+           if (action) {
+            QString uartOption = action->text();
+            // Vérifier si l'option UART est déjà sélectionnée
+            if ( Dashboard::selectedUartOptionsStatic.contains(uartOption)) {
+                // Si elle est déjà sélectionnée, la retirer de la liste et décocher l'action
+                Dashboard::selectedUartOptionsStatic.removeOne(uartOption);
+                action->setChecked(false);
 
-//            } else {
-//                // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
-//                 selectedUartOptionsStatic.append(uartOption);
-//                action->setChecked(true);
+            } else {
+                // Si elle n'est pas déjà sélectionnée, l'ajouter à la liste et cocher l'action
+                Dashboard::selectedUartOptionsStatic.append(uartOption);
+                action->setChecked(true);
 
-//            }
+            }
 
-//           }
+           }
 
 
-//    }
+    }
 //    void ConfigMode::onI2COptionSelected()
 //    {
 //       QAction *action = qobject_cast<QAction *>(sender());

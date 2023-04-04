@@ -221,7 +221,7 @@ for (auto m : menus) {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showSPI3config);
   }
   else if(action->text()=="I2C1") {
-//      connect (action ,&QAction::triggered , this , &ConfigMode::showI2C1config);
+      connect (action ,&QAction::triggered , this , &Runmode::showI2C1Run);
   }
   else if(action->text()=="&I2C2") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showI2C2config);

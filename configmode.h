@@ -47,7 +47,7 @@ public slots :
     void returnDashboard();
     void addActionToMenu(QString menuItem, QString actionName);
     void sendframe();
-//    void onUartOptionSelected();
+    void onUartOptionSelected();
 
 //    void onI2COptionSelected();
 //    void onSPIOptionSelected();
