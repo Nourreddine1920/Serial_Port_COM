@@ -47,7 +47,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     antivirus.png \
+    back-arrow.png \
     back.png \
+    back1.png \
     config1.png \
     config2.png \
     config3.png \
@@ -62,9 +64,21 @@ DISTFILES += \
     file.txt \
     images/logo-actia.png \
     images/logo-actia.png \
+    input.png \
+    loading.png \
+    output.png \
+    platform.png \
     reglage.png \
     return-button.png \
     return.png \
+    running-time.png \
+    send (1).png \
+    send (2).png \
+    send (3).png \
+    send (4).png \
+    send (5).png \
+    send (6).png \
+    send-message.png \
     send.png
 
 

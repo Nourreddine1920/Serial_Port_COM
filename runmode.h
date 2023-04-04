@@ -30,6 +30,8 @@ private:
 public slots :
     void returnDashboard();
     void addActionToMenu(QString menuItem, QString actionName);
+    void sendRUNframe();
+
 
 
 private slots :
@@ -39,7 +41,10 @@ private slots :
 
         auto textBrowser = new QTextBrowser(widget);
         auto label = new QLabel("Enter your message:", widget);
+
         auto lineEdit = new QLineEdit(widget);
+        lineEdit->setPlaceholderText("Enter the data to write");
+
         auto button1 = new QPushButton("Send Message", widget);
         auto button2 = new QPushButton("Recieve Message", widget);
 
@@ -63,9 +68,10 @@ private slots :
 
         // Create a vertical layout for the text browser, message input, and buttons
         auto layout = new QVBoxLayout(widget);
-        layout->addWidget(textBrowser);
         layout->addWidget(label);
         layout->addWidget(lineEdit);
+
+        layout->addWidget(textBrowser);
 
         auto buttonLayout = new QHBoxLayout();
         buttonLayout->addWidget(button1);
@@ -124,6 +130,8 @@ private slots :
         // Create controls for sending and receiving data
         QLabel* sendDataLabel = new QLabel("Send Data:");
         QLineEdit* sendDataEdit = new QLineEdit;
+        sendDataEdit->setPlaceholderText("Enter the data to write");
+
         QLabel* receivedDataLabel = new QLabel("Received Data:");
         QTextBrowser* receivedDataBrowser = new QTextBrowser;
 
@@ -206,6 +214,9 @@ private slots :
             receivedDataBrowser->setTextColor(Qt::BlankCursor);
 
             receivedDataBrowser->append(sendData);
+
+            sendDataEdit->clear();
+
         });
         connect(receiveButton, &QPushButton::clicked, this, [receivedDataBrowser](){
             // Code to receive data using the SPI interface
@@ -323,6 +334,10 @@ private slots :
             dataTextBrowser->append(registerName);
             dataTextBrowser->append(data);
 
+            deviceAddressLineEdit->clear();
+            dataLineEdit->clear();
+
+
             // Code to write data to I2C and update dataTextBrowser with the result
         });
 
@@ -403,6 +418,9 @@ private slots :
 
             dataTextBrowser->append("No Data Coming");
 
+            deviceAddressLineEdit->clear();
+
+
         });
 
     }
@@ -479,6 +497,9 @@ private slots :
 
 
             statusTextBrowser->append("No Data Coming");
+
+            voltageLineEdit->clear();
+
 
 
         });

@@ -27,7 +27,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
     // Create a QToolButton for the "Connect" button
     QToolButton *connectButton = new QToolButton(this);
-    connectButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/send.png"));
+    connectButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/send (2).png"));
     connectButton->setText(tr("&Send Configs"));
     connectButton->setStyleSheet("font: Helvetica gras 20px; padding: 18px; width: 500px;");
     connectButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -37,7 +37,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
     connect(connectButton, &QToolButton::clicked, this, &ConfigMode::sendframe);
 
     QToolButton *returnButton = new QToolButton(this);
-    returnButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/back.png"));
+    returnButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/back-arrow.png"));
     returnButton->setText(tr("&Return"));
     returnButton->setStyleSheet("font: Helvetica gras 20px; padding: 18px; width: 500px;");
     returnButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -1016,29 +1016,33 @@ void ConfigMode::returnDashboard()
              }
 
 
-//         QByteArray responseData = serialPort->readAll();
-//         QString response = QString::fromLocal8Bit(responseData);
-//         QByteArray responseData = serialPort->readAll();
-//         QString response = QString::fromUtf8(responseData.data(), responseData.size() - 1); // remove last character
-
-         // QByteArray buffer;
-         // buffer.append(responseData);
-
-
-
-//         while(serialPort->waitForReadyRead())
-//         {
-//         // if(response.contains("UART4 configured successfully")){
-//         qDebug() << "response" <<response ;
-//         QMessageBox::information(this,"configuration",response);
-//}
 
          qDebug() << " packet:" << packet;
          qDebug() << " packet1:" << packet1;
          qDebug() << " packet2:" << packet2;
          qDebug() << " packet3:" << packet3;
 
-         qDebug() << " delimpacket:" << DelimPacket;
+
+         /******************************* getting notification ***************************************/
+
+         QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
+         QByteArray responseData;
+         while (serialPort->waitForReadyRead(100)) {
+         responseData.append(serialPort->readAll());
+
+
+         }
+
+         if (!responseData.isEmpty()) {
+
+         lastResponse = QString::fromUtf8(responseData);
+         qDebug()<<"response"<<lastResponse;
+
+         if (!lastResponse.isEmpty()) {
+
+         QMessageBox::information(this, "configuration", lastResponse);
+         }
+         }
 
 
          /*------------------------------------- Go to Run Mode -----------------------------------------------*/
