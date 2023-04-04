@@ -227,7 +227,7 @@ for (auto m : menus) {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showI2C2config);
   }
   else if(action->text()=="ADC1") {
-//      connect (action ,&QAction::triggered , this , &ConfigMode::showADC1config);
+      connect (action ,&QAction::triggered , this , &Runmode::showADC1Run);
   }
   else if(action->text()=="&ADC3") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showADC3config);

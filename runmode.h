@@ -203,14 +203,14 @@ private slots :
             QString sendData = sendDataEdit->text();
             // Code to send data using the SPI interface
             QString receivedData = "Received data";
-            receivedDataBrowser->setTextColor(Qt::darkGreen);
+            receivedDataBrowser->setTextColor(Qt::BlankCursor);
 
             receivedDataBrowser->append(sendData);
         });
         connect(receiveButton, &QPushButton::clicked, this, [receivedDataBrowser](){
             // Code to receive data using the SPI interface
             QString receivedData = "Showing data";
-            receivedDataBrowser->setTextColor(Qt::Key_Bluetooth);
+            receivedDataBrowser->setTextColor(Qt::darkRed);
 
             receivedDataBrowser->append(receivedData);
         });
@@ -303,6 +303,9 @@ private slots :
             QString registerName = registerComboBox->currentText();
             // Code to read data from I2C and update dataTextBrowser with the result
 
+            dataTextBrowser->setTextColor(Qt::darkRed);
+
+
             dataTextBrowser->append("No Data Coming");
 
         });
@@ -313,11 +316,93 @@ private slots :
             QString registerName = registerComboBox->currentText();
             QString data = dataLineEdit->text();
 
+            dataTextBrowser->setTextColor(Qt::BlankCursor);
+
+
             dataTextBrowser->append(deviceAddress);
             dataTextBrowser->append(registerName);
             dataTextBrowser->append(data);
 
             // Code to write data to I2C and update dataTextBrowser with the result
+        });
+
+    }
+
+    void showADC1Run(){
+        // Create a widget for ADC IP
+        QWidget* adcWidget = new QWidget();
+        setCentralWidget(adcWidget);
+
+        QVBoxLayout* adcLayout = new QVBoxLayout(adcWidget);
+
+        // Create a QLabel to display the ADC device address
+        QLabel* deviceAddressLabel = new QLabel("ADC Device Address:", adcWidget);
+        QLineEdit* deviceAddressLineEdit = new QLineEdit(adcWidget);
+        deviceAddressLineEdit->setPlaceholderText("Enter the device address");
+
+        // Create a QComboBox to select the ADC channel
+        QLabel* channelLabel = new QLabel("Select Channel:", adcWidget);
+        QComboBox* channelComboBox = new QComboBox(adcWidget);
+        channelComboBox->addItem("Channel 1");
+        channelComboBox->addItem("Channel 2");
+        channelComboBox->addItem("Channel 3");
+
+        // Create a QPushButton to initiate the ADC read operation
+        QPushButton* readButton = new QPushButton("Read", adcWidget);
+
+        // Create a QTextBrowser to display the ADC read data
+        QTextBrowser* dataTextBrowser = new QTextBrowser(adcWidget);
+
+        // Add the components to the layout
+        adcLayout->addWidget(deviceAddressLabel);
+        adcLayout->addWidget(deviceAddressLineEdit);
+        adcLayout->addWidget(channelLabel);
+        adcLayout->addWidget(channelComboBox);
+        adcLayout->addWidget(dataTextBrowser);
+        adcLayout->addWidget(readButton);
+
+        // adding some styles
+        QString styleSheet2 =
+            "QPushButton {"
+            "    background-color: gray;"
+            "    border: none;"
+            "    color: white;"
+            "    padding: 3px 3px;"
+            "    text-align: center;"
+            "    text-decoration: none;"
+            "    font-size: 14px;"
+            "    margin: 4px 2px;"
+            "    border-radius: 10px;"
+            "}"
+            ""
+            "QPushButton:hover {"
+            "    background-color: #3e8e41;"
+            "}";
+        QFont font("Segoe UI");
+
+        readButton->setStyleSheet(styleSheet2);
+        deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+        channelLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        channelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color:#899499; background-color: white;");
+
+
+        // Set the layout for the widget
+        adcWidget->setLayout(adcLayout);
+
+        // Connect the signals and slots
+        QObject::connect(readButton, &QPushButton::clicked, [deviceAddressLineEdit, channelComboBox, dataTextBrowser]() {
+            // Read data from the selected ADC channel
+            QString deviceAddress = deviceAddressLineEdit->text();
+            QString channel = channelComboBox->currentText();
+            // Code to read data from ADC and update dataTextBrowser with the result
+
+            dataTextBrowser->setTextColor(Qt::darkRed);
+
+
+            dataTextBrowser->append("No Data Coming");
+
         });
 
     }
