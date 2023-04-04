@@ -406,6 +406,84 @@ private slots :
         });
 
     }
+    void showDACOUT1Run(){
+        // Create a widget for DAC
+        QWidget* dacWidget = new QWidget();
+        setCentralWidget(dacWidget);
+
+        QVBoxLayout* dacLayout = new QVBoxLayout(dacWidget);
+
+        // Create a QLabel to display the DAC output voltage
+        QLabel* voltageLabel = new QLabel("Output Voltage (V):", dacWidget);
+        QLineEdit* voltageLineEdit = new QLineEdit(dacWidget);
+        voltageLineEdit->setPlaceholderText("Enter the desired voltage");
+
+        // Create a QComboBox to select the DAC channel to output to
+//        QLabel* channelLabel = new QLabel("Channel:", dacWidget);
+//        QComboBox* channelComboBox = new QComboBox(dacWidget);
+//        channelComboBox->addItem("Channel 1");
+//        channelComboBox->addItem("Channel 2");
+
+        // Create a QPushButton to initiate the DAC output
+        QPushButton* outputButton = new QPushButton("Output", dacWidget);
+
+        // Create a QTextBrowser to display the DAC output status
+        QTextBrowser* statusTextBrowser = new QTextBrowser(dacWidget);
+
+        // Add the components to the layout
+        dacLayout->addWidget(voltageLabel);
+        dacLayout->addWidget(voltageLineEdit);
+//        dacLayout->addWidget(channelLabel);
+//        dacLayout->addWidget(channelComboBox);
+        dacLayout->addWidget(statusTextBrowser);
+        dacLayout->addWidget(outputButton);
+
+
+        // Set the layout for the widget
+        dacWidget->setLayout(dacLayout);
+
+
+        // adding some styles
+        QString styleSheet2 =
+            "QPushButton {"
+            "    background-color: gray;"
+            "    border: none;"
+            "    color: white;"
+            "    padding: 3px 3px;"
+            "    text-align: center;"
+            "    text-decoration: none;"
+            "    font-size: 14px;"
+            "    margin: 4px 2px;"
+            "    border-radius: 10px;"
+            "}"
+            ""
+            "QPushButton:hover {"
+            "    background-color: #3e8e41;"
+            "}";
+        QFont font("Segoe UI");
+
+        outputButton->setStyleSheet(styleSheet2);
+        voltageLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        statusTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+        voltageLabel->setStyleSheet("font: bold 13px; color: #328930;");
+
+
+        // Connect the signals and slots
+        QObject::connect(outputButton, &QPushButton::clicked, [voltageLineEdit, statusTextBrowser]() {
+            // Output the desired voltage on the selected channel
+            QString voltage = voltageLineEdit->text();
+//            QString channel = channelComboBox->currentText();
+            // Code to output voltage on DAC and update statusTextBrowser with the result
+
+            statusTextBrowser->setTextColor(Qt::darkRed);
+
+
+            statusTextBrowser->append("No Data Coming");
+
+
+        });
+
+    }
 
 };
 

@@ -55,6 +55,227 @@ ConfigMode::ConfigMode(QWidget *parent) :
     QWidgetAction *action = new QWidgetAction(menuBar());
     action->setDefaultWidget(checkBox);
 
+    //-------------------------IPs Configurations-------------------------//
+
+    // Checkable UART Configurations
+    auto *UART4 = new QAction("UART4", this);
+  // QAction *action = new QAction("Checkable Action", menuBar());
+
+    UART4->setCheckable(true);
+ //   menuBar()->addAction(UART4);
+
+    if (Dashboard::selectedUartOptionsStatic.contains("UART4")) {
+        UART4->setChecked(true);
+ //       menuBar()->addAction(UART4);
+
+    }
+
+
+
+
+
+
+
+    QAction *UART5 = new QAction("&UART5", this);
+    UART5->setCheckable(true);
+    if (Dashboard::selectedUartOptionsStatic.contains("&UART5")) {
+        UART5->setChecked(true);
+    }
+
+
+
+ //   QAction *UART7 = new QAction("&UART7", this);
+ //   UART7->setCheckable(true);
+ //   if (selectedUartOptionsStatic.contains("&UART7")) {
+ //       UART7->setChecked(true);
+ //   }
+
+
+ //   QAction *UART8 = new QAction("&UART8", this);
+ //   UART8->setCheckable(true);
+ //   if (selectedUartOptionsStatic.contains("&UART8")) {
+ //       UART8->setChecked(true);
+ //   }
+
+
+ //   QAction *UART9 = new QAction("&UART9", this);
+ //   UART9->setCheckable(true);
+ //   if (selectedUartOptionsStatic.contains("&UART9")) {
+ //       UART9->setChecked(true);
+ //   }
+
+ //   QAction *USART1 = new QAction("&USART1", this);
+ //   USART1->setCheckable(true);
+ //   if (selectedUartOptionsStatic.contains("&USART1")) {
+ //       USART1->setChecked(true);
+ //   }
+
+
+ //   QAction *USART2 = new QAction("&USART2", this);
+ //  USART2->setCheckable(true);
+ //  if (selectedUartOptionsStatic.contains("&USART2")) {
+ //      USART2->setChecked(true);
+ //  }
+
+ //   QAction *USART6 = new QAction("&USART6", this);
+ //   USART6->setCheckable(true);
+ //   if (selectedUartOptionsStatic.contains("&USART6")) {
+ //       USART6->setChecked(true);
+ //   }
+
+ //   QAction *USART10 = new QAction("&USART10", this);
+ //   USART10->setCheckable(true);
+ //   if (selectedUartOptionsStatic.contains("&USART10")) {
+ //       USART10->setChecked(true);
+ //   }
+
+
+
+
+
+
+ //   // Checkable SPI Configurations
+ //   QAction *SPI1 = new QAction("SPI1", this);
+ //   SPI1->setCheckable(true);
+ //   if (selectedSPIOptionsStatic.contains("SPI1")) {
+ //       SPI1->setChecked(true);
+ //   }
+
+
+
+ //   QAction *SPI2 = new QAction("&SPI2", this);
+ //   SPI2->setCheckable(true);
+ //   if (selectedSPIOptionsStatic.contains("&SPI2")) {
+ //       SPI2->setChecked(true);
+ //   }
+
+
+ //   QAction *SPI3 = new QAction("&SPI3", this);
+ //   SPI3->setCheckable(true);
+ //   if (selectedSPIOptionsStatic.contains("&SPI3")) {
+ //       SPI3->setChecked(true);
+ //   }
+
+
+ //   QAction *SPI4 = new QAction("&SPI4", this);
+ //   SPI4->setCheckable(true);
+ //   if (selectedSPIOptionsStatic.contains("&SPI4")) {
+ //       SPI4->setChecked(true);
+ //   }
+
+
+ //   QAction *SPI5 = new QAction("&SPI5", this);
+ //   SPI5->setCheckable(true);
+ //   if (selectedSPIOptionsStatic.contains("&SPI5")) {
+ //       SPI5->setChecked(true);
+ //   }
+
+
+ //   QAction *SPI6 = new QAction("&SPI6", this);
+ //   SPI6->setCheckable(true);
+ //   if (selectedSPIOptionsStatic.contains("&SPI6")) {
+ //       SPI6->setChecked(true);
+ //   }
+
+
+ //   // Checkable I2C Configurations
+ //   QAction *I2C1 = new QAction("I2C1", this);
+ //   I2C1->setCheckable(true);
+ //   if (selectedI2COptionsStatic.contains("I2C1")) {
+ //       I2C1->setChecked(true);
+ //   }
+
+
+
+ //   QAction *I2C2 = new QAction("&I2C2", this);
+ //   I2C2->setCheckable(true);
+ //   if (selectedI2COptionsStatic.contains("&I2C2")) {
+ //       I2C2->setChecked(true);
+ //   }
+
+
+ //   QAction *I2C3 = new QAction("&I2C3", this);
+ //   I2C3->setCheckable(true);
+ //   if (selectedI2COptionsStatic.contains("&I2C3")) {
+ //       I2C3->setChecked(true);
+ //   }
+
+ //   QAction *I2C4 = new QAction("&I2C4", this);
+ //   I2C4->setCheckable(true);
+ //   if (selectedI2COptionsStatic.contains("&I2C4")) {
+ //       I2C4->setChecked(true);
+ //   }
+
+ //   QAction *I2C5 = new QAction("&I2C5", this);
+ //   I2C5->setCheckable(true);
+ //   if (selectedI2COptionsStatic.contains("&I2C5")) {
+ //       I2C5->setChecked(true);
+ //   }
+
+ //   // Checkable ADC Configurations
+ //   QAction *ADC1 = new QAction("ADC1", this);
+ //   ADC1->setCheckable(true);
+ //   if (selectedADCOptionsStatic.contains("ADC1")) {
+ //       ADC1->setChecked(true);
+ //   }
+
+
+ //   QAction *ADC2 = new QAction("&ADC2", this);
+ //   ADC2->setCheckable(true);
+ //   if (selectedADCOptionsStatic.contains("&ADC2")) {
+ //       ADC2->setChecked(true);
+ //   }
+
+
+ //   QAction *ADC3 = new QAction("&ADC3", this);
+ //   ADC3->setCheckable(true);
+ //   if (selectedADCOptionsStatic.contains("&ADC3")) {
+ //       ADC3->setChecked(true);
+ //   }
+
+
+
+
+ //   // Checkable DAC Configurations
+ //   QAction *DAC_OUT1 = new QAction("DAC_OUT1", this);
+ //   DAC_OUT1->setCheckable(true);
+ //   if (selectedDACOptionsStatic.contains("DAC_OUT1")) {
+ //       DAC_OUT1->setChecked(true);
+ //   }
+ //   QAction *DAC_OUT2 = new QAction("DAC_OUT2", this);
+ //   DAC_OUT2->setCheckable(true);
+ //   if (selectedDACOptionsStatic.contains("DAC_OUT2")) {
+ //       DAC_OUT2->setChecked(true);
+ //   }
+
+
+
+
+ //   // Checkable Input Capture Mode Configurations
+ //   QAction *InputCaptureMode = new QAction("Input Capture Mode" , this);
+ //   InputCaptureMode->setCheckable(true);
+ //   if (selectedTIMEROptionsStatic.contains("Input Capture Mode")) {
+ //      InputCaptureMode->setChecked(true);
+ //   }
+
+
+
+ //   // Checkable GPIO Mode Configurations
+
+ //   QAction *GPIO_OUTPUT = new QAction("GPIO_OUTPUT" , this);
+ //   GPIO_OUTPUT->setCheckable(true);
+ //   if (selectedGPIOOptionsStatic.contains("GPIO_OUTPUT")) {
+ //      GPIO_OUTPUT->setChecked(true);
+ //   }
+
+ //   QAction *GPIO_INPUT = new QAction("&GPIO_INPUT" , this);
+ //   GPIO_INPUT->setCheckable(true);
+ //   if (selectedGPIOOptionsStatic.contains("&GPIO_INPUT")) {
+ //      GPIO_INPUT->setChecked(true);
+ //   }
+
+
+
     //-------------------------Styling the meny Bar -------------------------//
 
 

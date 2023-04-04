@@ -19,6 +19,8 @@ Runmode::Runmode(QWidget *parent) :
    QSerialPort* serialPort = uart->getSerialPort();
 
 
+
+
     // Create a QToolButton for the "Connect" button
     QToolButton *connectButton = new QToolButton(this);
     connectButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/debug.png"));
@@ -233,7 +235,7 @@ for (auto m : menus) {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showADC3config);
   }
   else if(action->text()=="DAC_OUT1") {
-//      connect (action ,&QAction::triggered , this , &ConfigMode::showDACOUT1config);
+      connect (action ,&QAction::triggered , this , &Runmode::showDACOUT1Run);
   }
   else if(action->text()=="DAC_OUT2") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showDACOUT2config);
