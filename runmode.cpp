@@ -284,7 +284,7 @@ for (auto m : menus) {
   connect (action ,&QAction::triggered , this , &Runmode::showUART4Run);
 }
   else if(action->text()=="&UART5") {
-//      connect (action ,&QAction::triggered , this , &ConfigMode::showUART5config);
+      connect (action ,&QAction::triggered , this , &Runmode::showUART5Run);
   }
   else if(action->text()=="&USART1") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showUSART1config);
@@ -296,7 +296,7 @@ for (auto m : menus) {
       connect (action ,&QAction::triggered , this , &Runmode::showSPI1Run);
   }
   else if(action->text()=="&SPI2") {
-//      connect (action ,&QAction::triggered , this , &ConfigMode::showSPI2config);
+      connect (action ,&QAction::triggered , this , &Runmode::showSPI2Run);
   }
   else if(action->text()=="&SPI3") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showSPI3config);
@@ -320,7 +320,7 @@ for (auto m : menus) {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showDACOUT2config);
   }
   else if(action->text()=="GPIO_OUTPUT") {
-//      connect (action ,&QAction::triggered , this , &ConfigMode::showGPIOOUTPUTconfig);
+      connect (action ,&QAction::triggered , this , &Runmode::showGPIOOUTPUTRun);
   }
   else if(action->text()=="&GPIO_INPUT") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showGPIOINPUTconfig);

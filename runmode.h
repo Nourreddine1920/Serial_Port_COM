@@ -10,6 +10,7 @@
 #include <QCheckBox>
 #include <QRadioButton>
 #include <QComboBox>
+#include <QSpinBox>
 
 namespace Ui {
 class Runmode;
@@ -109,8 +110,201 @@ private slots :
 
     }
 
+    void showUART5Run(){
+
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+        auto textBrowser = new QTextBrowser(widget);
+        auto label = new QLabel("Enter your message:", widget);
+
+        auto lineEdit = new QLineEdit(widget);
+        lineEdit->setPlaceholderText("Enter the data to write");
+
+        auto button1 = new QPushButton("Send Message", widget);
+        auto button2 = new QPushButton("Recieve Message", widget);
+
+        QString styleSheet2 =
+            "QPushButton {"
+            "    background-color: gray;"
+            "    border: none;"
+            "    color: white;"
+            "    padding: 3px 3px;"
+            "    text-align: center;"
+            "    text-decoration: none;"
+            "    font-size: 14px;"
+            "    margin: 4px 2px;"
+            "    border-radius: 10px;"
+            "}"
+            ""
+            "QPushButton:hover {"
+            "    background-color: #3e8e41;"
+            "}";
+
+
+        // Create a vertical layout for the text browser, message input, and buttons
+        auto layout = new QVBoxLayout(widget);
+        layout->addWidget(label);
+        layout->addWidget(lineEdit);
+
+        layout->addWidget(textBrowser);
+
+        auto buttonLayout = new QHBoxLayout();
+        buttonLayout->addWidget(button1);
+        buttonLayout->addWidget(button2);
+        layout->addLayout(buttonLayout);
+
+        // Set some styling properties for the text browser, message input, and buttons
+//        lineEdit->setStyleSheet("QLineEdit { background-color: #ffffff; }");
+//        button1->setStyleSheet("QPushButton { background-color: #33b5e5; color: white; }");
+//        button2->setStyleSheet("QPushButton { background-color: #33b5e5; color: white; }");
+
+        QFont font("Segoe UI");
+        label->setFont(font);
+        label->setStyleSheet("font: bold 13px; color: #328930;");
+        lineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        button1->setStyleSheet(styleSheet2);
+        button2->setStyleSheet(styleSheet2);
+        textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+
+
+        // Connect the "send message" button to a slot
+        connect(button1, &QPushButton::clicked, [=]() {
+            QString message = lineEdit->text();
+//            textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+            textBrowser->setTextColor(Qt::darkGreen);
+
+            textBrowser->append(message);
+            lineEdit->clear();
+        });
+
+        // Set the layout for the widget
+        widget->setLayout(layout);
+
+    }
+
 
     void showSPI1Run(){
+        // Create a widget to hold the SPI IP functionality
+        QWidget* spiWidget = new QWidget(this);
+        setCentralWidget(spiWidget);
+
+        // Create controls for configuring the SPI interface
+        QLabel* DataOrderLabel = new QLabel("Data Order:");
+//        QLineEdit* frequencyEdit = new QLineEdit("1000000");
+        QComboBox* dataOrderCombo = new QComboBox;
+        dataOrderCombo->addItem("MSB First");
+        dataOrderCombo->addItem("LSB First");
+        QLabel* BitOrderLabel = new QLabel("Bits Order:");
+
+        QComboBox* bitOrderCombo = new QComboBox;
+        bitOrderCombo->addItem("MSB First");
+        bitOrderCombo->addItem("LSB First");
+
+        // Create controls for sending and receiving data
+        QLabel* sendDataLabel = new QLabel("Send Data:");
+        QLineEdit* sendDataEdit = new QLineEdit;
+        sendDataEdit->setPlaceholderText("Enter the data to write");
+
+        QLabel* receivedDataLabel = new QLabel("Received Data:");
+        QTextBrowser* receivedDataBrowser = new QTextBrowser;
+
+        // Create buttons for sending and receiving data
+        QPushButton* sendButton = new QPushButton("Send");
+        QPushButton* receiveButton = new QPushButton("Receive");
+
+        // Create a layout for the widget
+        QVBoxLayout* layout = new QVBoxLayout(spiWidget);
+        layout->addWidget(DataOrderLabel);
+        layout->addWidget(dataOrderCombo);
+        layout->addWidget(BitOrderLabel);
+
+        layout->addWidget(bitOrderCombo);
+        layout->addWidget(sendDataLabel);
+        layout->addWidget(sendDataEdit);
+        layout->addWidget(receivedDataLabel);
+        layout->addWidget(receivedDataBrowser);
+        auto buttonLayout = new QHBoxLayout();
+        buttonLayout->addWidget(sendButton);
+        buttonLayout->addWidget(receiveButton);
+        layout->addLayout(buttonLayout);
+
+
+        // Set some styling properties for the controls
+
+        QString styleSheet2 =
+            "QPushButton {"
+            "    background-color: gray;"
+            "    border: none;"
+            "    color: white;"
+            "    padding: 3px 3px;"
+            "    text-align: center;"
+            "    text-decoration: none;"
+            "    font-size: 14px;"
+            "    margin: 4px 2px;"
+            "    border-radius: 10px;"
+            "}"
+            ""
+            "QPushButton:hover {"
+            "    background-color: #3e8e41;"
+            "}";
+        QFont font("Segoe UI");
+        sendDataLabel->setFont(font);
+        receivedDataLabel->setFont(font);
+
+
+        sendDataLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        receivedDataLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        // Create a label widget and set its font to Noto Sans
+//        QFont font("Noto Sans");
+        DataOrderLabel->setFont(font);
+        BitOrderLabel->setFont(font);
+
+        DataOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        BitOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
+
+        sendDataEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+        dataOrderCombo->setStyleSheet("font-weight: bold; border: 1px solid 868482; color:#899499; background-color: white;");
+        bitOrderCombo->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: #899499; background-color: white;");
+
+        sendButton->setStyleSheet(styleSheet2);
+        receiveButton->setStyleSheet(styleSheet2);
+
+        receivedDataBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+
+
+
+
+//        spiWidget->setStyleSheet("QWidget { background-color: #f0f0f0; }"
+//                                 "QLineEdit, QTextBrowser { background-color: white; border: 1px solid #ccc; }"
+//                                 "QPushButton { background-color: #33b5e5; color: white; }");
+
+        // Connect the buttons to their corresponding functions
+        connect(sendButton, &QPushButton::clicked, this, [sendDataEdit, receivedDataBrowser](){
+            QString sendData = sendDataEdit->text();
+            // Code to send data using the SPI interface
+            QString receivedData = "Received data";
+            receivedDataBrowser->setTextColor(Qt::BlankCursor);
+
+            receivedDataBrowser->append(sendData);
+
+            sendDataEdit->clear();
+
+        });
+        connect(receiveButton, &QPushButton::clicked, this, [receivedDataBrowser](){
+            // Code to receive data using the SPI interface
+            QString receivedData = "Showing data";
+            receivedDataBrowser->setTextColor(Qt::darkRed);
+
+            receivedDataBrowser->append(receivedData);
+        });
+
+    }
+
+    void showSPI2Run(){
+
+
         // Create a widget to hold the SPI IP functionality
         QWidget* spiWidget = new QWidget(this);
         setCentralWidget(spiWidget);
@@ -679,6 +873,106 @@ private slots :
         });
 
     }
+
+//    void showGPIOOUTPUTRun(){
+//        // Create a widget for GPIO output pin
+//        QWidget* gpioOutputWidget = new QWidget();
+//        setCentralWidget(gpioOutputWidget);
+
+//        QVBoxLayout* gpioOutputLayout = new QVBoxLayout(gpioOutputWidget);
+
+//        // Create a QLabel to display the GPIO pin number
+//        QLabel* pinNumberLabel = new QLabel("Pin Number:", gpioOutputWidget);
+//        QLineEdit* pinNumberLineEdit = new QLineEdit(gpioOutputWidget);
+//        pinNumberLineEdit->setPlaceholderText("Enter the GPIO pin number");
+
+//        // Create a QComboBox to select the output value
+//        QLabel* valueLabel = new QLabel("Value:", gpioOutputWidget);
+//        QComboBox* valueComboBox = new QComboBox(gpioOutputWidget);
+//        valueComboBox->addItem("High");
+//        valueComboBox->addItem("Low");
+
+//        // Create a QPushButton to set the output value
+//        QPushButton* setValueButton = new QPushButton("Set Value", gpioOutputWidget);
+
+//        // Add the components to the layout
+//        gpioOutputLayout->addWidget(pinNumberLabel);
+//        gpioOutputLayout->addWidget(pinNumberLineEdit);
+//        gpioOutputLayout->addWidget(valueLabel);
+//        gpioOutputLayout->addWidget(valueComboBox);
+//        gpioOutputLayout->addWidget(setValueButton);
+
+//        // Set the layout for the widget
+//        gpioOutputWidget->setLayout(gpioOutputLayout);
+
+//        // Connect the signals and slots
+//        QObject::connect(setValueButton, &QPushButton::clicked, [pinNumberLineEdit, valueComboBox]() {
+//            // Set the output value of the selected GPIO pin
+//            QString pinNumber = pinNumberLineEdit->text();
+//            QString value = valueComboBox->currentText();
+//            // Code to set the output value of the selected GPIO pin
+//        });
+
+//    }
+        void showGPIOOUTPUTRun(){
+            // Create a widget for GPIO output
+            QWidget* gpioWidget = new QWidget();
+                    setCentralWidget(gpioWidget);
+
+            QVBoxLayout* gpioLayout = new QVBoxLayout(gpioWidget);
+
+            // Create a QLabel to display the GPIO pin number
+            QLabel* gpioPinLabel = new QLabel("GPIO Pin Number:", gpioWidget);
+            QSpinBox* gpioPinSpinBox = new QSpinBox(gpioWidget);
+            gpioPinSpinBox->setMinimum(0);
+            gpioPinSpinBox->setMaximum(31);
+
+            // Create a QComboBox to select the GPIO pin direction
+            QLabel* gpioDirectionLabel = new QLabel("Direction:", gpioWidget);
+            QComboBox* gpioDirectionComboBox = new QComboBox(gpioWidget);
+            gpioDirectionComboBox->addItem("Input");
+            gpioDirectionComboBox->addItem("Output");
+
+            // Create a QPushButton to set the GPIO pin direction
+            QPushButton* gpioSetDirectionButton = new QPushButton("Set Direction", gpioWidget);
+
+            // Create a QLabel to display the GPIO pin value
+            QLabel* gpioValueLabel = new QLabel("Value:", gpioWidget);
+            QComboBox* gpioValueComboBox = new QComboBox(gpioWidget);
+            gpioValueComboBox->addItem("Low");
+            gpioValueComboBox->addItem("High");
+
+            // Create a QPushButton to set the GPIO pin value
+            QPushButton* gpioSetValueButton = new QPushButton("Set Value", gpioWidget);
+
+            // Add the components to the layout
+            gpioLayout->addWidget(gpioPinLabel);
+            gpioLayout->addWidget(gpioPinSpinBox);
+            gpioLayout->addWidget(gpioDirectionLabel);
+            gpioLayout->addWidget(gpioDirectionComboBox);
+            gpioLayout->addWidget(gpioSetDirectionButton);
+            gpioLayout->addWidget(gpioValueLabel);
+            gpioLayout->addWidget(gpioValueComboBox);
+            gpioLayout->addWidget(gpioSetValueButton);
+
+            // Set the layout for the widget
+            gpioWidget->setLayout(gpioLayout);
+
+            // Connect the signals and slots
+            QObject::connect(gpioSetDirectionButton, &QPushButton::clicked, [gpioPinSpinBox, gpioDirectionComboBox]() {
+                // Set the direction of the selected GPIO pin
+                int gpioPinNumber = gpioPinSpinBox->value();
+                QString gpioDirection = gpioDirectionComboBox->currentText();
+                // Code to set the direction of the GPIO pin
+            });
+
+            QObject::connect(gpioSetValueButton, &QPushButton::clicked, [gpioPinSpinBox, gpioValueComboBox]() {
+                // Set the value of the selected GPIO pin
+                int gpioPinNumber = gpioPinSpinBox->value();
+                QString gpioValue = gpioValueComboBox->currentText();
+                // Code to set the value of the GPIO pin
+            });
+        }
 
 };
 
