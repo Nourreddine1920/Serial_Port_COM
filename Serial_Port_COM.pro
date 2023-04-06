@@ -61,6 +61,7 @@ DISTFILES += \
     debug.png \
     debug1.png \
     debugging.png \
+    download.png \
     file.txt \
     images/logo-actia.png \
     images/logo-actia.png \

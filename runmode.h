@@ -461,6 +461,160 @@ private slots :
         dacWidget->setLayout(dacLayout);
 
 
+            // adding some styles
+            QString styleSheet2 =
+                "QPushButton {"
+                "    background-color: gray;"
+                "    border: none;"
+                "    color: white;"
+                "    padding: 3px 3px;"
+                "    text-align: center;"
+                "    text-decoration: none;"
+                "    font-size: 14px;"
+                "    margin: 4px 2px;"
+                "    border-radius: 10px;"
+                "}"
+                ""
+                "QPushButton:hover {"
+                "    background-color: #3e8e41;"
+                "}";
+            QFont font("Segoe UI");
+
+            outputButton->setStyleSheet(styleSheet2);
+            voltageLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+            statusTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+            voltageLabel->setStyleSheet("font: bold 13px; color: #328930;");
+
+
+        // Connect the signals and slots
+        QObject::connect(outputButton, &QPushButton::clicked, [voltageLineEdit, statusTextBrowser]() {
+            // Output the desired voltage on the selected channel
+            QString voltage = voltageLineEdit->text();
+//            QString channel = channelComboBox->currentText();
+            // Code to output voltage on DAC and update statusTextBrowser with the result
+
+            statusTextBrowser->setTextColor(Qt::darkRed);
+
+
+            statusTextBrowser->append("No Data Coming");
+
+            voltageLineEdit->clear();
+
+
+
+        });
+
+    }
+
+//    void showFrequencyMesureRun(){
+//        // Create a widget for Timer
+//        QWidget* timerWidget = new QWidget();
+//        setCentralWidget(timerWidget);
+
+//        QVBoxLayout* timerLayout = new QVBoxLayout(timerWidget);
+
+//        // Create a QLabel to display the Timer mode
+//        QLabel* modeLabel = new QLabel("Mode:", timerWidget);
+//        QComboBox* modeComboBox = new QComboBox(timerWidget);
+//        modeComboBox->addItem("Input Capture");
+//        modeComboBox->addItem("Output Compare");
+
+//        // Create a QLabel to display the Timer channel
+//        QLabel* channelLabel = new QLabel("Channel:", timerWidget);
+//        QComboBox* channelComboBox = new QComboBox(timerWidget);
+//        channelComboBox->addItem("Channel 1");
+//        channelComboBox->addItem("Channel 2");
+//        channelComboBox->addItem("Channel 3");
+//        channelComboBox->addItem("Channel 4");
+
+//        // Create a QPushButton to start the Timer
+//        QPushButton* startButton = new QPushButton("Start", timerWidget);
+
+//        // Create a QPushButton to stop the Timer
+//        QPushButton* stopButton = new QPushButton("Stop", timerWidget);
+
+//        // Create a QLabel to display the frequency
+//        QLabel* frequencyLabel = new QLabel("Frequency:", timerWidget);
+//        QLineEdit* frequencyLineEdit = new QLineEdit(timerWidget);
+//        frequencyLineEdit->setReadOnly(true);
+
+//        // Add the components to the layout
+//        timerLayout->addWidget(modeLabel);
+//        timerLayout->addWidget(modeComboBox);
+//        timerLayout->addWidget(channelLabel);
+//        timerLayout->addWidget(channelComboBox);
+//        timerLayout->addWidget(startButton);
+//        timerLayout->addWidget(stopButton);
+//        timerLayout->addWidget(frequencyLabel);
+//        timerLayout->addWidget(frequencyLineEdit);
+
+//        // Set the layout for the widget
+//        timerWidget->setLayout(timerLayout);
+
+//        // Connect the signals and slots
+//        QObject::connect(startButton, &QPushButton::clicked, [modeComboBox, channelComboBox, frequencyLineEdit]() {
+//            // Start the Timer in input capture mode with the selected channel
+//            QString mode = modeComboBox->currentText();
+//            QString channel = channelComboBox->currentText();
+//            // Code to start the Timer and capture the frequency
+//        });
+
+//        QObject::connect(stopButton, &QPushButton::clicked, [frequencyLineEdit]() {
+//            // Stop the Timer and display the captured frequency
+//            // Code to stop the Timer and calculate and display the frequency in frequencyLineEdit
+//        });
+
+
+//    }
+
+    void showFrequencyMesureRun(){
+        // Create a widget for Timer
+        QWidget* timerWidget = new QWidget();
+        setCentralWidget(timerWidget);
+
+        QVBoxLayout* timerLayout = new QVBoxLayout(timerWidget);
+
+        // Create a QLabel to display the timer frequency
+        QLabel* frequencyLabel = new QLabel("Frequency:", timerWidget);
+        QLineEdit* frequencyLineEdit = new QLineEdit(timerWidget);
+        frequencyLineEdit->setPlaceholderText("Enter the desired Frequency");
+
+//        frequencyLineEdit->setReadOnly(true);
+
+        // Create a QComboBox to select the Timer channel to use for input capture
+//        QLabel* channelLabel = new QLabel("Channel:", timerWidget);
+//        QComboBox* channelComboBox = new QComboBox(timerWidget);
+//        channelComboBox->addItem("Channel 1");
+//        channelComboBox->addItem("Channel 2");
+//        channelComboBox->addItem("Channel 3");
+//        channelComboBox->addItem("Channel 4");
+
+        // Create a QPushButton to start the input capture operation
+        QPushButton* startButton = new QPushButton("Start", timerWidget);
+        QPushButton* stopButton = new QPushButton("Stop", timerWidget);
+
+        // Create a QTextBrowser to display the input capture data
+        QTextBrowser* dataTextBrowser = new QTextBrowser(timerWidget);
+
+        // Add the components to the layout
+        timerLayout->addWidget(frequencyLabel);
+        timerLayout->addWidget(frequencyLineEdit);
+//        timerLayout->addWidget(channelLabel);
+//        timerLayout->addWidget(channelComboBox);
+
+        timerLayout->addWidget(dataTextBrowser);
+
+        auto buttonLayout = new QHBoxLayout();
+        buttonLayout->addWidget(startButton);
+        buttonLayout->addWidget(stopButton);
+        timerLayout->addLayout(buttonLayout);
+
+
+        // Set the layout for the widget
+        timerWidget->setLayout(timerLayout);
+
+
+
         // adding some styles
         QString styleSheet2 =
             "QPushButton {"
@@ -480,25 +634,45 @@ private slots :
             "}";
         QFont font("Segoe UI");
 
-        outputButton->setStyleSheet(styleSheet2);
-        voltageLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-        statusTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
-        voltageLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        startButton->setStyleSheet(styleSheet2);
+        stopButton->setStyleSheet(styleSheet2);
+
+        frequencyLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+        frequencyLabel->setStyleSheet("font: bold 13px; color: #328930;");
+
 
 
         // Connect the signals and slots
-        QObject::connect(outputButton, &QPushButton::clicked, [voltageLineEdit, statusTextBrowser]() {
-            // Output the desired voltage on the selected channel
-            QString voltage = voltageLineEdit->text();
-//            QString channel = channelComboBox->currentText();
-            // Code to output voltage on DAC and update statusTextBrowser with the result
+        QObject::connect(startButton, &QPushButton::clicked, [frequencyLineEdit, dataTextBrowser]() {
+            // Start the input capture operation on the selected Timer channel
 
-            statusTextBrowser->setTextColor(Qt::darkRed);
+            dataTextBrowser->setTextColor(Qt::BlankCursor);
+
+            QString frequency = frequencyLineEdit->text();
 
 
-            statusTextBrowser->append("No Data Coming");
+            frequencyLineEdit->clear();
 
-            voltageLineEdit->clear();
+            // Code to start input capture and update frequencyLineEdit and dataTextBrowser with the result
+
+            dataTextBrowser->append(frequency);
+
+
+
+
+        });
+
+        QObject::connect(stopButton, &QPushButton::clicked, [frequencyLineEdit, dataTextBrowser]() {
+            // Start the input capture operation on the selected Timer channel
+//            QString frequency = frequencyLineEdit->text();
+            // Code to start input capture and update frequencyLineEdit and dataTextBrowser with the result
+
+            dataTextBrowser->setTextColor(Qt::darkRed);
+
+
+            dataTextBrowser->append("Stop Reading Data");
+
 
 
 
