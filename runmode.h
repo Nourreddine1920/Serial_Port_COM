@@ -10,6 +10,7 @@
 #include <QCheckBox>
 #include <QRadioButton>
 #include <QComboBox>
+#include <QSpinBox>
 
 namespace Ui {
 class Runmode;
@@ -109,8 +110,201 @@ private slots :
 
     }
 
+    void showUART5Run(){
+
+        QWidget *widget = new QWidget(this);
+        setCentralWidget(widget);
+
+        auto textBrowser = new QTextBrowser(widget);
+        auto label = new QLabel("Enter your message:", widget);
+
+        auto lineEdit = new QLineEdit(widget);
+        lineEdit->setPlaceholderText("Enter the data to write");
+
+        auto button1 = new QPushButton("Send Message", widget);
+        auto button2 = new QPushButton("Recieve Message", widget);
+
+        QString styleSheet2 =
+            "QPushButton {"
+            "    background-color: gray;"
+            "    border: none;"
+            "    color: white;"
+            "    padding: 3px 3px;"
+            "    text-align: center;"
+            "    text-decoration: none;"
+            "    font-size: 14px;"
+            "    margin: 4px 2px;"
+            "    border-radius: 10px;"
+            "}"
+            ""
+            "QPushButton:hover {"
+            "    background-color: #3e8e41;"
+            "}";
+
+
+        // Create a vertical layout for the text browser, message input, and buttons
+        auto layout = new QVBoxLayout(widget);
+        layout->addWidget(label);
+        layout->addWidget(lineEdit);
+
+        layout->addWidget(textBrowser);
+
+        auto buttonLayout = new QHBoxLayout();
+        buttonLayout->addWidget(button1);
+        buttonLayout->addWidget(button2);
+        layout->addLayout(buttonLayout);
+
+        // Set some styling properties for the text browser, message input, and buttons
+//        lineEdit->setStyleSheet("QLineEdit { background-color: #ffffff; }");
+//        button1->setStyleSheet("QPushButton { background-color: #33b5e5; color: white; }");
+//        button2->setStyleSheet("QPushButton { background-color: #33b5e5; color: white; }");
+
+        QFont font("Segoe UI");
+        label->setFont(font);
+        label->setStyleSheet("font: bold 13px; color: #328930;");
+        lineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        button1->setStyleSheet(styleSheet2);
+        button2->setStyleSheet(styleSheet2);
+        textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+
+
+        // Connect the "send message" button to a slot
+        connect(button1, &QPushButton::clicked, [=]() {
+            QString message = lineEdit->text();
+//            textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+            textBrowser->setTextColor(Qt::darkGreen);
+
+            textBrowser->append(message);
+            lineEdit->clear();
+        });
+
+        // Set the layout for the widget
+        widget->setLayout(layout);
+
+    }
+
 
     void showSPI1Run(){
+        // Create a widget to hold the SPI IP functionality
+        QWidget* spiWidget = new QWidget(this);
+        setCentralWidget(spiWidget);
+
+        // Create controls for configuring the SPI interface
+        QLabel* DataOrderLabel = new QLabel("Data Order:");
+//        QLineEdit* frequencyEdit = new QLineEdit("1000000");
+        QComboBox* dataOrderCombo = new QComboBox;
+        dataOrderCombo->addItem("MSB First");
+        dataOrderCombo->addItem("LSB First");
+        QLabel* BitOrderLabel = new QLabel("Bits Order:");
+
+        QComboBox* bitOrderCombo = new QComboBox;
+        bitOrderCombo->addItem("MSB First");
+        bitOrderCombo->addItem("LSB First");
+
+        // Create controls for sending and receiving data
+        QLabel* sendDataLabel = new QLabel("Send Data:");
+        QLineEdit* sendDataEdit = new QLineEdit;
+        sendDataEdit->setPlaceholderText("Enter the data to write");
+
+        QLabel* receivedDataLabel = new QLabel("Received Data:");
+        QTextBrowser* receivedDataBrowser = new QTextBrowser;
+
+        // Create buttons for sending and receiving data
+        QPushButton* sendButton = new QPushButton("Send");
+        QPushButton* receiveButton = new QPushButton("Receive");
+
+        // Create a layout for the widget
+        QVBoxLayout* layout = new QVBoxLayout(spiWidget);
+        layout->addWidget(DataOrderLabel);
+        layout->addWidget(dataOrderCombo);
+        layout->addWidget(BitOrderLabel);
+
+        layout->addWidget(bitOrderCombo);
+        layout->addWidget(sendDataLabel);
+        layout->addWidget(sendDataEdit);
+        layout->addWidget(receivedDataLabel);
+        layout->addWidget(receivedDataBrowser);
+        auto buttonLayout = new QHBoxLayout();
+        buttonLayout->addWidget(sendButton);
+        buttonLayout->addWidget(receiveButton);
+        layout->addLayout(buttonLayout);
+
+
+        // Set some styling properties for the controls
+
+        QString styleSheet2 =
+            "QPushButton {"
+            "    background-color: gray;"
+            "    border: none;"
+            "    color: white;"
+            "    padding: 3px 3px;"
+            "    text-align: center;"
+            "    text-decoration: none;"
+            "    font-size: 14px;"
+            "    margin: 4px 2px;"
+            "    border-radius: 10px;"
+            "}"
+            ""
+            "QPushButton:hover {"
+            "    background-color: #3e8e41;"
+            "}";
+        QFont font("Segoe UI");
+        sendDataLabel->setFont(font);
+        receivedDataLabel->setFont(font);
+
+
+        sendDataLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        receivedDataLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        // Create a label widget and set its font to Noto Sans
+//        QFont font("Noto Sans");
+        DataOrderLabel->setFont(font);
+        BitOrderLabel->setFont(font);
+
+        DataOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        BitOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
+
+        sendDataEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+        dataOrderCombo->setStyleSheet("font-weight: bold; border: 1px solid 868482; color:#899499; background-color: white;");
+        bitOrderCombo->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: #899499; background-color: white;");
+
+        sendButton->setStyleSheet(styleSheet2);
+        receiveButton->setStyleSheet(styleSheet2);
+
+        receivedDataBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+
+
+
+
+//        spiWidget->setStyleSheet("QWidget { background-color: #f0f0f0; }"
+//                                 "QLineEdit, QTextBrowser { background-color: white; border: 1px solid #ccc; }"
+//                                 "QPushButton { background-color: #33b5e5; color: white; }");
+
+        // Connect the buttons to their corresponding functions
+        connect(sendButton, &QPushButton::clicked, this, [sendDataEdit, receivedDataBrowser](){
+            QString sendData = sendDataEdit->text();
+            // Code to send data using the SPI interface
+            QString receivedData = "Received data";
+            receivedDataBrowser->setTextColor(Qt::BlankCursor);
+
+            receivedDataBrowser->append(sendData);
+
+            sendDataEdit->clear();
+
+        });
+        connect(receiveButton, &QPushButton::clicked, this, [receivedDataBrowser](){
+            // Code to receive data using the SPI interface
+            QString receivedData = "Showing data";
+            receivedDataBrowser->setTextColor(Qt::darkRed);
+
+            receivedDataBrowser->append(receivedData);
+        });
+
+    }
+
+    void showSPI2Run(){
+
+
         // Create a widget to hold the SPI IP functionality
         QWidget* spiWidget = new QWidget(this);
         setCentralWidget(spiWidget);
@@ -461,29 +655,29 @@ private slots :
         dacWidget->setLayout(dacLayout);
 
 
-        // adding some styles
-        QString styleSheet2 =
-            "QPushButton {"
-            "    background-color: gray;"
-            "    border: none;"
-            "    color: white;"
-            "    padding: 3px 3px;"
-            "    text-align: center;"
-            "    text-decoration: none;"
-            "    font-size: 14px;"
-            "    margin: 4px 2px;"
-            "    border-radius: 10px;"
-            "}"
-            ""
-            "QPushButton:hover {"
-            "    background-color: #3e8e41;"
-            "}";
-        QFont font("Segoe UI");
+            // adding some styles
+            QString styleSheet2 =
+                "QPushButton {"
+                "    background-color: gray;"
+                "    border: none;"
+                "    color: white;"
+                "    padding: 3px 3px;"
+                "    text-align: center;"
+                "    text-decoration: none;"
+                "    font-size: 14px;"
+                "    margin: 4px 2px;"
+                "    border-radius: 10px;"
+                "}"
+                ""
+                "QPushButton:hover {"
+                "    background-color: #3e8e41;"
+                "}";
+            QFont font("Segoe UI");
 
-        outputButton->setStyleSheet(styleSheet2);
-        voltageLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-        statusTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
-        voltageLabel->setStyleSheet("font: bold 13px; color: #328930;");
+            outputButton->setStyleSheet(styleSheet2);
+            voltageLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+            statusTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+            voltageLabel->setStyleSheet("font: bold 13px; color: #328930;");
 
 
         // Connect the signals and slots
@@ -505,6 +699,357 @@ private slots :
         });
 
     }
+
+//    void showFrequencyMesureRun(){
+//        // Create a widget for Timer
+//        QWidget* timerWidget = new QWidget();
+//        setCentralWidget(timerWidget);
+
+//        QVBoxLayout* timerLayout = new QVBoxLayout(timerWidget);
+
+//        // Create a QLabel to display the Timer mode
+//        QLabel* modeLabel = new QLabel("Mode:", timerWidget);
+//        QComboBox* modeComboBox = new QComboBox(timerWidget);
+//        modeComboBox->addItem("Input Capture");
+//        modeComboBox->addItem("Output Compare");
+
+//        // Create a QLabel to display the Timer channel
+//        QLabel* channelLabel = new QLabel("Channel:", timerWidget);
+//        QComboBox* channelComboBox = new QComboBox(timerWidget);
+//        channelComboBox->addItem("Channel 1");
+//        channelComboBox->addItem("Channel 2");
+//        channelComboBox->addItem("Channel 3");
+//        channelComboBox->addItem("Channel 4");
+
+//        // Create a QPushButton to start the Timer
+//        QPushButton* startButton = new QPushButton("Start", timerWidget);
+
+//        // Create a QPushButton to stop the Timer
+//        QPushButton* stopButton = new QPushButton("Stop", timerWidget);
+
+//        // Create a QLabel to display the frequency
+//        QLabel* frequencyLabel = new QLabel("Frequency:", timerWidget);
+//        QLineEdit* frequencyLineEdit = new QLineEdit(timerWidget);
+//        frequencyLineEdit->setReadOnly(true);
+
+//        // Add the components to the layout
+//        timerLayout->addWidget(modeLabel);
+//        timerLayout->addWidget(modeComboBox);
+//        timerLayout->addWidget(channelLabel);
+//        timerLayout->addWidget(channelComboBox);
+//        timerLayout->addWidget(startButton);
+//        timerLayout->addWidget(stopButton);
+//        timerLayout->addWidget(frequencyLabel);
+//        timerLayout->addWidget(frequencyLineEdit);
+
+//        // Set the layout for the widget
+//        timerWidget->setLayout(timerLayout);
+
+//        // Connect the signals and slots
+//        QObject::connect(startButton, &QPushButton::clicked, [modeComboBox, channelComboBox, frequencyLineEdit]() {
+//            // Start the Timer in input capture mode with the selected channel
+//            QString mode = modeComboBox->currentText();
+//            QString channel = channelComboBox->currentText();
+//            // Code to start the Timer and capture the frequency
+//        });
+
+//        QObject::connect(stopButton, &QPushButton::clicked, [frequencyLineEdit]() {
+//            // Stop the Timer and display the captured frequency
+//            // Code to stop the Timer and calculate and display the frequency in frequencyLineEdit
+//        });
+
+
+//    }
+
+    void showFrequencyMesureRun(){
+        // Create a widget for Timer
+        QWidget* timerWidget = new QWidget();
+        setCentralWidget(timerWidget);
+
+        QVBoxLayout* timerLayout = new QVBoxLayout(timerWidget);
+
+        // Create a QLabel to display the timer frequency
+        QLabel* frequencyLabel = new QLabel("Frequency:", timerWidget);
+        QLineEdit* frequencyLineEdit = new QLineEdit(timerWidget);
+        frequencyLineEdit->setPlaceholderText("Enter the desired Frequency");
+
+//        frequencyLineEdit->setReadOnly(true);
+
+        // Create a QComboBox to select the Timer channel to use for input capture
+//        QLabel* channelLabel = new QLabel("Channel:", timerWidget);
+//        QComboBox* channelComboBox = new QComboBox(timerWidget);
+//        channelComboBox->addItem("Channel 1");
+//        channelComboBox->addItem("Channel 2");
+//        channelComboBox->addItem("Channel 3");
+//        channelComboBox->addItem("Channel 4");
+
+        // Create a QPushButton to start the input capture operation
+        QPushButton* startButton = new QPushButton("Start", timerWidget);
+        QPushButton* stopButton = new QPushButton("Stop", timerWidget);
+
+        // Create a QTextBrowser to display the input capture data
+        QTextBrowser* dataTextBrowser = new QTextBrowser(timerWidget);
+
+        // Add the components to the layout
+        timerLayout->addWidget(frequencyLabel);
+        timerLayout->addWidget(frequencyLineEdit);
+//        timerLayout->addWidget(channelLabel);
+//        timerLayout->addWidget(channelComboBox);
+
+        timerLayout->addWidget(dataTextBrowser);
+
+        auto buttonLayout = new QHBoxLayout();
+        buttonLayout->addWidget(startButton);
+        buttonLayout->addWidget(stopButton);
+        timerLayout->addLayout(buttonLayout);
+
+
+        // Set the layout for the widget
+        timerWidget->setLayout(timerLayout);
+
+
+
+        // adding some styles
+        QString styleSheet2 =
+            "QPushButton {"
+            "    background-color: gray;"
+            "    border: none;"
+            "    color: white;"
+            "    padding: 3px 3px;"
+            "    text-align: center;"
+            "    text-decoration: none;"
+            "    font-size: 14px;"
+            "    margin: 4px 2px;"
+            "    border-radius: 10px;"
+            "}"
+            ""
+            "QPushButton:hover {"
+            "    background-color: #3e8e41;"
+            "}";
+        QFont font("Segoe UI");
+
+        startButton->setStyleSheet(styleSheet2);
+        stopButton->setStyleSheet(styleSheet2);
+
+        frequencyLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+        frequencyLabel->setStyleSheet("font: bold 13px; color: #328930;");
+
+
+
+        // Connect the signals and slots
+        QObject::connect(startButton, &QPushButton::clicked, [frequencyLineEdit, dataTextBrowser]() {
+            // Start the input capture operation on the selected Timer channel
+
+            dataTextBrowser->setTextColor(Qt::BlankCursor);
+
+            QString frequency = frequencyLineEdit->text();
+
+
+            frequencyLineEdit->clear();
+
+            // Code to start input capture and update frequencyLineEdit and dataTextBrowser with the result
+
+            dataTextBrowser->append(frequency);
+
+
+
+
+        });
+
+        QObject::connect(stopButton, &QPushButton::clicked, [frequencyLineEdit, dataTextBrowser]() {
+            // Start the input capture operation on the selected Timer channel
+//            QString frequency = frequencyLineEdit->text();
+            // Code to start input capture and update frequencyLineEdit and dataTextBrowser with the result
+
+            dataTextBrowser->setTextColor(Qt::darkRed);
+
+
+            dataTextBrowser->append("Stop Reading Data");
+
+
+
+
+        });
+
+    }
+
+//    void showGPIOOUTPUTRun(){
+//        // Create a widget for GPIO output pin
+//        QWidget* gpioOutputWidget = new QWidget();
+//        setCentralWidget(gpioOutputWidget);
+
+//        QVBoxLayout* gpioOutputLayout = new QVBoxLayout(gpioOutputWidget);
+
+//        // Create a QLabel to display the GPIO pin number
+//        QLabel* pinNumberLabel = new QLabel("Pin Number:", gpioOutputWidget);
+//        QLineEdit* pinNumberLineEdit = new QLineEdit(gpioOutputWidget);
+//        pinNumberLineEdit->setPlaceholderText("Enter the GPIO pin number");
+
+//        // Create a QComboBox to select the output value
+//        QLabel* valueLabel = new QLabel("Value:", gpioOutputWidget);
+//        QComboBox* valueComboBox = new QComboBox(gpioOutputWidget);
+//        valueComboBox->addItem("High");
+//        valueComboBox->addItem("Low");
+
+//        // Create a QPushButton to set the output value
+//        QPushButton* setValueButton = new QPushButton("Set Value", gpioOutputWidget);
+
+//        // Add the components to the layout
+//        gpioOutputLayout->addWidget(pinNumberLabel);
+//        gpioOutputLayout->addWidget(pinNumberLineEdit);
+//        gpioOutputLayout->addWidget(valueLabel);
+//        gpioOutputLayout->addWidget(valueComboBox);
+//        gpioOutputLayout->addWidget(setValueButton);
+
+//        // Set the layout for the widget
+//        gpioOutputWidget->setLayout(gpioOutputLayout);
+
+//        // Connect the signals and slots
+//        QObject::connect(setValueButton, &QPushButton::clicked, [pinNumberLineEdit, valueComboBox]() {
+//            // Set the output value of the selected GPIO pin
+//            QString pinNumber = pinNumberLineEdit->text();
+//            QString value = valueComboBox->currentText();
+//            // Code to set the output value of the selected GPIO pin
+//        });
+
+//    }
+        void showGPIOOUTPUTRun(){
+            // Create a widget for GPIO Output
+            QWidget* gpioOutputWidget = new QWidget();
+                    setCentralWidget(gpioOutputWidget);
+
+            QVBoxLayout* gpioOutputLayout = new QVBoxLayout(gpioOutputWidget);
+
+            // Create a QLabel to display the status of the LED
+            QLabel* ledStatusLabel = new QLabel("LED Status: OFF", gpioOutputWidget);
+
+            // Create a QPushButton to turn ON the LED
+            QPushButton* ledOnButton = new QPushButton("Turn ON LED", gpioOutputWidget);
+
+            // Create a QPushButton to turn OFF the LED
+            QPushButton* ledOffButton = new QPushButton("Turn OFF LED", gpioOutputWidget);
+
+            // Create a QLabel to display the status of the relay
+            QLabel* relayStatusLabel = new QLabel("Relay Status: OFF", gpioOutputWidget);
+
+            // Create a QPushButton to turn ON the relay
+            QPushButton* relayOnButton = new QPushButton("Turn ON Relay", gpioOutputWidget);
+
+            // Create a QPushButton to turn OFF the relay
+            QPushButton* relayOffButton = new QPushButton("Turn OFF Relay", gpioOutputWidget);
+
+
+            // Create a QLabel to display the status of the relay
+            QLabel* MotorStatusLabel = new QLabel("Motor Status: OFF", gpioOutputWidget);
+
+            // Create a QPushButton to turn ON the relay
+            QPushButton* MotorOnButton = new QPushButton("Power ON Motor", gpioOutputWidget);
+
+            // Create a QPushButton to turn OFF the relay
+            QPushButton* MotorOffButton = new QPushButton("Turn OFF Motor", gpioOutputWidget);
+
+            // Add the components to the layout
+            gpioOutputLayout->addWidget(ledStatusLabel);
+            auto buttonLayout = new QHBoxLayout();
+            buttonLayout->addWidget(ledOnButton);
+            buttonLayout->addWidget(ledOffButton);
+            gpioOutputLayout->addLayout(buttonLayout);
+
+            gpioOutputLayout->addWidget(relayStatusLabel);
+            auto buttonLayout1 = new QHBoxLayout();
+            buttonLayout1->addWidget(relayOnButton);
+            buttonLayout1->addWidget(relayOffButton);
+            gpioOutputLayout->addLayout(buttonLayout1);
+
+            gpioOutputLayout->addWidget(MotorStatusLabel);
+            auto buttonLayout2 = new QHBoxLayout();
+            buttonLayout2->addWidget(MotorOnButton);
+            buttonLayout2->addWidget(MotorOffButton);
+            gpioOutputLayout->addLayout(buttonLayout2);
+
+
+
+            // Set the layout for the widget
+            gpioOutputWidget->setLayout(gpioOutputLayout);
+
+
+            // adding some styles
+            QString styleSheet2 =
+                "QPushButton {"
+                "    background-color: gray;"
+                "    border: none;"
+                "    color: white;"
+                "    padding: 3px 3px;"
+                "    text-align: center;"
+                "    text-decoration: none;"
+                "    font-size: 14px;"
+                "    margin: 4px 2px;"
+                "    border-radius: 10px;"
+                "}"
+                ""
+                "QPushButton:hover {"
+                "    background-color: #3e8e41;"
+                "}";
+            QFont font("Segoe UI");
+
+            ledOnButton->setStyleSheet(styleSheet2);
+            ledOffButton->setStyleSheet(styleSheet2);
+            relayOnButton->setStyleSheet(styleSheet2);
+            relayOffButton->setStyleSheet(styleSheet2);
+            MotorOnButton->setStyleSheet(styleSheet2);
+            MotorOffButton->setStyleSheet(styleSheet2);
+
+            ledStatusLabel->setStyleSheet("font: bold 16px; color: #328930;");
+            relayStatusLabel->setStyleSheet("font: bold 16px; color: #328930;");
+
+            MotorStatusLabel->setStyleSheet("font: bold 16px; color: #328930;");
+
+
+
+
+            // Connect the signals and slots for LED control
+            QObject::connect(ledOnButton, &QPushButton::clicked, [ledStatusLabel]() {
+                // Code to turn ON the LED
+                // For example, set GPIO pin to HIGH
+                ledStatusLabel->setText("LED Status: ON");
+            });
+
+            QObject::connect(ledOffButton, &QPushButton::clicked, [ledStatusLabel]() {
+                // Code to turn OFF the LED
+                // For example, set GPIO pin to LOW
+                ledStatusLabel->setText("LED Status: OFF");
+            });
+
+            // Connect the signals and slots for relay control
+            QObject::connect(relayOnButton, &QPushButton::clicked, [relayStatusLabel]() {
+                // Code to turn ON the relay
+                // For example, set GPIO pin to HIGH
+                relayStatusLabel->setText("Relay Status: ON");
+            });
+
+            QObject::connect(relayOffButton, &QPushButton::clicked, [relayStatusLabel]() {
+                // Code to turn OFF the relay
+                // For example, set GPIO pin to LOW
+                relayStatusLabel->setText("Relay Status: OFF");
+            });
+
+
+            // Connect the signals and slots for Motor control
+            QObject::connect(MotorOnButton, &QPushButton::clicked, [MotorStatusLabel]() {
+                // Code to turn ON the relay
+                // For example, set GPIO pin to HIGH
+                MotorStatusLabel->setText("Motor Status: ON");
+            });
+
+            QObject::connect(MotorOffButton, &QPushButton::clicked, [MotorStatusLabel]() {
+                // Code to turn OFF the relay
+                // For example, set GPIO pin to LOW
+                MotorStatusLabel->setText("Motor Status: OFF");
+            });
+
+        }
+
 
 };
 

@@ -284,7 +284,7 @@ for (auto m : menus) {
   connect (action ,&QAction::triggered , this , &Runmode::showUART4Run);
 }
   else if(action->text()=="&UART5") {
-//      connect (action ,&QAction::triggered , this , &ConfigMode::showUART5config);
+      connect (action ,&QAction::triggered , this , &Runmode::showUART5Run);
   }
   else if(action->text()=="&USART1") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showUSART1config);
@@ -296,7 +296,7 @@ for (auto m : menus) {
       connect (action ,&QAction::triggered , this , &Runmode::showSPI1Run);
   }
   else if(action->text()=="&SPI2") {
-//      connect (action ,&QAction::triggered , this , &ConfigMode::showSPI2config);
+      connect (action ,&QAction::triggered , this , &Runmode::showSPI2Run);
   }
   else if(action->text()=="&SPI3") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showSPI3config);
@@ -320,13 +320,13 @@ for (auto m : menus) {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showDACOUT2config);
   }
   else if(action->text()=="GPIO_OUTPUT") {
-//      connect (action ,&QAction::triggered , this , &ConfigMode::showGPIOOUTPUTconfig);
+      connect (action ,&QAction::triggered , this , &Runmode::showGPIOOUTPUTRun);
   }
   else if(action->text()=="&GPIO_INPUT") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showGPIOINPUTconfig);
   }
   else if(action->text()=="Input Capture Mode") {
-//      connect (action ,&QAction::triggered , this , &ConfigMode::showFrequencyMesureconfig);
+      connect (action ,&QAction::triggered , this , &Runmode::showFrequencyMesureRun);
   }
 
 
@@ -346,38 +346,40 @@ void Runmode::sendRUNframe(){
     Uart* uart = Uart::getInstance();
    QSerialPort* serialPort = uart->getSerialPort();
 
+    QByteArray packet4;
 
-    QByteArray packet1;
-    QByteArray packet2;
-    QByteArray packet3;
-    QByteArray packet;
-
-    uint8_t messageIPID = 0x01;
-
-    uint8_t messageBaudID = 0x02;
-    uint8_t messageParityID = 0x03;
-    uint8_t messageStopID = 0x04;
-    uint8_t messageDataID = 0x05;
-    uint8_t messageFlowID = 0x06;
-
-    packet1.append(messageBaudID);
+    char delimiter1[2] = "*";
 
 
-    packet1.append(messageParityID);
+    uint8_t messageIPID = 0xA;
+
+    uint8_t messageBaudID = 0xB;
+    uint8_t messageParityID = 0xC;
+    uint8_t messageStopID = 0xD;
+    uint8_t messageDataID = 0xE;
+    uint8_t messageFlowID = 0xF;
+
+    packet4.append(messageBaudID);
+    packet4.append(delimiter1);
 
 
-    packet1.append(messageStopID);
+    packet4.append(messageParityID);
+    packet4.append(delimiter1);
 
 
-    packet1.append(messageDataID);
+    packet4.append(messageStopID);
+    packet4.append(delimiter1);
 
 
-    packet1.append(messageFlowID);
+    packet4.append(messageDataID);
+    packet4.append(delimiter1);
 
-    packet1.append("\n");
+    packet4.append(messageFlowID);
+
+    packet4.append("\n");
 
 
-//    serialPort->write(packet1);
+    serialPort->write(packet4);
 
 //    qint64 bytesWritten = serialPort->write(concatenated);
 
@@ -388,7 +390,7 @@ void Runmode::sendRUNframe(){
 
 
 
-    qDebug() << "RUN:" << packet1;
+    qDebug() << "RUN:" << packet4;
 
 
 
