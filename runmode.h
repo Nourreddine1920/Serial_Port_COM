@@ -915,64 +915,141 @@ private slots :
 
 //    }
         void showGPIOOUTPUTRun(){
-            // Create a widget for GPIO output
-            QWidget* gpioWidget = new QWidget();
-                    setCentralWidget(gpioWidget);
+            // Create a widget for GPIO Output
+            QWidget* gpioOutputWidget = new QWidget();
+                    setCentralWidget(gpioOutputWidget);
 
-            QVBoxLayout* gpioLayout = new QVBoxLayout(gpioWidget);
+            QVBoxLayout* gpioOutputLayout = new QVBoxLayout(gpioOutputWidget);
 
-            // Create a QLabel to display the GPIO pin number
-            QLabel* gpioPinLabel = new QLabel("GPIO Pin Number:", gpioWidget);
-            QSpinBox* gpioPinSpinBox = new QSpinBox(gpioWidget);
-            gpioPinSpinBox->setMinimum(0);
-            gpioPinSpinBox->setMaximum(31);
+            // Create a QLabel to display the status of the LED
+            QLabel* ledStatusLabel = new QLabel("LED Status: OFF", gpioOutputWidget);
 
-            // Create a QComboBox to select the GPIO pin direction
-            QLabel* gpioDirectionLabel = new QLabel("Direction:", gpioWidget);
-            QComboBox* gpioDirectionComboBox = new QComboBox(gpioWidget);
-            gpioDirectionComboBox->addItem("Input");
-            gpioDirectionComboBox->addItem("Output");
+            // Create a QPushButton to turn ON the LED
+            QPushButton* ledOnButton = new QPushButton("Turn ON LED", gpioOutputWidget);
 
-            // Create a QPushButton to set the GPIO pin direction
-            QPushButton* gpioSetDirectionButton = new QPushButton("Set Direction", gpioWidget);
+            // Create a QPushButton to turn OFF the LED
+            QPushButton* ledOffButton = new QPushButton("Turn OFF LED", gpioOutputWidget);
 
-            // Create a QLabel to display the GPIO pin value
-            QLabel* gpioValueLabel = new QLabel("Value:", gpioWidget);
-            QComboBox* gpioValueComboBox = new QComboBox(gpioWidget);
-            gpioValueComboBox->addItem("Low");
-            gpioValueComboBox->addItem("High");
+            // Create a QLabel to display the status of the relay
+            QLabel* relayStatusLabel = new QLabel("Relay Status: OFF", gpioOutputWidget);
 
-            // Create a QPushButton to set the GPIO pin value
-            QPushButton* gpioSetValueButton = new QPushButton("Set Value", gpioWidget);
+            // Create a QPushButton to turn ON the relay
+            QPushButton* relayOnButton = new QPushButton("Turn ON Relay", gpioOutputWidget);
+
+            // Create a QPushButton to turn OFF the relay
+            QPushButton* relayOffButton = new QPushButton("Turn OFF Relay", gpioOutputWidget);
+
+
+            // Create a QLabel to display the status of the relay
+            QLabel* MotorStatusLabel = new QLabel("Motor Status: OFF", gpioOutputWidget);
+
+            // Create a QPushButton to turn ON the relay
+            QPushButton* MotorOnButton = new QPushButton("Power ON Motor", gpioOutputWidget);
+
+            // Create a QPushButton to turn OFF the relay
+            QPushButton* MotorOffButton = new QPushButton("Turn OFF Motor", gpioOutputWidget);
 
             // Add the components to the layout
-            gpioLayout->addWidget(gpioPinLabel);
-            gpioLayout->addWidget(gpioPinSpinBox);
-            gpioLayout->addWidget(gpioDirectionLabel);
-            gpioLayout->addWidget(gpioDirectionComboBox);
-            gpioLayout->addWidget(gpioSetDirectionButton);
-            gpioLayout->addWidget(gpioValueLabel);
-            gpioLayout->addWidget(gpioValueComboBox);
-            gpioLayout->addWidget(gpioSetValueButton);
+            gpioOutputLayout->addWidget(ledStatusLabel);
+            auto buttonLayout = new QHBoxLayout();
+            buttonLayout->addWidget(ledOnButton);
+            buttonLayout->addWidget(ledOffButton);
+            gpioOutputLayout->addLayout(buttonLayout);
+
+            gpioOutputLayout->addWidget(relayStatusLabel);
+            auto buttonLayout1 = new QHBoxLayout();
+            buttonLayout1->addWidget(relayOnButton);
+            buttonLayout1->addWidget(relayOffButton);
+            gpioOutputLayout->addLayout(buttonLayout1);
+
+            gpioOutputLayout->addWidget(MotorStatusLabel);
+            auto buttonLayout2 = new QHBoxLayout();
+            buttonLayout2->addWidget(MotorOnButton);
+            buttonLayout2->addWidget(MotorOffButton);
+            gpioOutputLayout->addLayout(buttonLayout2);
+
+
 
             // Set the layout for the widget
-            gpioWidget->setLayout(gpioLayout);
+            gpioOutputWidget->setLayout(gpioOutputLayout);
 
-            // Connect the signals and slots
-            QObject::connect(gpioSetDirectionButton, &QPushButton::clicked, [gpioPinSpinBox, gpioDirectionComboBox]() {
-                // Set the direction of the selected GPIO pin
-                int gpioPinNumber = gpioPinSpinBox->value();
-                QString gpioDirection = gpioDirectionComboBox->currentText();
-                // Code to set the direction of the GPIO pin
+
+            // adding some styles
+            QString styleSheet2 =
+                "QPushButton {"
+                "    background-color: gray;"
+                "    border: none;"
+                "    color: white;"
+                "    padding: 3px 3px;"
+                "    text-align: center;"
+                "    text-decoration: none;"
+                "    font-size: 14px;"
+                "    margin: 4px 2px;"
+                "    border-radius: 10px;"
+                "}"
+                ""
+                "QPushButton:hover {"
+                "    background-color: #3e8e41;"
+                "}";
+            QFont font("Segoe UI");
+
+            ledOnButton->setStyleSheet(styleSheet2);
+            ledOffButton->setStyleSheet(styleSheet2);
+            relayOnButton->setStyleSheet(styleSheet2);
+            relayOffButton->setStyleSheet(styleSheet2);
+            MotorOnButton->setStyleSheet(styleSheet2);
+            MotorOffButton->setStyleSheet(styleSheet2);
+
+            ledStatusLabel->setStyleSheet("font: bold 16px; color: #328930;");
+            relayStatusLabel->setStyleSheet("font: bold 16px; color: #328930;");
+
+            MotorStatusLabel->setStyleSheet("font: bold 16px; color: #328930;");
+
+
+
+
+            // Connect the signals and slots for LED control
+            QObject::connect(ledOnButton, &QPushButton::clicked, [ledStatusLabel]() {
+                // Code to turn ON the LED
+                // For example, set GPIO pin to HIGH
+                ledStatusLabel->setText("LED Status: ON");
             });
 
-            QObject::connect(gpioSetValueButton, &QPushButton::clicked, [gpioPinSpinBox, gpioValueComboBox]() {
-                // Set the value of the selected GPIO pin
-                int gpioPinNumber = gpioPinSpinBox->value();
-                QString gpioValue = gpioValueComboBox->currentText();
-                // Code to set the value of the GPIO pin
+            QObject::connect(ledOffButton, &QPushButton::clicked, [ledStatusLabel]() {
+                // Code to turn OFF the LED
+                // For example, set GPIO pin to LOW
+                ledStatusLabel->setText("LED Status: OFF");
             });
+
+            // Connect the signals and slots for relay control
+            QObject::connect(relayOnButton, &QPushButton::clicked, [relayStatusLabel]() {
+                // Code to turn ON the relay
+                // For example, set GPIO pin to HIGH
+                relayStatusLabel->setText("Relay Status: ON");
+            });
+
+            QObject::connect(relayOffButton, &QPushButton::clicked, [relayStatusLabel]() {
+                // Code to turn OFF the relay
+                // For example, set GPIO pin to LOW
+                relayStatusLabel->setText("Relay Status: OFF");
+            });
+
+
+            // Connect the signals and slots for Motor control
+            QObject::connect(MotorOnButton, &QPushButton::clicked, [MotorStatusLabel]() {
+                // Code to turn ON the relay
+                // For example, set GPIO pin to HIGH
+                MotorStatusLabel->setText("Motor Status: ON");
+            });
+
+            QObject::connect(MotorOffButton, &QPushButton::clicked, [MotorStatusLabel]() {
+                // Code to turn OFF the relay
+                // For example, set GPIO pin to LOW
+                MotorStatusLabel->setText("Motor Status: OFF");
+            });
+
         }
+
 
 };
 
