@@ -11,6 +11,8 @@
 #include <QRadioButton>
 #include <QComboBox>
 #include <QSpinBox>
+#include "uart.h"
+#include <QSerialPort>
 
 namespace Ui {
 class Runmode;
@@ -96,12 +98,64 @@ private slots :
         // Connect the "send message" button to a slot
         connect(button1, &QPushButton::clicked, [=]() {
             QString message = lineEdit->text();
-//            textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+            Uart* uart = Uart::getInstance();
+            QSerialPort* serialPort = uart->getSerialPort();
+            char delimiter1[2] = "*";
+
+
             textBrowser->setTextColor(Qt::darkGreen);
+            QByteArray packet1;
+
+            QByteArray Message = message.toUtf8();
+            packet1.append(Message);
+            packet1.append(delimiter1);
+            packet1.append("\n");
+
+
+            qDebug() << "packet1 :"<<  packet1 ;
+
+
 
             textBrowser->append(message);
+
+            if (serialPort->isOpen() && serialPort->isWritable()) {
+                qint64 bytesWritten = serialPort->write(packet1);
+                if (bytesWritten == -1) {
+                    qDebug() << "Error: Failed to write data to serial port";
+                } else {
+                    qDebug() << bytesWritten << "bytes written to serial port";
+                }
+            } else {
+                qDebug() << "Error: Serial port is not open or not writable";
+            }
+
             lineEdit->clear();
         });
+
+
+        // Connect the "send message" button to a slot
+        connect(button2, &QPushButton::clicked, [=]() {
+            Uart* uart = Uart::getInstance();
+            QSerialPort* serialPort = uart->getSerialPort();
+
+            textBrowser->setTextColor(Qt::darkRed);
+
+            if (serialPort->isOpen() && serialPort->isReadable()) {
+                QByteArray responseData = serialPort->readAll();
+                if (!responseData.isEmpty()) {
+                    QString lastResponse = QString::fromUtf8(responseData);
+                    qDebug() << "Received data:" << lastResponse;
+                    textBrowser->append(lastResponse);
+                } else {
+                    qDebug() << "No data received from serial port";
+                    textBrowser->append("No data received from serial port");
+                }
+            } else {
+                qDebug() << "Error: Serial port is not open or not readable";
+                textBrowser->append("Error: Serial port is not open or not readable");
+            }
+        });
+
 
         // Set the layout for the widget
         widget->setLayout(layout);
