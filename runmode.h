@@ -13,6 +13,8 @@
 #include <QSpinBox>
 #include "uart.h"
 #include <QSerialPort>
+#include <QDate>
+#include <QTime>
 
 namespace Ui {
 class Runmode;
@@ -68,6 +70,9 @@ private slots :
             "    background-color: #3e8e41;"
             "}";
 
+        Uart* uart = Uart::getInstance();
+        QSerialPort* serialPort = uart->getSerialPort();
+
 
         // Create a vertical layout for the text browser, message input, and buttons
         auto layout = new QVBoxLayout(widget);
@@ -95,6 +100,18 @@ private slots :
         textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
 
 
+
+//        QByteArray buffer;
+//        const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+//        QByteArray data = serialPort->readAll();
+//        buffer.append(data);
+////                QString message(data);
+//        qDebug() << "Received message:" << data;
+
+//        textBrowser->append(buffer);
+
         // Connect the "send message" button to a slot
         connect(button1, &QPushButton::clicked, [=]() {
             QString message = lineEdit->text();
@@ -109,7 +126,7 @@ private slots :
             QByteArray Message = message.toUtf8();
             packet1.append(Message);
             packet1.append(delimiter1);
-            packet1.append("\n");
+            packet1.append("\r");
 
 
             qDebug() << "packet1 :"<<  packet1 ;
@@ -135,25 +152,41 @@ private slots :
 
         // Connect the "send message" button to a slot
         connect(button2, &QPushButton::clicked, [=]() {
-            Uart* uart = Uart::getInstance();
-            QSerialPort* serialPort = uart->getSerialPort();
 
             textBrowser->setTextColor(Qt::darkRed);
 
-            if (serialPort->isOpen() && serialPort->isReadable()) {
-                QByteArray responseData = serialPort->readAll();
-                if (!responseData.isEmpty()) {
-                    QString lastResponse = QString::fromUtf8(responseData);
-                    qDebug() << "Received data:" << lastResponse;
-                    textBrowser->append(lastResponse);
-                } else {
-                    qDebug() << "No data received from serial port";
-                    textBrowser->append("No data received from serial port");
-                }
-            } else {
-                qDebug() << "Error: Serial port is not open or not readable";
-                textBrowser->append("Error: Serial port is not open or not readable");
-            }
+//            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
+//            QByteArray responseData;
+//            while (serialPort->waitForReadyRead(100)) {
+//            responseData.append(serialPort->readAll());
+
+
+//            }
+
+//                if (!responseData.isEmpty()) {
+//                    lastResponse = QString::fromUtf8(responseData);
+
+//                    qDebug() << "Received data:" << lastResponse;
+//                    textBrowser->append(lastResponse);
+//                } else {
+//                    qDebug() << "No data received from serial port";
+//                    textBrowser->append("No data received from serial port");
+//                }
+
+            QByteArray buffer;
+            const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+            QByteArray data = serialPort->readAll();
+            buffer.append(data);
+//                QString message(data);
+            qDebug() << "Received message:" << data;
+
+
+
+            textBrowser->append(buffer);
+
+
         });
 
 
@@ -168,6 +201,10 @@ private slots :
 
         QWidget *widget = new QWidget(this);
         setCentralWidget(widget);
+
+        Uart* uart = Uart::getInstance();
+        QSerialPort* serialPort = uart->getSerialPort();
+
 
         auto textBrowser = new QTextBrowser(widget);
         auto label = new QLabel("Enter your message:", widget);
@@ -228,9 +265,90 @@ private slots :
 //            textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
             textBrowser->setTextColor(Qt::darkGreen);
 
+            char delimiter1[2] = "*";
+
+
+            textBrowser->setTextColor(Qt::darkGreen);
+            QByteArray packet1;
+
+            QByteArray Message = message.toUtf8();
+            packet1.append(Message);
+            packet1.append(delimiter1);
+            packet1.append("\r");
+
+
+            qDebug() << "packet1 :"<<  packet1 ;
+
             textBrowser->append(message);
+            QDate date = QDate::currentDate();
+            QString dateString = date.toString();
+
+
+            qDebug() << "date :  " <<dateString;
+
+            QTime time = QTime::currentTime();
+
+
+            QString timestring = time.toString();
+            qDebug() << "time :  " <<timestring;
+
+
+            textBrowser->append(message);
+
+            if (serialPort->isOpen() && serialPort->isWritable()) {
+                qint64 bytesWritten = serialPort->write(packet1);
+                if (bytesWritten == -1) {
+                    qDebug() << "Error: Failed to write data to serial port";
+                } else {
+                    qDebug() << bytesWritten << "bytes written to serial port";
+                }
+            } else {
+                qDebug() << "Error: Serial port is not open or not writable";
+            }
+
+
             lineEdit->clear();
         });
+
+
+        // Connect the "send message" button to a slot
+        connect(button2, &QPushButton::clicked, [=]() {
+
+            textBrowser->setTextColor(Qt::darkRed);
+
+//            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
+//            QByteArray responseData;
+//            while (serialPort->waitForReadyRead(100)) {
+//            responseData.append(serialPort->readAll());
+
+
+//            }
+
+//                if (!responseData.isEmpty()) {
+//                    lastResponse = QString::fromUtf8(responseData);
+
+//                    qDebug() << "Received data:" << lastResponse;
+//                    textBrowser->append(lastResponse);
+//                } else {
+//                    qDebug() << "No data received from serial port";
+//                    textBrowser->append("No data received from serial port");
+//                }
+
+            QByteArray buffer;
+            const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+            QByteArray data = serialPort->readAll();
+            buffer.append(data);
+//                QString message(data);
+            qDebug() << "Received message:" << data;
+
+
+
+            textBrowser->append(buffer);
+        });
+
+
 
         // Set the layout for the widget
         widget->setLayout(layout);
@@ -1067,12 +1185,73 @@ private slots :
                 // Code to turn ON the LED
                 // For example, set GPIO pin to HIGH
                 ledStatusLabel->setText("LED Status: ON");
+
+                Uart* uart = Uart::getInstance();
+                QSerialPort* serialPort = uart->getSerialPort();
+                char delimiter1[2] = "*";
+
+
+                QByteArray packet1;
+
+                packet1.append("ON");
+                packet1.append(delimiter1);
+                packet1.append("\r");
+
+
+                qDebug() << "packet1 :"<<  packet1 ;
+
+
+
+
+                if (serialPort->isOpen() && serialPort->isWritable()) {
+                    qint64 bytesWritten = serialPort->write(packet1);
+                    if (bytesWritten == -1) {
+                        qDebug() << "Error: Failed to write data to serial port";
+                    } else {
+                        qDebug() << bytesWritten << "bytes written to serial port";
+                    }
+                } else {
+                    qDebug() << "Error: Serial port is not open or not writable";
+                }
+
+
+
+
             });
 
             QObject::connect(ledOffButton, &QPushButton::clicked, [ledStatusLabel]() {
                 // Code to turn OFF the LED
                 // For example, set GPIO pin to LOW
                 ledStatusLabel->setText("LED Status: OFF");
+
+                Uart* uart = Uart::getInstance();
+                QSerialPort* serialPort = uart->getSerialPort();
+                char delimiter1[2] = "*";
+
+
+                QByteArray packet1;
+
+                packet1.append("OFF");
+                packet1.append(delimiter1);
+                packet1.append("\r");
+
+
+                qDebug() << "packet1 :"<<  packet1 ;
+
+
+
+
+                if (serialPort->isOpen() && serialPort->isWritable()) {
+                    qint64 bytesWritten = serialPort->write(packet1);
+                    if (bytesWritten == -1) {
+                        qDebug() << "Error: Failed to write data to serial port";
+                    } else {
+                        qDebug() << bytesWritten << "bytes written to serial port";
+                    }
+                } else {
+                    qDebug() << "Error: Serial port is not open or not writable";
+                }
+
             });
 
             // Connect the signals and slots for relay control

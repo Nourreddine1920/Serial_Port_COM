@@ -1179,9 +1179,25 @@ private slots :
 
                qDebug() << "Settings file path: " << settings.fileName();
 
+               QDate date = QDate::currentDate();
+               QString dateString = date.toString();
+
+
+               qDebug() << "date :  " <<dateString;
+
+               QTime time = QTime::currentTime();
+
+
+               QString timestring = time.toString();
+               qDebug() << "time :  " <<timestring;
+
+
+               QString Date = dateString +", " + timestring;
 
 
                settings.beginGroup("UART5Configs");
+
+               settings.setValue("Date", Date);
 
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
@@ -4607,6 +4623,10 @@ private slots :
 
                    qDebug() << "selected option:" << LeftBit;
                    qDebug() << "LeftBit:" << LeftBitConfig;
+
+
+
+
                });
 
                layout->addRow(LeftBitLabel, LeftBitComboBox);
@@ -4638,6 +4658,8 @@ private slots :
 
 
                settings.beginGroup("ADCConfigs");
+
+//               settings.setValue("date",dateString);
 
                settings.setValue("Channel",  Channel);
                settings.setValue("Resolution",  Resolution);
@@ -6583,7 +6605,7 @@ private slots :
         QLabel* PINLabel = new QLabel(tr("GPIO Output PIN "), this);
         QComboBox* PINComboBox = new QComboBox(this);
 
-        PINComboBox->addItems(QStringList() << "PG4" << "PG5" << "PG6" << "PG7" << "PG10" << "PG11" << "PG12" << "PG13" );
+        PINComboBox->addItems(QStringList() << "PB13" << "PB14" << "PB15" << "PB16" << "PB1" << "PB2" << "PB3" << "PB4" );
 
 
         PINLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");

@@ -499,6 +499,10 @@ void ConfigMode::returnDashboard()
          QList<QMenu*> menus = menuBar()->findChildren<QMenu*>();
          QSettings settings("UARTConfig.txt", QSettings::IniFormat);
           QSettings settingsSPI("SPIConfig.txt", QSettings::IniFormat);
+          QSettings settingsGPIO("GPIOConfig.txt", QSettings::IniFormat);
+          QSettings settingsADC("ADCConfig.txt", QSettings::IniFormat);
+
+
           char delimiter2[2] = ",";
           char delimiter1[2] = "|";
 
@@ -513,11 +517,16 @@ void ConfigMode::returnDashboard()
           QByteArray packet2;
           QByteArray packet3;
 
+          QByteArray packet4;
+          QByteArray packet5;
+
 
           bool uart4Found = false;
           bool uart5Found = false;
           bool spi1Found = false;
           bool spi2Found = false;
+          bool gpioFound = false;
+          bool adc1found=false;
 
 
 
@@ -885,12 +894,213 @@ void ConfigMode::returnDashboard()
             packet3.append(delimiter1);
 
             packet3.append(dataFirstbits);
-//            packet3.append(delimiter2);
+            packet3.append(delimiter2);
 
 
 //            serialPort->write(packet2);
 
         }
+
+
+        if (deviceName.startsWith("GPIO_OUTPUT")) {
+
+             qDebug() << "check" << deviceName.startsWith("GPIO_OUTPUT");
+            qDebug() << " device:" << deviceName;
+
+            gpioFound = true;
+
+
+            settingsGPIO.beginGroup("GPIOOUTPUTConfigs");
+
+            QString GPIO;
+            QString Mode;
+            QString PIN;
+            QString Speed;
+
+            QString GPIOConfig = settingsGPIO.value("GPIO" , GPIO).toString();
+            QString ModeConfig = settingsGPIO.value("Mode" , Mode).toString();
+            QString PINConfig = settingsGPIO.value("PIN" , PIN).toString();
+            QString SpeedConfig = settingsGPIO.value("Speed" , Speed).toString();
+            settingsGPIO.endGroup();
+
+            qDebug() << " GPIOConfig:" << GPIOConfig;
+
+            // Define the message ID and payload
+            uint8_t messageIPID1 = 0x11;
+
+            uint8_t messageBaudID1 = 0x12;
+            uint8_t messageParityID1 = 0x13;
+            uint8_t messageStopID1 = 0x14;
+            uint8_t messageDataID1 = 0x15;
+            uint8_t messageFlowID1 = 0x06;
+
+            QByteArray GPIO1 = GPIOConfig.toUtf8();
+            QByteArray Mode1 = ModeConfig.toUtf8();
+            QByteArray PIN1 = PINConfig.toUtf8();
+            QByteArray Speed1 = SpeedConfig.toUtf8();
+
+
+
+        //    QByteArray checking = "\n";
+
+
+        //    QByteArray payloadData = "This is my payload data";
+
+            // Create a message packet
+        //    packet.append(messageIPID);
+        //    packet.append(delimiter);
+
+//            packet1.append(delimiter2);
+
+            packet4.append(messageBaudID1);
+            packet4.append(delimiter1);
+
+            packet4.append(GPIO1);
+
+            packet4.append(delimiter1);
+            packet4.append(messageParityID1);
+            packet4.append(delimiter1);
+
+            packet4.append(Mode1);
+
+            packet4.append(delimiter1);
+            packet4.append(messageStopID1);
+            packet4.append(delimiter1);
+
+            packet4.append(PIN1);
+            packet4.append(delimiter1);
+
+            packet4.append(messageDataID1);
+            packet4.append(delimiter1);
+
+            packet4.append(Speed1);
+
+            packet4.append(delimiter1);
+
+
+
+
+//            serialPort->write(packet1);
+        }
+
+
+
+        if (deviceName.startsWith("ADC1")) {
+
+        qDebug() << " device:" << deviceName;
+
+        adc1found = true;
+
+
+
+
+        settingsADC.beginGroup("ADC1Configs");
+
+        QString Channel;
+        QString Resolution;
+        QString Scan;
+        QString Continuous;
+        QString Discontinuous;
+        QString EndConversion;
+        QString Behavior;
+        QString LeftBit;
+
+
+
+
+        QString ChannelConfig = settingsADC.value("Channel" , Channel).toString();
+        QString ResolutionConfig = settingsADC.value("Resolution" , Resolution).toString();
+        QString ScanConfig = settingsADC.value("Scan" , Scan).toString();
+        QString ContinuousConfig = settingsADC.value("Continuous" , Continuous).toString();
+        QString DiscontinuousConfig = settingsADC.value("Discontinuous" , Discontinuous).toString();
+        QString EndConversionConfig = settingsADC.value("EndConversion" , EndConversion).toString();
+        QString BehaviorConfig = settingsADC.value("Behavior" , Behavior).toString();
+        QString LeftBitConfig = settingsADC.value("LeftBit" , LeftBit).toString();
+
+
+
+        // Define the message ID and payload
+        // uint8_t messageIPID = 0x01;
+        uint8_t messageChannelID = 0x015;
+        uint8_t messageResolutionID = 0x03;
+        uint8_t messageScanID = 0x04;
+        uint8_t messageContinuousID = 0x05;
+        uint8_t messageDiscontinuousID = 0x06;
+        uint8_t messageEndConversionID = 0x07;
+        uint8_t messageBehaviorID = 0x08;
+        uint8_t messageLeftBitID = 0x09;
+
+        QByteArray dataChannel = ChannelConfig.toUtf8();
+        QByteArray dataResolution = ResolutionConfig.toUtf8();
+        QByteArray dataScan = ScanConfig.toUtf8();
+        QByteArray dataContinuous = ContinuousConfig.toUtf8();
+        QByteArray dataDiscontinuous= DiscontinuousConfig.toUtf8();
+        QByteArray dataEndConversion= EndConversionConfig.toUtf8();
+        QByteArray dataBehavior= BehaviorConfig.toUtf8();
+        QByteArray dataLeftBit= LeftBitConfig.toUtf8();
+
+        settingsADC.endGroup();
+
+
+
+        packet5.append(messageChannelID);
+        packet5.append(delimiter1);
+
+        packet5.append(dataChannel);
+
+        packet5.append(delimiter1);
+        packet5.append(messageResolutionID);
+        packet5.append(delimiter1);
+
+        packet5.append(dataResolution);
+
+        packet5.append(delimiter1);
+        packet5.append(messageScanID);
+        packet5.append(delimiter1);
+
+        packet5.append(dataScan);
+        packet5.append(delimiter1);
+
+        packet5.append(messageContinuousID);
+        packet5.append(delimiter1);
+
+        packet5.append(dataContinuous);
+        packet5.append(delimiter1);
+
+        packet5.append(messageDiscontinuousID);
+        packet5.append(delimiter1);
+
+        packet5.append(dataDiscontinuous);
+        packet5.append(delimiter1);
+
+        packet5.append(messageEndConversionID);
+        packet5.append(delimiter1);
+
+        packet5.append(dataEndConversion);
+        packet5.append(delimiter1);
+
+
+        packet5.append(messageBehaviorID);
+        packet5.append(delimiter1);
+
+        packet5.append(dataBehavior);
+        packet5.append(delimiter1);
+
+        packet5.append(messageLeftBitID);
+        packet5.append(delimiter1);
+
+        packet5.append(dataLeftBit);
+        packet5.append(delimiter1);
+
+
+
+
+
+        }
+
+
+
+        }}
 
 
 
@@ -978,7 +1188,7 @@ void ConfigMode::returnDashboard()
 
 
 
-        }}
+//        }}
 
          if (!uart4Found) {
          packet.append(delimiter2);
@@ -999,7 +1209,18 @@ void ConfigMode::returnDashboard()
 //         serialPort->write(packet2);
          }
 
-         QByteArray concatenated = packet + packet1 + packet2 + packet3;
+         if (!gpioFound) {
+         packet4.append(delimiter2);
+//         serialPort->write(packet2);
+         }
+
+         if (!adc1found) {
+         packet5.append(delimiter2);
+         // serialPort->write(packet2);
+         }
+
+
+         QByteArray concatenated = packet + packet1 + packet2 + packet3 + packet4 + packet5;
 
          concatenated.append("\n");
          qint64 bytesWritten = serialPort->write(concatenated);
@@ -1022,6 +1243,8 @@ void ConfigMode::returnDashboard()
          qDebug() << " packet2:" << packet2;
          qDebug() << " packet3:" << packet3;
 
+         qDebug() << " packet4:" << packet4;
+         qDebug() << " packet5:" << packet5;
 
          /******************************* getting notification ***************************************/
 

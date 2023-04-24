@@ -376,7 +376,7 @@ void Runmode::sendRUNframe(){
 
     packet4.append(messageFlowID);
 
-    packet4.append("\n");
+    packet4.append("\r");
 
 
     serialPort->write(packet4);
