@@ -975,7 +975,7 @@ void ConfigMode::returnDashboard()
 
             packet4.append(Speed1);
 
-            packet4.append(delimiter1);
+            packet4.append(delimiter2);
 
 
 
@@ -1090,7 +1090,7 @@ void ConfigMode::returnDashboard()
         packet5.append(delimiter1);
 
         packet5.append(dataLeftBit);
-        packet5.append(delimiter1);
+//        packet5.append(delimiter1);
 
 
 

@@ -714,6 +714,10 @@ private slots :
         QWidget* adcWidget = new QWidget();
         setCentralWidget(adcWidget);
 
+        Uart* uart = Uart::getInstance();
+        QSerialPort* serialPort = uart->getSerialPort();
+
+
         QVBoxLayout* adcLayout = new QVBoxLayout(adcWidget);
 
         // Create a QLabel to display the ADC device address
@@ -730,6 +734,7 @@ private slots :
 
         // Create a QPushButton to initiate the ADC read operation
         QPushButton* readButton = new QPushButton("Read", adcWidget);
+        QPushButton* writeButton = new QPushButton("Write", adcWidget);
 
         // Create a QTextBrowser to display the ADC read data
         QTextBrowser* dataTextBrowser = new QTextBrowser(adcWidget);
@@ -740,7 +745,11 @@ private slots :
         adcLayout->addWidget(channelLabel);
         adcLayout->addWidget(channelComboBox);
         adcLayout->addWidget(dataTextBrowser);
-        adcLayout->addWidget(readButton);
+        auto buttonLayout = new QHBoxLayout();
+        buttonLayout->addWidget(writeButton);
+        buttonLayout->addWidget(readButton);
+        adcLayout->addLayout(buttonLayout);
+
 
         // adding some styles
         QString styleSheet2 =
@@ -762,6 +771,7 @@ private slots :
         QFont font("Segoe UI");
 
         readButton->setStyleSheet(styleSheet2);
+        writeButton->setStyleSheet(styleSheet2);
         deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
         dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
         channelLabel->setStyleSheet("font: bold 13px; color: #328930;");
@@ -773,7 +783,44 @@ private slots :
         adcWidget->setLayout(adcLayout);
 
         // Connect the signals and slots
-        QObject::connect(readButton, &QPushButton::clicked, [deviceAddressLineEdit, channelComboBox, dataTextBrowser]() {
+
+        QObject::connect(writeButton, &QPushButton::clicked, [deviceAddressLineEdit, channelComboBox, dataTextBrowser,serialPort]() {
+            // Read data from the selected ADC channel
+            QString message = deviceAddressLineEdit->text();
+            char delimiter1[2] = "*";
+
+
+            dataTextBrowser->setTextColor(Qt::darkGreen);
+            QByteArray packet1;
+
+            QByteArray Message = message.toUtf8();
+            packet1.append(Message);
+            packet1.append(delimiter1);
+            packet1.append("\r");
+
+
+            qDebug() << "packet1 :"<<  packet1 ;
+
+
+
+            dataTextBrowser->append(message);
+
+            if (serialPort->isOpen() && serialPort->isWritable()) {
+                qint64 bytesWritten = serialPort->write(packet1);
+                if (bytesWritten == -1) {
+                    qDebug() << "Error: Failed to write data to serial port";
+                } else {
+                    qDebug() << bytesWritten << "bytes written to serial port";
+                }
+            } else {
+                qDebug() << "Error: Serial port is not open or not writable";
+            }
+
+            deviceAddressLineEdit->clear();
+
+
+        });
+        QObject::connect(readButton, &QPushButton::clicked, [deviceAddressLineEdit, channelComboBox, dataTextBrowser,serialPort]() {
             // Read data from the selected ADC channel
             QString deviceAddress = deviceAddressLineEdit->text();
             QString channel = channelComboBox->currentText();
@@ -782,7 +829,38 @@ private slots :
             dataTextBrowser->setTextColor(Qt::darkRed);
 
 
-            dataTextBrowser->append("No Data Coming");
+
+//            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
+//            QByteArray responseData;
+//            while (serialPort->waitForReadyRead(100)) {
+//            responseData.append(serialPort->readAll());
+
+
+//            }
+
+//                if (!responseData.isEmpty()) {
+//                    lastResponse = QString::fromUtf8(responseData);
+
+//                    qDebug() << "Received data:" << lastResponse;
+//                    textBrowser->append(lastResponse);
+//                } else {
+//                    qDebug() << "No data received from serial port";
+//                    textBrowser->append("No data received from serial port");
+//                }
+
+            QByteArray buffer;
+            const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+            QByteArray data = serialPort->readAll();
+            QString datastring(data);
+            buffer.append(data);
+//                QString message(data);
+            qDebug() << "Received message:" << datastring;
+
+
+
+            dataTextBrowser->append(datastring);
 
             deviceAddressLineEdit->clear();
 
