@@ -1179,9 +1179,25 @@ private slots :
 
                qDebug() << "Settings file path: " << settings.fileName();
 
+               QDate date = QDate::currentDate();
+               QString dateString = date.toString();
+
+
+               qDebug() << "date :  " <<dateString;
+
+               QTime time = QTime::currentTime();
+
+
+               QString timestring = time.toString();
+               qDebug() << "time :  " <<timestring;
+
+
+               QString Date = dateString +", " + timestring;
 
 
                settings.beginGroup("UART5Configs");
+
+               settings.setValue("Date", Date);
 
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
@@ -2938,1240 +2954,1102 @@ private slots :
 
     }
     void I2CConfig (){
-        QWidget *widget = new QWidget(this);
-        setCentralWidget(widget);
+            QWidget *widget = new QWidget(this);
+            setCentralWidget(widget);
 
-                // Create Layout form for I2C
-                QFormLayout* layout = new QFormLayout(this);
+                    // Create Layout form for I2C
+                    QFormLayout* layout = new QFormLayout(this);
 
-                QLabel* titleLabel = new QLabel("I2C configurations", this);
+                    QLabel* titleLabel = new QLabel("I2C configurations", this);
 
-                // Load the icon image
-                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+                    // Load the icon image
+                    QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
 
-                // Create a QLabel for the icon and set its size
-                QLabel* iconLabel = new QLabel(this);
-                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-                iconLabel->setFixedSize(30, 30);
+                    // Create a QLabel for the icon and set its size
+                    QLabel* iconLabel = new QLabel(this);
+                    iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                    iconLabel->setFixedSize(30, 30);
 
-                // Create a QHBoxLayout to hold the icon and the title label
-                QHBoxLayout* titleLayout = new QHBoxLayout();
-                titleLayout->addWidget(iconLabel);
-                titleLayout->addWidget(titleLabel);
-                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+                    // Create a QHBoxLayout to hold the icon and the title label
+                    QHBoxLayout* titleLayout = new QHBoxLayout();
+                    titleLayout->addWidget(iconLabel);
+                    titleLayout->addWidget(titleLabel);
+                    titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
 
-                // Set the font and style sheet for the title label
-                QFontDatabase fontDatabase;
-                QStringList fontFamilies = fontDatabase.families();
+                    // Set the font and style sheet for the title label
+                    QFontDatabase fontDatabase;
+                    QStringList fontFamilies = fontDatabase.families();
 
-                // Choose the first available font as the best font
-                QString bestFont = fontFamilies.first();
+                    // Choose the first available font as the best font
+                    QString bestFont = fontFamilies.first();
 
-                // Create a font object with the best font and size
-                QFont font(bestFont, 15);
+                    // Create a font object with the best font and size
+                    QFont font(bestFont, 15);
 
-                // Set the font and style sheet for the label
-                titleLabel->setFont(font);
-                iconLabel->setFont(font);
+                    // Set the font and style sheet for the label
+                    titleLabel->setFont(font);
+                    iconLabel->setFont(font);
 
-                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+                    titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+    //                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
-                titleLabel->setAlignment(Qt::AlignCenter);
-
-
-                // Add the title label and the icon to the main layout
-                layout->addRow(titleLayout);
+                    titleLabel->setAlignment(Qt::AlignCenter);
 
 
-                // ----------------------Create Timing----------------------//
-
-               QLabel* TimingLabel = new QLabel(tr("Custom Timing"), this);
-               QComboBox* TimingComboBox = new QComboBox(this);
-
-               TimingComboBox->addItems(QStringList() << "Enable" << "Disable");
-               TimingComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-               // Set the minimum width to 100 pixels
-               TimingComboBox->setMinimumWidth(10);
-               TimingLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               TimingComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+                    // Add the title label and the icon to the main layout
+                    layout->addRow(titleLayout);
 
 
-               layout->addRow(TimingLabel, TimingComboBox);
+                    // ----------------------Create AddressingMode----------------------//
 
-               // ----------------------- Save Timing configs into a I2CConfig.txt-----------------------------------//
+                   QLabel* AddressingMode = new QLabel(tr("AdressLenght"), this);
+                   QComboBox* AddressingModeBox = new QComboBox(this);
+
+                   AddressingModeBox->addItems(QStringList() << "7-bit" << "10-bit");
+                   AddressingModeBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+                   // Set the minimum width to 100 pixels
+                   AddressingModeBox->setMinimumWidth(10);
+                   AddressingMode->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                   AddressingModeBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
-               QString TimingConfig = settings.value("Timing", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
+                   layout->addRow(AddressingMode, AddressingModeBox);
 
-               int indexTiming = TimingComboBox->findText(TimingConfig);
-               if (indexTiming != -1)
-                   TimingComboBox->setCurrentIndex(indexTiming);
+                   // ----------------------- Save AdressLenght configs into a I2CConfig.txt-----------------------------------//
 
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString Timing; // declare stopBits outside of the lambda
 
-               connect(TimingComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Timing](int indexTiming){
-                   // Retrieve the selected option
+                   QString AdressLenghtConfig = settings.value("AdressLenght", "").toString();
+    //                QString stopBitsConfig;
+                   // Set the selected option in the combo box
+
+                   int indexAdressLenght= AddressingModeBox->findText(AdressLenghtConfig);
+                   if (indexAdressLenght != -1)
+                       AddressingModeBox->setCurrentIndex(indexAdressLenght);
+
+                   // Connect the combo box to the slot
+        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                   QString AddressingMODE; // declare stopBits outside of the lambda
+
+                   connect(AddressingModeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressingMODE](int indexAdressLenght){
+                       // Retrieve the selected option
+                       QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                       QString AddressingMODE = AddressingModeBox->itemText(indexAdressLenght);
+                       settings.beginGroup("I2CConfigs");
+
+
+                       // Store the selected option in the settings file
+                       settings.setValue("AdressLenght", AddressingMODE);
+                       settings.endGroup();
+
+                       // Retrieve the stored value and print to the console
+                       QString AdressLenghtConfig  = settings.value("AdressLenght" , AddressingMODE).toString();
+    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                       qDebug() << "selected option:" << AddressingMODE;
+                       qDebug() << "AdressLenght:" << AdressLenghtConfig;
+                   });
+
+                   // ----------------------Create DualAddressMode----------------------//
+
+                   QLabel* DualAddressModeLabel = new QLabel(tr("DualAddressMode"), this);
+                   QComboBox* DualAddressModeComboBox = new QComboBox(this);
+                   DualAddressModeComboBox->addItems(QStringList() << "Disable" << "Enable");
+                   DualAddressModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                   DualAddressModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+                   layout->addRow(DualAddressModeLabel, DualAddressModeComboBox);
+
+
+
+                   // ----------------------- Save DualAddressMode into a I2CConfig.txt-----------------------------------//
+
+
+                   QString DualAddressModeConfig = settings.value("DualAddressMode", "").toString();
+    //                QString stopBitsConfig;
+                   // Set the selected option in the combo box
+
+                   int indexDualAddressMode = DualAddressModeComboBox->findText(DualAddressModeConfig);
+                   if (indexDualAddressMode != -1)
+                       DualAddressModeComboBox->setCurrentIndex(indexDualAddressMode);
+
+                   // Connect the combo box to the slot
+        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                   QString DualAddressMode; // declare stopBits outside of the lambda
+
+                   connect(DualAddressModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DualAddressMode](int indexDualAddressMode){
+                       // Retrieve the selected option
+                       QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                       QString Speed = DualAddressModeComboBox->itemText(indexDualAddressMode);
+                       settings.beginGroup("I2CConfigs");
+
+
+                       // Store the selected option in the settings file
+                       settings.setValue("DualAddressMode", DualAddressMode);
+                       settings.endGroup();
+
+                       // Retrieve the stored value and print to the console
+                       QString DualAddressModeConfig = settings.value("DualAddressMode" , DualAddressMode).toString();
+    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                       qDebug() << "selected option:" << DualAddressMode;
+                       qDebug() << "Speed:" << DualAddressModeConfig;
+                   });
+
+
+
+
+
+                   // ----------------------Create AddressMasks----------------------//
+
+                   QLabel* AddressMasksLabel = new QLabel(tr("AddressMasks"), this);
+                   QComboBox* AddressMasksComboBox = new QComboBox(this);
+                   AddressMasksComboBox->addItems(QStringList() << "NO Mask" << "1 " << "2" <<"3"<<"4"<<"5"<<"6"<<"7");
+
+
+
+
+
+
+                   AddressMasksLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                   AddressMasksComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+                   layout->addRow(AddressMasksLabel, AddressMasksComboBox);
+
+
+
+                   // ----------------------- Save AddressMasks configs into a I2CConfig.txt-----------------------------------//
+
+
+                   QString AddressMasksConfig = settings.value("AddressMasks", "").toString();
+    //                QString stopBitsConfig;
+                   // Set the selected option in the combo box
+
+                   int indexAddressMasks = AddressMasksComboBox->findText(AddressMasksConfig);
+                   if (indexAddressMasks != -1)
+                       AddressMasksComboBox->setCurrentIndex(indexAddressMasks);
+
+                   // Connect the combo box to the slot
+        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                   QString AddressMasks; // declare stopBits outside of the lambda
+
+                   connect(AddressMasksComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressMasks](int indexAddressMasks){
+                       // Retrieve the selected option
+                       QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                       QString AddressMasks = AddressMasksComboBox->itemText(indexAddressMasks);
+                       settings.beginGroup("I2CConfigs");
+
+
+                       // Store the selected option in the settings file
+                       settings.setValue("AddressMasks", AddressMasks);
+                       settings.endGroup();
+
+                       // Retrieve the stored value and print to the console
+                       QString AddressMasksConfig = settings.value("AddressMasks" , AddressMasks).toString();
+    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                       qDebug() << "selected option:" << AddressMasks;
+                       qDebug() << "AddressMasks:" << AddressMasksConfig;
+                   });
+
+
+
+                   // ----------------------Create GeneralCallMode----------------------//
+
+                   QLabel* GeneralCallModeLabel = new QLabel(tr("GeneralCallMode"), this);
+                   QComboBox* GeneralCallModeComboBox = new QComboBox(this);
+                   GeneralCallModeComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
+                   GeneralCallModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                   GeneralCallModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+
+
+                   layout->addRow(GeneralCallModeLabel, GeneralCallModeComboBox);
+
+
+
+
+                   // ----------------------- Save GeneralCallMode configs into a I2CConfig.txt-----------------------------------//
+
+
+                   QString GeneralCallModeConfig = settings.value("GeneralCallMode", "").toString();
+    //                QString stopBitsConfig;
+                   // Set the selected option in the combo box
+
+                   int indexGeneralCallMode = GeneralCallModeComboBox->findText(GeneralCallModeConfig);
+                   if (indexGeneralCallMode != -1)
+                       GeneralCallModeComboBox->setCurrentIndex(indexGeneralCallMode);
+
+                   // Connect the combo box to the slot
+        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                   QString GeneralCallMode; // declare stopBits outside of the lambda
+
+                   connect(GeneralCallModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&GeneralCallMode](int indexGeneralCallMode){
+                       // Retrieve the selected option
+                       QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                       QString GeneralCallMode = GeneralCallModeComboBox->itemText(indexGeneralCallMode);
+                       settings.beginGroup("I2CConfigs");
+
+
+                       // Store the selected option in the settings file
+                       settings.setValue("GeneralCallMode", GeneralCallMode);
+                       settings.endGroup();
+
+                       // Retrieve the stored value and print to the console
+                       QString GeneralCallModeConfig = settings.value("GeneralCallMode" , GeneralCallMode).toString();
+    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                       qDebug() << "selected option:" << GeneralCallMode;
+                       qDebug() << "GeneralCallMode:" << GeneralCallModeConfig;
+                   });
+
+                   // ----------------------Create NoStretchMode----------------------//
+
+                                QLabel* NoStretchModeLabel = new QLabel(tr("NoStretchMode"), this);
+                                QComboBox* NoStretchModeComboBox = new QComboBox(this);
+                                NoStretchModeComboBox->addItems(QStringList() << "Enable" << "Disable " );
+
+
+
+
+
+
+                                NoStretchModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                                NoStretchModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+                                layout->addRow(NoStretchModeLabel, NoStretchModeComboBox);
+
+
+
+                                // ----------------------- Save NoStretchMode configs into a I2CConfig.txt-----------------------------------//
+
+
+                                QString NoStretchModeConfig = settings.value("AddressMasks", "").toString();
+                 //                QString stopBitsConfig;
+                                // Set the selected option in the combo box
+
+                                int indexNoStretchMode= NoStretchModeComboBox->findText(NoStretchModeConfig);
+                                if (indexNoStretchMode != -1)
+                                    NoStretchModeComboBox->setCurrentIndex(indexNoStretchMode);
+
+                                // Connect the combo box to the slot
+                     //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                                QString NoStretchMode; // declare stopBits outside of the lambda
+
+                                connect(NoStretchModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&NoStretchMode](int indexNoStretchMode){
+                                    // Retrieve the selected option
+                                    QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                                    QString NoStretchMode = NoStretchModeComboBox->itemText(indexNoStretchMode);
+                                    settings.beginGroup("I2CConfigs");
+
+
+                                    // Store the selected option in the settings file
+                                    settings.setValue("NoStretchMode", NoStretchMode);
+                                    settings.endGroup();
+
+                                    // Retrieve the stored value and print to the console
+                                    QString NoStretchModeConfig = settings.value("NoStretchMode" , NoStretchMode).toString();
+                 //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                                    qDebug() << "selected option:" << NoStretchMode;
+                                    qDebug() << "NoStretchMode:" << NoStretchModeConfig;
+                                });
+
+
+
+
+
+                   layout->setContentsMargins(0, 0, 0, 0);
+                   layout->setSpacing(30);
+
+                   // Create the vertical layout and add the form layout to it
+                   QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+                   verticalLayout->addStretch();
+                   verticalLayout->addLayout(layout);
+                   verticalLayout->addStretch();
+
+                   // Create the horizontal layout and add the vertical layout to it
+                   QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+                   horizontalLayout->addStretch();
+                   horizontalLayout->addLayout(verticalLayout);
+                   horizontalLayout->addStretch();
+
+                   // Set the widget layout to the horizontal layout
+
+                   widget->setLayout(horizontalLayout);
+                   widget->setGeometry(500, 500, 600, 500);
+
+
+
+
                    QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
-                   QString Timing = TimingComboBox->itemText(indexTiming);
+                   qDebug() << "Settings file path: " << settings.fileName();
+
+
+
+                   settings.beginGroup("I2CConfigs");
+
+                   settings.setValue("AdressLenght",  AddressingMODE);
+                   settings.setValue("DualAddressMode",  DualAddressMode);
+                   settings.setValue("AddressMasksConfig",  AddressMasksConfig);
+                   settings.setValue("AnalogFilter",  GeneralCallModeConfig);
+                   settings.setValue("NoStretchMode",  NoStretchMode);
+
+
+
+
+                   settings.endGroup();
+
                    settings.beginGroup("I2CConfigs");
 
 
-                   // Store the selected option in the settings file
-                   settings.setValue("Timing", Timing);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString TimingConfig = settings.value("Timing" , Timing).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-                   qDebug() << "selected option:" << Timing;
-                   qDebug() << "Timing:" << TimingConfig;
-               });
-
-               // ----------------------Create Speed Mode----------------------//
-
-               QLabel* SpeedLabel = new QLabel(tr("I2C Speed Mode"), this);
-               QComboBox* SpeedComboBox = new QComboBox(this);
-               SpeedComboBox->addItems(QStringList() << "Standart Mode" << "Fast Mode " << "Fast Mode Plus");
-               SpeedLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               SpeedComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-               layout->addRow(SpeedLabel, SpeedComboBox);
 
 
 
-               // ----------------------- Save Speed configs into a I2CConfig.txt-----------------------------------//
+
+        }
+
+        void I2C1Config (){
+            QWidget *widget = new QWidget(this);
+            setCentralWidget(widget);
+
+                    // Create Layout form for I2C
+                    QFormLayout* layout = new QFormLayout(this);
+
+                    QLabel* titleLabel = new QLabel("I2C1 configurations", this);
+
+                    // Load the icon image
+                    QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+
+                    // Create a QLabel for the icon and set its size
+                    QLabel* iconLabel = new QLabel(this);
+                    iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                    iconLabel->setFixedSize(30, 30);
+
+                    // Create a QHBoxLayout to hold the icon and the title label
+                    QHBoxLayout* titleLayout = new QHBoxLayout();
+                    titleLayout->addWidget(iconLabel);
+                    titleLayout->addWidget(titleLabel);
+                    titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+
+                    // Set the font and style sheet for the title label
+                    QFontDatabase fontDatabase;
+                    QStringList fontFamilies = fontDatabase.families();
+
+                    // Choose the first available font as the best font
+                    QString bestFont = fontFamilies.first();
+
+                    // Create a font object with the best font and size
+                    QFont font(bestFont, 15);
+
+                    // Set the font and style sheet for the label
+                    titleLabel->setFont(font);
+                    iconLabel->setFont(font);
+
+                    titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+    //                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+
+                    titleLabel->setAlignment(Qt::AlignCenter);
 
 
-               QString SpeedConfig = settings.value("Speed", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
+                    // Add the title label and the icon to the main layout
+                    layout->addRow(titleLayout);
 
-               int indexSpeed = SpeedComboBox->findText(SpeedConfig);
-               if (indexSpeed != -1)
-                   SpeedComboBox->setCurrentIndex(indexSpeed);
 
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString Speed; // declare stopBits outside of the lambda
 
-               connect(SpeedComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Speed](int indexSpeed){
-                   // Retrieve the selected option
+                    // ----------------------Create AddressingMode----------------------//
+
+                   QLabel* AddressingMode = new QLabel(tr("AdressLenght"), this);
+                   QComboBox* AddressingModeBox = new QComboBox(this);
+
+                   AddressingModeBox->addItems(QStringList() << "7-bit" << "10-bit");
+                   AddressingModeBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+                   // Set the minimum width to 100 pixels
+                   AddressingModeBox->setMinimumWidth(10);
+                   AddressingMode->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                   AddressingModeBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+                   layout->addRow(AddressingMode, AddressingModeBox);
+
+                   // ----------------------- Save AdressLenght configs into a I2CConfig.txt-----------------------------------//
+
+
+                   QString AdressLenghtConfig = settings.value("AdressLenght", "").toString();
+    //                QString stopBitsConfig;
+                   // Set the selected option in the combo box
+
+                   int indexAdressLenght= AddressingModeBox->findText(AdressLenghtConfig);
+                   if (indexAdressLenght != -1)
+                       AddressingModeBox->setCurrentIndex(indexAdressLenght);
+
+                   // Connect the combo box to the slot
+        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                   QString AddressingMODE; // declare stopBits outside of the lambda
+
+                   connect(AddressingModeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressingMODE](int indexAdressLenght){
+                       // Retrieve the selected option
+                       QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                       QString AddressingMODE = AddressingModeBox->itemText(indexAdressLenght);
+                       settings.beginGroup("I2C1Configs");
+
+
+                       // Store the selected option in the settings file
+                       settings.setValue("AdressLenght", AddressingMODE);
+                       settings.endGroup();
+
+                       // Retrieve the stored value and print to the console
+                       QString AdressLenghtConfig  = settings.value("AdressLenght" , AddressingMODE).toString();
+    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                       qDebug() << "selected option:" << AddressingMODE;
+                       qDebug() << "AdressLenght:" << AdressLenghtConfig;
+                   });
+
+                   // ----------------------Create DualAddressMode----------------------//
+
+                   QLabel* DualAddressModeLabel = new QLabel(tr("DualAddressMode"), this);
+                   QComboBox* DualAddressModeComboBox = new QComboBox(this);
+                   DualAddressModeComboBox->addItems(QStringList() << "Disable" << "Enable");
+                   DualAddressModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                   DualAddressModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+                   layout->addRow(DualAddressModeLabel, DualAddressModeComboBox);
+
+
+
+                   // ----------------------- Save DualAddressMode into a I2CConfig.txt-----------------------------------//
+
+
+                   QString DualAddressModeConfig = settings.value("DualAddressMode", "").toString();
+    //                QString stopBitsConfig;
+                   // Set the selected option in the combo box
+
+                   int indexDualAddressMode = DualAddressModeComboBox->findText(DualAddressModeConfig);
+                   if (indexDualAddressMode != -1)
+                       DualAddressModeComboBox->setCurrentIndex(indexDualAddressMode);
+
+                   // Connect the combo box to the slot
+        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                   QString DualAddressMode; // declare stopBits outside of the lambda
+
+                   connect(DualAddressModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DualAddressMode](int indexDualAddressMode){
+                       // Retrieve the selected option
+                       QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                       QString DualAddressMode = DualAddressModeComboBox->itemText(indexDualAddressMode);
+                       settings.beginGroup("I2C1Configs");
+
+
+                       // Store the selected option in the settings file
+                       settings.setValue("DualAddressMode", DualAddressMode);
+                       settings.endGroup();
+
+                       // Retrieve the stored value and print to the console
+                       QString DualAddressModeConfig = settings.value("DualAddressMode" , DualAddressMode).toString();
+    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                       qDebug() << "selected option:" << DualAddressMode;
+                       qDebug() << "DualAddressMode:" << DualAddressModeConfig;
+                   });
+
+
+
+
+
+                   // ----------------------Create AddressMasks----------------------//
+
+                   QLabel* AddressMasksLabel = new QLabel(tr("AddressMasks"), this);
+                   QComboBox* AddressMasksComboBox = new QComboBox(this);
+                   AddressMasksComboBox->addItems(QStringList() << "NO Mask" <<"Mask01" << "Mask02  " << "Mask03" <<"Mask04"<<"Mask05"<<"Mask06"<<"Mask07");
+
+
+
+
+
+
+                   AddressMasksLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                   AddressMasksComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+                   layout->addRow(AddressMasksLabel, AddressMasksComboBox);
+
+
+
+                   // ----------------------- Save Frequency configs into a I2CConfig.txt-----------------------------------//
+
+
+                   QString AddressMasksConfig = settings.value("AddressMasks", "").toString();
+    //                QString stopBitsConfig;
+                   // Set the selected option in the combo box
+
+                   int indexAddressMasks = AddressMasksComboBox->findText(AddressMasksConfig);
+                   if (indexAddressMasks != -1)
+                       AddressMasksComboBox->setCurrentIndex(indexAddressMasks);
+
+                   // Connect the combo box to the slot
+        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                   QString AddressMasks; // declare stopBits outside of the lambda
+
+                   connect(AddressMasksComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressMasks](int indexAddressMasks){
+                       // Retrieve the selected option
+                       QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                       QString AddressMasks = AddressMasksComboBox->itemText(indexAddressMasks);
+                       settings.beginGroup("I2C1Configs");
+
+
+                       // Store the selected option in the settings file
+                       settings.setValue("AddressMasks", AddressMasks);
+                       settings.endGroup();
+
+                       // Retrieve the stored value and print to the console
+                       QString AddressMasksConfig = settings.value("AddressMasks" , AddressMasks).toString();
+    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                       qDebug() << "selected option:" << AddressMasks;
+                       qDebug() << "AddressMasks:" << AddressMasksConfig;
+                   });
+
+
+
+                   // ----------------------Create GeneralCallMode----------------------//
+
+                   QLabel* GeneralCallModeLabel = new QLabel(tr("GeneralCallMode"), this);
+                   QComboBox* GeneralCallModeComboBox = new QComboBox(this);
+                   GeneralCallModeComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
+                   GeneralCallModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                   GeneralCallModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+                   layout->addRow(GeneralCallModeLabel, GeneralCallModeComboBox);
+
+
+
+                   // ----------------------- Save GeneralCallMode configs into a I2CConfig.txt-----------------------------------//
+
+
+                   QString GeneralCallModeConfig = settings.value("GeneralCallMode", "").toString();
+    //                QString stopBitsConfig;
+                   // Set the selected option in the combo box
+
+                   int indexGeneralCallMode = GeneralCallModeComboBox->findText(GeneralCallModeConfig);
+                   if (indexGeneralCallMode != -1)
+                       GeneralCallModeComboBox->setCurrentIndex(indexGeneralCallMode);
+
+                   // Connect the combo box to the slot
+        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                   QString GeneralCallMode; // declare stopBits outside of the lambda
+
+                   connect(GeneralCallModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&GeneralCallMode](int indexGeneralCallMode){
+                       // Retrieve the selected option
+                       QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                       QString GeneralCallMode = GeneralCallModeComboBox->itemText(indexGeneralCallMode);
+                       settings.beginGroup("I2C1Configs");
+
+
+                       // Store the selected option in the settings file
+                       settings.setValue("GeneralCallMode", GeneralCallMode);
+                       settings.endGroup();
+
+                       // Retrieve the stored value and print to the console
+                       QString GeneralCallModeConfig = settings.value("GeneralCallMode" , GeneralCallMode).toString();
+    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                       qDebug() << "selected option:" << GeneralCallMode;
+                       qDebug() << "GeneralCallMode:" << GeneralCallModeConfig;
+                   });
+
+                   // ----------------------Create NoStretchMode----------------------//
+
+                                QLabel* NoStretchModeLabel = new QLabel(tr("NoStretchMode"), this);
+                                QComboBox* NoStretchModeComboBox = new QComboBox(this);
+                                NoStretchModeComboBox->addItems(QStringList() << "Disable" << "Enable " );
+
+
+
+
+
+
+                                NoStretchModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                                NoStretchModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+                                layout->addRow(NoStretchModeLabel, NoStretchModeComboBox);
+
+
+
+                                // ----------------------- Save NoStretchMode configs into a I2CConfig.txt-----------------------------------//
+
+
+                                QString NoStretchModeConfig = settings.value("NoStretchMode", "").toString();
+                 //                QString stopBitsConfig;
+                                // Set the selected option in the combo box
+
+                                int indexNoStretchMode= NoStretchModeComboBox->findText(AddressMasksConfig);
+                                if (indexNoStretchMode != -1)
+                                    NoStretchModeComboBox->setCurrentIndex(indexNoStretchMode);
+
+                                // Connect the combo box to the slot
+                     //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                                QString NoStretchMode; // declare stopBits outside of the lambda
+
+                                connect(NoStretchModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&NoStretchMode](int indexNoStretchMode){
+                                    // Retrieve the selected option
+                                    QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                                    QString NoStretchMode = NoStretchModeComboBox->itemText(indexNoStretchMode);
+                                    settings.beginGroup("I2C1Configs");
+
+
+                                    // Store the selected option in the settings file
+                                    settings.setValue("NoStretchMode", NoStretchMode);
+                                    settings.endGroup();
+
+                                    // Retrieve the stored value and print to the console
+                                    QString NoStretchModeConfig = settings.value("NoStretchMode" , NoStretchMode).toString();
+                 //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                                    qDebug() << "selected option:" << NoStretchMode;
+                                    qDebug() << "NoStretchMode:" << NoStretchModeConfig;
+                                });
+
+
+
+
+                   layout->setContentsMargins(0, 0, 0, 0);
+                   layout->setSpacing(30);
+
+                   // Create the vertical layout and add the form layout to it
+                   QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+                   verticalLayout->addStretch();
+                   verticalLayout->addLayout(layout);
+                   verticalLayout->addStretch();
+
+                   // Create the horizontal layout and add the vertical layout to it
+                   QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+                   horizontalLayout->addStretch();
+                   horizontalLayout->addLayout(verticalLayout);
+                   horizontalLayout->addStretch();
+
+                   // Set the widget layout to the horizontal layout
+
+                   widget->setLayout(horizontalLayout);
+                   widget->setGeometry(500, 500, 600, 500);
+
+
+
                    QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
-                   QString Speed = SpeedComboBox->itemText(indexSpeed);
-                   settings.beginGroup("I2CConfigs");
+                   qDebug() << "Settings file path: " << settings.fileName();
 
 
-                   // Store the selected option in the settings file
-                   settings.setValue("Speed", Speed);
+
+                   settings.beginGroup("I2C1Configs");
+
+
+                   settings.setValue("AdressLenght",  AddressingMODE);
+                   settings.setValue("DualAddressMode",  DualAddressMode);
+                   settings.setValue("AddressMasksConfig",  AddressMasksConfig);
+                   settings.setValue("AnalogFilter",  GeneralCallModeConfig);
+                   settings.setValue("NoStretchMode",  NoStretchMode);
+
+
+
                    settings.endGroup();
 
-                   // Retrieve the stored value and print to the console
-                   QString SpeedConfig = settings.value("Speed" , Speed).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
-                   qDebug() << "selected option:" << Speed;
-                   qDebug() << "Speed:" << SpeedConfig;
-               });
 
+                   settings.beginGroup("I2C1Configs");
 
+                   settings.remove("Timing");
+                   settings.remove("Speed");
+                   settings.remove("Frequency");
+                   settings.remove("Rise");
+                   settings.remove("Fall");
+                    settings.remove("Converter");
+                     settings.remove("AnalogFilter");
+                       settings.remove("AddressMasksConfig");
+            settings.endGroup();
 
 
 
-               // ----------------------Create Frequency Speed----------------------//
 
-               QLabel* FrequencyLabel = new QLabel(tr("Speed Frequency"), this);
-               QComboBox* FrequencyComboBox = new QComboBox(this);
-               FrequencyComboBox->addItems(QStringList() << "200 KHz" << "400 KHz " << "1 MHz");
 
 
 
 
 
 
-               FrequencyLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FrequencyComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        }
+        void I2C2Config (){
+               QWidget *widget = new QWidget(this);
+               setCentralWidget(widget);
 
-               layout->addRow(FrequencyLabel, FrequencyComboBox);
+                       // Create Layout form for I2C
+                       QFormLayout* layout = new QFormLayout(this);
 
+                       QLabel* titleLabel = new QLabel("I2C2 configurations", this);
 
+                       // Load the icon image
+                       QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
 
-               // ----------------------- Save Frequency configs into a I2CConfig.txt-----------------------------------//
+                       // Create a QLabel for the icon and set its size
+                       QLabel* iconLabel = new QLabel(this);
+                       iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+                       iconLabel->setFixedSize(30, 30);
 
+                       // Create a QHBoxLayout to hold the icon and the title label
+                       QHBoxLayout* titleLayout = new QHBoxLayout();
+                       titleLayout->addWidget(iconLabel);
+                       titleLayout->addWidget(titleLabel);
+                       titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
 
-               QString FrequencyConfig = settings.value("Frequency", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
+                       // Set the font and style sheet for the title label
+                       QFontDatabase fontDatabase;
+                       QStringList fontFamilies = fontDatabase.families();
 
-               int indexFrequency = FrequencyComboBox->findText(FrequencyConfig);
-               if (indexFrequency != -1)
-                   FrequencyComboBox->setCurrentIndex(indexFrequency);
+                       // Choose the first available font as the best font
+                       QString bestFont = fontFamilies.first();
 
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString Frequency; // declare stopBits outside of the lambda
+                       // Create a font object with the best font and size
+                       QFont font(bestFont, 15);
 
-               connect(FrequencyComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Frequency](int indexFrequency){
-                   // Retrieve the selected option
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+                       // Set the font and style sheet for the label
+                       titleLabel->setFont(font);
+                       iconLabel->setFont(font);
 
-                   QString Frequency = FrequencyComboBox->itemText(indexFrequency);
-                   settings.beginGroup("I2CConfigs");
+                       titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
+       //                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
+                       titleLabel->setAlignment(Qt::AlignCenter);
 
-                   // Store the selected option in the settings file
-                   settings.setValue("Frequency", Frequency);
-                   settings.endGroup();
 
-                   // Retrieve the stored value and print to the console
-                   QString FrequencyConfig = settings.value("Frequency" , Frequency).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+                       // Add the title label and the icon to the main layout
+                       layout->addRow(titleLayout);
 
-                   qDebug() << "selected option:" << Frequency;
-                   qDebug() << "Frequency:" << FrequencyConfig;
-               });
 
+                       // ----------------------Create AddressingMode----------------------//
 
-               // ----------------------Create Rise Edge----------------------//
+                      QLabel* AddressingMode = new QLabel(tr("AdressLenght"), this);
+                      QComboBox* AddressingModeBox = new QComboBox(this);
 
-               QLabel* RiseLabel = new QLabel(tr("Rise Time"), this);
-               QSpinBox* RiseSpinBox = new QSpinBox(this);
-               RiseSpinBox->setMinimum(20);
-               RiseSpinBox->setMaximum(1000);
+                      AddressingModeBox->addItems(QStringList() << "7-bit" << "10-bit");
+                      AddressingModeBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+                      // Set the minimum width to 100 pixels
+                      AddressingModeBox->setMinimumWidth(10);
+                      AddressingMode->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                      AddressingModeBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-               RiseLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               RiseSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-               layout->addRow(RiseLabel, RiseSpinBox);
 
+                      layout->addRow(AddressingMode, AddressingModeBox);
 
+                      // ----------------------- Save AdressLenght configs into a I2CConfig.txt-----------------------------------//
 
-               //---------------------Save configuration into SPIConfig.txt---------------------------//
 
+                      QString AdressLenghtConfig = settings.value("AdressLenght", "").toString();
+       //                QString stopBitsConfig;
+                      // Set the selected option in the combo box
 
-               QString RiseConfig = settings.value("Rise", "").toString();
-               // Set the selected value in the spin box
-               RiseSpinBox->setValue(RiseConfig.toInt());
+                      int indexAdressLenght= AddressingModeBox->findText(AdressLenghtConfig);
+                      if (indexAdressLenght != -1)
+                          AddressingModeBox->setCurrentIndex(indexAdressLenght);
 
-               // Connect the spin box to the slot
-               QString Rise; // declare Rise outside of the lambda
-               connect(RiseSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Rise](int value){
-                   // Retrieve the selected value
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+                      // Connect the combo box to the slot
+           //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                      QString AddressingMODE; // declare stopBits outside of the lambda
 
-                   QString Rise = QString::number(value);
-                   settings.beginGroup("I2CConfigs");
+                      connect(AddressingModeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressingMODE](int indexAdressLenght){
+                          // Retrieve the selected option
+                          QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
-                   // Store the selected value in the settings file
-                   settings.setValue("Rise", Rise);
-                   settings.endGroup();
+                          QString AddressingMODE = AddressingModeBox->itemText(indexAdressLenght);
+                          settings.beginGroup("I2C2Configs");
 
-                   // Retrieve the stored value and print to the console
-                   QString RiseConfig = settings.value("Rise" , Rise).toString();
-                   qDebug() << "selected value:" << Rise;
-                   qDebug() << "Rise:" << RiseConfig;
-               });
 
+                          // Store the selected option in the settings file
+                          settings.setValue("AdressLenght", AddressingMODE);
+                          settings.endGroup();
 
+                          // Retrieve the stored value and print to the console
+                          QString AdressLenghtConfig  = settings.value("AdressLenght" , AddressingMODE).toString();
+       //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
+                          qDebug() << "selected option:" << AddressingMODE;
+                          qDebug() << "AdressLenght:" << AdressLenghtConfig;
+                      });
 
+                      // ----------------------Create DualAddressMode----------------------//
 
-               // ----------------------Create Fall edge----------------------//
+                      QLabel* DualAddressModeLabel = new QLabel(tr("DualAddressMode"), this);
+                      QComboBox* DualAddressModeComboBox = new QComboBox(this);
+                      DualAddressModeComboBox->addItems(QStringList() << "Disable" << "Enable");
+                      DualAddressModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                      DualAddressModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-               QLabel* FallLabel = new QLabel(tr("Fall Time"), this);
-               QSpinBox* FallSpinBox = new QSpinBox(this);
-               FallSpinBox->setMinimum(10);
-               FallSpinBox->setMaximum(300);
+                      layout->addRow(DualAddressModeLabel, DualAddressModeComboBox);
 
-               FallLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FallSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-               layout->addRow(FallLabel, FallSpinBox);
 
 
+                      // ----------------------- Save DualAddressMode into a I2CConfig.txt-----------------------------------//
 
-               //---------------------Save configuration into SPIConfig.txt---------------------------//
 
+                      QString DualAddressModeConfig = settings.value("DualAddressMode", "").toString();
+       //                QString stopBitsConfig;
+                      // Set the selected option in the combo box
 
-               QString FallConfig = settings.value("Fall", "").toString();
-               // Set the selected value in the spin box
-               FallSpinBox->setValue(FallConfig.toInt());
+                      int indexDualAddressMode = DualAddressModeComboBox->findText(DualAddressModeConfig);
+                      if (indexDualAddressMode != -1)
+                          DualAddressModeComboBox->setCurrentIndex(indexDualAddressMode);
 
-               // Connect the spin box to the slot
-               QString Fall; // declare Fall outside of the lambda
-               connect(FallSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Fall](int value){
-                   // Retrieve the selected value
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+                      // Connect the combo box to the slot
+           //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                      QString DualAddressMode; // declare stopBits outside of the lambda
 
-                   QString Fall = QString::number(value);
-                   settings.beginGroup("I2CConfigs");
+                      connect(DualAddressModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DualAddressMode](int indexDualAddressMode){
+                          // Retrieve the selected option
+                          QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
-                   // Store the selected value in the settings file
-                   settings.setValue("Fall", Fall);
-                   settings.endGroup();
+                          QString DualAddressMode = DualAddressModeComboBox->itemText(indexDualAddressMode);
+                          settings.beginGroup("I2C2Configs");
 
-                   // Retrieve the stored value and print to the console
-                   QString FallConfig = settings.value("Fall" , Fall).toString();
-                   qDebug() << "selected value:" << Fall;
-                   qDebug() << "Fall:" << FallConfig;
-               });
 
+                          // Store the selected option in the settings file
+                          settings.setValue("DualAddressMode", DualAddressMode);
+                          settings.endGroup();
 
+                          // Retrieve the stored value and print to the console
+                          QString DualAddressModeConfig = settings.value("DualAddressMode" , DualAddressMode).toString();
+       //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
-               // ----------------------Create Converter----------------------//
+                          qDebug() << "selected option:" << DualAddressMode;
+                          qDebug() << "DualAddressMode:" << DualAddressModeConfig;
+                      });
 
-               QLabel* ConverterLabel = new QLabel(tr("Coefficient of Digital Converter"), this);
-               QSpinBox* ConverterSpinBox = new QSpinBox(this);
-               ConverterSpinBox->setMinimum(0);
-               ConverterSpinBox->setMaximum(16);
 
-               ConverterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               ConverterSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-               layout->addRow(ConverterLabel, ConverterSpinBox);
 
 
-               //---------------------Save configuration into SPIConfig.txt---------------------------//
 
+                      // ----------------------Create AddressMasks----------------------//
 
-               QString ConverterConfig = settings.value("Converter", "").toString();
-               // Set the selected value in the spin box
-               ConverterSpinBox->setValue(ConverterConfig.toInt());
+                      QLabel* AddressMasksLabel = new QLabel(tr("AddressMasks"), this);
+                      QComboBox* AddressMasksComboBox = new QComboBox(this);
+                       AddressMasksComboBox->addItems(QStringList() << "NO Mask" <<"Mask01" << "Mask02  " << "Mask03" <<"Mask04"<<"Mask05"<<"Mask06"<<"Mask07");
 
-               // Connect the spin box to the slot
-               QString Converter; // declare Converter outside of the lambda
-               connect(ConverterSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Converter](int value){
-                   // Retrieve the selected value
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
-                   QString Converter = QString::number(value);
-                   settings.beginGroup("I2CConfigs");
 
-                   // Store the selected value in the settings file
-                   settings.setValue("Converter", Converter);
-                   settings.endGroup();
 
-                   // Retrieve the stored value and print to the console
-                   QString ConverterConfig = settings.value("Converter" , Converter).toString();
-                   qDebug() << "selected value:" << Converter;
-                   qDebug() << "Converter:" << ConverterConfig;
-               });
 
 
-               // ----------------------Create Analog Filter----------------------//
+                      AddressMasksLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                      AddressMasksComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
-               QLabel* AnalogFilterLabel = new QLabel(tr("Analog Filter"), this);
-               QComboBox* AnalogFilterComboBox = new QComboBox(this);
-               AnalogFilterComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
-               AnalogFilterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               AnalogFilterComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+                      layout->addRow(AddressMasksLabel, AddressMasksComboBox);
 
 
 
-               // ----------------------- Save Analog Filter configs into a I2CConfig.txt-----------------------------------//
+                      // ----------------------- Save AddressMasks configs into a I2CConfig.txt-----------------------------------//
 
 
-               QString AnalogFilterConfig = settings.value("AnalogFilter", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
+                      QString AddressMasksConfig = settings.value("AddressMasks", "").toString();
+       //                QString stopBitsConfig;
+                      // Set the selected option in the combo box
 
-               int indexAnalogFilter = AnalogFilterComboBox->findText(AnalogFilterConfig);
-               if (indexAnalogFilter != -1)
-                   AnalogFilterComboBox->setCurrentIndex(indexAnalogFilter);
+                      int indexAddressMasks = AddressMasksComboBox->findText(AddressMasksConfig);
+                      if (indexAddressMasks != -1)
+                          AddressMasksComboBox->setCurrentIndex(indexAddressMasks);
 
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString AnalogFilter; // declare stopBits outside of the lambda
+                      // Connect the combo box to the slot
+           //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                      QString AddressMasks; // declare stopBits outside of the lambda
 
-               connect(AnalogFilterComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AnalogFilter](int indexAnalogFilter){
-                   // Retrieve the selected option
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+                      connect(AddressMasksComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressMasks](int indexAddressMasks){
+                          // Retrieve the selected option
+                          QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
-                   QString AnalogFilter = AnalogFilterComboBox->itemText(indexAnalogFilter);
-                   settings.beginGroup("I2CConfigs");
+                          QString AddressMasks = AddressMasksComboBox->itemText(indexAddressMasks);
+                          settings.beginGroup("I2C2Configs");
 
 
-                   // Store the selected option in the settings file
-                   settings.setValue("AnalogFilter", AnalogFilter);
-                   settings.endGroup();
+                          // Store the selected option in the settings file
+                          settings.setValue("AddressMasks", AddressMasks);
+                          settings.endGroup();
 
-                   // Retrieve the stored value and print to the console
-                   QString AnalogFilterConfig = settings.value("AnalogFilter" , AnalogFilter).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+                          // Retrieve the stored value and print to the console
+                          QString AddressMasksConfig = settings.value("AddressMasks" , AddressMasks).toString();
+       //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
-                   qDebug() << "selected option:" << AnalogFilter;
-                   qDebug() << "AnalogFilter:" << AnalogFilterConfig;
-               });
+                          qDebug() << "selected option:" << AddressMasks;
+                          qDebug() << "AddressMasks:" << AddressMasksConfig;
+                      });
 
 
-               layout->addRow(AnalogFilterLabel, AnalogFilterComboBox);
-               layout->setContentsMargins(0, 0, 0, 0);
-               layout->setSpacing(30);
 
-               // Create the vertical layout and add the form layout to it
-               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
-               verticalLayout->addStretch();
-               verticalLayout->addLayout(layout);
-               verticalLayout->addStretch();
+                      // ----------------------Create GeneralCallMode----------------------//
 
-               // Create the horizontal layout and add the vertical layout to it
-               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
-               horizontalLayout->addStretch();
-               horizontalLayout->addLayout(verticalLayout);
-               horizontalLayout->addStretch();
+                      QLabel* GeneralCallModeLabel = new QLabel(tr("GeneralCallMode"), this);
+                      QComboBox* GeneralCallModeComboBox = new QComboBox(this);
+                      GeneralCallModeComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
+                      GeneralCallModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                      GeneralCallModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+                      layout->addRow(GeneralCallModeLabel, GeneralCallModeComboBox);
 
-               // Set the widget layout to the horizontal layout
 
-               widget->setLayout(horizontalLayout);
-               widget->setGeometry(500, 500, 600, 500);
 
+                      // ----------------------- Save GeneralCallMode configs into a I2CConfig.txt-----------------------------------//
 
-               QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
-               qDebug() << "Settings file path: " << settings.fileName();
+                      QString GeneralCallModeConfig = settings.value("GeneralCallMode", "").toString();
+       //                QString stopBitsConfig;
+                      // Set the selected option in the combo box
 
+                      int indexGeneralCallMode = GeneralCallModeComboBox->findText(GeneralCallModeConfig);
+                      if (indexGeneralCallMode != -1)
+                          GeneralCallModeComboBox->setCurrentIndex(indexGeneralCallMode);
 
+                      // Connect the combo box to the slot
+           //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                      QString GeneralCallMode; // declare stopBits outside of the lambda
 
-               settings.beginGroup("I2CConfigs");
+                      connect(GeneralCallModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&GeneralCallMode](int indexGeneralCallMode){
+                          // Retrieve the selected option
+                          QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
-               settings.setValue("Timing",  Timing);
-               settings.setValue("Speed",  Speed);
-               settings.setValue("Frequency",  Frequency);
-               settings.setValue("Rise",  Rise);
-               settings.setValue("Fall",  Fall);
-               settings.setValue("Converter",  Converter);
-               settings.setValue("AnalogFilter",  AnalogFilter);
+                          QString GeneralCallMode = GeneralCallModeComboBox->itemText(indexGeneralCallMode);
+                          settings.beginGroup("I2C2Configs");
 
 
+                          // Store the selected option in the settings file
+                          settings.setValue("GeneralCallMode", GeneralCallMode);
+                          settings.endGroup();
+
+                          // Retrieve the stored value and print to the console
+                          QString GeneralCallModeConfig = settings.value("GeneralCallMode" , GeneralCallMode).toString();
+       //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                          qDebug() << "selected option:" << GeneralCallMode;
+                          qDebug() << "GeneralCallMode:" << GeneralCallModeConfig;
+                      });
+
+                      // ----------------------Create NoStretchMode----------------------//
+
+                                   QLabel* NoStretchModeLabel = new QLabel(tr("NoStretchMode"), this);
+                                   QComboBox* NoStretchModeComboBox = new QComboBox(this);
+                                   NoStretchModeComboBox->addItems(QStringList() << "Enable" << "Disable " );
+
+
+
+
+
+
+                                   NoStretchModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
+                                   NoStretchModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+                                   layout->addRow(NoStretchModeLabel, NoStretchModeComboBox);
+
+
+
+                                   // ----------------------- Save NoStretchMode configs into a I2CConfig.txt-----------------------------------//
+
+
+                                   QString NoStretchModeConfig = settings.value("NoStretchMode", "").toString();
+                    //                QString stopBitsConfig;
+                                   // Set the selected option in the combo box
+
+                                   int indexNoStretchMode= NoStretchModeComboBox->findText(AddressMasksConfig);
+                                   if (indexNoStretchMode != -1)
+                                       NoStretchModeComboBox->setCurrentIndex(indexNoStretchMode);
+
+                                   // Connect the combo box to the slot
+                        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
+                                   QString NoStretchMode; // declare stopBits outside of the lambda
+
+                                   connect(NoStretchModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&NoStretchMode](int indexNoStretchMode){
+                                       // Retrieve the selected option
+                                       QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                                       QString NoStretchMode = NoStretchModeComboBox->itemText(indexNoStretchMode);
+                                       settings.beginGroup("I2C2Configs");
+
+
+                                       // Store the selected option in the settings file
+                                       settings.setValue("NoStretchMode", NoStretchMode);
+                                       settings.endGroup();
+
+                                       // Retrieve the stored value and print to the console
+                                       QString NoStretchModeConfig = settings.value("NoStretchMode" , NoStretchMode).toString();
+                    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
+
+                                       qDebug() << "selected option:" << NoStretchMode;
+                                       qDebug() << "NoStretchMode:" << NoStretchModeConfig;
+                                   });
+
+
+
+
+
+                      layout->setContentsMargins(0, 0, 0, 0);
+                      layout->setSpacing(30);
+
+                      // Create the vertical layout and add the form layout to it
+                      QVBoxLayout* verticalLayout = new QVBoxLayout(this);
+                      verticalLayout->addStretch();
+                      verticalLayout->addLayout(layout);
+                      verticalLayout->addStretch();
+
+                      // Create the horizontal layout and add the vertical layout to it
+                      QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
+                      horizontalLayout->addStretch();
+                      horizontalLayout->addLayout(verticalLayout);
+                      horizontalLayout->addStretch();
+
+                      // Set the widget layout to the horizontal layout
+
+                      widget->setLayout(horizontalLayout);
+                      widget->setGeometry(500, 500, 600, 500);
+
+
+                      QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+
+                      qDebug() << "Settings file path: " << settings.fileName();
+
+
+
+                      settings.beginGroup("I2C2Configs");
+
+
+                      settings.setValue("AdressLenght",  AddressingMODE);
+                      settings.setValue("DualAddressMode",  DualAddressMode);
+                      settings.setValue("AddressMasksConfig",  AddressMasksConfig);
+                      settings.setValue("AnalogFilter",  GeneralCallModeConfig);
+                      settings.setValue("NoStretchMode",  NoStretchMode);
+
+
+
+                      settings.endGroup();
+
+
+
+                      settings.beginGroup("I2C2Configs");
+
+                      settings.remove("Timing");
+                      settings.remove("Speed");
+                      settings.remove("Frequency");
+                      settings.remove("Rise");
+                      settings.remove("Fall");
+                       settings.remove("Converter");
+                        settings.remove("AnalogFilter");
+                          settings.remove("AddressMasksConfig");
                settings.endGroup();
 
 
 
 
-    }
-
-    void I2C1Config (){
-        QWidget *widget = new QWidget(this);
-        setCentralWidget(widget);
-
-                // Create Layout form for I2C
-                QFormLayout* layout = new QFormLayout(this);
-
-                QLabel* titleLabel = new QLabel("I2C1 configurations", this);
-
-                // Load the icon image
-                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
-
-                // Create a QLabel for the icon and set its size
-                QLabel* iconLabel = new QLabel(this);
-                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-                iconLabel->setFixedSize(30, 30);
-
-                // Create a QHBoxLayout to hold the icon and the title label
-                QHBoxLayout* titleLayout = new QHBoxLayout();
-                titleLayout->addWidget(iconLabel);
-                titleLayout->addWidget(titleLabel);
-                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
-
-                // Set the font and style sheet for the title label
-                QFontDatabase fontDatabase;
-                QStringList fontFamilies = fontDatabase.families();
-
-                // Choose the first available font as the best font
-                QString bestFont = fontFamilies.first();
-
-                // Create a font object with the best font and size
-                QFont font(bestFont, 15);
-
-                // Set the font and style sheet for the label
-                titleLabel->setFont(font);
-                iconLabel->setFont(font);
-
-                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-
-                titleLabel->setAlignment(Qt::AlignCenter);
-
-
-                // Add the title label and the icon to the main layout
-                layout->addRow(titleLayout);
-
-
-                // ----------------------Create Timing----------------------//
-
-               QLabel* TimingLabel = new QLabel(tr("Custom Timing"), this);
-               QComboBox* TimingComboBox = new QComboBox(this);
-
-               TimingComboBox->addItems(QStringList() << "Enable" << "Disable");
-               TimingComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-               // Set the minimum width to 100 pixels
-               TimingComboBox->setMinimumWidth(10);
-               TimingLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               TimingComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-
-               layout->addRow(TimingLabel, TimingComboBox);
-
-
-               // ----------------------- Save Timing configs into a I2CConfig.txt-----------------------------------//
-
-
-               QString TimingConfig = settings.value("Timing", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
-
-               int indexTiming = TimingComboBox->findText(TimingConfig);
-               if (indexTiming != -1)
-                   TimingComboBox->setCurrentIndex(indexTiming);
-
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString Timing; // declare stopBits outside of the lambda
-
-               connect(TimingComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Timing](int indexTiming){
-                   // Retrieve the selected option
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Timing = TimingComboBox->itemText(indexTiming);
-                   settings.beginGroup("I2C1Configs");
-
-
-                   // Store the selected option in the settings file
-                   settings.setValue("Timing", Timing);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString TimingConfig = settings.value("Timing" , Timing).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-                   qDebug() << "selected option:" << Timing;
-                   qDebug() << "Timing:" << TimingConfig;
-               });
-
-
-
-
-               // ----------------------Create Speed Mode----------------------//
-
-               QLabel* SpeedLabel = new QLabel(tr("I2C Speed Mode"), this);
-               QComboBox* SpeedComboBox = new QComboBox(this);
-               SpeedComboBox->addItems(QStringList() << "Standart Mode" << "Fast Mode " << "Fast Mode Plus");
-               SpeedLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               SpeedComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-               layout->addRow(SpeedLabel, SpeedComboBox);
-
-
-               // ----------------------- Save Speed configs into a I2CConfig.txt-----------------------------------//
-
-
-               QString SpeedConfig = settings.value("Speed", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
-
-               int indexSpeed = SpeedComboBox->findText(SpeedConfig);
-               if (indexSpeed != -1)
-                   SpeedComboBox->setCurrentIndex(indexSpeed);
-
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString Speed; // declare stopBits outside of the lambda
-
-               connect(SpeedComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Speed](int indexSpeed){
-                   // Retrieve the selected option
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Speed = SpeedComboBox->itemText(indexSpeed);
-                   settings.beginGroup("I2C1Configs");
-
-
-                   // Store the selected option in the settings file
-                   settings.setValue("Speed", Speed);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString SpeedConfig = settings.value("Speed" , Speed).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-                   qDebug() << "selected option:" << Speed;
-                   qDebug() << "Speed:" << SpeedConfig;
-               });
-
-
-               // ----------------------Create Frequency Speed----------------------//
-
-               QLabel* FrequencyLabel = new QLabel(tr("Speed Frequency"), this);
-               QComboBox* FrequencyComboBox = new QComboBox(this);
-               FrequencyComboBox->addItems(QStringList() << "200 KHz" << "400 KHz " << "1 MHz");
-
-
-
-
-
-
-               FrequencyLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FrequencyComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-               layout->addRow(FrequencyLabel, FrequencyComboBox);
-
-
-
-               // ----------------------- Save Frequency configs into a I2CConfig.txt-----------------------------------//
-
-
-               QString FrequencyConfig = settings.value("Frequency", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
-
-               int indexFrequency = FrequencyComboBox->findText(FrequencyConfig);
-               if (indexFrequency != -1)
-                   FrequencyComboBox->setCurrentIndex(indexFrequency);
-
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString Frequency; // declare stopBits outside of the lambda
-
-               connect(FrequencyComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Frequency](int indexFrequency){
-                   // Retrieve the selected option
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Frequency = FrequencyComboBox->itemText(indexFrequency);
-                   settings.beginGroup("I2C1Configs");
-
-
-                   // Store the selected option in the settings file
-                   settings.setValue("Frequency", Frequency);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString FrequencyConfig = settings.value("Frequency" , Frequency).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-                   qDebug() << "selected option:" << Frequency;
-                   qDebug() << "Frequency:" << FrequencyConfig;
-               });
-
-
-
-               // ----------------------Create Rise Edge----------------------//
-
-               QLabel* RiseLabel = new QLabel(tr("Rise Time"), this);
-               QSpinBox* RiseSpinBox = new QSpinBox(this);
-               RiseSpinBox->setMinimum(20);
-               RiseSpinBox->setMaximum(1000);
-
-               RiseLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               RiseSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-               layout->addRow(RiseLabel, RiseSpinBox);
-
-
-
-               //---------------------Save configuration into SPIConfig.txt---------------------------//
-
-
-               QString RiseConfig = settings.value("Rise", "").toString();
-               // Set the selected value in the spin box
-               RiseSpinBox->setValue(RiseConfig.toInt());
-
-               // Connect the spin box to the slot
-               QString Rise; // declare Rise outside of the lambda
-               connect(RiseSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Rise](int value){
-                   // Retrieve the selected value
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Rise = QString::number(value);
-                   settings.beginGroup("I2C1Configs");
-
-                   // Store the selected value in the settings file
-                   settings.setValue("Rise", Rise);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString RiseConfig = settings.value("Rise" , Rise).toString();
-                   qDebug() << "selected value:" << Rise;
-                   qDebug() << "Rise:" << RiseConfig;
-               });
-
-
-
-
-               // ----------------------Create Fall edge----------------------//
-
-               QLabel* FallLabel = new QLabel(tr("Fall Time"), this);
-               QSpinBox* FallSpinBox = new QSpinBox(this);
-               FallSpinBox->setMinimum(10);
-               FallSpinBox->setMaximum(300);
-
-               FallLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FallSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-               layout->addRow(FallLabel, FallSpinBox);
-
-
-               //---------------------Save configuration into SPIConfig.txt---------------------------//
-
-
-               QString FallConfig = settings.value("Fall", "").toString();
-               // Set the selected value in the spin box
-               FallSpinBox->setValue(FallConfig.toInt());
-
-               // Connect the spin box to the slot
-               QString Fall; // declare Fall outside of the lambda
-               connect(FallSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Fall](int value){
-                   // Retrieve the selected value
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Fall = QString::number(value);
-                   settings.beginGroup("I2C1Configs");
-
-                   // Store the selected value in the settings file
-                   settings.setValue("Fall", Fall);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString FallConfig = settings.value("Fall" , Fall).toString();
-                   qDebug() << "selected value:" << Fall;
-                   qDebug() << "Fall:" << FallConfig;
-               });
-
-
-
-               // ----------------------Create Converter----------------------//
-
-               QLabel* ConverterLabel = new QLabel(tr("Coefficient of Digital Converter"), this);
-               QSpinBox* ConverterSpinBox = new QSpinBox(this);
-               ConverterSpinBox->setMinimum(0);
-               ConverterSpinBox->setMaximum(16);
-
-               ConverterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               ConverterSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-               layout->addRow(ConverterLabel, ConverterSpinBox);
-
-
-
-               //---------------------Save configuration into SPIConfig.txt---------------------------//
-
-
-               QString ConverterConfig = settings.value("Converter", "").toString();
-               // Set the selected value in the spin box
-               ConverterSpinBox->setValue(ConverterConfig.toInt());
-
-               // Connect the spin box to the slot
-               QString Converter; // declare Converter outside of the lambda
-               connect(ConverterSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Converter](int value){
-                   // Retrieve the selected value
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Converter = QString::number(value);
-                   settings.beginGroup("I2C1Configs");
-
-                   // Store the selected value in the settings file
-                   settings.setValue("Converter", Converter);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString ConverterConfig = settings.value("Converter" , Converter).toString();
-                   qDebug() << "selected value:" << Converter;
-                   qDebug() << "Converter:" << ConverterConfig;
-               });
-
-
-               // ----------------------Create Analog Filter----------------------//
-
-               QLabel* AnalogFilterLabel = new QLabel(tr("Analog Filter"), this);
-               QComboBox* AnalogFilterComboBox = new QComboBox(this);
-               AnalogFilterComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
-               AnalogFilterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               AnalogFilterComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-               // ----------------------- Save Analog Filter configs into a I2CConfig.txt-----------------------------------//
-
-
-               QString AnalogFilterConfig = settings.value("AnalogFilter", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
-
-               int indexAnalogFilter = AnalogFilterComboBox->findText(AnalogFilterConfig);
-               if (indexAnalogFilter != -1)
-                   AnalogFilterComboBox->setCurrentIndex(indexAnalogFilter);
-
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString AnalogFilter; // declare stopBits outside of the lambda
-
-               connect(AnalogFilterComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AnalogFilter](int indexAnalogFilter){
-                   // Retrieve the selected option
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString AnalogFilter = AnalogFilterComboBox->itemText(indexAnalogFilter);
-                   settings.beginGroup("I2C1Configs");
-
-
-                   // Store the selected option in the settings file
-                   settings.setValue("AnalogFilter", AnalogFilter);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString AnalogFilterConfig = settings.value("AnalogFilter" , AnalogFilter).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-                   qDebug() << "selected option:" << AnalogFilter;
-                   qDebug() << "AnalogFilter:" << AnalogFilterConfig;
-               });
-
-               layout->addRow(AnalogFilterLabel, AnalogFilterComboBox);
-               layout->setContentsMargins(0, 0, 0, 0);
-               layout->setSpacing(30);
-
-               // Create the vertical layout and add the form layout to it
-               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
-               verticalLayout->addStretch();
-               verticalLayout->addLayout(layout);
-               verticalLayout->addStretch();
-
-               // Create the horizontal layout and add the vertical layout to it
-               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
-               horizontalLayout->addStretch();
-               horizontalLayout->addLayout(verticalLayout);
-               horizontalLayout->addStretch();
-
-               // Set the widget layout to the horizontal layout
-
-               widget->setLayout(horizontalLayout);
-               widget->setGeometry(500, 500, 600, 500);
-
-
-
-               QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-               qDebug() << "Settings file path: " << settings.fileName();
-
-
-
-               settings.beginGroup("I2C1Configs");
-
-               settings.setValue("Timing",  Timing);
-               settings.setValue("Speed",  Speed);
-               settings.setValue("Frequency",  Frequency);
-               settings.setValue("Rise",  Rise);
-               settings.setValue("Fall",  Fall);
-               settings.setValue("Converter",  Converter);
-               settings.setValue("AnalogFilter",  AnalogFilter);
-
-
-               settings.endGroup();
-
-
-
-
-
-
-    }
-
-    void I2C2Config (){
-        QWidget *widget = new QWidget(this);
-        setCentralWidget(widget);
-
-                // Create Layout form for I2C
-                QFormLayout* layout = new QFormLayout(this);
-
-                QLabel* titleLabel = new QLabel("I2C2 configurations", this);
-
-                // Load the icon image
-                QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
-
-                // Create a QLabel for the icon and set its size
-                QLabel* iconLabel = new QLabel(this);
-                iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-                iconLabel->setFixedSize(30, 30);
-
-                // Create a QHBoxLayout to hold the icon and the title label
-                QHBoxLayout* titleLayout = new QHBoxLayout();
-                titleLayout->addWidget(iconLabel);
-                titleLayout->addWidget(titleLabel);
-                titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
-
-                // Set the font and style sheet for the title label
-                QFontDatabase fontDatabase;
-                QStringList fontFamilies = fontDatabase.families();
-
-                // Choose the first available font as the best font
-                QString bestFont = fontFamilies.first();
-
-                // Create a font object with the best font and size
-                QFont font(bestFont, 15);
-
-                // Set the font and style sheet for the label
-                titleLabel->setFont(font);
-                iconLabel->setFont(font);
-
-                titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-
-                titleLabel->setAlignment(Qt::AlignCenter);
-
-
-                // Add the title label and the icon to the main layout
-                layout->addRow(titleLayout);
-
-
-                // ----------------------Create Timing----------------------//
-
-               QLabel* TimingLabel = new QLabel(tr("Custom Timing"), this);
-               QComboBox* TimingComboBox = new QComboBox(this);
-
-               TimingComboBox->addItems(QStringList() << "Enable" << "Disable");
-               TimingComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-               // Set the minimum width to 100 pixels
-               TimingComboBox->setMinimumWidth(10);
-               TimingLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               TimingComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-
-               layout->addRow(TimingLabel, TimingComboBox);
-
-
-               // ----------------------- Save Timing configs into a I2CConfig.txt-----------------------------------//
-
-
-               QString TimingConfig = settings.value("Timing", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
-
-               int indexTiming = TimingComboBox->findText(TimingConfig);
-               if (indexTiming != -1)
-                   TimingComboBox->setCurrentIndex(indexTiming);
-
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString Timing; // declare stopBits outside of the lambda
-
-               connect(TimingComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Timing](int indexTiming){
-                   // Retrieve the selected option
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Timing = TimingComboBox->itemText(indexTiming);
-                   settings.beginGroup("I2C2Configs");
-
-
-                   // Store the selected option in the settings file
-                   settings.setValue("Timing", Timing);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString TimingConfig = settings.value("Timing" , Timing).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-                   qDebug() << "selected option:" << Timing;
-                   qDebug() << "Timing:" << TimingConfig;
-               });
-
-               // ----------------------Create Speed Mode----------------------//
-
-               QLabel* SpeedLabel = new QLabel(tr("I2C Speed Mode"), this);
-               QComboBox* SpeedComboBox = new QComboBox(this);
-               SpeedComboBox->addItems(QStringList() << "Standart Mode" << "Fast Mode " << "Fast Mode Plus");
-               SpeedLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               SpeedComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-               layout->addRow(SpeedLabel, SpeedComboBox);
-
-
-
-               // ----------------------- Save Speed configs into a I2CConfig.txt-----------------------------------//
-
-
-               QString SpeedConfig = settings.value("Speed", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
-
-               int indexSpeed = SpeedComboBox->findText(SpeedConfig);
-               if (indexSpeed != -1)
-                   SpeedComboBox->setCurrentIndex(indexSpeed);
-
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString Speed; // declare stopBits outside of the lambda
-
-               connect(SpeedComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Speed](int indexSpeed){
-                   // Retrieve the selected option
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Speed = SpeedComboBox->itemText(indexSpeed);
-                   settings.beginGroup("I2C2Configs");
-
-
-                   // Store the selected option in the settings file
-                   settings.setValue("Speed", Speed);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString SpeedConfig = settings.value("Speed" , Speed).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-                   qDebug() << "selected option:" << Speed;
-                   qDebug() << "Speed:" << SpeedConfig;
-               });
-
-
-               // ----------------------Create Frequency Speed----------------------//
-
-               QLabel* FrequencyLabel = new QLabel(tr("Speed Frequency"), this);
-               QComboBox* FrequencyComboBox = new QComboBox(this);
-               FrequencyComboBox->addItems(QStringList() << "200 KHz" << "400 KHz " << "1 MHz");
-               FrequencyLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FrequencyComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-               layout->addRow(FrequencyLabel, FrequencyComboBox);
-
-               // ----------------------- Save Frequency configs into a I2CConfig.txt-----------------------------------//
-
-
-               QString FrequencyConfig = settings.value("Frequency", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
-
-               int indexFrequency = FrequencyComboBox->findText(FrequencyConfig);
-               if (indexFrequency != -1)
-                   FrequencyComboBox->setCurrentIndex(indexFrequency);
-
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString Frequency; // declare stopBits outside of the lambda
-
-               connect(FrequencyComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Frequency](int indexFrequency){
-                   // Retrieve the selected option
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Frequency = FrequencyComboBox->itemText(indexFrequency);
-                   settings.beginGroup("I2C2Configs");
-
-
-                   // Store the selected option in the settings file
-                   settings.setValue("Frequency", Frequency);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString FrequencyConfig = settings.value("Frequency" , Frequency).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-                   qDebug() << "selected option:" << Frequency;
-                   qDebug() << "Frequency:" << FrequencyConfig;
-               });
-
-
-               // ----------------------Create Rise Edge----------------------//
-
-               QLabel* RiseLabel = new QLabel(tr("Rise Time"), this);
-               QSpinBox* RiseSpinBox = new QSpinBox(this);
-               RiseSpinBox->setMinimum(20);
-               RiseSpinBox->setMaximum(1000);
-
-               RiseLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               RiseSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-               layout->addRow(RiseLabel, RiseSpinBox);
-
-
-               //---------------------Save configuration into SPIConfig.txt---------------------------//
-
-
-               QString RiseConfig = settings.value("Rise", "").toString();
-               // Set the selected value in the spin box
-               RiseSpinBox->setValue(RiseConfig.toInt());
-
-               // Connect the spin box to the slot
-               QString Rise; // declare Rise outside of the lambda
-               connect(RiseSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Rise](int value){
-                   // Retrieve the selected value
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Rise = QString::number(value);
-                   settings.beginGroup("I2C2Configs");
-
-                   // Store the selected value in the settings file
-                   settings.setValue("Rise", Rise);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString RiseConfig = settings.value("Rise" , Rise).toString();
-                   qDebug() << "selected value:" << Rise;
-                   qDebug() << "Rise:" << RiseConfig;
-               });
-
-
-
-
-               // ----------------------Create Fall edge----------------------//
-
-               QLabel* FallLabel = new QLabel(tr("Fall Time"), this);
-               QSpinBox* FallSpinBox = new QSpinBox(this);
-               FallSpinBox->setMinimum(10);
-               FallSpinBox->setMaximum(300);
-
-               FallLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FallSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-               layout->addRow(FallLabel, FallSpinBox);
-
-
-               //---------------------Save configuration into SPIConfig.txt---------------------------//
-
-
-               QString FallConfig = settings.value("Fall", "").toString();
-               // Set the selected value in the spin box
-               FallSpinBox->setValue(FallConfig.toInt());
-
-               // Connect the spin box to the slot
-               QString Fall; // declare Fall outside of the lambda
-               connect(FallSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Fall](int value){
-                   // Retrieve the selected value
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Fall = QString::number(value);
-                   settings.beginGroup("I2C2Configs");
-
-                   // Store the selected value in the settings file
-                   settings.setValue("Fall", Fall);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString FallConfig = settings.value("Fall" , Fall).toString();
-                   qDebug() << "selected value:" << Fall;
-                   qDebug() << "Fall:" << FallConfig;
-               });
-
-
-
-               // ----------------------Create Converter----------------------//
-
-               QLabel* ConverterLabel = new QLabel(tr("Coefficient of Digital Converter"), this);
-               QSpinBox* ConverterSpinBox = new QSpinBox(this);
-               ConverterSpinBox->setMinimum(0);
-               ConverterSpinBox->setMaximum(16);
-
-               ConverterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               ConverterSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-               layout->addRow(ConverterLabel, ConverterSpinBox);
-
-
-               //---------------------Save configuration into SPIConfig.txt---------------------------//
-
-
-               QString ConverterConfig = settings.value("Converter", "").toString();
-               // Set the selected value in the spin box
-               ConverterSpinBox->setValue(ConverterConfig.toInt());
-
-               // Connect the spin box to the slot
-               QString Converter; // declare Converter outside of the lambda
-               connect(ConverterSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [=,&Converter](int value){
-                   // Retrieve the selected value
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString Converter = QString::number(value);
-                   settings.beginGroup("I2C2Configs");
-
-                   // Store the selected value in the settings file
-                   settings.setValue("Converter", Converter);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString ConverterConfig = settings.value("Converter" , Converter).toString();
-                   qDebug() << "selected value:" << Converter;
-                   qDebug() << "Converter:" << ConverterConfig;
-               });
-
-
-
-               // ----------------------Create Analog Filter----------------------//
-
-               QLabel* AnalogFilterLabel = new QLabel(tr("Analog Filter"), this);
-               QComboBox* AnalogFilterComboBox = new QComboBox(this);
-               AnalogFilterComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
-               AnalogFilterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               AnalogFilterComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-               // ----------------------- Save Analog Filter configs into a I2CConfig.txt-----------------------------------//
-
-
-               QString AnalogFilterConfig = settings.value("AnalogFilter", "").toString();
-//                QString stopBitsConfig;
-               // Set the selected option in the combo box
-
-               int indexAnalogFilter = AnalogFilterComboBox->findText(AnalogFilterConfig);
-               if (indexAnalogFilter != -1)
-                   AnalogFilterComboBox->setCurrentIndex(indexAnalogFilter);
-
-               // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
-               QString AnalogFilter; // declare stopBits outside of the lambda
-
-               connect(AnalogFilterComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AnalogFilter](int indexAnalogFilter){
-                   // Retrieve the selected option
-                   QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-                   QString AnalogFilter = AnalogFilterComboBox->itemText(indexAnalogFilter);
-                   settings.beginGroup("I2C2Configs");
-
-
-                   // Store the selected option in the settings file
-                   settings.setValue("AnalogFilter", AnalogFilter);
-                   settings.endGroup();
-
-                   // Retrieve the stored value and print to the console
-                   QString AnalogFilterConfig = settings.value("AnalogFilter" , AnalogFilter).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
-                   qDebug() << "selected option:" << AnalogFilter;
-                   qDebug() << "AnalogFilter:" << AnalogFilterConfig;
-               });
-
-               layout->addRow(AnalogFilterLabel, AnalogFilterComboBox);
-               layout->setContentsMargins(0, 0, 0, 0);
-               layout->setSpacing(30);
-
-               // Create the vertical layout and add the form layout to it
-               QVBoxLayout* verticalLayout = new QVBoxLayout(this);
-               verticalLayout->addStretch();
-               verticalLayout->addLayout(layout);
-               verticalLayout->addStretch();
-
-               // Create the horizontal layout and add the vertical layout to it
-               QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
-               horizontalLayout->addStretch();
-               horizontalLayout->addLayout(verticalLayout);
-               horizontalLayout->addStretch();
-
-               // Set the widget layout to the horizontal layout
-
-               widget->setLayout(horizontalLayout);
-               widget->setGeometry(500, 500, 600, 500);
-
-
-               QSettings settings("I2CConfig.txt", QSettings::IniFormat);
-
-               qDebug() << "Settings file path: " << settings.fileName();
-
-
-
-               settings.beginGroup("I2C2Configs");
-
-               settings.setValue("Timing",  Timing);
-               settings.setValue("Speed",  Speed);
-               settings.setValue("Frequency",  Frequency);
-               settings.setValue("Rise",  Rise);
-               settings.setValue("Fall",  Fall);
-               settings.setValue("Converter",  Converter);
-               settings.setValue("AnalogFilter",  AnalogFilter);
-
-
-               settings.endGroup();
-
-
-
-
-    }
+           }
     void ADCConfig (){
         QWidget *widget = new QWidget(this);
         setCentralWidget(widget);
@@ -4607,6 +4485,10 @@ private slots :
 
                    qDebug() << "selected option:" << LeftBit;
                    qDebug() << "LeftBit:" << LeftBitConfig;
+
+
+
+
                });
 
                layout->addRow(LeftBitLabel, LeftBitComboBox);
@@ -4638,6 +4520,8 @@ private slots :
 
 
                settings.beginGroup("ADCConfigs");
+
+//               settings.setValue("date",dateString);
 
                settings.setValue("Channel",  Channel);
                settings.setValue("Resolution",  Resolution);
@@ -6583,7 +6467,7 @@ private slots :
         QLabel* PINLabel = new QLabel(tr("GPIO Output PIN "), this);
         QComboBox* PINComboBox = new QComboBox(this);
 
-        PINComboBox->addItems(QStringList() << "PG4" << "PG5" << "PG6" << "PG7" << "PG10" << "PG11" << "PG12" << "PG13" );
+        PINComboBox->addItems(QStringList() << "PB13" << "PB14" << "PB15" << "PB16" << "PB1" << "PB2" << "PB3" << "PB4" );
 
 
         PINLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
@@ -7318,7 +7202,7 @@ private slots :
         QLabel* AutoReloadLabel = new QLabel(tr("Counter Period (AutoReload) "), this);
         QSpinBox* AutoReloadSpinBox = new QSpinBox(this);
         AutoReloadSpinBox->setMinimum(0);
-        AutoReloadSpinBox->setMaximum(65535);
+        AutoReloadSpinBox->setMaximum(55633);
 
 
         AutoReloadLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");

@@ -917,277 +917,259 @@ private slots :
         setCentralWidget(centralWidget);
     }
     void showI2C1config(){
-        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+            QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
-        // create the list widget
-        QListWidget* configList = new QListWidget(this);
-        configList->clear();
-        settings.beginGroup("I2C1Configs");
+            // create the list widget
+            QListWidget* configList = new QListWidget(this);
+            configList->clear();
+            settings.beginGroup("I2C1Configs");
 
-        QString Timing;
-        QString Speed;
-        QString Frequency;
-        QString Rise;
-        QString Fall;
-        QString Converter;
-        QString AnalogFilter;
+            QString AdressLenght ;
+            QString DualAddressMode;
+            QString NoStretchMode;
+            QString AddressMasks;
+            QString GeneralCallMode;
 
 
 
-        QString TimingConfig = settings.value("Timing" , Timing).toString();
-        QString SpeedConfig = settings.value("Speed" , Speed).toString();
-        QString FrequencyConfig = settings.value("Frequency" , Frequency).toString();
-        QString RiseConfig = settings.value("Rise" , Rise).toString();
-        QString FallConfig = settings.value("Fall" , Fall).toString();
-        QString ConverterConfig = settings.value("Converter" , Converter).toString();
-        QString AnalogFilterConfig = settings.value("AnalogFilter" , AnalogFilter).toString();
 
+            QString AdressLenghtConfig = settings.value("AdressLenght" , AdressLenght).toString();
+            QString DualAddressModeConfig = settings.value("DualAddressMode" , DualAddressMode).toString();
+            QString NoStretchModeConfig = settings.value("NoStretchMode" , NoStretchMode).toString();
+            QString AddressMasksConfig = settings.value("AddressMasks" , AddressMasks).toString();
+            QString GeneralCallModeConfig = settings.value("GeneralCallMode" , GeneralCallMode).toString();
 
 
-        QListWidgetItem* titleItem = new QListWidgetItem(tr("I2C1 Configurations"), configList);
 
+            QListWidgetItem* titleItem = new QListWidgetItem(tr("I2C1 Configurations"), configList);
 
-        QListWidgetItem* TimingItem = new QListWidgetItem(tr("•  Timing     :     ") +TimingConfig , configList);
-        QListWidgetItem* SpeedItem = new QListWidgetItem(tr("•  Speed       :  ") +SpeedConfig , configList);
-        QListWidgetItem* FrequencyItem = new QListWidgetItem(tr("•  Frequency     :    ") +FrequencyConfig , configList);
-        QListWidgetItem* RiseItem = new QListWidgetItem(tr("•  Rise     :    ") +RiseConfig , configList);
-        QListWidgetItem* FallItem = new QListWidgetItem(tr("•  Fall    :    ") +FallConfig , configList);
-        QListWidgetItem* ConverterItem = new QListWidgetItem(tr("•  Converter    :    ") +ConverterConfig , configList);
-        QListWidgetItem* AnalogFilterItem = new QListWidgetItem(tr("•  AnalogFilter    :    ") +AnalogFilterConfig , configList);
 
+            QListWidgetItem* AdressLenghtItem = new QListWidgetItem(tr("•  Adress Lenght     :     ") +AdressLenghtConfig , configList);
+            QListWidgetItem* DualAddressModeItem = new QListWidgetItem(tr("•  Dual Address Mode       :  ") +DualAddressModeConfig , configList);
+            QListWidgetItem* NoStretchModeItem = new QListWidgetItem(tr("•  No Stretch Mode     :    ") +NoStretchModeConfig , configList);
+            QListWidgetItem* AddressMasksItem = new QListWidgetItem(tr("•  Address Masks     :    ") +AddressMasksConfig , configList);
+            QListWidgetItem* GeneralCallModeItem = new QListWidgetItem(tr("•  General Call Mode    :    ") +GeneralCallModeConfig , configList);
 
-        // Set the font and style sheet for the title label
-        QFontDatabase fontDatabase;
-        QStringList fontFamilies = fontDatabase.families();
 
-        // Choose the first available font as the best font
-        QString bestFont = fontFamilies.first();
 
-        // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+            // Set the font and style sheet for the title label
+            QFontDatabase fontDatabase;
+            QStringList fontFamilies = fontDatabase.families();
 
-        titleItem->setFont(font);
-        titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::darkGreen);
-        QBrush white(Qt::white);
+            // Choose the first available font as the best font
+            QString bestFont = fontFamilies.first();
 
-        titleItem->setBackground(gray);
-        titleItem->setForeground(white);
+            // Create a font object with the best font and size
+            QFont font(bestFont, 18);
 
-        TimingItem->setFont(QFont("Helvetica", 13));
-        TimingItem->setTextAlignment(Qt::TopLeftCorner);
-        SpeedItem->setFont(QFont("Helvetica", 13));
-        SpeedItem->setTextAlignment(Qt::TopLeftCorner);
-        FrequencyItem->setFont(QFont("Helvetica", 13));
-        FrequencyItem->setTextAlignment(Qt::TopLeftCorner);
-        RiseItem->setFont(QFont("Helvetica", 13));
-        RiseItem->setTextAlignment(Qt::TopLeftCorner);
-        FallItem->setFont(QFont("Helvetica", 13));
-        FallItem->setTextAlignment(Qt::TopLeftCorner);
-        ConverterItem->setFont(QFont("Helvetica", 13));
-        ConverterItem->setTextAlignment(Qt::TopLeftCorner);
-        AnalogFilterItem->setFont(QFont("Helvetica", 13));
-        AnalogFilterItem->setTextAlignment(Qt::TopLeftCorner);
+            titleItem->setFont(font);
+            titleItem->setTextAlignment(Qt::TopLeftCorner);
+            QBrush gray(Qt::darkGreen);
+            QBrush white(Qt::white);
 
+            titleItem->setBackground(gray);
+            titleItem->setForeground(white);
 
-        configList->setSpacing(15);
-        configList->addItem(titleItem);
+            AdressLenghtItem->setFont(QFont("Helvetica", 13));
+            AdressLenghtItem->setTextAlignment(Qt::TopLeftCorner);
+            DualAddressModeItem->setFont(QFont("Helvetica", 13));
+            DualAddressModeItem->setTextAlignment(Qt::TopLeftCorner);
+            NoStretchModeItem->setFont(QFont("Helvetica", 13));
+            NoStretchModeItem->setTextAlignment(Qt::TopLeftCorner);
+            AddressMasksItem->setFont(QFont("Helvetica", 13));
+            AddressMasksItem->setTextAlignment(Qt::TopLeftCorner);
+            GeneralCallModeItem->setFont(QFont("Helvetica", 13));
+            GeneralCallModeItem->setTextAlignment(Qt::TopLeftCorner);
 
-        configList->addItem(TimingItem);
-        configList->addItem(SpeedItem);
-        configList->addItem(FrequencyItem);
-        configList->addItem(RiseItem);
-        configList->addItem(FallItem);
-        configList->addItem(ConverterItem);
-        configList->addItem(AnalogFilterItem);
 
 
+            configList->setSpacing(15);
+            configList->addItem(titleItem);
 
+            configList->addItem(AdressLenghtItem);
+            configList->addItem(DualAddressModeItem);
+            configList->addItem(NoStretchModeItem);
+            configList->addItem(AddressMasksItem);
+            configList->addItem(GeneralCallModeItem);
 
-        configList->show();
 
-        settings.endGroup();
 
-        // Create Layout form
-        QFormLayout* layout = new QFormLayout(this);
 
-        // Create a QLabel for "DAC configurations" and center it horizontally
-        QLabel* titleLabel = new QLabel("UART4 configurations", this);
+            configList->show();
 
-        // Load the icon image
-        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
+            settings.endGroup();
 
-        // Create a QLabel for the icon and set its size
-        QLabel* iconLabel = new QLabel(this);
-        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-        iconLabel->setFixedSize(30, 30);
+            // Create Layout form
+            QFormLayout* layout = new QFormLayout(this);
 
-        QHBoxLayout* titleLayout = new QHBoxLayout();
-        titleLayout->addWidget(iconLabel);
-        titleLayout->addWidget(titleLabel);
-        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+            // Create a QLabel for "DAC configurations" and center it horizontally
+            QLabel* titleLabel = new QLabel("UART4 configurations", this);
 
+            // Load the icon image
+            QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
 
-        // create a widget to hold the list and add it to a layout
-        QWidget* centralWidget = new QWidget(this);
-        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
-        layout1->addWidget(configList);
-        layout1->setAlignment(Qt::AlignHCenter);
-        layout->addRow(titleLayout);
-        layout->addRow(layout1);
+            // Create a QLabel for the icon and set its size
+            QLabel* iconLabel = new QLabel(this);
+            iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            iconLabel->setFixedSize(30, 30);
 
+            QHBoxLayout* titleLayout = new QHBoxLayout();
+            titleLayout->addWidget(iconLabel);
+            titleLayout->addWidget(titleLabel);
+            titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+            // create a widget to hold the list and add it to a layout
+            QWidget* centralWidget = new QWidget(this);
+            QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+            layout1->addWidget(configList);
+            layout1->setAlignment(Qt::AlignHCenter);
+            layout->addRow(titleLayout);
+            layout->addRow(layout1);
 
 
 
-//        layout1->addRow(configList);
-//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
-//                                  "QListWidget::item { padding: 5px; }"
-//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+    //        configList->setStyleSheet("background-color: white; font-size: 14px;");
+            configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
-        // set the central widget of the main window to the layout
-        setCentralWidget(centralWidget);
-    }
-    void showI2C2config(){
-        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
-        // create the list widget
-        QListWidget* configList = new QListWidget(this);
-        configList->clear();
-        settings.beginGroup("I2C2Configs");
+    //        layout1->addRow(configList);
+    //        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+    //                                  "QListWidget::item { padding: 5px; }"
+    //                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
 
-        QString Timing;
-        QString Speed;
-        QString Frequency;
-        QString Rise;
-        QString Fall;
-        QString Converter;
-        QString AnalogFilter;
 
+            // set the central widget of the main window to the layout
+            setCentralWidget(centralWidget);
+        }
+        void showI2C2config(){
+            QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
+            // create the list widget
+            QListWidget* configList = new QListWidget(this);
+            configList->clear();
+            settings.beginGroup("I2C2Configs");
 
-        QString TimingConfig = settings.value("Timing" , Timing).toString();
-        QString SpeedConfig = settings.value("Speed" , Speed).toString();
-        QString FrequencyConfig = settings.value("Frequency" , Frequency).toString();
-        QString RiseConfig = settings.value("Rise" , Rise).toString();
-        QString FallConfig = settings.value("Fall" , Fall).toString();
-        QString ConverterConfig = settings.value("Converter" , Converter).toString();
-        QString AnalogFilterConfig = settings.value("AnalogFilter" , AnalogFilter).toString();
+            QString AdressLenght ;
+            QString DualAddressMode;
+            QString NoStretchMode;
+            QString AddressMasks;
+            QString GeneralCallMode;
 
 
 
-        QListWidgetItem* titleItem = new QListWidgetItem(tr("I2C2 Configurations"), configList);
 
+            QString AdressLenghtConfig = settings.value("AdressLenght" , AdressLenght).toString();
+            QString DualAddressModeConfig = settings.value("DualAddressMode" , DualAddressMode).toString();
+            QString NoStretchModeConfig = settings.value("NoStretchMode" , NoStretchMode).toString();
+            QString AddressMasksConfig = settings.value("AddressMasks" , AddressMasks).toString();
+            QString GeneralCallModeConfig = settings.value("GeneralCallMode" , GeneralCallMode).toString();
 
-        QListWidgetItem* TimingItem = new QListWidgetItem(tr("•  Timing     :     ") +TimingConfig , configList);
-        QListWidgetItem* SpeedItem = new QListWidgetItem(tr("•  Speed       :  ") +SpeedConfig , configList);
-        QListWidgetItem* FrequencyItem = new QListWidgetItem(tr("•  Frequency     :    ") +FrequencyConfig , configList);
-        QListWidgetItem* RiseItem = new QListWidgetItem(tr("•  Rise     :    ") +RiseConfig , configList);
-        QListWidgetItem* FallItem = new QListWidgetItem(tr("•  Fall    :    ") +FallConfig , configList);
-        QListWidgetItem* ConverterItem = new QListWidgetItem(tr("•  Converter    :    ") +ConverterConfig , configList);
-        QListWidgetItem* AnalogFilterItem = new QListWidgetItem(tr("•  AnalogFilter    :    ") +AnalogFilterConfig , configList);
 
 
-        // Set the font and style sheet for the title label
-        QFontDatabase fontDatabase;
-        QStringList fontFamilies = fontDatabase.families();
+            QListWidgetItem* titleItem = new QListWidgetItem(tr("I2C2 Configurations"), configList);
 
-        // Choose the first available font as the best font
-        QString bestFont = fontFamilies.first();
 
-        // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+            QListWidgetItem* AdressLenghtItem = new QListWidgetItem(tr("•  Adress Lenght     :     ") +AdressLenghtConfig , configList);
+            QListWidgetItem* DualAddressModeItem = new QListWidgetItem(tr("•  Dual Address Mode       :  ") +DualAddressModeConfig , configList);
+            QListWidgetItem* NoStretchModeItem = new QListWidgetItem(tr("•  No Stretch Mode     :    ") +NoStretchModeConfig , configList);
+            QListWidgetItem* AddressMasksItem = new QListWidgetItem(tr("•  Address Masks     :    ") +AddressMasksConfig , configList);
+            QListWidgetItem* GeneralCallModeItem = new QListWidgetItem(tr("•  General Call Mode    :    ") +GeneralCallModeConfig , configList);
 
-        titleItem->setFont(font);
-        titleItem->setTextAlignment(Qt::TopLeftCorner);
-        QBrush gray(Qt::darkGreen);
-        QBrush white(Qt::white);
 
-        titleItem->setBackground(gray);
-        titleItem->setForeground(white);
 
-        TimingItem->setFont(QFont("Helvetica", 13));
-        TimingItem->setTextAlignment(Qt::TopLeftCorner);
-        SpeedItem->setFont(QFont("Helvetica", 13));
-        SpeedItem->setTextAlignment(Qt::TopLeftCorner);
-        FrequencyItem->setFont(QFont("Helvetica", 13));
-        FrequencyItem->setTextAlignment(Qt::TopLeftCorner);
-        RiseItem->setFont(QFont("Helvetica", 13));
-        RiseItem->setTextAlignment(Qt::TopLeftCorner);
-        FallItem->setFont(QFont("Helvetica", 13));
-        FallItem->setTextAlignment(Qt::TopLeftCorner);
-        ConverterItem->setFont(QFont("Helvetica", 13));
-        ConverterItem->setTextAlignment(Qt::TopLeftCorner);
-        AnalogFilterItem->setFont(QFont("Helvetica", 13));
-        AnalogFilterItem->setTextAlignment(Qt::TopLeftCorner);
+            // Set the font and style sheet for the title label
+            QFontDatabase fontDatabase;
+            QStringList fontFamilies = fontDatabase.families();
 
+            // Choose the first available font as the best font
+            QString bestFont = fontFamilies.first();
 
-        configList->setSpacing(15);
-        configList->addItem(titleItem);
+            // Create a font object with the best font and size
+            QFont font(bestFont, 18);
 
-        configList->addItem(TimingItem);
-        configList->addItem(SpeedItem);
-        configList->addItem(FrequencyItem);
-        configList->addItem(RiseItem);
-        configList->addItem(FallItem);
-        configList->addItem(ConverterItem);
-        configList->addItem(AnalogFilterItem);
+            titleItem->setFont(font);
+            titleItem->setTextAlignment(Qt::TopLeftCorner);
+            QBrush gray(Qt::darkGreen);
+            QBrush white(Qt::white);
 
+            titleItem->setBackground(gray);
+            titleItem->setForeground(white);
 
+            AdressLenghtItem->setFont(QFont("Helvetica", 13));
+            AdressLenghtItem->setTextAlignment(Qt::TopLeftCorner);
+            DualAddressModeItem->setFont(QFont("Helvetica", 13));
+            DualAddressModeItem->setTextAlignment(Qt::TopLeftCorner);
+            NoStretchModeItem->setFont(QFont("Helvetica", 13));
+            NoStretchModeItem->setTextAlignment(Qt::TopLeftCorner);
+            AddressMasksItem->setFont(QFont("Helvetica", 13));
+            AddressMasksItem->setTextAlignment(Qt::TopLeftCorner);
+            GeneralCallModeItem->setFont(QFont("Helvetica", 13));
+            GeneralCallModeItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->show();
 
-        settings.endGroup();
+            configList->setSpacing(15);
+            configList->addItem(titleItem);
 
-        // Create Layout form
-        QFormLayout* layout = new QFormLayout(this);
+            configList->addItem(AdressLenghtItem);
+            configList->addItem(DualAddressModeItem);
+            configList->addItem(NoStretchModeItem);
+            configList->addItem(AddressMasksItem);
+            configList->addItem(GeneralCallModeItem);
 
-        // Create a QLabel for "DAC configurations" and center it horizontally
-        QLabel* titleLabel = new QLabel("UART4 configurations", this);
 
-        // Load the icon image
-        QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
 
-        // Create a QLabel for the icon and set its size
-        QLabel* iconLabel = new QLabel(this);
-        iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-        iconLabel->setFixedSize(30, 30);
 
-        QHBoxLayout* titleLayout = new QHBoxLayout();
-        titleLayout->addWidget(iconLabel);
-        titleLayout->addWidget(titleLabel);
-        titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
+            configList->show();
 
+            settings.endGroup();
 
-        // create a widget to hold the list and add it to a layout
-        QWidget* centralWidget = new QWidget(this);
-        QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
-        layout1->addWidget(configList);
-        layout1->setAlignment(Qt::AlignHCenter);
-        layout->addRow(titleLayout);
-        layout->addRow(layout1);
+            // Create Layout form
+            QFormLayout* layout = new QFormLayout(this);
 
+            // Create a QLabel for "DAC configurations" and center it horizontally
+            QLabel* titleLabel = new QLabel("UART4 configurations", this);
 
+            // Load the icon image
+            QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+            // Create a QLabel for the icon and set its size
+            QLabel* iconLabel = new QLabel(this);
+            iconLabel->setPixmap(icon.scaled(30, 30, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            iconLabel->setFixedSize(30, 30);
 
+            QHBoxLayout* titleLayout = new QHBoxLayout();
+            titleLayout->addWidget(iconLabel);
+            titleLayout->addWidget(titleLabel);
+            titleLayout->setSpacing(10); // Set the spacing between the icon and the title label
 
 
-//        layout1->addRow(configList);
-//        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
-//                                  "QListWidget::item { padding: 5px; }"
-//                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+            // create a widget to hold the list and add it to a layout
+            QWidget* centralWidget = new QWidget(this);
+            QHBoxLayout* layout1 = new QHBoxLayout(centralWidget);
+            layout1->addWidget(configList);
+            layout1->setAlignment(Qt::AlignHCenter);
+            layout->addRow(titleLayout);
+            layout->addRow(layout1);
 
 
-        // set the central widget of the main window to the layout
-        setCentralWidget(centralWidget);
-    }
+
+    //        configList->setStyleSheet("background-color: white; font-size: 14px;");
+            configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+
+
+
+    //        layout1->addRow(configList);
+    //        configList->setStyleSheet("QListWidget { background-color: white; border: 1px solid gray; }"
+    //                                  "QListWidget::item { padding: 5px; }"
+    //                                  "QListWidget::item:hover { background-color: #E6F9FF; }");
+
+
+            // set the central widget of the main window to the layout
+            setCentralWidget(centralWidget);
+        }
     void showADC1config(){
         QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
