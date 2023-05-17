@@ -366,17 +366,6 @@ private slots :
         QSerialPort* serialPort = uart->getSerialPort();
 
 
-        // Create controls for configuring the SPI interface
-        QLabel* DataOrderLabel = new QLabel("Data Order:");
-//        QLineEdit* frequencyEdit = new QLineEdit("1000000");
-        QComboBox* dataOrderCombo = new QComboBox;
-        dataOrderCombo->addItem("MSB First");
-        dataOrderCombo->addItem("LSB First");
-        QLabel* BitOrderLabel = new QLabel("Bits Order:");
-
-        QComboBox* bitOrderCombo = new QComboBox;
-        bitOrderCombo->addItem("MSB First");
-        bitOrderCombo->addItem("LSB First");
 
         // Create controls for sending and receiving data
         QLabel* sendDataLabel = new QLabel("Send Data:");
@@ -392,11 +381,6 @@ private slots :
 
         // Create a layout for the widget
         QVBoxLayout* layout = new QVBoxLayout(spiWidget);
-        layout->addWidget(DataOrderLabel);
-        layout->addWidget(dataOrderCombo);
-        layout->addWidget(BitOrderLabel);
-
-        layout->addWidget(bitOrderCombo);
         layout->addWidget(sendDataLabel);
         layout->addWidget(sendDataEdit);
         layout->addWidget(receivedDataLabel);
@@ -434,16 +418,6 @@ private slots :
         receivedDataLabel->setStyleSheet("font: bold 13px; color: #328930;");
         // Create a label widget and set its font to Noto Sans
 //        QFont font("Noto Sans");
-        DataOrderLabel->setFont(font);
-        BitOrderLabel->setFont(font);
-
-        DataOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
-        BitOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
-
-        sendDataEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-        dataOrderCombo->setStyleSheet("font-weight: bold; border: 1px solid 868482; color:#899499; background-color: white;");
-        bitOrderCombo->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: #899499; background-color: white;");
 
         sendButton->setStyleSheet(styleSheet2);
         receiveButton->setStyleSheet(styleSheet2);
@@ -457,8 +431,9 @@ private slots :
 //                                 "QLineEdit, QTextBrowser { background-color: white; border: 1px solid #ccc; }"
 //                                 "QPushButton { background-color: #33b5e5; color: white; }");
 
-        // Connect the buttons to their corresponding functions
-        connect(sendButton, &QPushButton::clicked, this, [sendDataEdit, receivedDataBrowser, serialPort](){
+
+        // Connect the "send message" button to a slot
+        connect(sendButton, &QPushButton::clicked, [=]() {
             QString message = sendDataEdit->text();
 //            textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
             receivedDataBrowser->setTextColor(Qt::darkGreen);
@@ -491,7 +466,6 @@ private slots :
             qDebug() << "time :  " <<timestring;
 
 
-            receivedDataBrowser->append(message);
 
             if (serialPort->isOpen() && serialPort->isWritable()) {
                 qint64 bytesWritten = serialPort->write(packet1);
@@ -507,8 +481,11 @@ private slots :
 
             sendDataEdit->clear();
         });
-        connect(receiveButton, &QPushButton::clicked, this, [receivedDataBrowser,serialPort](){
-            // Code to receive data using the SPI interface
+
+
+        // Connect the "send message" button to a slot
+        connect(receiveButton, &QPushButton::clicked, [=]() {
+
             receivedDataBrowser->setTextColor(Qt::darkRed);
 
 //            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
