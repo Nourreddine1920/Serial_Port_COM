@@ -125,6 +125,7 @@ private slots :
 
             QByteArray Message = message.toUtf8();
             packet1.append(Message);
+//            packet1.append("\b");
             packet1.append(delimiter1);
             packet1.append("\r");
 
@@ -361,17 +362,10 @@ private slots :
         QWidget* spiWidget = new QWidget(this);
         setCentralWidget(spiWidget);
 
-        // Create controls for configuring the SPI interface
-        QLabel* DataOrderLabel = new QLabel("Data Order:");
-//        QLineEdit* frequencyEdit = new QLineEdit("1000000");
-        QComboBox* dataOrderCombo = new QComboBox;
-        dataOrderCombo->addItem("MSB First");
-        dataOrderCombo->addItem("LSB First");
-        QLabel* BitOrderLabel = new QLabel("Bits Order:");
+        Uart* uart = Uart::getInstance();
+        QSerialPort* serialPort = uart->getSerialPort();
 
-        QComboBox* bitOrderCombo = new QComboBox;
-        bitOrderCombo->addItem("MSB First");
-        bitOrderCombo->addItem("LSB First");
+
 
         // Create controls for sending and receiving data
         QLabel* sendDataLabel = new QLabel("Send Data:");
@@ -387,11 +381,6 @@ private slots :
 
         // Create a layout for the widget
         QVBoxLayout* layout = new QVBoxLayout(spiWidget);
-        layout->addWidget(DataOrderLabel);
-        layout->addWidget(dataOrderCombo);
-        layout->addWidget(BitOrderLabel);
-
-        layout->addWidget(bitOrderCombo);
         layout->addWidget(sendDataLabel);
         layout->addWidget(sendDataEdit);
         layout->addWidget(receivedDataLabel);
@@ -429,16 +418,6 @@ private slots :
         receivedDataLabel->setStyleSheet("font: bold 13px; color: #328930;");
         // Create a label widget and set its font to Noto Sans
 //        QFont font("Noto Sans");
-        DataOrderLabel->setFont(font);
-        BitOrderLabel->setFont(font);
-
-        DataOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
-        BitOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
-
-        sendDataEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-        dataOrderCombo->setStyleSheet("font-weight: bold; border: 1px solid 868482; color:#899499; background-color: white;");
-        bitOrderCombo->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: #899499; background-color: white;");
 
         sendButton->setStyleSheet(styleSheet2);
         receiveButton->setStyleSheet(styleSheet2);
@@ -452,24 +431,93 @@ private slots :
 //                                 "QLineEdit, QTextBrowser { background-color: white; border: 1px solid #ccc; }"
 //                                 "QPushButton { background-color: #33b5e5; color: white; }");
 
-        // Connect the buttons to their corresponding functions
-        connect(sendButton, &QPushButton::clicked, this, [sendDataEdit, receivedDataBrowser](){
-            QString sendData = sendDataEdit->text();
-            // Code to send data using the SPI interface
-            QString receivedData = "Received data";
-            receivedDataBrowser->setTextColor(Qt::BlankCursor);
 
-            receivedDataBrowser->append(sendData);
+        // Connect the "send message" button to a slot
+        connect(sendButton, &QPushButton::clicked, [=]() {
+            QString message = sendDataEdit->text();
+//            textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+            receivedDataBrowser->setTextColor(Qt::darkGreen);
+
+            char delimiter1[2] = "*";
+
+
+            receivedDataBrowser->setTextColor(Qt::darkGreen);
+            QByteArray packet1;
+
+            QByteArray Message = message.toUtf8();
+            packet1.append(Message);
+            packet1.append(delimiter1);
+            packet1.append("\r");
+
+
+            qDebug() << "packet1 :"<<  packet1 ;
+
+            receivedDataBrowser->append(message);
+            QDate date = QDate::currentDate();
+            QString dateString = date.toString();
+
+
+            qDebug() << "date :  " <<dateString;
+
+            QTime time = QTime::currentTime();
+
+
+            QString timestring = time.toString();
+            qDebug() << "time :  " <<timestring;
+
+
+
+            if (serialPort->isOpen() && serialPort->isWritable()) {
+                qint64 bytesWritten = serialPort->write(packet1);
+                if (bytesWritten == -1) {
+                    qDebug() << "Error: Failed to write data to serial port";
+                } else {
+                    qDebug() << bytesWritten << "bytes written to serial port";
+                }
+            } else {
+                qDebug() << "Error: Serial port is not open or not writable";
+            }
+
 
             sendDataEdit->clear();
-
         });
-        connect(receiveButton, &QPushButton::clicked, this, [receivedDataBrowser](){
-            // Code to receive data using the SPI interface
-            QString receivedData = "Showing data";
+
+
+        // Connect the "send message" button to a slot
+        connect(receiveButton, &QPushButton::clicked, [=]() {
+
             receivedDataBrowser->setTextColor(Qt::darkRed);
 
-            receivedDataBrowser->append(receivedData);
+//            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
+//            QByteArray responseData;
+//            while (serialPort->waitForReadyRead(100)) {
+//            responseData.append(serialPort->readAll());
+
+
+//            }
+
+//                if (!responseData.isEmpty()) {
+//                    lastResponse = QString::fromUtf8(responseData);
+
+//                    qDebug() << "Received data:" << lastResponse;
+//                    textBrowser->append(lastResponse);
+//                } else {
+//                    qDebug() << "No data received from serial port";
+//                    textBrowser->append("No data received from serial port");
+//                }
+
+            QByteArray buffer;
+            const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+            QByteArray data = serialPort->readAll();
+            buffer.append(data);
+//                QString message(data);
+            qDebug() << "Received message:" << data;
+
+
+
+            receivedDataBrowser->append(buffer);
         });
 
     }
@@ -855,6 +903,9 @@ private slots :
 
             qDebug() << "packet1 :"<<  packet1 ;
 
+            dataTextBrowser->append("analogique address: \n\r");
+
+
 
 
             dataTextBrowser->append(message);
@@ -1159,7 +1210,7 @@ private slots :
         // Create a QLabel to display the timer frequency
         QLabel* frequencyLabel = new QLabel("Frequency:", timerWidget);
         QLineEdit* frequencyLineEdit = new QLineEdit(timerWidget);
-        frequencyLineEdit->setPlaceholderText("Enter the desired Frequency");
+        frequencyLineEdit->setPlaceholderText("Enter the Timer Clock");
 
 //        frequencyLineEdit->setReadOnly(true);
 
