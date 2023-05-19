@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    ui->label_value->setFont(font1);
 
     // Chargement de l'image
-    QImage backgroundImage("C:/Users/nawledbr/Documents/Serial_Port_COM/3.png");
+    QImage backgroundImage("C:/Users/nawledbr/Documents/Serial_Port_COM/test.png");
 
     // Création d'un label pour afficher l'image
 //    QWidget window;
@@ -116,7 +116,6 @@ MainWindow::MainWindow(QWidget *parent) :
            ""
            "QProgressBar::chunk {"
            "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #50C878, stop:1 #00A36C);"
-           "    border-radius: 5px;"
            "}";
        ui->progressBar->setStyleSheet(styleSheet1);
 }
@@ -128,7 +127,7 @@ MainWindow::~MainWindow()
 void MainWindow::start_Loading()
 {
 for (int value = ui->progressBar->minimum();value<= ui->progressBar->maximum();value++){
-QThread::msleep(50);
+QThread::msleep(100);
 ui->progressBar->setValue(value);
 qApp->processEvents(QEventLoop::EventLoopExec);
 
