@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    ui->label_value->setFont(font1);
 
     // Chargement de l'image
-    QImage backgroundImage("C:/Users/nawledbr/Documents/Serial_Port_COM/test.png");
+    QImage backgroundImage("C:/Users/nawledbr/Documents/Serial_Port_COM/actia-logo.png");
 
     // Création d'un label pour afficher l'image
 //    QWidget window;
@@ -127,7 +127,7 @@ MainWindow::~MainWindow()
 void MainWindow::start_Loading()
 {
 for (int value = ui->progressBar->minimum();value<= ui->progressBar->maximum();value++){
-QThread::msleep(100);
+QThread::msleep(30);
 ui->progressBar->setValue(value);
 qApp->processEvents(QEventLoop::EventLoopExec);
 

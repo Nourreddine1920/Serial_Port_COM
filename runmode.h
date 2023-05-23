@@ -118,15 +118,22 @@ private slots :
             Uart* uart = Uart::getInstance();
             QSerialPort* serialPort = uart->getSerialPort();
             char delimiter1[2] = "*";
+            char delim2[2]="+";
 
 
             textBrowser->setTextColor(Qt::darkGreen);
             QByteArray packet1;
 
             QByteArray Message = message.toUtf8();
+            packet1.append("0x2");
+            packet1.append("|");
+
             packet1.append(Message);
-//            packet1.append("\b");
+            packet1.append("\t");
+
+
             packet1.append(delimiter1);
+
             packet1.append("\r");
 
 
@@ -439,14 +446,23 @@ private slots :
             receivedDataBrowser->setTextColor(Qt::darkGreen);
 
             char delimiter1[2] = "*";
+//            char delimiter2[2] = "-";
 
 
             receivedDataBrowser->setTextColor(Qt::darkGreen);
             QByteArray packet1;
 
             QByteArray Message = message.toUtf8();
+            packet1.append("0x3");
+            packet1.append("/");
+
             packet1.append(Message);
+            packet1.append("\t");
+
+
+
             packet1.append(delimiter1);
+
             packet1.append("\r");
 
 
@@ -689,8 +705,8 @@ private slots :
         i2cLayout->addWidget(dataLineEdit);
         i2cLayout->addWidget(dataTextBrowser);
         auto buttonLayout = new QHBoxLayout();
-        buttonLayout->addWidget(readButton);
         buttonLayout->addWidget(writeButton);
+        buttonLayout->addWidget(readButton);
         i2cLayout->addLayout(buttonLayout);
 
         // adding some styles to the widget
@@ -790,6 +806,7 @@ private slots :
 
             qDebug() << "packet1 :"<<  packet1 ;
 
+            dataTextBrowser->append("Sensor address: \n\r");
 
 
             dataTextBrowser->append(message);
@@ -1208,7 +1225,7 @@ private slots :
         QVBoxLayout* timerLayout = new QVBoxLayout(timerWidget);
 
         // Create a QLabel to display the timer frequency
-        QLabel* frequencyLabel = new QLabel("Frequency:", timerWidget);
+        QLabel* frequencyLabel = new QLabel("Timer Clock:", timerWidget);
         QLineEdit* frequencyLineEdit = new QLineEdit(timerWidget);
         frequencyLineEdit->setPlaceholderText("Enter the Timer Clock");
 
@@ -1223,8 +1240,8 @@ private slots :
 //        channelComboBox->addItem("Channel 4");
 
         // Create a QPushButton to start the input capture operation
-        QPushButton* startButton = new QPushButton("Start", timerWidget);
-        QPushButton* stopButton = new QPushButton("Stop", timerWidget);
+        QPushButton* startButton = new QPushButton("Send Data", timerWidget);
+        QPushButton* stopButton = new QPushButton("Recieve Data", timerWidget);
 
         // Create a QTextBrowser to display the input capture data
         QTextBrowser* dataTextBrowser = new QTextBrowser(timerWidget);
@@ -1295,7 +1312,7 @@ private slots :
             qDebug() << "packet1 :"<<  packet1 ;
 
 
-            dataTextBrowser->append("Desired frequency : \n\r");
+            dataTextBrowser->append("Timer Clock : \n\r");
 
 
 

@@ -17,7 +17,7 @@ Uart::Uart(QWidget *parent)
     // Disable maximizing
     setFixedSize(width(), height());
 
-    QWidget::setWindowTitle("UART Configurations ");
+    QWidget::setWindowTitle("UART Connection ");
 
 
 
@@ -260,9 +260,44 @@ void Uart::on_btnConnect_clicked()
                 //code = ui->lineEdit_2->text();
                 //codeSize = code.size();
                 //connect(&serialPort,SIGNAL(readyRead()),this,SLOT(recieveMessage()));
+
+                QString styleSheet = "\
+                    QMessageBox {\
+                        background-color:#D3D3D3	;\
+                        color: #263238;\
+                        font-family:  Fantasy ;\
+                        font-size: 12px;\
+                    }\
+                    \
+                    QMessageBox QLabel {\
+                        color: #000000	;\
+                    }\
+                    \
+                    QMessageBox QPushButton {\
+                        background-color: #4CAF50;\
+                        border: 1px solid #388E3C;\
+                        color: #FFFFFF;\
+                        padding: 3px;\
+                        min-width: 50px;\
+                    }\
+                    \
+                    QMessageBox QPushButton:hover {\
+                        background-color: #388E3C;\
+                    }";
+
                 if(serialPort->open(QIODevice::ReadWrite)){
-                QMessageBox::information(this,"COM ouverte","connexion OK sur"+ portName);
-                //serialPort->write("Hello/n");
+
+                        QMessageBox msgBox;
+                        msgBox.setWindowTitle("Serial Connection");
+                        msgBox.setStyleSheet(styleSheet);
+                        msgBox.setIcon(QMessageBox::Information);
+                        msgBox.setText("Connexion OK sur " + portName);
+                        msgBox.exec();
+
+//                QMessageBox* MessageBOX;
+////                MessageBOX->setStyleSheet(styleSheet);
+//                QMessageBox::information(this,"COM ouverte","connexion OK sur"+ portName);
+//                //serialPort->write("Hello/n");
 
                 }else{
                 //probleme d'ouverure du port serie

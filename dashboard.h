@@ -3486,7 +3486,7 @@ private slots :
 
                     // ----------------------Create AddressingMode----------------------//
 
-                   QLabel* AddressingMode = new QLabel(tr("AdressLenght"), this);
+                   QLabel* AddressingMode = new QLabel(tr("Adress Lenght"), this);
                    QComboBox* AddressingModeBox = new QComboBox(this);
 
                    AddressingModeBox->addItems(QStringList() << "7-bit" << "10-bit");
@@ -3536,7 +3536,7 @@ private slots :
 
                    // ----------------------Create DualAddressMode----------------------//
 
-                   QLabel* DualAddressModeLabel = new QLabel(tr("DualAddressMode"), this);
+                   QLabel* DualAddressModeLabel = new QLabel(tr("Dual Address Mode"), this);
                    QComboBox* DualAddressModeComboBox = new QComboBox(this);
                    DualAddressModeComboBox->addItems(QStringList() << "Disable" << "Enable");
                    DualAddressModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
@@ -3587,7 +3587,7 @@ private slots :
 
                    // ----------------------Create AddressMasks----------------------//
 
-                   QLabel* AddressMasksLabel = new QLabel(tr("AddressMasks"), this);
+                   QLabel* AddressMasksLabel = new QLabel(tr("Address Masks"), this);
                    QComboBox* AddressMasksComboBox = new QComboBox(this);
                    AddressMasksComboBox->addItems(QStringList() << "NO Mask" <<"Mask01" << "Mask02  " << "Mask03" <<"Mask04"<<"Mask05"<<"Mask06"<<"Mask07");
 
@@ -3642,7 +3642,7 @@ private slots :
 
                    // ----------------------Create GeneralCallMode----------------------//
 
-                   QLabel* GeneralCallModeLabel = new QLabel(tr("GeneralCallMode"), this);
+                   QLabel* GeneralCallModeLabel = new QLabel(tr("General Call Mode"), this);
                    QComboBox* GeneralCallModeComboBox = new QComboBox(this);
                    GeneralCallModeComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
                    GeneralCallModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
@@ -3688,7 +3688,7 @@ private slots :
 
                    // ----------------------Create NoStretchMode----------------------//
 
-                                QLabel* NoStretchModeLabel = new QLabel(tr("NoStretchMode"), this);
+                                QLabel* NoStretchModeLabel = new QLabel(tr("No Stretch Mode"), this);
                                 QComboBox* NoStretchModeComboBox = new QComboBox(this);
                                 NoStretchModeComboBox->addItems(QStringList() << "Disable" << "Enable " );
 
