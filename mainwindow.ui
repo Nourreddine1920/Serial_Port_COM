@@ -6,79 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>601</width>
-    <height>365</height>
+    <width>630</width>
+    <height>404</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>2</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label_titre">
+   <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>111</y>
-      <width>581</width>
-      <height>81</height>
+      <x>-20</x>
+      <y>380</y>
+      <width>681</width>
+      <height>16</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Rockwell</family>
-      <pointsize>30</pointsize>
-      <bold>true</bold>
-      <underline>false</underline>
-     </font>
+    <property name="value">
+     <number>0</number>
     </property>
-    <property name="text">
-     <string>WELCOME APPLICATION 👋</string>
-    </property>
-    <property name="scaledContents">
+    <property name="textVisible">
      <bool>false</bool>
     </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>293</y>
-      <width>581</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLabel" name="label_value">
-       <property name="font">
-        <font>
-         <family>Arial Rounded MT Bold</family>
-         <pointsize>20</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>0</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QProgressBar" name="progressBar">
-       <property name="value">
-        <number>0</number>
-       </property>
-       <property name="textVisible">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </widget>
   </widget>
  </widget>

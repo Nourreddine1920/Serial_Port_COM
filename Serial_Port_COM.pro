@@ -46,6 +46,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    1.png \
+    3.jpg \
+    3.png \
+    XCUBE.png \
+    actia-logo.png \
     antivirus.png \
     back-arrow.png \
     back.png \

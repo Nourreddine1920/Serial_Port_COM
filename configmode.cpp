@@ -1468,6 +1468,32 @@ void ConfigMode::returnDashboard()
 
          QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
          QByteArray responseData;
+
+
+         QString styleSheet = "\
+             QMessageBox {\
+                 background-color: #D3D3D3;\
+                 color: #263238;\
+                 font-family:Fantasy ;\
+                 font-size: 12px;\
+             }\
+             \
+             QMessageBox QLabel {\
+                 color: #000000	;\
+             }\
+             \
+             QMessageBox QPushButton {\
+                 background-color: #4CAF50;\
+                 border: 1px solid #388E3C;\
+                 color: #FFFFFF;\
+                 padding: 5px;\
+                 min-width: 70px;\
+             }\
+             \
+             QMessageBox QPushButton:hover {\
+                 background-color: #388E3C;\
+             }";
+
          while (serialPort->waitForReadyRead(100)) {
          responseData.append(serialPort->readAll());
 
@@ -1480,8 +1506,15 @@ void ConfigMode::returnDashboard()
          qDebug()<<"response"<<lastResponse;
 
          if (!lastResponse.isEmpty()) {
+                 QMessageBox msgBox;
+                 msgBox.setWindowTitle("IPs State");
+                 msgBox.setStyleSheet(styleSheet);
+                 msgBox.setIcon(QMessageBox::Information);
+                 msgBox.setText(lastResponse);
+                 msgBox.exec();
 
-         QMessageBox::information(this, "configuration", lastResponse);
+
+//         QMessageBox::information(this, "configuration", lastResponse);
          }
          }
 

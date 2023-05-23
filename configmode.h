@@ -560,7 +560,7 @@ private slots :
         QString Datasize;
         QString Firstbit;
 
-        QString ModeConfig = settings.value("Mode Selected" , Mode).toString();
+        QString ModeConfig = settings.value("Mode" , Mode).toString();
         QString NSSConfig = settings.value("NSS" , NSS).toString();
         QString FrameformatConfig = settings.value("Frameformat" , Frameformat).toString();
         QString DatasizeConfig = settings.value("Datasize" , Datasize).toString();

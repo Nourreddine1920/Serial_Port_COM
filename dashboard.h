@@ -136,7 +136,7 @@ private slots :
                baudRateComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                baudRateComboBox->setMinimumWidth(10);
-               baudRateLabel->setStyleSheet("font: bold 15px; color: black;");
+               baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(baudRateLabel, baudRateComboBox);
@@ -184,7 +184,7 @@ private slots :
                QLabel* parityLabel = new QLabel(tr("Parity"), this);
                QComboBox* parityComboBox = new QComboBox(this);
                parityComboBox->addItems(QStringList() << "None" << "Odd" << "Even");
-               parityLabel->setStyleSheet("font: bold 15px; color: black; ");
+               parityLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                parityComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(parityLabel, parityComboBox);
@@ -237,7 +237,7 @@ private slots :
                stopBitsComboBox->addItem("1,5 Bits");
                stopBitsComboBox->addItem("2 Bits");
 
-               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; ");
+               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(stopBitsLabel, stopBitsComboBox);
@@ -293,7 +293,7 @@ private slots :
                QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
                QComboBox* DataBitsComboBox = new QComboBox(this);
                DataBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
-               DataBitsLabel->setStyleSheet("font: bold 15px; color: black;");
+               DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                DataBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                // ----------------------- Save DataBits configs into a file.txt-----------------------------------//
@@ -337,7 +337,7 @@ private slots :
                QLabel* FlowControlLabel = new QLabel(tr("Flow Control"), this);
                QComboBox* FlowControlComboBox = new QComboBox(this);
                FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control " );
-               FlowControlLabel->setStyleSheet("font: bold 15px; color: black; ");
+               FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -413,7 +413,7 @@ private slots :
 
 
 
-               settings.beginGroup("UARTConfigs");
+               settings.beginGroup("|***************************UARTConfigs***********************************|");
 
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
@@ -520,7 +520,7 @@ private slots :
                baudRateComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                baudRateComboBox->setMinimumWidth(10);
-               baudRateLabel->setStyleSheet("font: bold 15px; color: black;");
+               baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(baudRateLabel, baudRateComboBox);
@@ -568,7 +568,7 @@ private slots :
                QLabel* parityLabel = new QLabel(tr("Parity"), this);
                QComboBox* parityComboBox = new QComboBox(this);
                parityComboBox->addItems(QStringList() << "None" << "Odd" << "Even");
-               parityLabel->setStyleSheet("font: bold 15px; color: black;");
+               parityLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                parityComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(parityLabel, parityComboBox);
@@ -621,7 +621,7 @@ private slots :
                stopBitsComboBox->addItem("1,5");
                stopBitsComboBox->addItem("2");
 
-               stopBitsLabel->setStyleSheet("font: bold 15px; color: black;");
+               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(stopBitsLabel, stopBitsComboBox);
@@ -677,7 +677,7 @@ private slots :
                QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
                QComboBox* DataBitsComboBox = new QComboBox(this);
                DataBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
-               DataBitsLabel->setStyleSheet("font: bold 15px; color: black; ");
+               DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                DataBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                // ----------------------- Save DataBits configs into a UARTConfig.txt-----------------------------------//
@@ -721,7 +721,7 @@ private slots :
                QLabel* FlowControlLabel = new QLabel(tr("Flow Control"), this);
                QComboBox* FlowControlComboBox = new QComboBox(this);
                FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control " );
-               FlowControlLabel->setStyleSheet("font: bold 15px; color: black;");
+               FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -795,15 +795,33 @@ private slots :
 
                qDebug() << "Settings file path: " << settings.fileName();
 
+               QDate date = QDate::currentDate();
+               QString dateString = date.toString();
 
 
-               settings.beginGroup("UART4Configs");
+               qDebug() << "date :  " <<dateString;
+
+               QTime time = QTime::currentTime();
+
+
+               QString timestring = time.toString();
+               qDebug() << "time :  " <<timestring;
+
+
+               QString Date = dateString +", " + timestring;
+
+
+
+               settings.beginGroup("|********************UART4Configs***********************|");
 
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
                settings.setValue("DataBits",  DataBits);
                settings.setValue("FlowControl",  FlowControl);
                settings.setValue("Parity",  Parity);
+
+               settings.setValue("Date",  Date);
+
 
                settings.endGroup();
 
@@ -904,7 +922,7 @@ private slots :
                baudRateComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                baudRateComboBox->setMinimumWidth(10);
-               baudRateLabel->setStyleSheet("font: bold 15px; color: black;");
+               baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(baudRateLabel, baudRateComboBox);
@@ -952,7 +970,7 @@ private slots :
                QLabel* parityLabel = new QLabel(tr("Parity"), this);
                QComboBox* parityComboBox = new QComboBox(this);
                parityComboBox->addItems(QStringList() << "None" << "Odd" << "Even");
-               parityLabel->setStyleSheet("font: bold 15px; color: black; ");
+               parityLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                parityComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(parityLabel, parityComboBox);
@@ -1005,7 +1023,7 @@ private slots :
                stopBitsComboBox->addItem("1,5");
                stopBitsComboBox->addItem("2");
 
-               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; ");
+               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(stopBitsLabel, stopBitsComboBox);
@@ -1061,7 +1079,7 @@ private slots :
                QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
                QComboBox* DataBitsComboBox = new QComboBox(this);
                DataBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
-               DataBitsLabel->setStyleSheet("font: bold 15px; color: black;");
+               DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                DataBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                // ----------------------- Save DataBits configs into a UARTConfig.txt-----------------------------------//
@@ -1105,7 +1123,7 @@ private slots :
                QLabel* FlowControlLabel = new QLabel(tr("Flow Control"), this);
                QComboBox* FlowControlComboBox = new QComboBox(this);
                FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control" );
-               FlowControlLabel->setStyleSheet("font: bold 15px; color: black; ");
+               FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -1197,13 +1215,15 @@ private slots :
 
                settings.beginGroup("UART5Configs");
 
-               settings.setValue("Date", Date);
 
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
                settings.setValue("DataBits",  DataBits);
                settings.setValue("FlowControl",  FlowControl);
                settings.setValue("Parity",  Parity);
+
+               settings.setValue("Date", Date);
+
 
                settings.endGroup();
 
@@ -1303,7 +1323,7 @@ private slots :
                baudRateComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                baudRateComboBox->setMinimumWidth(10);
-               baudRateLabel->setStyleSheet("font: bold 15px; color: black;");
+               baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(baudRateLabel, baudRateComboBox);
@@ -1351,7 +1371,7 @@ private slots :
                QLabel* parityLabel = new QLabel(tr("Parity"), this);
                QComboBox* parityComboBox = new QComboBox(this);
                parityComboBox->addItems(QStringList() << "None" << "Odd" << "Even");
-               parityLabel->setStyleSheet("font: bold 15px; color: black; ");
+               parityLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                parityComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(parityLabel, parityComboBox);
@@ -1404,7 +1424,7 @@ private slots :
                stopBitsComboBox->addItem("1,5 Bits");
                stopBitsComboBox->addItem("2 Bits");
 
-               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; ");
+               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(stopBitsLabel, stopBitsComboBox);
@@ -1460,7 +1480,7 @@ private slots :
                QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
                QComboBox* DataBitsComboBox = new QComboBox(this);
                DataBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
-               DataBitsLabel->setStyleSheet("font: bold 15px; color: black;");
+               DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                DataBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                // ----------------------- Save DataBits configs into a UARTConfig.txt-----------------------------------//
@@ -1504,7 +1524,7 @@ private slots :
                QLabel* FlowControlLabel = new QLabel(tr("Flow Control"), this);
                QComboBox* FlowControlComboBox = new QComboBox(this);
                FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control " );
-               FlowControlLabel->setStyleSheet("font: bold 15px; color: black;");
+               FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -1577,7 +1597,20 @@ private slots :
                QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                qDebug() << "Settings file path: " << settings.fileName();
+               QDate date = QDate::currentDate();
+                            QString dateString = date.toString();
 
+
+                            qDebug() << "date :  " <<dateString;
+
+                            QTime time = QTime::currentTime();
+
+
+                            QString timestring = time.toString();
+                            qDebug() << "time :  " <<timestring;
+
+
+                            QString Date = dateString +", " + timestring;
 
 
                settings.beginGroup("USART1Configs");
@@ -1587,6 +1620,9 @@ private slots :
                settings.setValue("DataBits",  DataBits);
                settings.setValue("FlowControl",  FlowControl);
                settings.setValue("Parity",  Parity);
+
+               settings.setValue("Date", Date);
+
 
                settings.endGroup();
 
@@ -1687,7 +1723,7 @@ private slots :
                baudRateComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                baudRateComboBox->setMinimumWidth(10);
-               baudRateLabel->setStyleSheet("font: bold 15px; color: black;");
+               baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(baudRateLabel, baudRateComboBox);
@@ -1735,7 +1771,7 @@ private slots :
                QLabel* parityLabel = new QLabel(tr("Parity"), this);
                QComboBox* parityComboBox = new QComboBox(this);
                parityComboBox->addItems(QStringList() << "None" << "Odd" << "Even");
-               parityLabel->setStyleSheet("font: bold 15px; color: black;");
+               parityLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                parityComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(parityLabel, parityComboBox);
@@ -1788,7 +1824,7 @@ private slots :
                stopBitsComboBox->addItem("1,5 Bits");
                stopBitsComboBox->addItem("2 Bits");
 
-               stopBitsLabel->setStyleSheet("font: bold 15px; color: black;");
+               stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(stopBitsLabel, stopBitsComboBox);
@@ -1844,7 +1880,7 @@ private slots :
                QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
                QComboBox* DataBitsComboBox = new QComboBox(this);
                DataBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
-               DataBitsLabel->setStyleSheet("font: bold 15px; color: black;");
+               DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                DataBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                // ----------------------- Save DataBits configs into a file.txt-----------------------------------//
@@ -1888,7 +1924,7 @@ private slots :
                QLabel* FlowControlLabel = new QLabel(tr("Flow Control"), this);
                QComboBox* FlowControlComboBox = new QComboBox(this);
                FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control " );
-               FlowControlLabel->setStyleSheet("font: bold 15px; color: black;");
+               FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -1961,7 +1997,20 @@ private slots :
                QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                qDebug() << "Settings file path: " << settings.fileName();
+               QDate date = QDate::currentDate();
+                            QString dateString = date.toString();
 
+
+                            qDebug() << "date :  " <<dateString;
+
+                            QTime time = QTime::currentTime();
+
+
+                            QString timestring = time.toString();
+                            qDebug() << "time :  " <<timestring;
+
+
+                            QString Date = dateString +", " + timestring;
 
 
                settings.beginGroup("USART2Configs");
@@ -1971,6 +2020,9 @@ private slots :
                settings.setValue("DataBits",  DataBits);
                settings.setValue("FlowControl",  FlowControl);
                settings.setValue("Parity",  Parity);
+
+               settings.setValue("Date", Date);
+
 
                settings.endGroup();
 
@@ -2071,7 +2123,7 @@ private slots :
                ModeComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                ModeComboBox->setMinimumWidth(10);
-               ModeLabel->setStyleSheet("font: bold 15px; color: black;");
+               ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -2116,7 +2168,7 @@ private slots :
                QLabel* NSSLabel = new QLabel(tr("Hardware NSS Signal"), this);
                QComboBox* NSSComboBox = new QComboBox(this);
                NSSComboBox->addItems(QStringList() << "Disable" << "Hardware NSS Input Signal" << "Hardware NSS Output Signal");
-               NSSLabel->setStyleSheet("font: bold 15px; color: black;");
+               NSSLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                NSSComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(NSSLabel, NSSComboBox);
@@ -2162,7 +2214,7 @@ private slots :
                QLabel* FrameFormatLabel = new QLabel(tr("Frame Format"), this);
                QComboBox* FrameFormatComboBox = new QComboBox(this);
                FrameFormatComboBox->addItems(QStringList() << "Motorola" << "Texas Instruments");
-               FrameFormatLabel->setStyleSheet("font: bold 15px; color: black;");
+               FrameFormatLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FrameFormatComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(FrameFormatLabel, FrameFormatComboBox);
@@ -2210,7 +2262,7 @@ private slots :
                DataSizeSpinBox->setMinimum(4);
                DataSizeSpinBox->setMaximum(32);
 
-               DataSizeLabel->setStyleSheet("font: bold 15px; color: black;");
+               DataSizeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                DataSizeSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
                layout->addRow(DataSizeLabel, DataSizeSpinBox);
 
@@ -2248,7 +2300,7 @@ private slots :
                QLabel* FirstBitLabel = new QLabel(tr("First Bit"), this);
                QComboBox* FirstBitComboBox = new QComboBox(this);
                FirstBitComboBox->addItems(QStringList() << "LSB" << "MSB"  );
-               FirstBitLabel->setStyleSheet("font: bold 15px; color: black;");
+               FirstBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FirstBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(FirstBitLabel, FirstBitComboBox);
@@ -2309,7 +2361,20 @@ private slots :
                QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                qDebug() << "Settings file path: " << settings.fileName();
+               QDate date = QDate::currentDate();
+                            QString dateString = date.toString();
 
+
+                            qDebug() << "date :  " <<dateString;
+
+                            QTime time = QTime::currentTime();
+
+
+                            QString timestring = time.toString();
+                            qDebug() << "time :  " <<timestring;
+
+
+                            QString Date = dateString +", " + timestring;
 
 
                settings.beginGroup("SPIConfigs");
@@ -2319,6 +2384,9 @@ private slots :
                settings.setValue("Frameformat",  Frameformat);
                settings.setValue("Datasize",  DataSize);
                settings.setValue("Firstbit",  Firstbit);
+
+               settings.setValue("Date", Date);
+
 
                settings.endGroup();
 
@@ -2384,7 +2452,7 @@ private slots :
                ModeComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                ModeComboBox->setMinimumWidth(10);
-               ModeLabel->setStyleSheet("font: bold 15px; color: black;");
+               ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -2428,7 +2496,7 @@ private slots :
                QLabel* NSSLabel = new QLabel(tr("Hardware NSS Signal"), this);
                QComboBox* NSSComboBox = new QComboBox(this);
                NSSComboBox->addItems(QStringList() << "Disable" << "Hardware NSS Input Signal" << "Hardware NSS Output Signal");
-               NSSLabel->setStyleSheet("font: bold 15px; color: black;");
+               NSSLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                NSSComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(NSSLabel, NSSComboBox);
@@ -2475,7 +2543,7 @@ private slots :
                QLabel* FrameFormatLabel = new QLabel(tr("Frame Format"), this);
                QComboBox* FrameFormatComboBox = new QComboBox(this);
                FrameFormatComboBox->addItems(QStringList() << "Motorola" << "Texas Instruments");
-               FrameFormatLabel->setStyleSheet("font: bold 15px; color: black;");
+               FrameFormatLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FrameFormatComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(FrameFormatLabel, FrameFormatComboBox);
@@ -2524,7 +2592,7 @@ private slots :
                DataSizeSpinBox->setMinimum(4);
                DataSizeSpinBox->setMaximum(32);
 
-               DataSizeLabel->setStyleSheet("font: bold 15px; color: black;");
+               DataSizeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                DataSizeSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
                layout->addRow(DataSizeLabel, DataSizeSpinBox);
 
@@ -2561,7 +2629,7 @@ private slots :
                QLabel* FirstBitLabel = new QLabel(tr("First Bit"), this);
                QComboBox* FirstBitComboBox = new QComboBox(this);
                FirstBitComboBox->addItems(QStringList() << "LSB" << "MSB"  );
-               FirstBitLabel->setStyleSheet("font: bold 15px; color: black;");
+               FirstBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FirstBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(FirstBitLabel, FirstBitComboBox);
@@ -2623,6 +2691,21 @@ private slots :
 
                qDebug() << "Settings file path: " << settings.fileName();
 
+               QDate date = QDate::currentDate();
+                            QString dateString = date.toString();
+
+
+                            qDebug() << "date :  " <<dateString;
+
+                            QTime time = QTime::currentTime();
+
+
+                            QString timestring = time.toString();
+                            qDebug() << "time :  " <<timestring;
+
+
+                            QString Date = dateString +", " + timestring;
+
 
 
                settings.beginGroup("SPI1Configs");
@@ -2632,6 +2715,9 @@ private slots :
                settings.setValue("Frameformat",  Frameformat);
                settings.setValue("Datasize",  DataSize);
                settings.setValue("Firstbit",  Firstbit);
+
+               settings.setValue("Date", Date);
+
 
                settings.endGroup();
 
@@ -2697,7 +2783,7 @@ private slots :
                ModeComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                ModeComboBox->setMinimumWidth(10);
-               ModeLabel->setStyleSheet("font: bold 15px; color: black;");
+               ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -2787,7 +2873,7 @@ private slots :
                QLabel* FrameFormatLabel = new QLabel(tr("Frame Format"), this);
                QComboBox* FrameFormatComboBox = new QComboBox(this);
                FrameFormatComboBox->addItems(QStringList() << "Motorola" << "Texas Instruments");
-               FrameFormatLabel->setStyleSheet("font: bold 15px; color: black;");
+               FrameFormatLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FrameFormatComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(FrameFormatLabel, FrameFormatComboBox);
@@ -2835,7 +2921,7 @@ private slots :
                DataSizeSpinBox->setMinimum(4);
                DataSizeSpinBox->setMaximum(32);
 
-               DataSizeLabel->setStyleSheet("font: bold 15px; color: black;");
+               DataSizeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                DataSizeSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
                layout->addRow(DataSizeLabel, DataSizeSpinBox);
 
@@ -2873,7 +2959,7 @@ private slots :
                QLabel* FirstBitLabel = new QLabel(tr("First Bit"), this);
                QComboBox* FirstBitComboBox = new QComboBox(this);
                FirstBitComboBox->addItems(QStringList() << "LSB" << "MSB"  );
-               FirstBitLabel->setStyleSheet("font: bold 15px; color: black;");
+               FirstBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FirstBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(FirstBitLabel, FirstBitComboBox);
@@ -2935,6 +3021,21 @@ private slots :
 
                qDebug() << "Settings file path: " << settings.fileName();
 
+               QDate date = QDate::currentDate();
+                            QString dateString = date.toString();
+
+
+                            qDebug() << "date :  " <<dateString;
+
+                            QTime time = QTime::currentTime();
+
+
+                            QString timestring = time.toString();
+                            qDebug() << "time :  " <<timestring;
+
+
+                            QString Date = dateString +", " + timestring;
+
 
 
                settings.beginGroup("SPI2Configs");
@@ -2944,6 +3045,9 @@ private slots :
                settings.setValue("Frameformat",  Frameformat);
                settings.setValue("Datasize",  DataSize);
                settings.setValue("Firstbit",  Firstbit);
+
+               settings.setValue("Date", Date);
+
 
                settings.endGroup();
 
@@ -3009,7 +3113,7 @@ private slots :
                    AddressingModeBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                    // Set the minimum width to 100 pixels
                    AddressingModeBox->setMinimumWidth(10);
-                   AddressingMode->setStyleSheet("font: bold 15px; color: black;");
+                   AddressingMode->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                    AddressingModeBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -3055,7 +3159,7 @@ private slots :
                    QLabel* DualAddressModeLabel = new QLabel(tr("DualAddressMode"), this);
                    QComboBox* DualAddressModeComboBox = new QComboBox(this);
                    DualAddressModeComboBox->addItems(QStringList() << "Disable" << "Enable");
-                   DualAddressModeLabel->setStyleSheet("font: bold 15px; color: black; ");
+                   DualAddressModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                    DualAddressModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                    layout->addRow(DualAddressModeLabel, DualAddressModeComboBox);
@@ -3112,7 +3216,7 @@ private slots :
 
 
 
-                   AddressMasksLabel->setStyleSheet("font: bold 15px; color: black;");
+                   AddressMasksLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                    AddressMasksComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                    layout->addRow(AddressMasksLabel, AddressMasksComboBox);
@@ -3161,7 +3265,7 @@ private slots :
                    QLabel* GeneralCallModeLabel = new QLabel(tr("GeneralCallMode"), this);
                    QComboBox* GeneralCallModeComboBox = new QComboBox(this);
                    GeneralCallModeComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
-                   GeneralCallModeLabel->setStyleSheet("font: bold 15px; color: black;");
+                   GeneralCallModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                    GeneralCallModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -3218,7 +3322,7 @@ private slots :
 
 
 
-                                NoStretchModeLabel->setStyleSheet("font: bold 15px; color: black;");
+                                NoStretchModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                                 NoStretchModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                                 layout->addRow(NoStretchModeLabel, NoStretchModeComboBox);
@@ -3291,6 +3395,21 @@ private slots :
 
                    qDebug() << "Settings file path: " << settings.fileName();
 
+                   QDate date = QDate::currentDate();
+                                QString dateString = date.toString();
+
+
+                                qDebug() << "date :  " <<dateString;
+
+                                QTime time = QTime::currentTime();
+
+
+                                QString timestring = time.toString();
+                                qDebug() << "time :  " <<timestring;
+
+
+                                QString Date = dateString +", " + timestring;
+
 
 
                    settings.beginGroup("I2CConfigs");
@@ -3301,12 +3420,14 @@ private slots :
                    settings.setValue("AnalogFilter",  GeneralCallModeConfig);
                    settings.setValue("NoStretchMode",  NoStretchMode);
 
+                   settings.setValue("Date", Date);
+
+
 
 
 
                    settings.endGroup();
 
-                   settings.beginGroup("I2CConfigs");
 
 
 
@@ -3365,14 +3486,14 @@ private slots :
 
                     // ----------------------Create AddressingMode----------------------//
 
-                   QLabel* AddressingMode = new QLabel(tr("AdressLenght"), this);
+                   QLabel* AddressingMode = new QLabel(tr("Adress Lenght"), this);
                    QComboBox* AddressingModeBox = new QComboBox(this);
 
                    AddressingModeBox->addItems(QStringList() << "7-bit" << "10-bit");
                    AddressingModeBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                    // Set the minimum width to 100 pixels
                    AddressingModeBox->setMinimumWidth(10);
-                   AddressingMode->setStyleSheet("font: bold 15px; color: black; ");
+                   AddressingMode->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                    AddressingModeBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -3415,10 +3536,10 @@ private slots :
 
                    // ----------------------Create DualAddressMode----------------------//
 
-                   QLabel* DualAddressModeLabel = new QLabel(tr("DualAddressMode"), this);
+                   QLabel* DualAddressModeLabel = new QLabel(tr("Dual Address Mode"), this);
                    QComboBox* DualAddressModeComboBox = new QComboBox(this);
                    DualAddressModeComboBox->addItems(QStringList() << "Disable" << "Enable");
-                   DualAddressModeLabel->setStyleSheet("font: bold 15px; color: black;");
+                   DualAddressModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                    DualAddressModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                    layout->addRow(DualAddressModeLabel, DualAddressModeComboBox);
@@ -3466,7 +3587,7 @@ private slots :
 
                    // ----------------------Create AddressMasks----------------------//
 
-                   QLabel* AddressMasksLabel = new QLabel(tr("AddressMasks"), this);
+                   QLabel* AddressMasksLabel = new QLabel(tr("Address Masks"), this);
                    QComboBox* AddressMasksComboBox = new QComboBox(this);
                    AddressMasksComboBox->addItems(QStringList() << "NO Mask" <<"Mask01" << "Mask02  " << "Mask03" <<"Mask04"<<"Mask05"<<"Mask06"<<"Mask07");
 
@@ -3475,7 +3596,7 @@ private slots :
 
 
 
-                   AddressMasksLabel->setStyleSheet("font: bold 15px; color: black; ");
+                   AddressMasksLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                    AddressMasksComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                    layout->addRow(AddressMasksLabel, AddressMasksComboBox);
@@ -3521,10 +3642,10 @@ private slots :
 
                    // ----------------------Create GeneralCallMode----------------------//
 
-                   QLabel* GeneralCallModeLabel = new QLabel(tr("GeneralCallMode"), this);
+                   QLabel* GeneralCallModeLabel = new QLabel(tr("General Call Mode"), this);
                    QComboBox* GeneralCallModeComboBox = new QComboBox(this);
                    GeneralCallModeComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
-                   GeneralCallModeLabel->setStyleSheet("font: bold 15px; color: black;");
+                   GeneralCallModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                    GeneralCallModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
                    layout->addRow(GeneralCallModeLabel, GeneralCallModeComboBox);
 
@@ -3567,7 +3688,7 @@ private slots :
 
                    // ----------------------Create NoStretchMode----------------------//
 
-                                QLabel* NoStretchModeLabel = new QLabel(tr("NoStretchMode"), this);
+                                QLabel* NoStretchModeLabel = new QLabel(tr("No Stretch Mode"), this);
                                 QComboBox* NoStretchModeComboBox = new QComboBox(this);
                                 NoStretchModeComboBox->addItems(QStringList() << "Disable" << "Enable " );
 
@@ -3576,7 +3697,7 @@ private slots :
 
 
 
-                                NoStretchModeLabel->setStyleSheet("font: bold 15px; color: black;");
+                                NoStretchModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                                 NoStretchModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                                 layout->addRow(NoStretchModeLabel, NoStretchModeComboBox);
@@ -3647,6 +3768,21 @@ private slots :
 
                    qDebug() << "Settings file path: " << settings.fileName();
 
+                   QDate date = QDate::currentDate();
+                                QString dateString = date.toString();
+
+
+                                qDebug() << "date :  " <<dateString;
+
+                                QTime time = QTime::currentTime();
+
+
+                                QString timestring = time.toString();
+                                qDebug() << "time :  " <<timestring;
+
+
+                                QString Date = dateString +", " + timestring;
+
 
 
                    settings.beginGroup("I2C1Configs");
@@ -3657,6 +3793,9 @@ private slots :
                    settings.setValue("AddressMasksConfig",  AddressMasksConfig);
                    settings.setValue("AnalogFilter",  GeneralCallModeConfig);
                    settings.setValue("NoStretchMode",  NoStretchMode);
+
+                   settings.setValue("Date", Date);
+
 
 
 
@@ -3742,7 +3881,7 @@ private slots :
                       AddressingModeBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                       // Set the minimum width to 100 pixels
                       AddressingModeBox->setMinimumWidth(10);
-                      AddressingMode->setStyleSheet("font: bold 15px; color: black;");
+                      AddressingMode->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                       AddressingModeBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -3788,7 +3927,7 @@ private slots :
                       QLabel* DualAddressModeLabel = new QLabel(tr("DualAddressMode"), this);
                       QComboBox* DualAddressModeComboBox = new QComboBox(this);
                       DualAddressModeComboBox->addItems(QStringList() << "Disable" << "Enable");
-                      DualAddressModeLabel->setStyleSheet("font: bold 15px; color: black;");
+                      DualAddressModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                       DualAddressModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                       layout->addRow(DualAddressModeLabel, DualAddressModeComboBox);
@@ -3845,7 +3984,7 @@ private slots :
 
 
 
-                      AddressMasksLabel->setStyleSheet("font: bold 15px; color: black;");
+                      AddressMasksLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                       AddressMasksComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                       layout->addRow(AddressMasksLabel, AddressMasksComboBox);
@@ -3894,7 +4033,7 @@ private slots :
                       QLabel* GeneralCallModeLabel = new QLabel(tr("GeneralCallMode"), this);
                       QComboBox* GeneralCallModeComboBox = new QComboBox(this);
                       GeneralCallModeComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
-                      GeneralCallModeLabel->setStyleSheet("font: bold 15px; color: black;");
+                      GeneralCallModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                       GeneralCallModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
                       layout->addRow(GeneralCallModeLabel, GeneralCallModeComboBox);
 
@@ -3946,7 +4085,7 @@ private slots :
 
 
 
-                                   NoStretchModeLabel->setStyleSheet("font: bold 15px; color: black;");
+                                   NoStretchModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                                    NoStretchModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                                    layout->addRow(NoStretchModeLabel, NoStretchModeComboBox);
@@ -4016,6 +4155,20 @@ private slots :
                       QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
                       qDebug() << "Settings file path: " << settings.fileName();
+                      QDate date = QDate::currentDate();
+                                   QString dateString = date.toString();
+
+
+                                   qDebug() << "date :  " <<dateString;
+
+                                   QTime time = QTime::currentTime();
+
+
+                                   QString timestring = time.toString();
+                                   qDebug() << "time :  " <<timestring;
+
+
+                                   QString Date = dateString +", " + timestring;
 
 
 
@@ -4027,6 +4180,9 @@ private slots :
                       settings.setValue("AddressMasksConfig",  AddressMasksConfig);
                       settings.setValue("AnalogFilter",  GeneralCallModeConfig);
                       settings.setValue("NoStretchMode",  NoStretchMode);
+
+                      settings.setValue("Date", Date);
+
 
 
 
@@ -4113,7 +4269,7 @@ private slots :
                ChannelComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                ChannelComboBox->setMinimumWidth(10);
-               ChannelLabel->setStyleSheet("font: bold 15px; color: black; ");
+               ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -4160,7 +4316,7 @@ private slots :
                QLabel* ResolutionLabel = new QLabel(tr("ADC Resolution Bit"), this);
                QComboBox* ResolutionComboBox = new QComboBox(this);
                ResolutionComboBox->addItems(QStringList() << "ADC 8-Bit Resolution" << "ADC 10-Bit Resolution" << "ADC 12-Bit Resolution" << "ADC 14-Bit Resolution" << "ADC 16-Bit Resolution"<< "ADC 12-Bit Optimized Resolution" << "ADC 14-Bit Optimized Resolution"  );
-               ResolutionLabel->setStyleSheet("font: bold 15px; color: black; ");
+               ResolutionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ResolutionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(ResolutionLabel, ResolutionComboBox);
@@ -4207,7 +4363,7 @@ private slots :
                QLabel* ScanLabel = new QLabel(tr("Scan Conversion Mode"), this);
                QComboBox* ScanComboBox = new QComboBox(this);
                ScanComboBox->addItems(QStringList() << "Disabled" );
-               ScanLabel->setStyleSheet("font: bold 15px; color: black; ");
+               ScanLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ScanComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(ScanLabel, ScanComboBox);
@@ -4256,7 +4412,7 @@ private slots :
 
                ContinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
 
-               ContinuousLabel->setStyleSheet("font: bold 15px; color: black;");
+               ContinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ContinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
                layout->addRow(ContinuousLabel, ContinuousComboBox);
 
@@ -4305,7 +4461,7 @@ private slots :
 
               DiscontinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
 
-              DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black;");
+              DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
               DiscontinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
               layout->addRow(DiscontinuousLabel, DiscontinuousComboBox);
 
@@ -4354,7 +4510,7 @@ private slots :
 
              EndConversionComboBox->addItems(QStringList() << "End of Single Conversion" << "End of sequence Conversion");
 
-             EndConversionLabel->setStyleSheet("font: bold 15px; color: black;");
+             EndConversionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
              EndConversionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
              layout->addRow(EndConversionLabel, EndConversionComboBox);
 
@@ -4402,7 +4558,7 @@ private slots :
 
             BehaviorComboBox->addItems(QStringList() << "Overrun Data Preserved" << "Overrun Data Overwritten");
 
-            BehaviorLabel->setStyleSheet("font: bold 15px; color: black;");
+            BehaviorLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
             BehaviorComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
             layout->addRow(BehaviorLabel, BehaviorComboBox);
 
@@ -4449,7 +4605,7 @@ private slots :
                QLabel* LeftBitLabel = new QLabel(tr("Left Bit Shift"), this);
                QComboBox* LeftBitComboBox = new QComboBox(this);
                LeftBitComboBox->addItems(QStringList() << "No Bit Shift" << "1 Bit Shift" << "2 Bit Shift"<<  "3 Bit Shift" << "4 Bit Shift" <<"5 Bit Shift" << "6 Bit Shift" <<"7 Bit Shift" <<"8 Bit Shift" <<"9 Bit Shift" <<"10 Bit Shift" <<"11 Bit Shift" << "12 Bit Shift" <<"13 Bit Shift" <<"14 Bit Shift" << "15 Bit Shift" );
-               LeftBitLabel->setStyleSheet("font: bold 15px; color: black;");
+               LeftBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                LeftBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                // ----------------------- Save Left Bit Choices configs into a ADCConfig.txt-----------------------------------//
@@ -4518,6 +4674,22 @@ private slots :
                qDebug() << "Settings file path: " << settings.fileName();
 
 
+               QDate date = QDate::currentDate();
+                            QString dateString = date.toString();
+
+
+                            qDebug() << "date :  " <<dateString;
+
+                            QTime time = QTime::currentTime();
+
+
+                            QString timestring = time.toString();
+                            qDebug() << "time :  " <<timestring;
+
+
+                            QString Date = dateString +", " + timestring;
+
+
 
                settings.beginGroup("ADCConfigs");
 
@@ -4531,6 +4703,9 @@ private slots :
                settings.setValue("EndConversion",  EndConversion);
                settings.setValue("Behavior",  Behavior);
                settings.setValue("LeftBit",  LeftBit);
+
+               settings.setValue("Date", Date);
+
 
 
                settings.endGroup();
@@ -4600,7 +4775,7 @@ private slots :
                ChannelComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                ChannelComboBox->setMinimumWidth(10);
-               ChannelLabel->setStyleSheet("font: bold 15px; color: black;");
+               ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -4646,7 +4821,7 @@ private slots :
                QLabel* ResolutionLabel = new QLabel(tr("ADC Resolution Bit"), this);
                QComboBox* ResolutionComboBox = new QComboBox(this);
                ResolutionComboBox->addItems(QStringList() << "ADC 8-Bit Resolution" << "ADC 10-Bit Resolution" << "ADC 12-Bit Resolution" << "ADC 14-Bit Resolution" << "ADC 16-Bit Resolution"<< "ADC 12-Bit Optimized Resolution" << "ADC 14-Bit Optimized Resolution"  );
-               ResolutionLabel->setStyleSheet("font: bold 15px; color: black;");
+               ResolutionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ResolutionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(ResolutionLabel, ResolutionComboBox);
@@ -4694,7 +4869,7 @@ private slots :
                QLabel* ScanLabel = new QLabel(tr("Scan Conversion Mode"), this);
                QComboBox* ScanComboBox = new QComboBox(this);
                ScanComboBox->addItems(QStringList() << "Disabled" );
-               ScanLabel->setStyleSheet("font: bold 15px; color: black;");
+               ScanLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ScanComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(ScanLabel, ScanComboBox);
@@ -4744,7 +4919,7 @@ private slots :
 
                ContinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
 
-               ContinuousLabel->setStyleSheet("font: bold 15px; color: black;");
+               ContinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ContinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
                layout->addRow(ContinuousLabel, ContinuousComboBox);
 
@@ -4792,7 +4967,7 @@ private slots :
 
               DiscontinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
 
-              DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black;");
+              DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
               DiscontinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -4842,7 +5017,7 @@ private slots :
 
              EndConversionComboBox->addItems(QStringList() << "End of Single Conversion" << "End of sequence Conversion");
 
-             EndConversionLabel->setStyleSheet("font: bold 15px; color: black;");
+             EndConversionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
              EndConversionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
              layout->addRow(EndConversionLabel, EndConversionComboBox);
 
@@ -4891,7 +5066,7 @@ private slots :
 
             BehaviorComboBox->addItems(QStringList() << "Overrun Data Preserved" << "Overrun Data Overwritten");
 
-            BehaviorLabel->setStyleSheet("font: bold 15px; color: black;");
+            BehaviorLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
             BehaviorComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
             layout->addRow(BehaviorLabel, BehaviorComboBox);
 
@@ -4938,7 +5113,7 @@ private slots :
                QLabel* LeftBitLabel = new QLabel(tr("Left Bit Shift"), this);
                QComboBox* LeftBitComboBox = new QComboBox(this);
                LeftBitComboBox->addItems(QStringList() << "No Bit Shift" << "1 Bit Shift" << "2 Bit Shift"<<  "3 Bit Shift" << "4 Bit Shift" <<"5 Bit Shift" << "6 Bit Shift" <<"7 Bit Shift" <<"8 Bit Shift" <<"9 Bit Shift" <<"10 Bit Shift" <<"11 Bit Shift" << "12 Bit Shift" <<"13 Bit Shift" <<"14 Bit Shift" << "15 Bit Shift" );
-               LeftBitLabel->setStyleSheet("font: bold 15px; color: black;");
+               LeftBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                LeftBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                // ----------------------- Save Left Bit Choices configs into a ADCConfig.txt-----------------------------------//
@@ -5002,6 +5177,21 @@ private slots :
 
                qDebug() << "Settings file path: " << settings.fileName();
 
+               QDate date = QDate::currentDate();
+                            QString dateString = date.toString();
+
+
+                            qDebug() << "date :  " <<dateString;
+
+                            QTime time = QTime::currentTime();
+
+
+                            QString timestring = time.toString();
+                            qDebug() << "time :  " <<timestring;
+
+
+                            QString Date = dateString +", " + timestring;
+
 
 
                settings.beginGroup("ADC1Configs");
@@ -5014,6 +5204,9 @@ private slots :
                settings.setValue("EndConversion",  EndConversion);
                settings.setValue("Behavior",  Behavior);
                settings.setValue("LeftBit",  LeftBit);
+
+               settings.setValue("Date", Date);
+
 
 
                settings.endGroup();
@@ -5085,7 +5278,7 @@ private slots :
                ChannelComboBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                // Set the minimum width to 100 pixels
                ChannelComboBox->setMinimumWidth(10);
-               ChannelLabel->setStyleSheet("font: bold 15px; color: black;");
+               ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -5133,7 +5326,7 @@ private slots :
                QLabel* ResolutionLabel = new QLabel(tr("ADC Resolution Bit"), this);
                QComboBox* ResolutionComboBox = new QComboBox(this);
                ResolutionComboBox->addItems(QStringList() << "ADC 8-Bit Resolution" << "ADC 10-Bit Resolution" << "ADC 12-Bit Resolution" << "ADC 14-Bit Resolution" << "ADC 16-Bit Resolution"<< "ADC 12-Bit Optimized Resolution" << "ADC 14-Bit Optimized Resolution"  );
-               ResolutionLabel->setStyleSheet("font: bold 15px; color: black;");
+               ResolutionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ResolutionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(ResolutionLabel, ResolutionComboBox);
@@ -5179,7 +5372,7 @@ private slots :
                QLabel* ScanLabel = new QLabel(tr("Scan Conversion Mode"), this);
                QComboBox* ScanComboBox = new QComboBox(this);
                ScanComboBox->addItems(QStringList() << "Disabled" );
-               ScanLabel->setStyleSheet("font: bold 15px; color: black;");
+               ScanLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ScanComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(ScanLabel, ScanComboBox);
@@ -5232,7 +5425,7 @@ private slots :
 
                ContinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
 
-               ContinuousLabel->setStyleSheet("font: bold 15px; color: black;");
+               ContinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                ContinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
                layout->addRow(ContinuousLabel, ContinuousComboBox);
 
@@ -5281,7 +5474,7 @@ private slots :
 
               DiscontinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
 
-              DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black;");
+              DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
               DiscontinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
               layout->addRow(DiscontinuousLabel, DiscontinuousComboBox);
 
@@ -5332,7 +5525,7 @@ private slots :
 
              EndConversionComboBox->addItems(QStringList() << "End of Single Conversion" << "End of sequence Conversion");
 
-             EndConversionLabel->setStyleSheet("font: bold 15px; color: black;");
+             EndConversionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
              EndConversionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
              layout->addRow(EndConversionLabel, EndConversionComboBox);
 
@@ -5381,7 +5574,7 @@ private slots :
 
             BehaviorComboBox->addItems(QStringList() << "Overrun Data Preserved" << "Overrun Data Overwritten");
 
-            BehaviorLabel->setStyleSheet("font: bold 15px; color: black;");
+            BehaviorLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
             BehaviorComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
             layout->addRow(BehaviorLabel, BehaviorComboBox);
 
@@ -5429,7 +5622,7 @@ private slots :
                QLabel* LeftBitLabel = new QLabel(tr("Left Bit Shift"), this);
                QComboBox* LeftBitComboBox = new QComboBox(this);
                LeftBitComboBox->addItems(QStringList() << "No Bit Shift" << "1 Bit Shift" << "2 Bit Shift"<<  "3 Bit Shift" << "4 Bit Shift" <<"5 Bit Shift" << "6 Bit Shift" <<"7 Bit Shift" <<"8 Bit Shift" <<"9 Bit Shift" <<"10 Bit Shift" <<"11 Bit Shift" << "12 Bit Shift" <<"13 Bit Shift" <<"14 Bit Shift" << "15 Bit Shift" );
-               LeftBitLabel->setStyleSheet("font: bold 15px; color: black;");
+               LeftBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                LeftBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                // ----------------------- Save Left Bit Choices configs into a ADCConfig.txt-----------------------------------//
@@ -5492,6 +5685,21 @@ private slots :
 
                qDebug() << "Settings file path: " << settings.fileName();
 
+               QDate date = QDate::currentDate();
+                            QString dateString = date.toString();
+
+
+                            qDebug() << "date :  " <<dateString;
+
+                            QTime time = QTime::currentTime();
+
+
+                            QString timestring = time.toString();
+                            qDebug() << "time :  " <<timestring;
+
+
+                            QString Date = dateString +", " + timestring;
+
 
 
                settings.beginGroup("ADC3Configs");
@@ -5504,6 +5712,9 @@ private slots :
                settings.setValue("EndConversion",  EndConversion);
                settings.setValue("Behavior",  Behavior);
                settings.setValue("LeftBit",  LeftBit);
+
+               settings.setValue("Date", Date);
+
 
 
                settings.endGroup();
@@ -5756,7 +5967,7 @@ private slots :
         QLabel* ChannelLabel = new QLabel(tr("OUT1 Connected to "), this);
         QComboBox* ChannelComboBox = new QComboBox(this);
         ChannelComboBox->addItems(QStringList() << "Disable" << "Only External Pin" << "Only on Chip Analog Peripherals" <<"Both external Pin and on Chip Analog" );
-        ChannelLabel->setStyleSheet("font: bold 15px; color: black;");
+        ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
         layout->addRow(ChannelLabel, ChannelComboBox);
 
@@ -5804,7 +6015,7 @@ private slots :
         ModeComboBox->addItems(QStringList() << "Normal Mode" << "Sample and Hold Mode" );
 
 
-        ModeLabel->setStyleSheet("font: bold 15px; color: black;");
+        ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -5857,7 +6068,7 @@ private slots :
         BufferComboBox->addItems(QStringList() << "Enable" << "Disable" );
 
 
-        BufferLabel->setStyleSheet("font: bold 15px; color: black;");
+        BufferLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         BufferComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -5912,7 +6123,7 @@ private slots :
         TriggerComboBox->addItems(QStringList() << "None" << "TIMER1 Trigger OUT event " << "TIMER1 Trigger OUT event " << "TIMER1 Trigger OUT event " << "TIMER2 Trigger OUT event " << "TIMER4 Trigger OUT event " << "TIMER5 Trigger OUT event " << "TIMER6 Trigger OUT event " << "TIMER7 Trigger OUT event " << "TIMER8 Trigger OUT event " << "TIMER15 Trigger OUT event" << "LPTIMER1 Trigger OUT event" << "LPTIMER2 Trigger OUT event" << "Software Trigger");
 
 
-        TriggerLabel->setStyleSheet("font: bold 15px; color: black;");
+        TriggerLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         TriggerComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -5966,7 +6177,7 @@ private slots :
         TrimmingComboBox->addItems(QStringList() << "Factory Trimming" << "User Trimming" );
 
 
-        TrimmingLabel->setStyleSheet("font: bold 15px; color: black;");
+        TrimmingLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         TrimmingComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6032,6 +6243,21 @@ private slots :
 
         QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
+        QDate date = QDate::currentDate();
+                     QString dateString = date.toString();
+
+
+                     qDebug() << "date :  " <<dateString;
+
+                     QTime time = QTime::currentTime();
+
+
+                     QString timestring = time.toString();
+                     qDebug() << "time :  " <<timestring;
+
+
+                     QString Date = dateString +", " + timestring;
+
 
         // DAC Configs
         settings.beginGroup("DAC1Configs");
@@ -6041,6 +6267,9 @@ private slots :
         settings.setValue("Buffer",  Buffer);
         settings.setValue("Trigger",  Trigger);
         settings.setValue("Trimming",  Trimming);
+
+        settings.setValue("Date", Date);
+
 
 
 
@@ -6109,7 +6338,7 @@ private slots :
         QLabel* Channel2Label = new QLabel(tr("OUT2 Connected to "), this);
         QComboBox* Channel2ComboBox = new QComboBox(this);
         Channel2ComboBox->addItems(QStringList() << "Disable" << "Only External Pin" << "Only on Chip Analog Peripherals" <<"Both external Pin and on Chip Analog" );
-        Channel2Label->setStyleSheet("font: bold 15px; color: black;");
+        Channel2Label->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         Channel2ComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
         layout->addRow(Channel2Label, Channel2ComboBox);
 
@@ -6162,7 +6391,7 @@ private slots :
         ModeComboBox->addItems(QStringList() << "Normal Mode" << "Sample and Hold Mode" );
 
 
-        ModeLabel->setStyleSheet("font: bold 15px; color: black;");
+        ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6215,7 +6444,7 @@ private slots :
         BufferComboBox->addItems(QStringList() << "Enable" << "Disable" );
 
 
-        BufferLabel->setStyleSheet("font: bold 15px; color: black;");
+        BufferLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         BufferComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6270,7 +6499,7 @@ private slots :
         TriggerComboBox->addItems(QStringList() << "None" << "TIMER1 Trigger OUT event " << "TIMER1 Trigger OUT event " << "TIMER1 Trigger OUT event " << "TIMER2 Trigger OUT event " << "TIMER4 Trigger OUT event " << "TIMER5 Trigger OUT event " << "TIMER6 Trigger OUT event " << "TIMER7 Trigger OUT event " << "TIMER8 Trigger OUT event " << "TIMER15 Trigger OUT event" << "LPTIMER1 Trigger OUT event" << "LPTIMER2 Trigger OUT event" << "Software Trigger");
 
 
-        TriggerLabel->setStyleSheet("font: bold 15px; color: black;");
+        TriggerLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         TriggerComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6324,7 +6553,7 @@ private slots :
         TrimmingComboBox->addItems(QStringList() << "Factory Trimming" << "User Trimming" );
 
 
-        TrimmingLabel->setStyleSheet("font: bold 15px; color: black;");
+        TrimmingLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         TrimmingComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6390,6 +6619,21 @@ private slots :
 
         QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
+        QDate date = QDate::currentDate();
+                     QString dateString = date.toString();
+
+
+                     qDebug() << "date :  " <<dateString;
+
+                     QTime time = QTime::currentTime();
+
+
+                     QString timestring = time.toString();
+                     qDebug() << "time :  " <<timestring;
+
+
+                     QString Date = dateString +", " + timestring;
+
 
         // DAC Configs
         settings.beginGroup("DAC2Configs");
@@ -6399,6 +6643,9 @@ private slots :
         settings.setValue("Buffer",  Buffer);
         settings.setValue("Trigger",  Trigger);
         settings.setValue("Trimming",  Trimming);
+
+        settings.setValue("Date", Date);
+
 
 
 
@@ -6470,7 +6717,7 @@ private slots :
         PINComboBox->addItems(QStringList() << "PB13" << "PB14" << "PB15" << "PB16" << "PB1" << "PB2" << "PB3" << "PB4" );
 
 
-        PINLabel->setStyleSheet("font: bold 15px; color: black;");
+        PINLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         PINComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6524,7 +6771,7 @@ private slots :
         ModeComboBox->addItems(QStringList() << "Push-Pull" << "Open-Drain" );
 
 
-        ModeLabel->setStyleSheet("font: bold 15px; color: black;");
+        ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6577,7 +6824,7 @@ private slots :
         GPIOComboBox->addItems(QStringList() << "No Pull-up and No Pull-down" << "Pull-up" << "Pull-down" );
 
 
-        GPIOLabel->setStyleSheet("font: bold 15px; color: black;");
+        GPIOLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         GPIOComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6633,7 +6880,7 @@ private slots :
         SpeedComboBox->addItems(QStringList() << "Low" << "Meduim" << "High" << "Very High" );
 
 
-        SpeedLabel->setStyleSheet("font: bold 15px; color: black;");
+        SpeedLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         SpeedComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6688,7 +6935,7 @@ private slots :
 
 
 
-        UserLabel->setStyleSheet("font: bold 15px; color: black;");
+        UserLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         UserLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6738,6 +6985,20 @@ private slots :
 
 //        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
+        QDate date = QDate::currentDate();
+                     QString dateString = date.toString();
+
+
+                     qDebug() << "date :  " <<dateString;
+
+                     QTime time = QTime::currentTime();
+
+
+                     QString timestring = time.toString();
+                     qDebug() << "time :  " <<timestring;
+
+
+                     QString Date = dateString +", " + timestring;
 
         // GPIO OUTPUT Configs
         settings.beginGroup("GPIOOUTPUTConfigs");
@@ -6748,6 +7009,9 @@ private slots :
         settings.setValue("GPIO",  GPIO);
         settings.setValue("Speed",  Speed);
         settings.setValue("User",  User);
+
+        settings.setValue("Date", Date);
+
 
 
 
@@ -6816,7 +7080,7 @@ private slots :
         PINComboBox->addItems(QStringList() << "PA6" << "PA7" << "PA8" << "PA9" << "PA10" << "PA11" << "PA12" << "PA13" );
 
 
-        PINLabel->setStyleSheet("font: bold 15px; color: black;");
+        PINLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         PINComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6869,7 +7133,7 @@ private slots :
         GPIOComboBox->addItems(QStringList() << "No Pull-up and No Pull-down" << "Pull-up" << "Pull-down" );
 
 
-        GPIOLabel->setStyleSheet("font: bold 15px; color: black;");
+        GPIOLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         GPIOComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6926,7 +7190,7 @@ private slots :
 
 
 
-        UserLabel->setStyleSheet("font: bold 15px; color: black;");
+        UserLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         UserLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -6975,6 +7239,21 @@ private slots :
 
 //        QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
+        QDate date = QDate::currentDate();
+                     QString dateString = date.toString();
+
+
+                     qDebug() << "date :  " <<dateString;
+
+                     QTime time = QTime::currentTime();
+
+
+                     QString timestring = time.toString();
+                     qDebug() << "time :  " <<timestring;
+
+
+                     QString Date = dateString +", " + timestring;
+
 
         // GPIO OUTPUT Configs
         settings.beginGroup("GPIOINPUTConfigs");
@@ -6983,6 +7262,9 @@ private slots :
 
         settings.setValue("GPIO",  GPIO);
         settings.setValue("User",  User);
+
+        settings.setValue("Date", Date);
+
 
 
 
@@ -7052,7 +7334,7 @@ private slots :
         ChannelComboBox->addItems(QStringList() << "Channel1" << "Channel2" << "Channel3" << "Channel4");
 
 
-        ChannelLabel->setStyleSheet("font: bold 15px; color: black;");
+        ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -7109,7 +7391,7 @@ private slots :
 
 
 
-        PrescalerLabel->setStyleSheet("font: bold 15px; color: black;");
+        PrescalerLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         PrescalerSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -7152,7 +7434,7 @@ private slots :
         CounterComboBox->addItems(QStringList() <<"Up" << "Down" );
 
 
-        CounterLabel->setStyleSheet("font: bold 15px; color: black;");
+        CounterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         CounterComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -7205,7 +7487,7 @@ private slots :
         AutoReloadSpinBox->setMaximum(55633);
 
 
-        AutoReloadLabel->setStyleSheet("font: bold 15px; color: black;");
+        AutoReloadLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         AutoReloadSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -7251,7 +7533,7 @@ private slots :
 
 
 
-        ClockLabel->setStyleSheet("font: bold 15px; color: black;");
+        ClockLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         ClockComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -7306,7 +7588,7 @@ private slots :
         RepititionSpinBox->setMaximum(65535);
 
 
-        RepititionLabel->setStyleSheet("font: bold 15px; color: black;");
+        RepititionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         RepititionSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -7352,7 +7634,7 @@ private slots :
 
 
 
-        PreloadLabel->setStyleSheet("font: bold 15px; color: black;");
+        PreloadLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
         PreloadComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
@@ -7420,6 +7702,21 @@ private slots :
 
         QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
 
+        QDate date = QDate::currentDate();
+                     QString dateString = date.toString();
+
+
+                     qDebug() << "date :  " <<dateString;
+
+                     QTime time = QTime::currentTime();
+
+
+                     QString timestring = time.toString();
+                     qDebug() << "time :  " <<timestring;
+
+
+                     QString Date = dateString +", " + timestring;
+
 
         // GPIO OUTPUT Configs
         settings.beginGroup("FrequencyMesureConfigs");
@@ -7432,6 +7729,9 @@ private slots :
         settings.setValue("Clock",  Clock);
         settings.setValue("Repitition",  Repitition);
         settings.setValue("Preload",  Preload);
+
+        settings.setValue("Date", Date);
+
 
 
 
