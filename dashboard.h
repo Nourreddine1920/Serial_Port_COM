@@ -547,7 +547,9 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Baudrate = baudRateComboBox->itemText(indexBaudrate);
-                   settings.beginGroup("UART4Configs");
+//                   settings.beginGroup("UART4Configs");
+                   settings.beginGroup("UART4");
+
 
 
                    // Store the selected option in the settings file
@@ -594,7 +596,9 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Parity = parityComboBox->itemText(indexParity);
-                   settings.beginGroup("UART4Configs");
+                  // settings.beginGroup("UART4Configs");
+                   settings.beginGroup("UART4");
+
 
 
                    // Store the selected option in the settings file
@@ -647,7 +651,9 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString stopBits = stopBitsComboBox->itemText(index);
-                   settings.beginGroup("UART4Configs");
+//                   settings.beginGroup("UART4Configs");
+                   settings.beginGroup("UART4");
+
 
 
                    // Store the selected option in the settings file
@@ -700,7 +706,9 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString DataBits = DataBitsComboBox->itemText(indexDataBits);
-                   settings.beginGroup("UART4Configs");
+//                   settings.beginGroup("UART4Configs");
+                   settings.beginGroup("UART4");
+
 
 
                    // Store the selected option in the settings file
@@ -750,7 +758,9 @@ private slots :
                      QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                      QString FlowControl = FlowControlComboBox->itemText(indexFlowControl);
-                     settings.beginGroup("UART4Configs");
+//                     settings.beginGroup("UART4Configs");
+                     settings.beginGroup("UART4");
+
 
 
                      // Store the selected option in the settings file
@@ -812,7 +822,7 @@ private slots :
 
 
 
-               settings.beginGroup("UART4Configs");
+               settings.beginGroup("UART4");
 
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
@@ -949,7 +959,8 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Baudrate = baudRateComboBox->itemText(indexBaudrate);
-                   settings.beginGroup("UART5Configs");
+                   settings.beginGroup("UART5");
+
 
 
                    // Store the selected option in the settings file
@@ -996,7 +1007,7 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Parity = parityComboBox->itemText(indexParity);
-                   settings.beginGroup("UART5Configs");
+                   settings.beginGroup("UART5");
 
 
                    // Store the selected option in the settings file
@@ -1049,7 +1060,7 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString stopBits = stopBitsComboBox->itemText(index);
-                   settings.beginGroup("UART5Configs");
+                   settings.beginGroup("UART5");
 
 
                    // Store the selected option in the settings file
@@ -1102,7 +1113,7 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString DataBits = DataBitsComboBox->itemText(indexDataBits);
-                   settings.beginGroup("UART5Configs");
+                   settings.beginGroup("UART5");
 
 
                    // Store the selected option in the settings file
@@ -1152,7 +1163,7 @@ private slots :
                      QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                      QString FlowControl = FlowControlComboBox->itemText(indexFlowControl);
-                     settings.beginGroup("UART5Configs");
+                     settings.beginGroup("UART5");
 
 
                      // Store the selected option in the settings file
@@ -1213,7 +1224,7 @@ private slots :
                QString Date = dateString +", " + timestring;
 
 
-               settings.beginGroup("UART5Configs");
+               settings.beginGroup("UART5");
 
 
                settings.setValue("Baudrate",  Baudrate);
@@ -1350,7 +1361,7 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Baudrate = baudRateComboBox->itemText(indexBaudrate);
-                   settings.beginGroup("USART1Configs");
+                   settings.beginGroup("USART1");
 
 
                    // Store the selected option in the settings file
@@ -1397,7 +1408,7 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Parity = parityComboBox->itemText(indexParity);
-                   settings.beginGroup("USART1Configs");
+                   settings.beginGroup("USART1");
 
 
                    // Store the selected option in the settings file
@@ -1450,7 +1461,7 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString stopBits = stopBitsComboBox->itemText(index);
-                   settings.beginGroup("USART1Configs");
+                   settings.beginGroup("USART1");
 
 
                    // Store the selected option in the settings file
@@ -1503,7 +1514,7 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString DataBits = DataBitsComboBox->itemText(indexDataBits);
-                   settings.beginGroup("USART1Configs");
+                   settings.beginGroup("USART1");
 
 
                    // Store the selected option in the settings file
@@ -1553,7 +1564,8 @@ private slots :
                      QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                      QString FlowControl = FlowControlComboBox->itemText(indexFlowControl);
-                     settings.beginGroup("USART1Configs");
+                     settings.beginGroup("USART1");
+
 
 
                      // Store the selected option in the settings file
@@ -1613,7 +1625,7 @@ private slots :
                             QString Date = dateString +", " + timestring;
 
 
-               settings.beginGroup("USART1Configs");
+               settings.beginGroup("USART1");
 
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
@@ -1750,7 +1762,7 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Baudrate = baudRateComboBox->itemText(indexBaudrate);
-                   settings.beginGroup("USART2Configs");
+                   settings.beginGroup("USART2");
 
 
                    // Store the selected option in the settings file
@@ -1797,7 +1809,8 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Parity = parityComboBox->itemText(indexParity);
-                   settings.beginGroup("USART2Configs");
+                   settings.beginGroup("USART2");
+
 
 
                    // Store the selected option in the settings file
@@ -1850,7 +1863,7 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString stopBits = stopBitsComboBox->itemText(index);
-                   settings.beginGroup("USART2Configs");
+                   settings.beginGroup("USART2");
 
 
                    // Store the selected option in the settings file
@@ -1903,7 +1916,7 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString DataBits = DataBitsComboBox->itemText(indexDataBits);
-                   settings.beginGroup("USART2Configs");
+                   settings.beginGroup("USART2");
 
 
                    // Store the selected option in the settings file
@@ -1953,7 +1966,7 @@ private slots :
                      QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                      QString FlowControl = FlowControlComboBox->itemText(indexFlowControl);
-                     settings.beginGroup("USART2Configs");
+                     settings.beginGroup("USART2");
 
 
                      // Store the selected option in the settings file
@@ -2013,7 +2026,7 @@ private slots :
                             QString Date = dateString +", " + timestring;
 
 
-               settings.beginGroup("USART2Configs");
+                            settings.beginGroup("USART2");
 
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
@@ -2148,7 +2161,7 @@ private slots :
                    QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                    QString Mode = ModeComboBox->itemText(indexMode);
-                   settings.beginGroup("SPIConfigs");
+                   settings.beginGroup("SPI");
 
 
                    // Store the selected option in the settings file
@@ -2476,7 +2489,7 @@ private slots :
                    QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                    QString Mode = ModeComboBox->itemText(indexMode);
-                   settings.beginGroup("SPI1Configs");
+                   settings.beginGroup("SPI1");
 
 
                    // Store the selected option in the settings file
@@ -2520,7 +2533,7 @@ private slots :
                    QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                    QString NSS = NSSComboBox->itemText(indexNSS);
-                   settings.beginGroup("SPI1Configs");
+                   settings.beginGroup("SPI1");
 
 
                    // Store the selected option in the settings file
@@ -2567,7 +2580,7 @@ private slots :
                    QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                    QString Frameformat = FrameFormatComboBox->itemText(indexFrameformat);
-                   settings.beginGroup("SPI1Configs");
+                   settings.beginGroup("SPI1");
 
 
                    // Store the selected option in the settings file
@@ -2611,7 +2624,7 @@ private slots :
                    QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                    QString DataSize = QString::number(value);
-                   settings.beginGroup("SPI1Configs");
+                   settings.beginGroup("SPI1");
 
                    // Store the selected value in the settings file
                    settings.setValue("DataSize", DataSize);
@@ -2654,7 +2667,7 @@ private slots :
                    QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                    QString Firstbit = FirstBitComboBox->itemText(indexFirstbit);
-                   settings.beginGroup("SPI1Configs");
+                   settings.beginGroup("SPI1");
 
 
                    // Store the selected option in the settings file
@@ -2708,7 +2721,7 @@ private slots :
 
 
 
-               settings.beginGroup("SPI1Configs");
+               settings.beginGroup("SPI1");
 
                settings.setValue("Mode",  Mode);
                settings.setValue("NSS",  NSS);
@@ -2807,7 +2820,7 @@ private slots :
                    QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                    QString Mode = ModeComboBox->itemText(indexMode);
-                   settings.beginGroup("SPI2Configs");
+                   settings.beginGroup("SPI2");
 
 
                    // Store the selected option in the settings file
@@ -2850,7 +2863,7 @@ private slots :
                    QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                    QString NSS = NSSComboBox->itemText(indexNSS);
-                   settings.beginGroup("SPI2Configs");
+                   settings.beginGroup("SPI2");
 
 
                    // Store the selected option in the settings file
@@ -2896,7 +2909,7 @@ private slots :
                    QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                    QString Frameformat = FrameFormatComboBox->itemText(indexFrameformat);
-                   settings.beginGroup("SPI2Configs");
+                   settings.beginGroup("SPI2");
 
 
                    // Store the selected option in the settings file
@@ -2940,7 +2953,7 @@ private slots :
                    QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                    QString DataSize = QString::number(value);
-                   settings.beginGroup("SPI2Configs");
+                   settings.beginGroup("SPI2");
 
                    // Store the selected value in the settings file
                    settings.setValue("DataSize", DataSize);
@@ -2984,7 +2997,7 @@ private slots :
                    QSettings settings("SPIConfig.txt", QSettings::IniFormat);
 
                    QString Firstbit = FirstBitComboBox->itemText(indexFirstbit);
-                   settings.beginGroup("SPI2Configs");
+                   settings.beginGroup("SPI2");
 
 
                    // Store the selected option in the settings file
@@ -3038,7 +3051,7 @@ private slots :
 
 
 
-               settings.beginGroup("SPI2Configs");
+               settings.beginGroup("SPI2");
 
                settings.setValue("Mode",  Mode);
                settings.setValue("NSS",  NSS);
@@ -3519,7 +3532,7 @@ private slots :
                        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
                        QString AddressingMODE = AddressingModeBox->itemText(indexAdressLenght);
-                       settings.beginGroup("I2C1Configs");
+                       settings.beginGroup("I2C1");
 
 
                        // Store the selected option in the settings file
@@ -3566,7 +3579,7 @@ private slots :
                        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
                        QString DualAddressMode = DualAddressModeComboBox->itemText(indexDualAddressMode);
-                       settings.beginGroup("I2C1Configs");
+                       settings.beginGroup("I2C1");
 
 
                        // Store the selected option in the settings file
@@ -3623,7 +3636,7 @@ private slots :
                        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
                        QString AddressMasks = AddressMasksComboBox->itemText(indexAddressMasks);
-                       settings.beginGroup("I2C1Configs");
+                       settings.beginGroup("I2C1");
 
 
                        // Store the selected option in the settings file
@@ -3671,7 +3684,7 @@ private slots :
                        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
                        QString GeneralCallMode = GeneralCallModeComboBox->itemText(indexGeneralCallMode);
-                       settings.beginGroup("I2C1Configs");
+                       settings.beginGroup("I2C1");
 
 
                        // Store the selected option in the settings file
@@ -3724,7 +3737,7 @@ private slots :
                                     QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
                                     QString NoStretchMode = NoStretchModeComboBox->itemText(indexNoStretchMode);
-                                    settings.beginGroup("I2C1Configs");
+                                    settings.beginGroup("I2C1");
 
 
                                     // Store the selected option in the settings file
@@ -3785,7 +3798,7 @@ private slots :
 
 
 
-                   settings.beginGroup("I2C1Configs");
+                   settings.beginGroup("I2C1");
 
 
                    settings.setValue("AdressLenght",  AddressingMODE);
@@ -3803,7 +3816,7 @@ private slots :
 
 
 
-                   settings.beginGroup("I2C1Configs");
+                   settings.beginGroup("I2C1");
 
                    settings.remove("Timing");
                    settings.remove("Speed");
@@ -3907,7 +3920,7 @@ private slots :
                           QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
                           QString AddressingMODE = AddressingModeBox->itemText(indexAdressLenght);
-                          settings.beginGroup("I2C2Configs");
+                          settings.beginGroup("I2C2");
 
 
                           // Store the selected option in the settings file
@@ -3954,7 +3967,7 @@ private slots :
                           QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
                           QString DualAddressMode = DualAddressModeComboBox->itemText(indexDualAddressMode);
-                          settings.beginGroup("I2C2Configs");
+                          settings.beginGroup("I2C2");
 
 
                           // Store the selected option in the settings file
@@ -4011,7 +4024,7 @@ private slots :
                           QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
                           QString AddressMasks = AddressMasksComboBox->itemText(indexAddressMasks);
-                          settings.beginGroup("I2C2Configs");
+                          settings.beginGroup("I2C2");
 
 
                           // Store the selected option in the settings file
@@ -4059,7 +4072,7 @@ private slots :
                           QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
                           QString GeneralCallMode = GeneralCallModeComboBox->itemText(indexGeneralCallMode);
-                          settings.beginGroup("I2C2Configs");
+                          settings.beginGroup("I2C2");
 
 
                           // Store the selected option in the settings file
@@ -4112,7 +4125,7 @@ private slots :
                                        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
 
                                        QString NoStretchMode = NoStretchModeComboBox->itemText(indexNoStretchMode);
-                                       settings.beginGroup("I2C2Configs");
+                                       settings.beginGroup("I2C2");
 
 
                                        // Store the selected option in the settings file
@@ -4172,7 +4185,7 @@ private slots :
 
 
 
-                      settings.beginGroup("I2C2Configs");
+                      settings.beginGroup("I2C2");
 
 
                       settings.setValue("AdressLenght",  AddressingMODE);
@@ -4190,7 +4203,7 @@ private slots :
 
 
 
-                      settings.beginGroup("I2C2Configs");
+                      settings.beginGroup("I2C2");
 
                       settings.remove("Timing");
                       settings.remove("Speed");
@@ -4801,7 +4814,7 @@ private slots :
                    QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                    QString Channel = ChannelComboBox->itemText(indexChannel);
-                   settings.beginGroup("ADC1Configs");
+                   settings.beginGroup("ADC1");
 
 
                    // Store the selected option in the settings file
@@ -4847,7 +4860,7 @@ private slots :
                    QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                    QString Resolution = ResolutionComboBox->itemText(indexResolution);
-                   settings.beginGroup("ADC1Configs");
+                   settings.beginGroup("ADC1");
 
 
                    // Store the selected option in the settings file
@@ -4894,7 +4907,7 @@ private slots :
                    QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                    QString Scan = ScanComboBox->itemText(indexScan);
-                   settings.beginGroup("ADC1Configs");
+                   settings.beginGroup("ADC1");
 
 
                    // Store the selected option in the settings file
@@ -4943,7 +4956,7 @@ private slots :
                    QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                    QString Continuous = ContinuousComboBox->itemText(indexContinuous);
-                   settings.beginGroup("ADC1Configs");
+                   settings.beginGroup("ADC1");
 
 
                    // Store the selected option in the settings file
@@ -4991,7 +5004,7 @@ private slots :
                   QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                   QString Discontinuous = DiscontinuousComboBox->itemText(indexDiscontinuous);
-                  settings.beginGroup("ADC1Configs");
+                  settings.beginGroup("ADC1");
 
 
                   // Store the selected option in the settings file
@@ -5042,7 +5055,7 @@ private slots :
                  QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                  QString EndConversion = EndConversionComboBox->itemText(indexEndConversion);
-                 settings.beginGroup("ADC1Configs");
+                 settings.beginGroup("ADC1");
 
 
                  // Store the selected option in the settings file
@@ -5091,7 +5104,7 @@ private slots :
                 QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                 QString Behavior = BehaviorComboBox->itemText(indexBehavior);
-                settings.beginGroup("ADC1Configs");
+                settings.beginGroup("ADC1");
 
 
                 // Store the selected option in the settings file
@@ -5136,7 +5149,7 @@ private slots :
                    QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                    QString LeftBit = LeftBitComboBox->itemText(indexLeftBit);
-                   settings.beginGroup("ADC1Configs");
+                   settings.beginGroup("ADC1");
 
 
                    // Store the selected option in the settings file
@@ -5194,7 +5207,7 @@ private slots :
 
 
 
-               settings.beginGroup("ADC1Configs");
+               settings.beginGroup("ADC1");
 
                settings.setValue("Channel",  Channel);
                settings.setValue("Resolution",  Resolution);
@@ -5305,7 +5318,7 @@ private slots :
                    QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                    QString Channel = ChannelComboBox->itemText(indexChannel);
-                   settings.beginGroup("ADC3Configs");
+                   settings.beginGroup("ADC3");
 
 
                    // Store the selected option in the settings file
@@ -5351,7 +5364,7 @@ private slots :
                    QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                    QString Resolution = ResolutionComboBox->itemText(indexResolution);
-                   settings.beginGroup("ADC3Configs");
+                   settings.beginGroup("ADC3");
 
 
                    // Store the selected option in the settings file
@@ -5399,7 +5412,7 @@ private slots :
                    QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                    QString Scan = ScanComboBox->itemText(indexScan);
-                   settings.beginGroup("ADC3Configs");
+                   settings.beginGroup("ADC3");
 
 
                    // Store the selected option in the settings file
@@ -5450,7 +5463,7 @@ private slots :
                    QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                    QString Continuous = ContinuousComboBox->itemText(indexContinuous);
-                   settings.beginGroup("ADC3Configs");
+                   settings.beginGroup("ADC3");
 
 
                    // Store the selected option in the settings file
@@ -5499,7 +5512,7 @@ private slots :
                   QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                   QString Discontinuous = DiscontinuousComboBox->itemText(indexDiscontinuous);
-                  settings.beginGroup("ADC3Configs");
+                  settings.beginGroup("ADC3");
 
 
                   // Store the selected option in the settings file
@@ -5550,7 +5563,7 @@ private slots :
                  QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                  QString EndConversion = EndConversionComboBox->itemText(indexEndConversion);
-                 settings.beginGroup("ADC3Configs");
+                 settings.beginGroup("ADC3");
 
 
                  // Store the selected option in the settings file
@@ -5599,7 +5612,7 @@ private slots :
                 QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                 QString Behavior = BehaviorComboBox->itemText(indexBehavior);
-                settings.beginGroup("ADC3Configs");
+                settings.beginGroup("ADC3");
 
 
                 // Store the selected option in the settings file
@@ -5645,7 +5658,7 @@ private slots :
                    QSettings settings("ADCConfig.txt", QSettings::IniFormat);
 
                    QString LeftBit = LeftBitComboBox->itemText(indexLeftBit);
-                   settings.beginGroup("ADC3Configs");
+                   settings.beginGroup("ADC3");
 
 
                    // Store the selected option in the settings file
@@ -5702,7 +5715,7 @@ private slots :
 
 
 
-               settings.beginGroup("ADC3Configs");
+               settings.beginGroup("ADC3");
 
                settings.setValue("Channel",  Channel);
                settings.setValue("Resolution",  Resolution);
@@ -5807,7 +5820,7 @@ private slots :
 //            QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
 //            QString Channel = ChannelComboBox->itemText(indexChannel);
-//            settings.beginGroup("DAC1Configs");
+//            settings.beginGroup("DAC1");
 
 
 //            // Store the selected option in the settings file
@@ -5857,7 +5870,7 @@ private slots :
 //            QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
 //            QString Channel2 = Channel2ComboBox->itemText(indexChannel2);
-//            settings.beginGroup("DAC2Configs");
+//            settings.beginGroup("DAC2");
 
 
 //            // Store the selected option in the settings file
@@ -5877,9 +5890,9 @@ private slots :
 //        // --------------Connection between two widgets Channel1 & Channel2--------------------//
 
 ////        connect(ChannelComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-////                this, &Dashboard::ShowingDAC1Configs);
+////                this, &Dashboard::ShowingDAC1);
 ////        connect(Channel2ComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-////                this, &Dashboard::ShowingDAC2Configs);
+////                this, &Dashboard::ShowingDAC2);
 
 
 //        // Create the vertical layout and add the form layout to it
@@ -5901,10 +5914,10 @@ private slots :
 
 //        // Saving DAC Configs into a file
 //        QSettings settings("DACConfig.txt", QSettings::IniFormat);
-//        settings.beginGroup("DAC1Configs");
+//        settings.beginGroup("DAC1");
 //        settings.setValue("Channel",  Channel);
 //        settings.endGroup();
-//        settings.beginGroup("DAC2Configs");
+//        settings.beginGroup("DAC2");
 //        settings.setValue("Channel2",  Channel2);
 //        settings.endGroup();
 //    }
@@ -5992,7 +6005,7 @@ private slots :
             QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
             QString Channel = ChannelComboBox->itemText(indexChannel);
-            settings.beginGroup("DAC1Configs");
+            settings.beginGroup("DAC1");
 
 
             // Store the selected option in the settings file
@@ -6044,7 +6057,7 @@ private slots :
             QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
             QString Mode = ModeComboBox->itemText(indexMode);
-            settings.beginGroup("DAC1Configs");
+            settings.beginGroup("DAC1");
 
 
             // Store the selected option in the settings file
@@ -6098,7 +6111,7 @@ private slots :
             QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
             QString Buffer = BufferComboBox->itemText(indexBuffer);
-            settings.beginGroup("DAC1Configs");
+            settings.beginGroup("DAC1");
 
 
             // Store the selected option in the settings file
@@ -6152,7 +6165,7 @@ private slots :
             QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
             QString Trigger = TriggerComboBox->itemText(indexTrigger);
-            settings.beginGroup("DAC1Configs");
+            settings.beginGroup("DAC1");
 
 
             // Store the selected option in the settings file
@@ -6207,7 +6220,7 @@ private slots :
             QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
             QString Trimming = TrimmingComboBox->itemText(indexTrimming);
-            settings.beginGroup("DAC1Configs");
+            settings.beginGroup("DAC1");
 
 
             // Store the selected option in the settings file
@@ -6260,7 +6273,7 @@ private slots :
 
 
         // DAC Configs
-        settings.beginGroup("DAC1Configs");
+        settings.beginGroup("DAC1");
         settings.setValue("Channel" , Channel);
 
         settings.setValue("Mode",  Mode);
@@ -6367,7 +6380,7 @@ private slots :
             QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
             QString Channel2 = Channel2ComboBox->itemText(indexChannel2);
-            settings.beginGroup("DAC2Configs");
+            settings.beginGroup("DAC2");
 
 
             // Store the selected option in the settings file
@@ -6420,7 +6433,7 @@ private slots :
             QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
             QString Mode = ModeComboBox->itemText(indexMode);
-            settings.beginGroup("DAC2Configs");
+            settings.beginGroup("DAC2");
 
 
             // Store the selected option in the settings file
@@ -6474,7 +6487,7 @@ private slots :
             QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
             QString Buffer = BufferComboBox->itemText(indexBuffer);
-            settings.beginGroup("DAC2Configs");
+            settings.beginGroup("DAC2");
 
 
             // Store the selected option in the settings file
@@ -6528,7 +6541,7 @@ private slots :
             QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
             QString Trigger = TriggerComboBox->itemText(indexTrigger);
-            settings.beginGroup("DAC2Configs");
+            settings.beginGroup("DAC2");
 
 
             // Store the selected option in the settings file
@@ -6583,7 +6596,7 @@ private slots :
             QSettings settings("DACConfig.txt", QSettings::IniFormat);
 
             QString Trimming = TrimmingComboBox->itemText(indexTrimming);
-            settings.beginGroup("DAC2Configs");
+            settings.beginGroup("DAC2");
 
 
             // Store the selected option in the settings file
@@ -6636,7 +6649,7 @@ private slots :
 
 
         // DAC Configs
-        settings.beginGroup("DAC2Configs");
+        settings.beginGroup("DAC2");
         settings.setValue("Channel2" , Channel2);
 
         settings.setValue("Mode",  Mode);
@@ -6669,7 +6682,7 @@ private slots :
         QFormLayout* layout = new QFormLayout(this);
 
         // Create a QLabel for "DAC configurations" and center it horizontally
-        QLabel* titleLabel = new QLabel("GPIO Output configurations", this);
+        QLabel* titleLabel = new QLabel("GPIO_OUTPUT configurations", this);
 
         // Load the icon image
         QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
@@ -6711,7 +6724,7 @@ private slots :
 
         // --------------Select GPIO PIN--------------------//
 
-        QLabel* PINLabel = new QLabel(tr("GPIO Output PIN "), this);
+        QLabel* PINLabel = new QLabel(tr("GPIO_OUTPUT PIN "), this);
         QComboBox* PINComboBox = new QComboBox(this);
 
         PINComboBox->addItems(QStringList() << "PB13" << "PB14" << "PB15" << "PB16" << "PB1" << "PB2" << "PB3" << "PB4" );
@@ -6747,7 +6760,7 @@ private slots :
             QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
             QString PIN = PINComboBox->itemText(indexPIN);
-            settings.beginGroup("GPIOOUTPUTConfigs");
+            settings.beginGroup("GPIO_OUTPUT");
 
 
             // Store the selected option in the settings file
@@ -6800,7 +6813,7 @@ private slots :
             QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
             QString Mode = ModeComboBox->itemText(indexMode);
-            settings.beginGroup("GPIOOUTPUTConfigs");
+            settings.beginGroup("GPIO_OUTPUT");
 
 
             // Store the selected option in the settings file
@@ -6854,7 +6867,7 @@ private slots :
             QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
             QString GPIO = GPIOComboBox->itemText(indexGPIO);
-            settings.beginGroup("GPIOOUTPUTConfigs");
+            settings.beginGroup("GPIO_OUTPUT");
 
 
             // Store the selected option in the settings file
@@ -6872,7 +6885,7 @@ private slots :
 
 
 
-        // --------------Maximum Output Speed for the GPIO OUTPUT--------------------//
+        // --------------Maximum Output Speed for the GPIO_OUTPUT--------------------//
 
         QLabel* SpeedLabel = new QLabel(tr(" Maximum Output Speed "), this);
         QComboBox* SpeedComboBox = new QComboBox(this);
@@ -6910,7 +6923,7 @@ private slots :
             QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
             QString Speed = SpeedComboBox->itemText(indexSpeed);
-            settings.beginGroup("GPIOOUTPUTConfigs");
+            settings.beginGroup("GPIO_OUTPUT");
 
 
             // Store the selected option in the settings file
@@ -6928,7 +6941,7 @@ private slots :
 
 
 
-        // --------------User Label for the GPIO OUTPUT --------------------//
+        // --------------User Label for the GPIO_OUTPUT --------------------//
 
         QLabel* UserLabel = new QLabel(tr(" User Label "), this);
         QLineEdit* UserLineEdit = new QLineEdit(this);
@@ -6955,7 +6968,7 @@ private slots :
             QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
             QString User = UserLineEdit->text();
-            settings.beginGroup("GPIOOUTPUTConfigs");
+            settings.beginGroup("GPIO_OUTPUT");
             settings.setValue("User", User);
             settings.endGroup();
             QString GPIOOUTPUTConfig = settings.value("User" , User).toString();
@@ -7000,8 +7013,8 @@ private slots :
 
                      QString Date = dateString +", " + timestring;
 
-        // GPIO OUTPUT Configs
-        settings.beginGroup("GPIOOUTPUTConfigs");
+        // GPIO_OUTPUT Configs
+        settings.beginGroup("GPIO_OUTPUT");
 
         settings.setValue("PIN",  PIN);
         settings.setValue("Mode",  Mode);
@@ -7032,7 +7045,7 @@ private slots :
 
         QFormLayout* layout = new QFormLayout(this);
         // Create a QLabel for "DAC configurations" and center it horizontally
-        QLabel* titleLabel = new QLabel("GPIO Input configurations", this);
+        QLabel* titleLabel = new QLabel("GPIO_OUTPUT configurations", this);
 
         // Load the icon image
         QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
@@ -7074,7 +7087,7 @@ private slots :
 
         // --------------Select GPIO PIN--------------------//
 
-        QLabel* PINLabel = new QLabel(tr("GPIO Input PIN "), this);
+        QLabel* PINLabel = new QLabel(tr("GPIO_OUTPUT PIN "), this);
         QComboBox* PINComboBox = new QComboBox(this);
 
         PINComboBox->addItems(QStringList() << "PA6" << "PA7" << "PA8" << "PA9" << "PA10" << "PA11" << "PA12" << "PA13" );
@@ -7109,7 +7122,7 @@ private slots :
             QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
             QString PIN = PINComboBox->itemText(indexPIN);
-            settings.beginGroup("GPIOINPUTConfigs");
+            settings.beginGroup("GPIO_INPUT");
 
 
             // Store the selected option in the settings file
@@ -7162,7 +7175,7 @@ private slots :
             QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
             QString GPIO = GPIOComboBox->itemText(indexGPIO);
-            settings.beginGroup("GPIOINPUTConfigs");
+            settings.beginGroup("GPIO_OUTPUT");
 
 
             // Store the selected option in the settings file
@@ -7183,7 +7196,7 @@ private slots :
 
 
 
-        // --------------User Label for the GPIO OUTPUT --------------------//
+        // --------------User Label for the GPIO_OUTPUT --------------------//
 
         QLabel* UserLabel = new QLabel(tr(" User Label "), this);
         QLineEdit* UserLineEdit = new QLineEdit(this);
@@ -7211,7 +7224,7 @@ private slots :
             QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
             QString User = UserLineEdit->text();
-            settings.beginGroup("GPIOINPUTConfigs");
+            settings.beginGroup("GPIO_INPUT");
             settings.setValue("User", User);
             settings.endGroup();
             QString GPIOINPUTConfig = settings.value("User" , User).toString();
@@ -7255,8 +7268,8 @@ private slots :
                      QString Date = dateString +", " + timestring;
 
 
-        // GPIO OUTPUT Configs
-        settings.beginGroup("GPIOINPUTConfigs");
+        // GPIO_OUTPUT Configs
+        settings.beginGroup("GPIO_INPUT");
 
         settings.setValue("PIN",  PIN);
 
@@ -7364,7 +7377,7 @@ private slots :
             QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
 
             QString Channel = ChannelComboBox->itemText(indexChannel);
-            settings.beginGroup("FrequencyMesureConfigs");
+            settings.beginGroup("Mesure_Frequency");
 
 
             // Store the selected option in the settings file
@@ -7413,7 +7426,7 @@ private slots :
             QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
 
             QString Prescaler = QString::number(value);
-            settings.beginGroup("FrequencyMesureConfigs");
+            settings.beginGroup("Mesure_Frequency");
 
             // Store the selected value in the settings file
             settings.setValue("Prescaler", Prescaler);
@@ -7462,7 +7475,7 @@ private slots :
             QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
 
             QString Counter = CounterComboBox->itemText(indexCounter);
-            settings.beginGroup("FrequencyMesureConfigs");
+            settings.beginGroup("Mesure_Frequency");
 
 
             // Store the selected option in the settings file
@@ -7510,7 +7523,7 @@ private slots :
             QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
 
             QString AutoReload = QString::number(value);
-            settings.beginGroup("FrequencyMesureConfigs");
+            settings.beginGroup("Mesure_Frequency");
 
             // Store the selected value in the settings file
             settings.setValue("AutoReload", AutoReload);
@@ -7562,7 +7575,7 @@ private slots :
             QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
 
             QString Clock = ClockComboBox->itemText(indexClock);
-            settings.beginGroup("FrequencyMesureConfigs");
+            settings.beginGroup("Mesure_Frequency");
 
 
             // Store the selected option in the settings file
@@ -7611,7 +7624,7 @@ private slots :
             QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
 
             QString Repitition = QString::number(value);
-            settings.beginGroup("FrequencyMesureConfigs");
+            settings.beginGroup("Mesure_Frequency");
 
             // Store the selected value in the settings file
             settings.setValue("Repitition", Repitition);
@@ -7663,7 +7676,7 @@ private slots :
             QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
 
             QString Preload = PreloadComboBox->itemText(indexPreload);
-            settings.beginGroup("FrequencyMesureConfigs");
+            settings.beginGroup("Mesure_Frequency");
 
 
             // Store the selected option in the settings file
@@ -7718,8 +7731,8 @@ private slots :
                      QString Date = dateString +", " + timestring;
 
 
-        // GPIO OUTPUT Configs
-        settings.beginGroup("FrequencyMesureConfigs");
+        // GPIO_OUTPUT Configs
+        settings.beginGroup("Mesure_Frequency");
 
         settings.setValue("Channel",  Channel);
         settings.setValue("Prescaler",  Prescaler);

@@ -63,7 +63,7 @@ private slots :
                 // create the list widget
                 QListWidget* configList = new QListWidget(this);
                 configList->clear();
-                settings.beginGroup("UART4Configs");
+                settings.beginGroup("UART4");
 
                 QString baudrate;
                 QString Parity;
@@ -187,7 +187,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("UART5Configs");
+        settings.beginGroup("UART5");
 
         QString baudrate;
         QString Parity;
@@ -310,7 +310,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("USART1Configs");
+        settings.beginGroup("USART1");
 
         QString baudrate;
         QString Parity;
@@ -431,7 +431,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("USART2Configs");
+        settings.beginGroup("USART2");
 
         QString baudrate;
         QString Parity;
@@ -552,7 +552,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("SPI1Configs");
+        settings.beginGroup("SPI1");
 
         QString Mode;
         QString NSS;
@@ -674,7 +674,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("SPI2Configs");
+        settings.beginGroup("SPI2");
 
         QString Mode;
         QString NSS;
@@ -922,7 +922,7 @@ private slots :
             // create the list widget
             QListWidget* configList = new QListWidget(this);
             configList->clear();
-            settings.beginGroup("I2C1Configs");
+            settings.beginGroup("I2C1");
 
             QString AdressLenght ;
             QString DualAddressMode;
@@ -1049,7 +1049,7 @@ private slots :
             // create the list widget
             QListWidget* configList = new QListWidget(this);
             configList->clear();
-            settings.beginGroup("I2C2Configs");
+            settings.beginGroup("I2C2");
 
             QString AdressLenght ;
             QString DualAddressMode;
@@ -1176,7 +1176,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("ADC1Configs");
+        settings.beginGroup("ADC1");
 
         QString Channel;
         QString Resolution;
@@ -1317,7 +1317,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("ADC3Configs");
+        settings.beginGroup("ADC3");
 
         QString Channel;
         QString Resolution;
@@ -1460,7 +1460,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("GPIOOUTPUTConfigs");
+        settings.beginGroup("GPIO_OUTPUT");
 
         QString PIN;
         QString Mode;
@@ -1584,7 +1584,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("GPIOINPUTConfigs");
+        settings.beginGroup("GPIO_INPUT");
 
         QString PIN;
         QString GPIO;
@@ -1695,7 +1695,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("DAC1Configs");
+        settings.beginGroup("DAC1");
 //        settings.beginGroup("DAC2Configs");
 
         QString Channel;
@@ -1848,7 +1848,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("DAC2Configs");
+        settings.beginGroup("DAC2");
 //        settings.beginGroup("DAC2Configs");
 
         QString Channel2;
@@ -2002,7 +2002,7 @@ private slots :
         // create the list widget
         QListWidget* configList = new QListWidget(this);
         configList->clear();
-        settings.beginGroup("FrequencyMesureConfigs");
+        settings.beginGroup("Mesure_Frequency");
 //        settings.beginGroup("DAC2Configs");
 
         QString Channel;
