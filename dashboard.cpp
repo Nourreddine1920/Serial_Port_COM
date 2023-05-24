@@ -33,6 +33,20 @@ Dashboard::Dashboard(QWidget *parent) :
         UART4->setChecked(true);
     }
 
+    if(! selectedUartOptionsStatic.contains("UART4"))
+    {
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("UART4");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+
+        }
+        settings.endGroup();
+
+
+    }
+
 
 
 
@@ -44,6 +58,19 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedUartOptionsStatic.contains("&UART5")) {
         UART5->setChecked(true);
     }
+    if(! selectedUartOptionsStatic.contains("&UART5"))
+    {
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("UART5");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+
+    }
+
 
 
 
@@ -54,11 +81,17 @@ Dashboard::Dashboard(QWidget *parent) :
     }
 
 
+
+
     QAction *UART8 = new QAction("&UART8", this);
     UART8->setCheckable(true);
     if (selectedUartOptionsStatic.contains("&UART8")) {
         UART8->setChecked(true);
     }
+
+
+
+
 
 
     QAction *UART9 = new QAction("&UART9", this);
@@ -72,12 +105,37 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedUartOptionsStatic.contains("&USART1")) {
         USART1->setChecked(true);
     }
+    if(! selectedUartOptionsStatic.contains("&SUART1"))
+    {
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("USART1");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+
+    }
+
 
 
     QAction *USART2 = new QAction("&USART2", this);
    USART2->setCheckable(true);
    if (selectedUartOptionsStatic.contains("&USART2")) {
        USART2->setChecked(true);
+   }
+   if(! selectedUartOptionsStatic.contains("&USART2"))
+   {
+       QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+       settings.beginGroup("USART2");
+       QStringList cles = settings.childKeys();
+       for(const QString &cle : cles){
+           settings.remove(cle);
+       }
+       settings.endGroup();
+
+
    }
 
     QAction *USART6 = new QAction("&USART6", this);
@@ -103,6 +161,18 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedSPIOptionsStatic.contains("SPI1")) {
         SPI1->setChecked(true);
     }
+    if(! selectedSPIOptionsStatic.contains("SPI1"))
+    {
+        QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("SPI1");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+
+    }
 
 
 
@@ -112,6 +182,18 @@ Dashboard::Dashboard(QWidget *parent) :
         SPI2->setChecked(true);
     }
 
+    if(! selectedSPIOptionsStatic.contains("&SPI2"))
+    {
+        QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("SPI2");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+
+    }
 
     QAction *SPI3 = new QAction("&SPI3", this);
     SPI3->setCheckable(true);
@@ -147,6 +229,18 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedI2COptionsStatic.contains("I2C1")) {
         I2C1->setChecked(true);
     }
+    if(! selectedI2COptionsStatic.contains("I2C1"))
+    {
+        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("I2C1");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+
+    }
 
 
 
@@ -155,6 +249,18 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedI2COptionsStatic.contains("&I2C2")) {
         I2C2->setChecked(true);
     }
+    if(! selectedI2COptionsStatic.contains("&I2C2"))
+    {
+        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("I2C2");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+}
+
+
 
 
     QAction *I2C3 = new QAction("&I2C3", this);
@@ -181,6 +287,18 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedADCOptionsStatic.contains("ADC1")) {
         ADC1->setChecked(true);
     }
+    if(! selectedADCOptionsStatic.contains("ADC1"))
+    {
+        QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("ADC1");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+}
+
 
 
     QAction *ADC2 = new QAction("&ADC2", this);
@@ -195,8 +313,17 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedADCOptionsStatic.contains("&ADC3")) {
         ADC3->setChecked(true);
     }
+    if(! selectedADCOptionsStatic.contains("&ADC3"))
+    {
+        QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("ADC3");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
 
-
+}
 
 
     // Checkable DAC Configurations
@@ -204,6 +331,17 @@ Dashboard::Dashboard(QWidget *parent) :
     DAC_OUT1->setCheckable(true);
     if (selectedDACOptionsStatic.contains("DAC_OUT1")) {
         DAC_OUT1->setChecked(true);
+    }
+
+    if(! selectedDACOptionsStatic.contains("DAC_OUT1"))
+    {
+        QSettings settings("DACConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("DAC1");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
     }
     QAction *DAC_OUT2 = new QAction("DAC_OUT2", this);
     DAC_OUT2->setCheckable(true);
@@ -220,8 +358,17 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedTIMEROptionsStatic.contains("Input Capture Mode")) {
        InputCaptureMode->setChecked(true);
     }
+    if(! selectedTIMEROptionsStatic.contains("Input Capture Mode"))
+      {
+          QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
+          settings.beginGroup("Mesure_Frequency");
+          QStringList cles = settings.childKeys();
+          for(const QString &cle : cles){
+              settings.remove(cle);
+          }
+          settings.endGroup();
 
-
+}
 
     // Checkable GPIO Mode Configurations
 
@@ -230,11 +377,32 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedGPIOOptionsStatic.contains("GPIO_OUTPUT")) {
        GPIO_OUTPUT->setChecked(true);
     }
+    if(! selectedADCOptionsStatic.contains("GPIO_OUTPUT"))
+      {
+          QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+          settings.beginGroup("GPIO_OUTPUT");
+          QStringList cles = settings.childKeys();
+          for(const QString &cle : cles){
+              settings.remove(cle);
+          }
+          settings.endGroup();
+    }
 
     QAction *GPIO_INPUT = new QAction("&GPIO_INPUT" , this);
     GPIO_INPUT->setCheckable(true);
     if (selectedGPIOOptionsStatic.contains("&GPIO_INPUT")) {
        GPIO_INPUT->setChecked(true);
+    }
+
+    if(! selectedADCOptionsStatic.contains("GPIO_INPUT"))
+      {
+          QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+          settings.beginGroup("GPIO_INPUT");
+          QStringList cles = settings.childKeys();
+          for(const QString &cle : cles){
+              settings.remove(cle);
+          }
+          settings.endGroup();
     }
 
     // Create a QToolButton for the "Connect" button
@@ -596,8 +764,8 @@ Dashboard::Dashboard(QWidget *parent) :
 
 void Dashboard::showConfigMode()
 {
-        ConfigMode *configMode = new ConfigMode();
-        QSet<QString> addedUartOptions;
+    ConfigMode *configMode = new ConfigMode();
+    QSet<QString> addedUartOptions;
         QSet<QString> addedI2COptions;
         QSet<QString> addedSPIOptions;
         QSet<QString> addedADCOptions;
@@ -606,78 +774,78 @@ void Dashboard::showConfigMode()
         QSet<QString> addedTIMEROptions;
 
 
-            // Parcourir chaque élément sélectionné
-            for (int i = 0; i < selectedUartOptionsStatic.size(); i++) {
-                QString uartOption = selectedUartOptionsStatic.at(i);
-                if (!addedUartOptions.contains(uartOption)) {
-                      configMode->addActionToMenu("&UART", uartOption);
-                      addedUartOptions.insert(uartOption);
+        // Parcourir chaque élément sélectionné
+        for (int i = 0; i < selectedUartOptionsStatic.size(); i++) {
+            QString uartOption = selectedUartOptionsStatic.at(i);
+            if (!addedUartOptions.contains(uartOption)) {
+                  configMode->addActionToMenu("&UART", uartOption);
+                  addedUartOptions.insert(uartOption);
 
 
-                       }
+                   }
 
 
 
 
+        }
+
+
+
+
+
+
+        for (int i = 0; i < selectedI2COptionsStatic.size(); i++) {
+            QString I2COption = selectedI2COptionsStatic.at(i);
+            // Vérifier si l'élément a déjà été ajouté pour I2C
+                  if (!addedI2COptions.contains(I2COption)) {
+                      configMode->addActionToMenu("&I2C", I2COption);
+                      addedI2COptions.insert(I2COption);
+                  }
+        }
+        for (int i = 0; i < selectedSPIOptionsStatic.size(); i++) {
+            QString SPIOption = selectedSPIOptionsStatic.at(i);
+                  if (!addedSPIOptions.contains(SPIOption)) {
+                      configMode->addActionToMenu("&SPI", SPIOption);
+                      addedSPIOptions.insert(SPIOption);
+                  }
+        }
+
+        for (int i = 0; i < selectedADCOptionsStatic.size(); i++) {
+            QString ADCOption = selectedADCOptionsStatic.at(i);
+            if (!addedADCOptions.contains(ADCOption)) {
+               configMode->addActionToMenu("&ADC", ADCOption);
+                addedADCOptions.insert(ADCOption);
             }
 
+        }
 
-
-
-
-
-            for (int i = 0; i < selectedI2COptionsStatic.size(); i++) {
-                QString I2COption = selectedI2COptionsStatic.at(i);
-                // Vérifier si l'élément a déjà été ajouté pour I2C
-                      if (!addedI2COptions.contains(I2COption)) {
-                          configMode->addActionToMenu("&I2C", I2COption);
-                          addedI2COptions.insert(I2COption);
-                      }
+        for (int i = 0; i < selectedDACOptionsStatic.size(); i++) {
+            QString DACOption = selectedDACOptionsStatic.at(i);
+            if (!addedDACOptions.contains(DACOption)) {
+               configMode->addActionToMenu("&DAC", DACOption);
+                addedDACOptions.insert(DACOption);
             }
-            for (int i = 0; i < selectedSPIOptionsStatic.size(); i++) {
-                QString SPIOption = selectedSPIOptionsStatic.at(i);
-                      if (!addedSPIOptions.contains(SPIOption)) {
-                          configMode->addActionToMenu("&SPI", SPIOption);
-                          addedSPIOptions.insert(SPIOption);
-                      }
+        }
+
+        for (int i = 0; i < selectedGPIOOptionsStatic.size(); i++) {
+            QString GPIOOption = selectedGPIOOptionsStatic.at(i);
+            if (!addedGPIOOptions.contains(GPIOOption)) {
+               configMode->addActionToMenu("&GPIO", GPIOOption);
+                addedGPIOOptions.insert(GPIOOption);
             }
+        }
 
-            for (int i = 0; i < selectedADCOptionsStatic.size(); i++) {
-                QString ADCOption = selectedADCOptionsStatic.at(i);
-                if (!addedADCOptions.contains(ADCOption)) {
-                   configMode->addActionToMenu("&ADC", ADCOption);
-                    addedADCOptions.insert(ADCOption);
-                }
-
+        for (int i = 0; i < selectedTIMEROptionsStatic.size(); i++) {
+            QString TIMEROption = selectedTIMEROptionsStatic.at(i);
+            if (!addedTIMEROptions.contains(TIMEROption)) {
+              configMode->addActionToMenu("&Frequency Mesure", TIMEROption);
+                addedTIMEROptions.insert(TIMEROption);
             }
 
-            for (int i = 0; i < selectedDACOptionsStatic.size(); i++) {
-                QString DACOption = selectedDACOptionsStatic.at(i);
-                if (!addedDACOptions.contains(DACOption)) {
-                   configMode->addActionToMenu("&DAC", DACOption);
-                    addedDACOptions.insert(DACOption);
-                }
-            }
+        }
 
-            for (int i = 0; i < selectedGPIOOptionsStatic.size(); i++) {
-                QString GPIOOption = selectedGPIOOptionsStatic.at(i);
-                if (!addedGPIOOptions.contains(GPIOOption)) {
-                   configMode->addActionToMenu("&GPIO", GPIOOption);
-                    addedGPIOOptions.insert(GPIOOption);
-                }
-            }
-
-            for (int i = 0; i < selectedTIMEROptionsStatic.size(); i++) {
-                QString TIMEROption = selectedTIMEROptionsStatic.at(i);
-                if (!addedTIMEROptions.contains(TIMEROption)) {
-                  configMode->addActionToMenu("&Frequency Mesure", TIMEROption);
-                    addedTIMEROptions.insert(TIMEROption);
-                }
-
-            }
-
-        configMode->show();
-        this->hide();
+    configMode->show();
+    this->hide();
 }
 void Dashboard::onUartOptionSelected()
 {

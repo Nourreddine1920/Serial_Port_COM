@@ -242,15 +242,14 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     QStringList keys = settings.childKeys(); // Récupère les clés du groupe
 
-    bool hasAllValues = true;
+    bool hasAllValues = false;
 
-    foreach (const QString& key, keys)
-    {
-    if (!settings.contains(key))
-    {
-    // La clé n'a pas de valeur dans le groupe
-    hasAllValues = false;
+    for (const QString &key : keys) {
+    if (key!="Date"){
+    if (!settings.value(key).toString().isEmpty()) {
+    hasAllValues = true;
     break;
+    }
     }
     }
 
@@ -272,8 +271,23 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     }
 
+//    QStringList cles = settings.childKeys();
 
+//    // Vérifier s'il y a des valeurs pour les clés du groupe UART
+//    bool valeursExistantes = false;
+//    for (const QString &cle : cles) {
+//    if (!settings.value(cle).toString().isEmpty()) {
+//    valeursExistantes = true;
+//    break;
+//    }
+//    }
 
+//    // Si des valeurs existent, ajouter le nom du groupe au sous-menu
+//    if (valeursExistantes) {
+//            run->addActionToMenu("&UART", groupName);
+//    }
+
+// }
     /***************************LOAD SPI UI*********************************/
 
 
@@ -284,19 +298,22 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     QStringList keysSPI = settingsSPI.childKeys(); // Récupère les clés du groupe
 
-    bool hasAllValuesSPI = true;
+    bool hasAllValuesSPI = false;
 
-    foreach (const QString& key, keysSPI)
+    for (const QString &key : keysSPI)
     {
-    if (!settingsSPI.contains(key))
+    if (key!="Date"){
+
+    if (!settingsSPI.value(key).toString().isEmpty())
     {
     // La clé n'a pas de valeur dans le groupe
-    hasAllValuesSPI = false;
+    hasAllValuesSPI = true;
     break;
     }
     }
-
+    }
     settingsSPI.endGroup(); // Termine le groupe spécifié dans le fichier de configuration
+
 
     if (hasAllValuesSPI)
     {
@@ -328,15 +345,17 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     QStringList keysADC = settingsADC.childKeys(); // Récupère les clés du groupe
 
-    bool hasAllValuesADC = true;
+    bool hasAllValuesADC = false;
 
-    foreach (const QString& key, keysADC)
+    for (const QString &key : keysADC)
     {
-    if (!settingsADC.contains(key))
+    if(key!="Date"){
+    if (!settingsADC.value(key).toString().isEmpty())
     {
     // La clé n'a pas de valeur dans le groupe
-    hasAllValuesADC = false;
+    hasAllValuesADC = true;
     break;
+    }
     }
     }
 
@@ -373,18 +392,19 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     QStringList keysDAC = settingsDAC.childKeys(); // Récupère les clés du groupe
 
-    bool hasAllValuesDAC = true;
+    bool hasAllValuesDAC = false;
 
-    foreach (const QString& key, keysDAC)
+    for (const QString &key : keysDAC)
     {
-    if (!settingsDAC.contains(key))
+    if(key!="Date"){
+    if (!settingsDAC.value(key).toString().isEmpty())
     {
     // La clé n'a pas de valeur dans le groupe
-    hasAllValuesDAC = false;
+    hasAllValuesDAC = true;
     break;
     }
     }
-
+    }
     settingsDAC.endGroup(); // Termine le groupe spécifié dans le fichier de configuration
 
     if (hasAllValuesDAC)
@@ -414,15 +434,17 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     QStringList keysI2C = settingsI2C.childKeys(); // Récupère les clés du groupe
 
-    bool hasAllValuesI2C = true;
+    bool hasAllValuesI2C = false;
 
-    foreach (const QString& key, keysI2C)
+    for (const QString &key : keysI2C)
     {
-    if (!settingsI2C.contains(key))
+        if(key!="Date"){
+    if (!settingsI2C.value(key).toString().isEmpty())
     {
     // La clé n'a pas de valeur dans le groupe
-    hasAllValuesI2C = false;
+    hasAllValuesI2C = true;
     break;
+    }
     }
     }
 
@@ -459,18 +481,20 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     QStringList keysGPIO = settingsGPIO.childKeys(); // Récupère les clés du groupe
 
-    bool hasAllValuesGPIO = true;
+    bool hasAllValuesGPIO = false;
 
-    foreach (const QString& key, keysGPIO)
+    for (const QString &key : keysGPIO)
     {
-    if (!settingsGPIO.contains(key))
-    {
-    // La clé n'a pas de valeur dans le groupe
-    hasAllValuesGPIO = false;
-    break;
-    }
-    }
+    if(key!="Date"){
 
+        if (!settingsGPIO.value(key).toString().isEmpty())
+        {
+            // La clé n'a pas de valeur dans le groupe
+            hasAllValuesGPIO = true;
+            break;
+        }
+    }
+}
     settingsGPIO.endGroup(); // Termine le groupe spécifié dans le fichier de configuration
 
     if (hasAllValuesGPIO)
@@ -500,15 +524,18 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     QStringList keysTIM = settingsTIM.childKeys(); // Récupère les clés du groupe
 
-    bool hasAllValuesTIM = true;
+    bool hasAllValuesTIM = false;
 
-    foreach (const QString& key, keysTIM)
+    for (const QString &key : keysTIM)
     {
-    if (!settingsTIM.contains(key))
+        if(key!="Date"){
+
+            if (!settingsTIM.value(key).toString().isEmpty())
     {
     // La clé n'a pas de valeur dans le groupe
-    hasAllValuesTIM = false;
+    hasAllValuesTIM = true;
     break;
+    }
     }
     }
 
