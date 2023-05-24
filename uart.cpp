@@ -5,6 +5,7 @@
 #include "dashboard.h"
 #include <QFontDatabase>
 #include <QSettings>
+#include "configchoice.h"
 
 
 
@@ -341,8 +342,8 @@ void Uart::on_btnConnect_clicked()
        // }/*
                 // Initialize the singleton instance of Uart
                 Uart::getInstance()->serialPort = serialPort;
-                Dashboard* dashboard = new Dashboard();
-                dashboard->show();
+                ConfigChoice* configChoice = new ConfigChoice();
+                configChoice->show();
                 this->hide();
 
 
