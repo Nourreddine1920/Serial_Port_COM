@@ -12,6 +12,23 @@ starting_screen::starting_screen(QWidget *parent) :
     ui->setupUi(this);
     // Initialize uart_connection object
 
+
+
+//    QImage backgroundImage("C:/Users/nawledbr/Documents/Serial_Port_COM/xcubellll.png");
+
+//    // Création d'un label pour afficher l'image
+////    QWidget window;
+
+//    QLabel* backgroundLabel = new QLabel(this);
+//    backgroundLabel->setPixmap(QPixmap::fromImage(backgroundImage));
+
+//    // Configuration de la position et de la taille du label d'arrière-plan
+//    backgroundLabel->setGeometry(0, 0, width(), height());
+//    backgroundLabel->setScaledContents(true); // Adapter l'image à la taille du label
+
+//    // Assurez-vous que le label d'arrière-plan est en dessous des autres widgets
+//    backgroundLabel->lower();
+
     QString styleSheet =
         "QPushButton {"
         "    background-color: #4CAF50;"

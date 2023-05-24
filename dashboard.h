@@ -812,7 +812,7 @@ private slots :
 
 
 
-               settings.beginGroup("|********************UART4Configs***********************|");
+               settings.beginGroup("UART4Configs");
 
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);

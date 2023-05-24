@@ -13,8 +13,10 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    configchoice.cpp \
     configmode.cpp \
     dashboard.cpp \
+    directrun.cpp \
     main.cpp \
     mainwindow.cpp \
     runmode.cpp \
@@ -23,8 +25,10 @@ SOURCES += \
     uartips.cpp
 
 HEADERS += \
+    configchoice.h \
     configmode.h \
     dashboard.h \
+    directrun.h \
     mainwindow.h \
     runmode.h \
     starting_screen.h \
@@ -32,8 +36,10 @@ HEADERS += \
     uartips.h
 
 FORMS += \
+    configchoice.ui \
     configmode.ui \
     dashboard.ui \
+    directrun.ui \
     mainwindow.ui \
     runmode.ui \
     starting_screen.ui \
@@ -52,6 +58,7 @@ DISTFILES += \
     XCUBE.png \
     actia-logo.png \
     antivirus.png \
+    application.png \
     back-arrow.png \
     back.png \
     back1.png \
@@ -85,6 +92,9 @@ DISTFILES += \
     send (5).png \
     send (6).png \
     send-message.png \
-    send.png
+    send.png \
+    welcome.png \
+    xcube (2).png \
+    xcubellll.png
 
 
