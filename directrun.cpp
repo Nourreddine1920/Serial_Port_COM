@@ -198,10 +198,10 @@ for (auto m : menus) {
 
    qDebug() << "actionUART4:" << ActionConfig;
 
-//  connect (action ,&QAction::triggered , this , &Runmode::showUART4Run);
+  connect (action ,&QAction::triggered , this , &DirectRun::showUART4Run);
 }
   else if(action->text()=="&UART5") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showUART5Run);
+      connect (action ,&QAction::triggered , this , &DirectRun::showUART5Run);
   }
   else if(action->text()=="&USART1") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showUSART1config);
@@ -210,40 +210,40 @@ for (auto m : menus) {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showUSART2config);
   }
   else if(action->text()=="SPI1") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showSPI1Run);
+      connect (action ,&QAction::triggered , this , &DirectRun::showSPI1Run);
   }
   else if(action->text()=="&SPI2") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showSPI2Run);
+//      connect (action ,&QAction::triggered , this , &DirectRun::showSPI2Run);
   }
   else if(action->text()=="&SPI3") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showSPI3config);
   }
   else if(action->text()=="I2C1") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showI2C1Run);
+      connect (action ,&QAction::triggered , this , &DirectRun::showI2C1Run);
   }
   else if(action->text()=="&I2C2") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showI2C2config);
   }
   else if(action->text()=="ADC1") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showADC1Run);
+      connect (action ,&QAction::triggered , this , &DirectRun::showADC1Run);
   }
   else if(action->text()=="&ADC3") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showADC3config);
   }
-  else if(action->text()=="DAC_OUT1") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showDACOUT1Run);
+  else if(action->text()=="DAC1") {
+      connect (action ,&QAction::triggered , this , &DirectRun::showDACOUT1Run);
   }
   else if(action->text()=="DAC_OUT2") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showDACOUT2config);
   }
   else if(action->text()=="GPIO_OUTPUT") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showGPIOOUTPUTRun);
+      connect (action ,&QAction::triggered , this , &DirectRun::showGPIOOUTPUTRun);
   }
   else if(action->text()=="&GPIO_INPUT") {
 //      connect (action ,&QAction::triggered , this , &ConfigMode::showGPIOINPUTconfig);
   }
-  else if(action->text()=="Input Capture Mode") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showFrequencyMesureRun);
+  else if(action->text()=="Mesure_Frequency") {
+      connect (action ,&QAction::triggered , this , &DirectRun::showFrequencyMesureRun);
   }
 }
 

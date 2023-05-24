@@ -16,6 +16,8 @@ ConfigChoice::ConfigChoice(QWidget *parent) :
     ui->setupUi(this);
 
     QWidget* configChoice = new QWidget(this);
+    QWidget::setWindowTitle("Welcome Application");
+
     centralWidget()->resize(400,300);
     setCentralWidget(configChoice);
 
@@ -330,7 +332,7 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     foreach (const QString& key, keysADC)
     {
-    if (!settings.contains(key))
+    if (!settingsADC.contains(key))
     {
     // La clé n'a pas de valeur dans le groupe
     hasAllValuesADC = false;

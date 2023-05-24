@@ -571,7 +571,7 @@ void ConfigMode::returnDashboard()
 
 
 
-         settings.beginGroup("UART4Configs");
+         settings.beginGroup("UART4");
 
          QString baudrate;
          QString Parity;
@@ -662,7 +662,7 @@ void ConfigMode::returnDashboard()
             uart5Found = true;
 
 
-            settings.beginGroup("UART5Configs");
+            settings.beginGroup("UART5");
 
             QString baudrate1;
             QString Parity1;
@@ -760,7 +760,7 @@ void ConfigMode::returnDashboard()
             spi1Found = true;
 
 
-            settingsSPI.beginGroup("SPI1Configs");
+            settingsSPI.beginGroup("SPI1");
 
             QString Mode;
             QString NSS;
@@ -840,7 +840,7 @@ void ConfigMode::returnDashboard()
             spi2Found = true;
 
 
-            settingsSPI.beginGroup("SPI2Configs");
+            settingsSPI.beginGroup("SPI2");
 
             QString Mode;
             QString NSS;
@@ -921,7 +921,7 @@ void ConfigMode::returnDashboard()
             gpioFound = true;
 
 
-            settingsGPIO.beginGroup("GPIOOUTPUTConfigs");
+            settingsGPIO.beginGroup("GPIO_OUTPUT");
 
             QString GPIO;
             QString Mode;
@@ -1005,7 +1005,7 @@ void ConfigMode::returnDashboard()
 
 
 
-        settingsADC.beginGroup("ADC1Configs");
+        settingsADC.beginGroup("ADC1");
 
         QString Channel;
         QString Resolution;
@@ -1116,7 +1116,7 @@ void ConfigMode::returnDashboard()
 
 
 
-        settingsI2C.beginGroup("I2C1Configs");
+        settingsI2C.beginGroup("I2C1");
         QString AdressLenght ;
         QString DualAddressMode;
         QString NoStretchMode;
@@ -1211,7 +1211,7 @@ void ConfigMode::returnDashboard()
 
 
 
-        settingsDAC.beginGroup("DAC1Configs");
+        settingsDAC.beginGroup("DAC1");
 
         QString Channel;
         QString Mode;
@@ -1286,7 +1286,7 @@ void ConfigMode::returnDashboard()
             TIMFound = true;
 
 
-            settingsTIM.beginGroup("FrequencyMesureConfigs");
+            settingsTIM.beginGroup("Mesure_Frequency");
 
             QString Prescaler;
             QString Counter;
