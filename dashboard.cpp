@@ -5,6 +5,7 @@
 #include <QWidgetAction>
 #include <QToolButton>
 #include "configmode.h"
+#include <QProcess>
 
 
 QStringList Dashboard::selectedUartOptionsStatic; // initialisation de la variable statique
@@ -33,6 +34,20 @@ Dashboard::Dashboard(QWidget *parent) :
         UART4->setChecked(true);
     }
 
+    if(! selectedUartOptionsStatic.contains("UART4"))
+    {
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("UART4");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+
+        }
+        settings.endGroup();
+
+
+    }
+
 
 
 
@@ -44,6 +59,19 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedUartOptionsStatic.contains("&UART5")) {
         UART5->setChecked(true);
     }
+    if(! selectedUartOptionsStatic.contains("&UART5"))
+    {
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("UART5");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+
+    }
+
 
 
 
@@ -54,11 +82,17 @@ Dashboard::Dashboard(QWidget *parent) :
     }
 
 
+
+
     QAction *UART8 = new QAction("&UART8", this);
     UART8->setCheckable(true);
     if (selectedUartOptionsStatic.contains("&UART8")) {
         UART8->setChecked(true);
     }
+
+
+
+
 
 
     QAction *UART9 = new QAction("&UART9", this);
@@ -72,12 +106,37 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedUartOptionsStatic.contains("&USART1")) {
         USART1->setChecked(true);
     }
+    if(! selectedUartOptionsStatic.contains("&SUART1"))
+    {
+        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("USART1");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+
+    }
+
 
 
     QAction *USART2 = new QAction("&USART2", this);
    USART2->setCheckable(true);
    if (selectedUartOptionsStatic.contains("&USART2")) {
        USART2->setChecked(true);
+   }
+   if(! selectedUartOptionsStatic.contains("&USART2"))
+   {
+       QSettings settings("UARTConfig.txt", QSettings::IniFormat);
+       settings.beginGroup("USART2");
+       QStringList cles = settings.childKeys();
+       for(const QString &cle : cles){
+           settings.remove(cle);
+       }
+       settings.endGroup();
+
+
    }
 
     QAction *USART6 = new QAction("&USART6", this);
@@ -103,6 +162,18 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedSPIOptionsStatic.contains("SPI1")) {
         SPI1->setChecked(true);
     }
+    if(! selectedSPIOptionsStatic.contains("SPI1"))
+    {
+        QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("SPI1");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+
+    }
 
 
 
@@ -112,6 +183,18 @@ Dashboard::Dashboard(QWidget *parent) :
         SPI2->setChecked(true);
     }
 
+    if(! selectedSPIOptionsStatic.contains("&SPI2"))
+    {
+        QSettings settings("SPIConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("SPI2");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+
+    }
 
     QAction *SPI3 = new QAction("&SPI3", this);
     SPI3->setCheckable(true);
@@ -147,6 +230,18 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedI2COptionsStatic.contains("I2C1")) {
         I2C1->setChecked(true);
     }
+    if(! selectedI2COptionsStatic.contains("I2C1"))
+    {
+        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("I2C1");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+
+    }
 
 
 
@@ -155,6 +250,18 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedI2COptionsStatic.contains("&I2C2")) {
         I2C2->setChecked(true);
     }
+    if(! selectedI2COptionsStatic.contains("&I2C2"))
+    {
+        QSettings settings("I2CConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("I2C2");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+}
+
+
 
 
     QAction *I2C3 = new QAction("&I2C3", this);
@@ -181,6 +288,18 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedADCOptionsStatic.contains("ADC1")) {
         ADC1->setChecked(true);
     }
+    if(! selectedADCOptionsStatic.contains("ADC1"))
+    {
+        QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("ADC1");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
+
+}
+
 
 
     QAction *ADC2 = new QAction("&ADC2", this);
@@ -195,8 +314,17 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedADCOptionsStatic.contains("&ADC3")) {
         ADC3->setChecked(true);
     }
+    if(! selectedADCOptionsStatic.contains("&ADC3"))
+    {
+        QSettings settings("ADCConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("ADC3");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
 
-
+}
 
 
     // Checkable DAC Configurations
@@ -204,6 +332,17 @@ Dashboard::Dashboard(QWidget *parent) :
     DAC_OUT1->setCheckable(true);
     if (selectedDACOptionsStatic.contains("DAC_OUT1")) {
         DAC_OUT1->setChecked(true);
+    }
+
+    if(! selectedDACOptionsStatic.contains("DAC_OUT1"))
+    {
+        QSettings settings("DACConfig.txt", QSettings::IniFormat);
+        settings.beginGroup("DAC1");
+        QStringList cles = settings.childKeys();
+        for(const QString &cle : cles){
+            settings.remove(cle);
+        }
+        settings.endGroup();
     }
     QAction *DAC_OUT2 = new QAction("DAC_OUT2", this);
     DAC_OUT2->setCheckable(true);
@@ -220,8 +359,17 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedTIMEROptionsStatic.contains("Input Capture Mode")) {
        InputCaptureMode->setChecked(true);
     }
+    if(! selectedTIMEROptionsStatic.contains("Input Capture Mode"))
+      {
+          QSettings settings("FrequencyMesureConfig.txt", QSettings::IniFormat);
+          settings.beginGroup("Mesure_Frequency");
+          QStringList cles = settings.childKeys();
+          for(const QString &cle : cles){
+              settings.remove(cle);
+          }
+          settings.endGroup();
 
-
+}
 
     // Checkable GPIO Mode Configurations
 
@@ -230,11 +378,32 @@ Dashboard::Dashboard(QWidget *parent) :
     if (selectedGPIOOptionsStatic.contains("GPIO_OUTPUT")) {
        GPIO_OUTPUT->setChecked(true);
     }
+    if(! selectedADCOptionsStatic.contains("GPIO_OUTPUT"))
+      {
+          QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+          settings.beginGroup("GPIO_OUTPUT");
+          QStringList cles = settings.childKeys();
+          for(const QString &cle : cles){
+              settings.remove(cle);
+          }
+          settings.endGroup();
+    }
 
     QAction *GPIO_INPUT = new QAction("&GPIO_INPUT" , this);
     GPIO_INPUT->setCheckable(true);
     if (selectedGPIOOptionsStatic.contains("&GPIO_INPUT")) {
        GPIO_INPUT->setChecked(true);
+    }
+
+    if(! selectedADCOptionsStatic.contains("GPIO_INPUT"))
+      {
+          QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
+          settings.beginGroup("GPIO_INPUT");
+          QStringList cles = settings.childKeys();
+          for(const QString &cle : cles){
+              settings.remove(cle);
+          }
+          settings.endGroup();
     }
 
     // Create a QToolButton for the "Connect" button
@@ -596,8 +765,8 @@ Dashboard::Dashboard(QWidget *parent) :
 
 void Dashboard::showConfigMode()
 {
-        ConfigMode *configMode = new ConfigMode();
-        QSet<QString> addedUartOptions;
+    ConfigMode *configMode = new ConfigMode();
+    QSet<QString> addedUartOptions;
         QSet<QString> addedI2COptions;
         QSet<QString> addedSPIOptions;
         QSet<QString> addedADCOptions;
@@ -606,78 +775,204 @@ void Dashboard::showConfigMode()
         QSet<QString> addedTIMEROptions;
 
 
-            // Parcourir chaque élément sélectionné
-            for (int i = 0; i < selectedUartOptionsStatic.size(); i++) {
-                QString uartOption = selectedUartOptionsStatic.at(i);
-                if (!addedUartOptions.contains(uartOption)) {
-                      configMode->addActionToMenu("&UART", uartOption);
-                      addedUartOptions.insert(uartOption);
+        // Parcourir chaque élément sélectionné
+        for (int i = 0; i < selectedUartOptionsStatic.size(); i++) {
+            QString uartOption = selectedUartOptionsStatic.at(i);
+            if (!addedUartOptions.contains(uartOption)) {
+                  configMode->addActionToMenu("&UART", uartOption);
+                  addedUartOptions.insert(uartOption);
 
 
-                       }
+                   }
 
 
 
 
+        }
+
+
+
+
+
+
+        for (int i = 0; i < selectedI2COptionsStatic.size(); i++) {
+            QString I2COption = selectedI2COptionsStatic.at(i);
+            // Vérifier si l'élément a déjà été ajouté pour I2C
+                  if (!addedI2COptions.contains(I2COption)) {
+                      configMode->addActionToMenu("&I2C", I2COption);
+                      addedI2COptions.insert(I2COption);
+                  }
+        }
+        for (int i = 0; i < selectedSPIOptionsStatic.size(); i++) {
+            QString SPIOption = selectedSPIOptionsStatic.at(i);
+                  if (!addedSPIOptions.contains(SPIOption)) {
+                      configMode->addActionToMenu("&SPI", SPIOption);
+                      addedSPIOptions.insert(SPIOption);
+                  }
+        }
+
+        for (int i = 0; i < selectedADCOptionsStatic.size(); i++) {
+            QString ADCOption = selectedADCOptionsStatic.at(i);
+            if (!addedADCOptions.contains(ADCOption)) {
+               configMode->addActionToMenu("&ADC", ADCOption);
+                addedADCOptions.insert(ADCOption);
             }
 
+        }
 
-
-
-
-
-            for (int i = 0; i < selectedI2COptionsStatic.size(); i++) {
-                QString I2COption = selectedI2COptionsStatic.at(i);
-                // Vérifier si l'élément a déjà été ajouté pour I2C
-                      if (!addedI2COptions.contains(I2COption)) {
-                          configMode->addActionToMenu("&I2C", I2COption);
-                          addedI2COptions.insert(I2COption);
-                      }
+        for (int i = 0; i < selectedDACOptionsStatic.size(); i++) {
+            QString DACOption = selectedDACOptionsStatic.at(i);
+            if (!addedDACOptions.contains(DACOption)) {
+               configMode->addActionToMenu("&DAC", DACOption);
+                addedDACOptions.insert(DACOption);
             }
-            for (int i = 0; i < selectedSPIOptionsStatic.size(); i++) {
-                QString SPIOption = selectedSPIOptionsStatic.at(i);
-                      if (!addedSPIOptions.contains(SPIOption)) {
-                          configMode->addActionToMenu("&SPI", SPIOption);
-                          addedSPIOptions.insert(SPIOption);
-                      }
+        }
+
+        for (int i = 0; i < selectedGPIOOptionsStatic.size(); i++) {
+            QString GPIOOption = selectedGPIOOptionsStatic.at(i);
+            if (!addedGPIOOptions.contains(GPIOOption)) {
+               configMode->addActionToMenu("&GPIO", GPIOOption);
+                addedGPIOOptions.insert(GPIOOption);
             }
+        }
 
-            for (int i = 0; i < selectedADCOptionsStatic.size(); i++) {
-                QString ADCOption = selectedADCOptionsStatic.at(i);
-                if (!addedADCOptions.contains(ADCOption)) {
-                   configMode->addActionToMenu("&ADC", ADCOption);
-                    addedADCOptions.insert(ADCOption);
-                }
-
+        for (int i = 0; i < selectedTIMEROptionsStatic.size(); i++) {
+            QString TIMEROption = selectedTIMEROptionsStatic.at(i);
+            if (!addedTIMEROptions.contains(TIMEROption)) {
+              configMode->addActionToMenu("&Frequency Mesure", TIMEROption);
+                addedTIMEROptions.insert(TIMEROption);
             }
 
-            for (int i = 0; i < selectedDACOptionsStatic.size(); i++) {
-                QString DACOption = selectedDACOptionsStatic.at(i);
-                if (!addedDACOptions.contains(DACOption)) {
-                   configMode->addActionToMenu("&DAC", DACOption);
-                    addedDACOptions.insert(DACOption);
-                }
-            }
+        }
+//        QString cmdPath = "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin"; // Remplacez "chemin_vers_STM32_Programmer_CLI.exe" par le chemin réel vers l'exécutable STM32_Programmer_CLI.exe
+//        QString binFilePath = "C:/Users/nawledbr/Desktop/testBins/read.bin"; // Chemin vers le fichier binaire
 
-            for (int i = 0; i < selectedGPIOOptionsStatic.size(); i++) {
-                QString GPIOOption = selectedGPIOOptionsStatic.at(i);
-                if (!addedGPIOOptions.contains(GPIOOption)) {
-                   configMode->addActionToMenu("&GPIO", GPIOOption);
-                    addedGPIOOptions.insert(GPIOOption);
-                }
-            }
 
-            for (int i = 0; i < selectedTIMEROptionsStatic.size(); i++) {
-                QString TIMEROption = selectedTIMEROptionsStatic.at(i);
-                if (!addedTIMEROptions.contains(TIMEROption)) {
-                  configMode->addActionToMenu("&Frequency Mesure", TIMEROption);
-                    addedTIMEROptions.insert(TIMEROption);
-                }
+//        QString command2 = QString("%1  STM32_Programmer_CLI.exe -c port=swd -w %2 0x08000000").arg(cmdPath).arg(binFilePath);
 
-            }
+//        // Commande 3 : STM32_Programmer_CLI.exe -c port=swd --start 0x08000000
+//        QString command3 = QString("%1 STM32_Programmer_CLI.exe -c port=swd --start 0x08000000").arg(cmdPath);
 
-        configMode->show();
-        this->hide();
+
+//        // Exécution de la commande 2
+//        QProcess::execute(command2);
+
+//        // Exécution de la commande 3
+//        QProcess::execute(command3);
+
+
+        QString program = "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe"; // Chemin vers le programme cubeprogrammer
+
+//        // Commande pour l'upload du fichier
+//        QStringList uploadArguments;
+//        uploadArguments << "-c" << "port=swd" << "--upload" << "0x08000000" << "128000" << "C:/Users/nawledbr/Desktop/testBins/read.bin";
+//        QProcess::startDetached(program, uploadArguments);
+
+//        // Commande pour l'écriture du fichier
+//        QStringList writeArguments;
+//        writeArguments << "-c" << "port=swd" << "-w" << "C:/Users/nawledbr/Desktop/testBins/read.bin" << "0x08000000";
+//        QProcess::startDetached(program, writeArguments);
+
+//        // Commande pour démarrer l'exécution
+//        QStringList startArguments;
+//        startArguments << "-c" << "port=swd" << "--start" << "0x08000000";
+////        QProcess::startDetached(program, startArguments);
+//        QProcess startProcess;
+//        startProcess.start(program, startArguments);
+//        startProcess.waitForFinished(-1);
+
+//        // Vérifier si la commande s'est terminée avec succès
+//        if (startProcess.exitStatus() == QProcess::NormalExit && startProcess.exitCode() == 0)
+//        {
+//        // Passer à la page "Run Mode"
+
+
+//        // ...
+//        }
+
+
+        // Commande pour l'upload du fichier
+//        QStringList uploadArguments;
+//        uploadArguments << "-c" << "port=swd" << "--upload" << "0x08000000" << "128000" << "C:/Users/nawledbr/Desktop/testBins/read.bin";
+//        QProcess uploadProcess;
+//        uploadProcess.start(program, uploadArguments);
+//        uploadProcess.waitForFinished(-1);
+
+//        // Vérifier si la commande s'est terminée avec succès
+//        if (uploadProcess.exitStatus() == QProcess::NormalExit && uploadProcess.exitCode() == 0)
+//        {
+        // Commande pour l'écriture du fichier
+        QStringList writeArguments;
+        writeArguments << "-c" << "port=swd" << "-w" << "C:/Users/nawledbr/Desktop/testBins/read.bin" << "0x08000000";
+        QProcess writeProcess;
+        writeProcess.startDetached(program, writeArguments);
+        writeProcess.waitForFinished(-1);
+
+        // Vérifier si la commande s'est terminée avec succès
+        if (writeProcess.exitStatus() == QProcess::NormalExit && writeProcess.exitCode() == 0)
+        {
+        // Commande pour démarrer l'exécution
+        QStringList startArguments;
+        startArguments << "-c" << "port=swd" << "--start" << "0x08000000";
+        QProcess startProcess;
+        startProcess.startDetached(program, startArguments);
+        startProcess.waitForFinished(-1);
+
+        // Vérifier si la commande s'est terminée avec succès
+        if (startProcess.exitStatus() == QProcess::NormalExit && startProcess.exitCode() == 0)
+        {
+        // Passer à la page "Run Mode"
+
+
+            /******************************* getting notification ***************************************/
+
+
+
+            QString styleSheet = "\
+                QMessageBox {\
+                    background-color: #D3D3D3;\
+                    color: #263238;\
+                    font-family:Fantasy ;\
+                    font-size: 12px;\
+                }\
+                \
+                QMessageBox QLabel {\
+                    color: #000000	;\
+                }\
+                \
+                QMessageBox QPushButton {\
+                    background-color: #4CAF50;\
+                    border: 1px solid #388E3C;\
+                    color: #FFFFFF;\
+                    padding: 5px;\
+                    min-width: 70px;\
+                }\
+                \
+                QMessageBox QPushButton:hover {\
+                    background-color: #388E3C;\
+                }";
+
+
+                    QMessageBox msgBox;
+                    msgBox.setWindowTitle("IPs State");
+                    msgBox.setStyleSheet(styleSheet);
+                    msgBox.setIcon(QMessageBox::Information);
+                    msgBox.setText("Start Program achieved successfully !");
+                    msgBox.exec();
+
+
+   //         QMessageBox::information(this, "configuration", lastResponse);
+
+
+
+                    configMode->show();
+                    this->hide();
+
+        // ...
+        }
+        }
+
+
 }
 void Dashboard::onUartOptionSelected()
 {
