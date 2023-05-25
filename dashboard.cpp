@@ -954,7 +954,7 @@ void Dashboard::showConfigMode()
 
 
                     QMessageBox msgBox;
-                    msgBox.setWindowTitle("IPs State");
+                    msgBox.setWindowTitle("Runnig Program");
                     msgBox.setStyleSheet(styleSheet);
                     msgBox.setIcon(QMessageBox::Information);
                     msgBox.setText("Start Program achieved successfully !");

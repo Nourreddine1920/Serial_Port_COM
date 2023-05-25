@@ -220,7 +220,25 @@ checkGroupAndAddSubMenu();
 //QStringList startArguments;
 //startArguments << "-c" << "port=swd" << "--start" << "0x08000000";
 //QProcess::startDetached(program, startArguments);
+//QString program = "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe"; // Chemin vers le programme cubeprogrammer
 
+//QStringList writeArguments;
+//writeArguments << "-c" << "port=swd" << "-w" << "C:/Users/nawledbr/Desktop/testBins/read.bin" << "0x08000000";
+//QProcess writeProcess;
+//writeProcess.startDetached(program, writeArguments);
+//writeProcess.waitForFinished(-1);
+
+//// Vérifier si la commande s'est terminée avec succès
+//if (writeProcess.exitStatus() == QProcess::NormalExit && writeProcess.exitCode() == 0)
+//{
+//// Commande pour démarrer l'exécution
+//QStringList startArguments;
+//startArguments << "-c" << "port=swd" << "--start" << "0x08000000";
+//QProcess startProcess;
+//startProcess.startDetached(program, startArguments);
+//startProcess.waitForFinished(-1);
+
+//}
 
 }
 
