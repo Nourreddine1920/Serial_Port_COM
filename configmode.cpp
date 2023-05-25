@@ -7,6 +7,7 @@
 #include <QToolButton>
 #include"uart.h"
 #include "runmode.h"
+#include<QProcess>
 
 //QStringList ConfigMode::selectedUartOptionsStatic; // initialisation de la variable statique
 //QStringList ConfigMode::selectedI2COptionsStatic; // initialisation de la variable statique
@@ -490,6 +491,17 @@ void ConfigMode::returnDashboard()
 
     void ConfigMode::sendframe()
      {
+
+//        QProcess process;
+//        QString program = "cmd.exe"; // Chemin vers le programme du cmd
+
+
+        //        // Commande pour démarrer l'exécution
+//                QStringList startArguments;
+//                startArguments << "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin" << "STM32_Programmer_CLI.exe" << "-c" << "port=swd" << "--start" << "0x08000000";
+//                process.start(program, startArguments);
+//                process.waitForFinished(-1); // Attendre que le processus se termine (bloquant)
+
 
 
 

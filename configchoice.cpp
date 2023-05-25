@@ -7,6 +7,7 @@
 #include "directrun.h"
 #include <QAction>
 #include <QMenu>
+#include <QProcess>
 
 
 ConfigChoice::ConfigChoice(QWidget *parent) :
@@ -203,6 +204,24 @@ ConfigChoice::ConfigChoice(QWidget *parent) :
 void ConfigChoice::handleLoadConfigButton()
 {
 checkGroupAndAddSubMenu();
+//QString program = "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe"; // Chemin vers le programme cubeprogrammer
+
+////        // Commande pour l'upload du fichier
+////        QStringList uploadArguments;
+////        uploadArguments << "-c" << "port=swd" << "--upload" << "0x08000000" << "128000" << "C:/Users/nawledbr/Desktop/testBins/read.bin";
+////        QProcess::startDetached(program, uploadArguments);
+
+//// Commande pour l'écriture du fichier
+//QStringList writeArguments;
+//writeArguments << "-c" << "port=swd" << "-w" << "C:/Users/nawledbr/Desktop/testBins/read.bin" << "0x08000000";
+//QProcess::startDetached(program, writeArguments);
+
+//// Commande pour démarrer l'exécution
+//QStringList startArguments;
+//startArguments << "-c" << "port=swd" << "--start" << "0x08000000";
+//QProcess::startDetached(program, startArguments);
+
+
 }
 
 void ConfigChoice::checkGroupAndAddSubMenu()
