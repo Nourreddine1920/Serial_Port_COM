@@ -805,20 +805,20 @@ private slots :
 
                qDebug() << "Settings file path: " << settings.fileName();
 
-//               QDate date = QDate::currentDate();
-//               QString dateString = date.toString();
+               QDate date = QDate::currentDate();
+               QString dateString = date.toString();
 
 
-//               qDebug() << "date :  " <<dateString;
+               qDebug() << "date :  " <<dateString;
 
-//               QTime time = QTime::currentTime();
-
-
-//               QString timestring = time.toString();
-//               qDebug() << "time :  " <<timestring;
+               QTime time = QTime::currentTime();
 
 
-//               QString Date = dateString +", " + timestring;
+               QString timestring = time.toString();
+               qDebug() << "time :  " <<timestring;
+
+
+               QString Date = dateString + "," + timestring;
 
 
 
@@ -830,7 +830,7 @@ private slots :
                settings.setValue("FlowControl",  FlowControl);
                settings.setValue("Parity",  Parity);
 
-//               settings.setValue("Date",  Date);
+               settings.setValue("Date",  Date);
 
 
                settings.endGroup();
