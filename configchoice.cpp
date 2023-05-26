@@ -273,6 +273,18 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     /***************************LOAD UART UI*********************************/
 
+
+    bool hasValuesUART = false; // Variable pour vérifier si UART a des valeurs
+    bool hasValuesSPI = false; // Variable pour vérifier si SPI a des valeurs
+    bool hasValuesADC = false; // Variable pour vérifier si SPI a des valeurs
+    bool hasValuesDAC = false; // Variable pour vérifier si SPI a des valeurs
+    bool hasValuesI2C = false; // Variable pour vérifier si SPI a des valeurs
+    bool hasValuesTIM = false; // Variable pour vérifier si SPI a des valeurs
+    bool hasValuesGPIO = false; // Variable pour vérifier si SPI a des valeurs
+
+
+
+
     foreach (const QString& groupName, groupNames)
     {
     settings.beginGroup(groupName); // Démarre le groupe spécifié dans le fichier de configuration
@@ -285,6 +297,8 @@ void ConfigChoice::checkGroupAndAddSubMenu()
     if (key!="Date"){
     if (!settings.value(key).toString().isEmpty()) {
     hasAllValues = true;
+    hasValuesUART = true; // Une valeur est présente pour UART
+
     break;
     }
     }
@@ -345,6 +359,8 @@ void ConfigChoice::checkGroupAndAddSubMenu()
     {
     // La clé n'a pas de valeur dans le groupe
     hasAllValuesSPI = true;
+    hasValuesSPI = true; // Une valeur est présente pour SPI
+
     break;
     }
     }
@@ -391,6 +407,7 @@ void ConfigChoice::checkGroupAndAddSubMenu()
     {
     // La clé n'a pas de valeur dans le groupe
     hasAllValuesADC = true;
+    hasValuesADC = true;
     break;
     }
     }
@@ -438,6 +455,7 @@ void ConfigChoice::checkGroupAndAddSubMenu()
     {
     // La clé n'a pas de valeur dans le groupe
     hasAllValuesDAC = true;
+    hasValuesDAC = true;
     break;
     }
     }
@@ -480,6 +498,7 @@ void ConfigChoice::checkGroupAndAddSubMenu()
     {
     // La clé n'a pas de valeur dans le groupe
     hasAllValuesI2C = true;
+    hasValuesI2C = true;
     break;
     }
     }
@@ -528,6 +547,7 @@ void ConfigChoice::checkGroupAndAddSubMenu()
         {
             // La clé n'a pas de valeur dans le groupe
             hasAllValuesGPIO = true;
+            hasValuesGPIO = true;
             break;
         }
     }
@@ -571,6 +591,7 @@ void ConfigChoice::checkGroupAndAddSubMenu()
     {
     // La clé n'a pas de valeur dans le groupe
     hasAllValuesTIM = true;
+     hasValuesTIM = true;
     break;
     }
     }
@@ -591,6 +612,48 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
         run->show();
         this->hide();
+
+    }
+
+
+    if (!hasValuesUART && !hasValuesSPI && !hasValuesADC && !hasValuesDAC && !hasValuesI2C && !hasValuesGPIO && !hasValuesTIM)
+    {
+    // Affiche le message box si aucune valeur n'est présente pour UART et SPI
+        /******************************* getting notification ***************************************/
+
+
+
+        QString styleSheet = "\
+            QMessageBox {\
+                background-color: #D3D3D3;\
+                color: #263238;\
+                font-family:Fantasy ;\
+                font-size: 12px;\
+            }\
+            \
+            QMessageBox QLabel {\
+                color: #000000	;\
+            }\
+            \
+            QMessageBox QPushButton {\
+                background-color: #4CAF50;\
+                border: 1px solid #388E3C;\
+                color: #FFFFFF;\
+                padding: 5px;\
+                min-width: 70px;\
+            }\
+            \
+            QMessageBox QPushButton:hover {\
+                background-color: #388E3C;\
+            }";
+
+
+                QMessageBox msgBox;
+                msgBox.setWindowTitle("Loaded Configurations");
+                msgBox.setStyleSheet(styleSheet);
+                msgBox.setIcon(QMessageBox::Information);
+                msgBox.setText("There is no previous configurations !");
+                msgBox.exec();
 
     }
 
