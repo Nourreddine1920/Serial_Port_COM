@@ -2,6 +2,7 @@
 #include "ui_starting_screen.h"
 #include "mainwindow.h"
 #include"uart.h"
+#include <QPushButton>
 
 #include"dashboard.h"
 
@@ -12,44 +13,64 @@ starting_screen::starting_screen(QWidget *parent) :
     ui->setupUi(this);
     // Initialize uart_connection object
 
+//    QWidget* Starting = new QWidget(this);
+
+    QImage backgroundImage("C:/Users/nawledbr/Documents/Serial_Port_COM/startingapplication.png");
+
+    QLabel* backgroundLabel = new QLabel(this);
+    backgroundLabel->setPixmap(QPixmap::fromImage(backgroundImage));
+    backgroundLabel->setGeometry(0, 0, width(), height());
+    backgroundLabel->setScaledContents(true);
+    backgroundLabel->lower();
+
+//    QPushButton* receiveButton = new QPushButton("START APPLICATION");
+
+//    QVBoxLayout* layout = new QVBoxLayout(Starting);
+//    auto buttonLayout = new QHBoxLayout();
+//    buttonLayout->addStretch(); // Ajouter un espace flexible avant le bouton
+//    buttonLayout->addWidget(receiveButton);
+//    buttonLayout->addStretch(); // Ajouter un autre espace flexible après le bouton
+
+//    layout->addStretch();
+//    layout->addLayout(buttonLayout);
+//    layout->setAlignment(buttonLayout, Qt::AlignCenter);
+
+    QString styleSheet2 =
+    "QPushButton {"
+    " background-color: #F9F6EE;"
+    " border: none;"
+    " color: #36454F;"
+    " padding: 3px 3px;"
+    " text-align: center;"
+    " text-decoration: none;"
+    " font-size: 20px;"
+    " margin: 4px 2px;"
+    "}"
+    ""
+    "QPushButton:hover {"
+    " background-color: #32CD32;"
+    "}";
+
+//    receiveButton->setStyleSheet(styleSheet2);
+    ui->pushButton_startapplication->setStyleSheet(styleSheet2);
+
+//    Starting->setLayout(layout);
+//    Starting->resize(400, 300);
+
+//    connect(receiveButton, &QPushButton::clicked, [=]() {
+//        MainWindow *LoadingScreen = new MainWindow;
+//        LoadingScreen->show();
+//        this->hide();
+//        //qApp->processEvents(QEventLoop::EventLoopExec);
+//        LoadingScreen->start_Loading();
+//        //passer à l'ecran uart
+
+//        //dashboard->show();
+//        Uartscreen->show();
+//        this->hide();
 
 
-//    QImage backgroundImage("C:/Users/nawledbr/Documents/Serial_Port_COM/xcubellll.png");
-
-//    // Création d'un label pour afficher l'image
-////    QWidget window;
-
-//    QLabel* backgroundLabel = new QLabel(this);
-//    backgroundLabel->setPixmap(QPixmap::fromImage(backgroundImage));
-
-//    // Configuration de la position et de la taille du label d'arrière-plan
-//    backgroundLabel->setGeometry(0, 0, width(), height());
-//    backgroundLabel->setScaledContents(true); // Adapter l'image à la taille du label
-
-//    // Assurez-vous que le label d'arrière-plan est en dessous des autres widgets
-//    backgroundLabel->lower();
-
-    QString styleSheet =
-        "QPushButton {"
-        "    background-color: #4CAF50;"
-        "    border: none;"
-        "    color: white;"
-        "    padding: 15px 32px;"
-        "    text-align: center;"
-        "    text-decoration: none;"
-        "    font-size: 20px;"
-        "    margin: 4px 2px;"
-        "    border-radius: 10px;"
-        "}"
-        ""
-        "QPushButton:hover {"
-        "    background-color: #3e8e41;"
-        "}";
-    ui->pushButton_startapplication->setStyleSheet(styleSheet);
-    QWidget::setWindowTitle("Welcome Page");
-
-
-    setFixedSize(width(), height());
+//    });
     Uartscreen=new Uart(this);
 }
 
