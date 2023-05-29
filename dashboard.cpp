@@ -902,65 +902,65 @@ void Dashboard::showConfigMode()
 //        if (uploadProcess.exitStatus() == QProcess::NormalExit && uploadProcess.exitCode() == 0)
 //        {
         // Commande pour l'écriture du fichier
-        QStringList writeArguments;
-        writeArguments << "-c" << "port=swd" << "-w" << "C:/Users/nawledbr/Desktop/testBins/read.bin" << "0x08000000";
-        QProcess writeProcess;
-        writeProcess.start(program, writeArguments);
-//        writeProcess.startDetached(program, writeArguments);
+//        QStringList writeArguments;
+//        writeArguments << "-c" << "port=swd" << "-w" << "C:/Users/nawledbr/Desktop/testBins/read.bin" << "0x08000000";
+//        QProcess writeProcess;
+//        writeProcess.start(program, writeArguments);
+////        writeProcess.startDetached(program, writeArguments);
 
-        writeProcess.waitForFinished(-1);
+//        writeProcess.waitForFinished(-1);
 
-        if (writeProcess.exitStatus() == QProcess::NormalExit && writeProcess.exitCode() == 0)
-        {
-        QStringList startArguments;
-        startArguments << "-c" << "port=swd" << "--start" << "0x08000000";
-        QProcess startProcess;
-        startProcess.start(program, startArguments);
-        startProcess.startDetached(program, startArguments);
+//        if (writeProcess.exitStatus() == QProcess::NormalExit && writeProcess.exitCode() == 0)
+//        {
+//        QStringList startArguments;
+//        startArguments << "-c" << "port=swd" << "--start" << "0x08000000";
+//        QProcess startProcess;
+//        startProcess.start(program, startArguments);
+//        startProcess.startDetached(program, startArguments);
 
-        startProcess.waitForFinished(-1);
+//        startProcess.waitForFinished(-1);
 
-        // Vérifier si la commande s'est terminée avec succès
-        if (startProcess.exitStatus() == QProcess::NormalExit && startProcess.exitCode() == 0)
-        {
-        // Passer à la page "Run Mode"
-
-
-//            /******************************* getting notification ***************************************/
+//        // Vérifier si la commande s'est terminée avec succès
+//        if (startProcess.exitStatus() == QProcess::NormalExit && startProcess.exitCode() == 0)
+//        {
+//        // Passer à la page "Run Mode"
 
 
-
-            QString styleSheet = "\
-                QMessageBox {\
-                    background-color: #D3D3D3;\
-                    color: #263238;\
-                    font-family:Fantasy ;\
-                    font-size: 12px;\
-                }\
-                \
-                QMessageBox QLabel {\
-                    color: #000000	;\
-                }\
-                \
-                QMessageBox QPushButton {\
-                    background-color: #4CAF50;\
-                    border: 1px solid #388E3C;\
-                    color: #FFFFFF;\
-                    padding: 5px;\
-                    min-width: 70px;\
-                }\
-                \
-                QMessageBox QPushButton:hover {\
-                    background-color: #388E3C;\
-                }";
+////            /******************************* getting notification ***************************************/
 
 
-                    QMessageBox msgBox;
-                    msgBox.setWindowTitle("Runnig Program");
-                    msgBox.setStyleSheet(styleSheet);
-                    msgBox.setIcon(QMessageBox::Information);
-                    msgBox.setText("Start Program achieved successfully !");
-                    msgBox.exec();
+
+//            QString styleSheet = "\
+//                QMessageBox {\
+//                    background-color: #D3D3D3;\
+//                    color: #263238;\
+//                    font-family:Fantasy ;\
+//                    font-size: 12px;\
+//                }\
+//                \
+//                QMessageBox QLabel {\
+//                    color: #000000	;\
+//                }\
+//                \
+//                QMessageBox QPushButton {\
+//                    background-color: #4CAF50;\
+//                    border: 1px solid #388E3C;\
+//                    color: #FFFFFF;\
+//                    padding: 5px;\
+//                    min-width: 70px;\
+//                }\
+//                \
+//                QMessageBox QPushButton:hover {\
+//                    background-color: #388E3C;\
+//                }";
+
+
+//                    QMessageBox msgBox;
+//                    msgBox.setWindowTitle("Runnig Program");
+//                    msgBox.setStyleSheet(styleSheet);
+//                    msgBox.setIcon(QMessageBox::Information);
+//                    msgBox.setText("Start Program achieved successfully !");
+//                    msgBox.exec();
 
 
 //            QMessageBox::information(this, "configuration", lastResponse);
@@ -971,8 +971,8 @@ void Dashboard::showConfigMode()
                     this->hide();
 
         // ...
-        }
-        }
+//        }
+//        }
 
 
 }

@@ -1004,7 +1004,8 @@ private slots :
         // Create a QLabel to display the DAC output voltage
         QLabel* voltageLabel = new QLabel("Digital Value :", dacWidget);
         QLineEdit* voltageLineEdit = new QLineEdit(dacWidget);
-        voltageLineEdit->setPlaceholderText("Enter the digital value");
+        voltageLineEdit->setPlaceholderText("Enter the digital value between 1 and 4096");
+        voltageLineEdit->setMaxLength(4);
 
         // Create a QComboBox to select the DAC channel to output to
 //        QLabel* channelLabel = new QLabel("Channel:", dacWidget);
