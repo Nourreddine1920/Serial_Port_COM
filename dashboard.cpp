@@ -905,17 +905,19 @@ void Dashboard::showConfigMode()
         QStringList writeArguments;
         writeArguments << "-c" << "port=swd" << "-w" << "C:/Users/nawledbr/Desktop/testBins/read.bin" << "0x08000000";
         QProcess writeProcess;
-        writeProcess.startDetached(program, writeArguments);
+        writeProcess.start(program, writeArguments);
+//        writeProcess.startDetached(program, writeArguments);
+
         writeProcess.waitForFinished(-1);
 
-        // Vérifier si la commande s'est terminée avec succès
         if (writeProcess.exitStatus() == QProcess::NormalExit && writeProcess.exitCode() == 0)
         {
-        // Commande pour démarrer l'exécution
         QStringList startArguments;
         startArguments << "-c" << "port=swd" << "--start" << "0x08000000";
         QProcess startProcess;
+        startProcess.start(program, startArguments);
         startProcess.startDetached(program, startArguments);
+
         startProcess.waitForFinished(-1);
 
         // Vérifier si la commande s'est terminée avec succès
@@ -924,7 +926,7 @@ void Dashboard::showConfigMode()
         // Passer à la page "Run Mode"
 
 
-            /******************************* getting notification ***************************************/
+//            /******************************* getting notification ***************************************/
 
 
 
@@ -961,7 +963,7 @@ void Dashboard::showConfigMode()
                     msgBox.exec();
 
 
-   //         QMessageBox::information(this, "configuration", lastResponse);
+//            QMessageBox::information(this, "configuration", lastResponse);
 
 
 
