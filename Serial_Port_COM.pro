@@ -93,7 +93,11 @@ DISTFILES += \
     send (6).png \
     send-message.png \
     send.png \
+    starting-app.png \
+    starting.png \
+    startingapplication.png \
     welcome.png \
+    welcomeapp.png \
     xcube (2).png \
     xcubellll.png
 
