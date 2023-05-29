@@ -11,6 +11,8 @@ starting_screen::starting_screen(QWidget *parent) :
     ui(new Ui::starting_screen)
 {
     ui->setupUi(this);
+    setWindowFlag(Qt::FramelessWindowHint);
+
     // Initialize uart_connection object
 
 //    QWidget* Starting = new QWidget(this);
@@ -45,6 +47,8 @@ starting_screen::starting_screen(QWidget *parent) :
     " text-decoration: none;"
     " font-size: 20px;"
     " margin: 4px 2px;"
+    "    border-radius: 10px;"
+
     "}"
     ""
     "QPushButton:hover {"
