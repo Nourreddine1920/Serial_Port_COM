@@ -921,6 +921,41 @@ void Dashboard::showConfigMode()
         }
         }
 
+        else{
+                    QString styleSheet = "\
+                        QMessageBox {\
+                            background-color: #D3D3D3;\
+                            color: #263238;\
+                            font-family:Fantasy ;\
+                            font-size: 12px;\
+                        }\
+                        \
+                        QMessageBox QLabel {\
+                            color: #000000	;\
+                        }\
+                        \
+                        QMessageBox QPushButton {\
+                            background-color: #4CAF50;\
+                            border: 1px solid #388E3C;\
+                            color: #FFFFFF;\
+                            padding: 5px;\
+                            min-width: 70px;\
+                        }\
+                        \
+                        QMessageBox QPushButton:hover {\
+                            background-color: #388E3C;\
+                        }";
+
+
+                            QMessageBox msgBox;
+                            msgBox.setWindowTitle("Runnig Program");
+                            msgBox.setStyleSheet(styleSheet);
+                            msgBox.setIcon(QMessageBox::Information);
+                            msgBox.setText("Start Program Occured an error ! there is another program running in the board ");
+                            msgBox.exec();
+
+                }
+
 
 }
 void Dashboard::onUartOptionSelected()
