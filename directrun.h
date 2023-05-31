@@ -529,7 +529,7 @@ private slots:
 
 
 
-            receivedDataBrowser->append(buffer);
+            receivedDataBrowser->append("Welcome from slave board !");
         });
 
     }
