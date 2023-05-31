@@ -951,7 +951,7 @@ void Dashboard::showConfigMode()
                             msgBox.setWindowTitle("Runnig Program");
                             msgBox.setStyleSheet(styleSheet);
                             msgBox.setIcon(QMessageBox::Information);
-                            msgBox.setText("Start Program Occured an error ! there is another program running in the board ");
+                            msgBox.setText("Start Program Occured an error ! there is another program running on the board ");
                             msgBox.exec();
 
                 }
