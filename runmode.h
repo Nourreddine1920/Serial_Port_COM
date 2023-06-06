@@ -15,6 +15,8 @@
 #include <QSerialPort>
 #include <QDate>
 #include <QTime>
+#include <QFontDatabase>
+#include<QFont>
 
 namespace Ui {
 class Runmode;
@@ -728,12 +730,17 @@ private slots :
             "QPushButton:hover {"
             "    background-color: #3e8e41;"
             "}";
-        QFont font("Segoe UI");
+//        QFont font("Segoe UI");
 
         readButton->setStyleSheet(styleSheet2);
         writeButton->setStyleSheet(styleSheet2);
         dataLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
         dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+
+        QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+        font.setBold(true);
+        dataTextBrowser->setFont(font);
+
         registerLabel->setStyleSheet("font: bold 13px; color: #328930;");
         dataLabel->setStyleSheet("font: bold 13px; color: #328930;");
         deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
@@ -748,7 +755,12 @@ private slots :
             QString deviceAddress = deviceAddressLineEdit->text();
             // Code to read data from ADC and update dataTextBrowser with the result
 
-            dataTextBrowser->setTextColor(Qt::darkRed);
+//            dataTextBrowser->setTextColor(Qt::darkRed);
+
+            QString color1 = "#AA4A44"; // Adresse de couleur pour le vert (green)
+
+            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
 
 
 
@@ -795,7 +807,12 @@ private slots :
             char delimiter1[2] = "*";
 
 
-            dataTextBrowser->setTextColor(Qt::darkGreen);
+//            dataTextBrowser->setTextColor(Qt::Key_Dead_Greek);
+
+            QString color = "#097969"; // Adresse de couleur pour le vert (green)
+
+            dataTextBrowser->setStyleSheet(QString("color: %50;").arg(color));
+
             QByteArray packet1;
 
             QByteArray Message = message.toUtf8();
