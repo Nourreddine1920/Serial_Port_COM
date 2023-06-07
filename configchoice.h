@@ -18,6 +18,8 @@ public:
 public slots:
     void handleLoadConfigButton();
     void checkGroupAndAddSubMenu();
+    void progressDelay(int milliseconds) ;
+
 private:
     Ui::ConfigChoice *ui;
 };
