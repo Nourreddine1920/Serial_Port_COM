@@ -8,7 +8,9 @@
 #include <QAction>
 #include <QMenu>
 #include <QProcess>
-
+#include <QElapsedTimer>
+#include <QCoreApplication>
+#include <QProgressDialog>
 
 ConfigChoice::ConfigChoice(QWidget *parent) :
     QMainWindow(parent),
@@ -99,8 +101,48 @@ ConfigChoice::ConfigChoice(QWidget *parent) :
     connect(receiveButton, &QPushButton::clicked, [=]() {
 
         Dashboard* dashboard = new Dashboard();
+        QString styleSheet = "\
+        QProgressDialog {\
+        background-color: #D3D3D3;\
+        color: #000000;\
+        font-family: Arial, sans-serif;\
+        font-size: 15px;\
+        }\
+        \
+        QProgressDialog QLabel {\
+        color: #023020;\
+        font-family:Fantasy;\
+        font-size: 15px;\
+        }\
+        \
+        QProgressDialog QProgressBar {\
+        background-color: #E2DFD2;\
+        border: 1px solid #CCCCCC;\
+        color: #2AAA8A;\
+        }\
+        \
+        QProgressDialog QPushButton {\
+        background-color: #4CAF50;\
+        border: 1px solid #388E3C;\
+        color: #FFFFFF;\
+        padding: 5px;\
+        min-width: 70px;\
+        }\
+        \
+        QProgressDialog QPushButton:hover {\
+        background-color: #388E3C;\
+        }";
 
 
+        QProgressDialog progressDialog("Waiting...", "", 0, 0 , this);
+        progressDialog.setWindowTitle("Program Download");
+        progressDialog.setWindowModality(Qt::WindowModal);
+        progressDialog.setStyleSheet(styleSheet);
+        progressDialog.setCancelButton(nullptr);
+        progressDialog.show();
+        QCoreApplication::processEvents();
+
+        progressDelay(2000); // Délai progressif avant l'affichage de la boîte de message
 
         QString program = "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/STM32_Programmer_CLI.exe"; // Chemin vers le programme cubeprogrammer
 
@@ -159,13 +201,16 @@ ConfigChoice::ConfigChoice(QWidget *parent) :
                         }";
 
 
+                            progressDialog.close();
+
+
+
                             QMessageBox msgBox;
                             msgBox.setWindowTitle("Runnig Program");
                             msgBox.setStyleSheet(styleSheet);
                             msgBox.setIcon(QMessageBox::Information);
                             msgBox.setText("Start Program achieved successfully !");
                             msgBox.exec();
-
 
 
 
@@ -773,6 +818,14 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
 
 
+}
+void ConfigChoice::progressDelay(int milliseconds) {
+QElapsedTimer timer;
+timer.start();
+
+while (timer.elapsed() < milliseconds) {
+QCoreApplication::processEvents();
+}
 }
 
 ConfigChoice::~ConfigChoice()
