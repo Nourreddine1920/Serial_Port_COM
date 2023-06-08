@@ -764,10 +764,10 @@ private slots :
 
 
 
-//            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
-//            QByteArray responseData;
-//            while (serialPort->waitForReadyRead(100)) {
-//            responseData.append(serialPort->readAll());
+            //            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
+            //            QByteArray responseData;
+            //            while (serialPort->waitForReadyRead(100)) {
+            //            responseData.append(serialPort->readAll());
 
 
 //            }
@@ -811,7 +811,7 @@ private slots :
 
             QString color = "#097969"; // Adresse de couleur pour le vert (green)
 
-            dataTextBrowser->setStyleSheet(QString("color: %50;").arg(color));
+            dataTextBrowser->setStyleSheet(QString("color: %1;").arg(color));
 
             QByteArray packet1;
 

@@ -559,7 +559,7 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     for (const QString &key : keysADC)
     {
-    if(key!="Date"){
+    if(key!="Date" && key!="Scan"){
     if (!settingsADC.value(key).toString().isEmpty())
     {
     // La clé n'a pas de valeur dans le groupe
@@ -650,7 +650,7 @@ void ConfigChoice::checkGroupAndAddSubMenu()
 
     for (const QString &key : keysI2C)
     {
-        if(key!="Date"){
+        if(key!="Date" && key!="AddressMasks" && key!="GeneralCallMode"){
     if (!settingsI2C.value(key).toString().isEmpty())
     {
     // La clé n'a pas de valeur dans le groupe
