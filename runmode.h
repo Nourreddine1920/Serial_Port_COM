@@ -757,11 +757,11 @@ private slots :
 
 //            dataTextBrowser->setTextColor(Qt::darkRed);
 
-            QString color1 = "#AA4A44"; // Adresse de couleur pour le vert (green)
+            QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
 
-            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
 
-
+            dataTextBrowser->setStyleSheet(style);
 
 
             //            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
@@ -809,9 +809,12 @@ private slots :
 
 //            dataTextBrowser->setTextColor(Qt::Key_Dead_Greek);
 
-            QString color = "#097969"; // Adresse de couleur pour le vert (green)
+            QString style1 ="color: #097969;"; // Adresse de couleur pour le vert (green)
 
-            dataTextBrowser->setStyleSheet(QString("color: %1;").arg(color));
+//            dataTextBrowser->setStyleSheet(QString("color: %1;").arg(color));
+
+            dataTextBrowser->setStyleSheet(style1);
+
 
             QByteArray packet1;
 
