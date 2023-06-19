@@ -84,8 +84,8 @@ private slots:
 //        lineEdit->setStyleSheet("QLineEdit { background-color: #ffffff; }");
 //        button1->setStyleSheet("QPushButton { background-color: #33b5e5; color: white; }");
 //        button2->setStyleSheet("QPushButton { background-color: #33b5e5; color: white; }");
+        QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
 
-        QFont font("Segoe UI");
         label->setFont(font);
         label->setStyleSheet("font: bold 13px; color: #328930;");
         lineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
@@ -93,6 +93,8 @@ private slots:
         button2->setStyleSheet(styleSheet2);
         textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
 
+        font.setBold(true);
+        textBrowser->setFont(font);
 
 
 //        QByteArray buffer;
@@ -115,7 +117,11 @@ private slots:
             char delim2[2]="+";
 
 
-            textBrowser->setTextColor(Qt::darkGreen);
+            QString style1 ="color: #097969;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            textBrowser->setStyleSheet(style1);
             QByteArray packet1;
 
             QByteArray Message = message.toUtf8();
@@ -155,7 +161,11 @@ private slots:
         // Connect the "send message" button to a slot
         connect(button2, &QPushButton::clicked, [=]() {
 
-            textBrowser->setTextColor(Qt::darkRed);
+            QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            textBrowser->setStyleSheet(style);
 
 //            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
 //            QByteArray responseData;
@@ -254,7 +264,7 @@ private slots:
 //        button1->setStyleSheet("QPushButton { background-color: #33b5e5; color: white; }");
 //        button2->setStyleSheet("QPushButton { background-color: #33b5e5; color: white; }");
 
-        QFont font("Segoe UI");
+        QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
         label->setFont(font);
         label->setStyleSheet("font: bold 13px; color: #328930;");
         lineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
@@ -262,12 +272,18 @@ private slots:
         button2->setStyleSheet(styleSheet2);
         textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
 
+        font.setBold(true);
+        textBrowser->setFont(font);
 
         // Connect the "send message" button to a slot
         connect(button1, &QPushButton::clicked, [=]() {
             QString message = lineEdit->text();
 //            textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
-            textBrowser->setTextColor(Qt::darkGreen);
+            QString style1 ="color: #097969;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            textBrowser->setStyleSheet(style1);
 
             char delimiter1[2] = "*";
 
@@ -318,7 +334,11 @@ private slots:
         // Connect the "send message" button to a slot
         connect(button2, &QPushButton::clicked, [=]() {
 
-            textBrowser->setTextColor(Qt::darkRed);
+            QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            textBrowser->setStyleSheet(style);
 
 //            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
 //            QByteArray responseData;
@@ -412,7 +432,7 @@ private slots:
             "QPushButton:hover {"
             "    background-color: #3e8e41;"
             "}";
-        QFont font("Segoe UI");
+        QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
         sendDataLabel->setFont(font);
         receivedDataLabel->setFont(font);
 
@@ -427,6 +447,8 @@ private slots:
 
         receivedDataBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
 
+        font.setBold(true);
+        receivedDataBrowser->setFont(font);
 
 
 
@@ -439,13 +461,16 @@ private slots:
         connect(sendButton, &QPushButton::clicked, [=]() {
             QString message = sendDataEdit->text();
 //            textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
-            receivedDataBrowser->setTextColor(Qt::darkGreen);
+            QString style1 ="color: #097969;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            receivedDataBrowser->setStyleSheet(style1);
 
             char delimiter1[2] = "*";
 //            char delimiter2[2] = "-";
 
 
-            receivedDataBrowser->setTextColor(Qt::darkGreen);
             QByteArray packet1;
 
             QByteArray Message = message.toUtf8();
@@ -498,7 +523,11 @@ private slots:
         // Connect the "send message" button to a slot
         connect(receiveButton, &QPushButton::clicked, [=]() {
 
-            receivedDataBrowser->setTextColor(Qt::darkRed);
+            QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            receivedDataBrowser->setStyleSheet(style);
 
 //            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
 //            QByteArray responseData;
@@ -600,7 +629,7 @@ private slots:
             "QPushButton:hover {"
             "    background-color: #3e8e41;"
             "}";
-        QFont font("Segoe UI");
+        QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
         sendDataLabel->setFont(font);
         receivedDataLabel->setFont(font);
 
@@ -625,6 +654,8 @@ private slots:
 
         receivedDataBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
 
+        font.setBold(true);
+        receivedDataBrowser->setFont(font);
 
 
 
@@ -724,7 +755,7 @@ private slots:
             "QPushButton:hover {"
             "    background-color: #3e8e41;"
             "}";
-        QFont font("Segoe UI");
+        QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
 
         readButton->setStyleSheet(styleSheet2);
         writeButton->setStyleSheet(styleSheet2);
@@ -734,6 +765,9 @@ private slots:
         dataLabel->setStyleSheet("font: bold 13px; color: #328930;");
         deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
         registerComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color:#899499; background-color: white;");
+        font.setBold(true);
+        dataTextBrowser->setFont(font);
+
         // Set the layout for the widget
         i2cWidget->setLayout(i2cLayout);
 
@@ -744,7 +778,11 @@ private slots:
             QString deviceAddress = deviceAddressLineEdit->text();
             // Code to read data from ADC and update dataTextBrowser with the result
 
-            dataTextBrowser->setTextColor(Qt::darkRed);
+            QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            dataTextBrowser->setStyleSheet(style);
 
 
 
@@ -791,7 +829,11 @@ private slots:
             char delimiter1[2] = "*";
 
 
-            dataTextBrowser->setTextColor(Qt::darkGreen);
+            QString style1 ="color: #097969;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            dataTextBrowser->setStyleSheet(style1);
             QByteArray packet1;
 
             QByteArray Message = message.toUtf8();
@@ -883,7 +925,7 @@ private slots:
             "QPushButton:hover {"
             "    background-color: #3e8e41;"
             "}";
-        QFont font("Segoe UI");
+        QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
 
         readButton->setStyleSheet(styleSheet2);
         writeButton->setStyleSheet(styleSheet2);
@@ -893,6 +935,8 @@ private slots:
         deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
         channelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color:#899499; background-color: white;");
 
+        font.setBold(true);
+        dataTextBrowser->setFont(font);
 
         // Set the layout for the widget
         adcWidget->setLayout(adcLayout);
@@ -905,7 +949,11 @@ private slots:
             char delimiter1[2] = "*";
 
 
-            dataTextBrowser->setTextColor(Qt::darkGreen);
+            QString style1 ="color: #097969;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            dataTextBrowser->setStyleSheet(style1);
             QByteArray packet1;
 
             QByteArray Message = message.toUtf8();
@@ -944,7 +992,11 @@ private slots:
             QString channel = channelComboBox->currentText();
             // Code to read data from ADC and update dataTextBrowser with the result
 
-            dataTextBrowser->setTextColor(Qt::darkRed);
+            QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            dataTextBrowser->setStyleSheet(style);
 
 
 
@@ -1052,7 +1104,7 @@ private slots:
                 "QPushButton:hover {"
                 "    background-color: #3e8e41;"
                 "}";
-            QFont font("Segoe UI");
+            QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
 
             readButton->setStyleSheet(styleSheet2);
             writeButton->setStyleSheet(styleSheet2);
@@ -1060,6 +1112,8 @@ private slots:
             voltageLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
             statusTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
             voltageLabel->setStyleSheet("font: bold 13px; color: #328930;");
+            font.setBold(true);
+            statusTextBrowser->setFont(font);
 
 
         // Connect the signals and slots
@@ -1069,7 +1123,11 @@ private slots:
                 QString deviceAddress = voltageLineEdit->text();
                 // Code to read data from ADC and update dataTextBrowser with the result
 
-                statusTextBrowser->setTextColor(Qt::darkRed);
+                QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
+
+    //            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+                statusTextBrowser->setStyleSheet(style);
 
 
 
@@ -1116,7 +1174,11 @@ private slots:
                 char delimiter1[2] = "*";
 
 
-                statusTextBrowser->setTextColor(Qt::darkGreen);
+                QString style1 ="color: #097969;"; // Adresse de couleur pour le vert (green)
+
+    //            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+                statusTextBrowser->setStyleSheet(style1);
                 QByteArray packet1;
 
                 QByteArray Message = message.toUtf8();
@@ -1279,7 +1341,7 @@ private slots:
             "QPushButton:hover {"
             "    background-color: #3e8e41;"
             "}";
-        QFont font("Segoe UI");
+        QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
 
         startButton->setStyleSheet(styleSheet2);
         stopButton->setStyleSheet(styleSheet2);
@@ -1287,6 +1349,8 @@ private slots:
         frequencyLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
         dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
         frequencyLabel->setStyleSheet("font: bold 13px; color: #328930;");
+        font.setBold(true);
+        dataTextBrowser->setFont(font);
 
 
 
@@ -1297,7 +1361,11 @@ private slots:
             char delimiter1[2] = "*";
 
 
-            dataTextBrowser->setTextColor(Qt::darkGreen);
+            QString style1 ="color: #097969;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            dataTextBrowser->setStyleSheet(style1);
             QByteArray packet1;
 
             QByteArray Message = message.toUtf8();
@@ -1344,7 +1412,11 @@ private slots:
             QString deviceAddress = frequencyLineEdit->text();
             // Code to read data from ADC and update dataTextBrowser with the result
 
-            dataTextBrowser->setTextColor(Qt::darkRed);
+            QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
+
+//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+
+            dataTextBrowser->setStyleSheet(style);
 
 
 
