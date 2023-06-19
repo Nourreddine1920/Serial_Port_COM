@@ -104,13 +104,13 @@ ConfigChoice::ConfigChoice(QWidget *parent) :
         QString styleSheet = "\
         QProgressDialog {\
         background-color: #D3D3D3;\
-        color: #000000;\
+        color: #454545;\
         font-family: Arial, sans-serif;\
         font-size: 15px;\
         }\
         \
         QProgressDialog QLabel {\
-        color: #023020;\
+        color: #454545;\
         font-family:Fantasy;\
         font-size: 15px;\
         }\
@@ -135,6 +135,11 @@ ConfigChoice::ConfigChoice(QWidget *parent) :
 
 
         QProgressDialog progressDialog("Waiting...", "", 0, 0 , this);
+        QFont font("Georgia", 10); // Police Arial avec une taille de 12 points
+
+        font.setBold(true);
+        progressDialog.setFont(font);
+
         progressDialog.setWindowTitle("Program Download");
         progressDialog.setWindowModality(Qt::WindowModal);
         progressDialog.setStyleSheet(styleSheet);

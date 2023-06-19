@@ -55,7 +55,7 @@ Uart::Uart(QWidget *parent)
     QString bestFont = fontFamilies.first();
 
     // Create a font object with the best font and size
-    QFont font(bestFont, 15);
+    QFont font(bestFont, 17);
 
     // Set the font and style sheet for the label
     ui->label_7->setFont(font);
