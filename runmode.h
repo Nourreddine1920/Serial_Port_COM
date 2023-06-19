@@ -477,7 +477,6 @@ private slots :
 //            char delimiter2[2] = "-";
 
 
-            receivedDataBrowser->setTextColor(Qt::darkGreen);
             QByteArray packet1;
 
             QByteArray Message = message.toUtf8();
@@ -531,40 +530,14 @@ private slots :
         connect(receiveButton, &QPushButton::clicked, [=]() {
 
             QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
-
-//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
-
             receivedDataBrowser->setStyleSheet(style);
-
-//            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
-//            QByteArray responseData;
-//            while (serialPort->waitForReadyRead(100)) {
-//            responseData.append(serialPort->readAll());
-
-
-//            }
-
-//                if (!responseData.isEmpty()) {
-//                    lastResponse = QString::fromUtf8(responseData);
-
-//                    qDebug() << "Received data:" << lastResponse;
-//                    textBrowser->append(lastResponse);
-//                } else {
-//                    qDebug() << "No data received from serial port";
-//                    textBrowser->append("No data received from serial port");
-//                }
-
             QByteArray buffer;
             const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
 
 
             QByteArray data = serialPort->readAll();
             buffer.append(data);
-//                QString message(data);
             qDebug() << "Received message:" << data;
-
-
-
             receivedDataBrowser->append(buffer);
         });
 
