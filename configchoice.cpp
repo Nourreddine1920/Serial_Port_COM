@@ -261,8 +261,8 @@ ConfigChoice::ConfigChoice(QWidget *parent) :
 
                 }
 
-//        dashboard->show();
-//        this->hide();
+        dashboard->show();
+        this->hide();
 
     });
 //    connect(sendButton, &QPushButton::clicked, [=]() {
