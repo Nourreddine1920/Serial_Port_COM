@@ -99,33 +99,6 @@ private slots :
 
                QLabel* baudRateLabel = new QLabel(tr("Baud Rate"), this);
                QComboBox* baudRateComboBox = new QComboBox(this);
-//               baudRateComboBox->setStyleSheet("QComboBox {"
-//                                       "background-color: white;"
-//                                       "border: 1px solid gray;"
-//                                       "border-radius: 3px;"
-//                                       "padding: 1px 18px 1px 3px;"
-//                                       "min-width: 6em;"
-//                                       "}"
-//                                       "QComboBox::drop-down {"
-//                                       "subcontrol-origin: padding;"
-//                                       "subcontrol-position: top right;"
-//                                       "width: 15px;"
-//                                       "border-left-width: 1px;"
-//                                       "border-left-color: gray;"
-//                                       "border-left-style: solid;"
-//                                       "border-top-right-radius: 3px;"
-//                                       "border-bottom-right-radius: 3px;"
-//                                       "}"
-//                                       "QComboBox::down-arrow {"
-//                                       "image: url(:/images/down_arrow.png);"
-//                                       "}"
-//                                       "QComboBox QAbstractItemView {"
-//                                       "background-color: white;"
-//                                       "border: 1px solid gray;"
-//                                       "selection-background-color: lightgray;"
-//                                       "}"
-//                                       );
-
                QList<qint32> baudRates = info.standardBaudRates(); // What baudrates does my computer support ?
                QList<QString> stringBaudRates;
                 for(int i = 0 ; i < baudRates.size() ; i++){
@@ -155,7 +128,6 @@ private slots :
                    baudRateComboBox->setCurrentIndex(indexBaudrate);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Baudrate; // declare stopBits outside of the lambda
 
                connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Baudrate](int indexBaudrate){
@@ -194,7 +166,6 @@ private slots :
 
 
                QString ParityConfig = settings.value("Parity", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int indexParity = parityComboBox->findText(ParityConfig);
@@ -202,7 +173,6 @@ private slots :
                    parityComboBox->setCurrentIndex(indexParity);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Parity; // declare stopBits outside of the lambda
 
                connect(parityComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Parity](int indexParity){
@@ -308,7 +278,6 @@ private slots :
                    DataBitsComboBox->setCurrentIndex(indexDataBits);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString DataBits; // declare stopBits outside of the lambda
 
                connect(DataBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DataBits](int indexDataBits){
@@ -325,8 +294,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                    qDebug() << "selected option:" << DataBits;
                    qDebug() << "DataBits:" << DataBitsConfig;
                });
@@ -443,8 +410,6 @@ private slots :
 
 
                // Add the QLabel to the QHBoxLayout and center it
-               //layout->addWidget(footerLabel, 0, Qt::AlignHCenter);
-
                // Set the size of the QWidget
                widget->setGeometry(100, 100, 400, 300);
 
@@ -497,7 +462,6 @@ private slots :
                 iconLabel->setFont(font);
 
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
 
@@ -539,7 +503,6 @@ private slots :
                    baudRateComboBox->setCurrentIndex(indexBaudrate);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Baudrate; // declare stopBits outside of the lambda
 
                connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Baudrate](int indexBaudrate){
@@ -547,7 +510,6 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Baudrate = baudRateComboBox->itemText(indexBaudrate);
-//                   settings.beginGroup("UART4Configs");
                    settings.beginGroup("UART4");
 
 
@@ -558,7 +520,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString BaudrateConfig = settings.value("Baudrate" , Baudrate).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                    qDebug() << "selected option:" << Baudrate;
                    qDebug() << "Baudrate:" << BaudrateConfig;
@@ -580,7 +541,6 @@ private slots :
 
 
                QString ParityConfig = settings.value("Parity", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int indexParity = parityComboBox->findText(ParityConfig);
@@ -588,7 +548,6 @@ private slots :
                    parityComboBox->setCurrentIndex(indexParity);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Parity; // declare stopBits outside of the lambda
 
                connect(parityComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Parity](int indexParity){
@@ -596,7 +555,6 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString Parity = parityComboBox->itemText(indexParity);
-                  // settings.beginGroup("UART4Configs");
                    settings.beginGroup("UART4");
 
 
@@ -607,7 +565,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString ParityConfig = settings.value("Parity" , Parity).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                    qDebug() << "selected option:" << Parity;
                    qDebug() << "Parity:" << ParityConfig;
@@ -690,7 +647,6 @@ private slots :
 
 
                QString DataBitsConfig = settings.value("DataBits", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int indexDataBits = DataBitsComboBox->findText(DataBitsConfig);
@@ -698,7 +654,6 @@ private slots :
                    DataBitsComboBox->setCurrentIndex(indexDataBits);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString DataBits; // declare stopBits outside of the lambda
 
                connect(DataBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DataBits](int indexDataBits){
@@ -706,7 +661,6 @@ private slots :
                    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
 
                    QString DataBits = DataBitsComboBox->itemText(indexDataBits);
-//                   settings.beginGroup("UART4Configs");
                    settings.beginGroup("UART4");
 
 
@@ -717,7 +671,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                    qDebug() << "selected option:" << DataBits;
                    qDebug() << "DataBits:" << DataBitsConfig;
@@ -855,7 +808,6 @@ private slots :
 
 
                // Add the QLabel to the QHBoxLayout and center it
-               //layout->addWidget(footerLabel, 0, Qt::AlignHCenter);
 
                // Set the size of the QWidget
                widget->setGeometry(100, 100, 400, 300);
@@ -909,7 +861,6 @@ private slots :
                 iconLabel->setFont(font);
 
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
 
@@ -943,7 +894,6 @@ private slots :
 
 
                QString BaudrateConfig = settings.value("Baudrate", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int indexBaudrate = baudRateComboBox->findText(BaudrateConfig);
@@ -951,7 +901,6 @@ private slots :
                    baudRateComboBox->setCurrentIndex(indexBaudrate);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Baudrate; // declare stopBits outside of the lambda
 
                connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Baudrate](int indexBaudrate){
@@ -969,7 +918,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString BaudrateConfig = settings.value("Baudrate" , Baudrate).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                    qDebug() << "selected option:" << Baudrate;
                    qDebug() << "Baudrate:" << BaudrateConfig;
@@ -991,7 +939,6 @@ private slots :
 
 
                QString ParityConfig = settings.value("Parity", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int indexParity = parityComboBox->findText(ParityConfig);
@@ -999,7 +946,6 @@ private slots :
                    parityComboBox->setCurrentIndex(indexParity);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Parity; // declare stopBits outside of the lambda
 
                connect(parityComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Parity](int indexParity){
@@ -1016,7 +962,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString ParityConfig = settings.value("Parity" , Parity).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                    qDebug() << "selected option:" << Parity;
                    qDebug() << "Parity:" << ParityConfig;
@@ -1097,7 +1042,6 @@ private slots :
 
 
                QString DataBitsConfig = settings.value("DataBits", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int indexDataBits = DataBitsComboBox->findText(DataBitsConfig);
@@ -1105,7 +1049,6 @@ private slots :
                    DataBitsComboBox->setCurrentIndex(indexDataBits);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString DataBits; // declare stopBits outside of the lambda
 
                connect(DataBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DataBits](int indexDataBits){
@@ -1122,8 +1065,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                    qDebug() << "selected option:" << DataBits;
                    qDebug() << "DataBits:" << DataBitsConfig;
                });
@@ -1225,48 +1166,17 @@ private slots :
 
 
                settings.beginGroup("UART5");
-
                settings.setValue("Date" , Date);
-
-
-
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
                settings.setValue("DataBits",  DataBits);
                settings.setValue("FlowControl",  FlowControl);
                settings.setValue("Parity",  Parity);
-
-
-
-
-//               settings.setValue("Date", Date);
-
-
                settings.endGroup();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                // Create the QLabel and set its text and minimum height
                QLabel* footerLabel = new QLabel();
                footerLabel->setText("Footer Text");
                footerLabel->setMinimumHeight(40);
-
-
-
-               // Add the QLabel to the QHBoxLayout and center it
-               //layout->addWidget(footerLabel, 0, Qt::AlignHCenter);
-
                // Set the size of the QWidget
                widget->setGeometry(100, 100, 400, 300);
 
@@ -1352,7 +1262,6 @@ private slots :
 
 
                QString BaudrateConfig = settings.value("Baudrate", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int indexBaudrate = baudRateComboBox->findText(BaudrateConfig);
@@ -1360,7 +1269,6 @@ private slots :
                    baudRateComboBox->setCurrentIndex(indexBaudrate);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Baudrate; // declare stopBits outside of the lambda
 
                connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Baudrate](int indexBaudrate){
@@ -1377,8 +1285,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString BaudrateConfig = settings.value("Baudrate" , Baudrate).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                    qDebug() << "selected option:" << Baudrate;
                    qDebug() << "Baudrate:" << BaudrateConfig;
                });
@@ -1391,7 +1297,6 @@ private slots :
                parityComboBox->addItems(QStringList() << "None" << "Odd" << "Even");
                parityLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                parityComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
                layout->addRow(parityLabel, parityComboBox);
 
 
@@ -1407,7 +1312,6 @@ private slots :
                    parityComboBox->setCurrentIndex(indexParity);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Parity; // declare stopBits outside of the lambda
 
                connect(parityComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Parity](int indexParity){
@@ -1424,8 +1328,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString ParityConfig = settings.value("Parity" , Parity).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                    qDebug() << "selected option:" << Parity;
                    qDebug() << "Parity:" << ParityConfig;
                });
@@ -1481,18 +1383,6 @@ private slots :
                    qDebug() << "selected option:" << stopBits;
                    qDebug() << "stopBits:" << stopBitsConfig;
                });
-
-
-
-
-
-
-
-
-
-
-
-
                // Create the data bits label and combo box
 
                QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
@@ -1505,7 +1395,6 @@ private slots :
 
 
                QString DataBitsConfig = settings.value("DataBits", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int indexDataBits = DataBitsComboBox->findText(DataBitsConfig);
@@ -1513,7 +1402,6 @@ private slots :
                    DataBitsComboBox->setCurrentIndex(indexDataBits);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString DataBits; // declare stopBits outside of the lambda
 
                connect(DataBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DataBits](int indexDataBits){
@@ -1522,32 +1410,22 @@ private slots :
 
                    QString DataBits = DataBitsComboBox->itemText(indexDataBits);
                    settings.beginGroup("USART1");
-
-
                    // Store the selected option in the settings file
                    settings.setValue("DataBits", DataBits);
                    settings.endGroup();
-
                    // Retrieve the stored value and print to the console
                    QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                    qDebug() << "selected option:" << DataBits;
                    qDebug() << "DataBits:" << DataBitsConfig;
                });
 
                // Create the flow control label and combo box
-
                layout->addRow(DataBitsLabel, DataBitsComboBox);
                QLabel* FlowControlLabel = new QLabel(tr("Flow Control"), this);
                QComboBox* FlowControlComboBox = new QComboBox(this);
                FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control " );
                FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-
-
-
                layout->addRow(FlowControlLabel, FlowControlComboBox);
                layout->setContentsMargins(0, 0, 0, 0);
                layout->setSpacing(30);
@@ -1572,9 +1450,6 @@ private slots :
 
                      QString FlowControl = FlowControlComboBox->itemText(indexFlowControl);
                      settings.beginGroup("USART1");
-
-
-
                      // Store the selected option in the settings file
                      settings.setValue("FlowControl", FlowControl);
                      settings.endGroup();
@@ -1618,44 +1493,21 @@ private slots :
                qDebug() << "Settings file path: " << settings.fileName();
                QDate date = QDate::currentDate();
                             QString dateString = date.toString();
-
-
                             qDebug() << "date :  " <<dateString;
-
                             QTime time = QTime::currentTime();
-
-
                             QString timestring = time.toString();
                             qDebug() << "time :  " <<timestring;
-
-
                             QString Date = dateString +", " + timestring;
 
 
                settings.beginGroup("USART1");
-
                settings.setValue("Baudrate",  Baudrate);
                settings.setValue("stopBits",  stopBits);
                settings.setValue("DataBits",  DataBits);
                settings.setValue("FlowControl",  FlowControl);
                settings.setValue("Parity",  Parity);
-
                settings.setValue("Date", Date);
-
-
                settings.endGroup();
-
-
-
-
-
-
-
-
-
-
-
-
 
                // Create the QLabel and set its text and minimum height
                QLabel* footerLabel = new QLabel();
@@ -1663,9 +1515,6 @@ private slots :
                footerLabel->setMinimumHeight(40);
 
 
-
-               // Add the QLabel to the QHBoxLayout and center it
-               //layout->addWidget(footerLabel, 0, Qt::AlignHCenter);
 
                // Set the size of the QWidget
                widget->setGeometry(100, 100, 400, 300);
@@ -1719,8 +1568,6 @@ private slots :
                 iconLabel->setFont(font);
 
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-
                 titleLabel->setAlignment(Qt::AlignCenter);
 
 
@@ -1753,7 +1600,6 @@ private slots :
 
 
                QString BaudrateConfig = settings.value("Baudrate", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int indexBaudrate = baudRateComboBox->findText(BaudrateConfig);
@@ -1761,7 +1607,6 @@ private slots :
                    baudRateComboBox->setCurrentIndex(indexBaudrate);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Baudrate; // declare stopBits outside of the lambda
 
                connect(baudRateComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Baudrate](int indexBaudrate){
@@ -1800,7 +1645,6 @@ private slots :
 
 
                QString ParityConfig = settings.value("Parity", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int indexParity = parityComboBox->findText(ParityConfig);
@@ -1808,7 +1652,6 @@ private slots :
                    parityComboBox->setCurrentIndex(indexParity);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Parity; // declare stopBits outside of the lambda
 
                connect(parityComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Parity](int indexParity){
@@ -1843,10 +1686,8 @@ private slots :
                stopBitsComboBox->addItem("1 Bits");
                stopBitsComboBox->addItem("1,5 Bits");
                stopBitsComboBox->addItem("2 Bits");
-
                stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
                layout->addRow(stopBitsLabel, stopBitsComboBox);
 
 
@@ -1884,17 +1725,6 @@ private slots :
                    qDebug() << "stopBits:" << stopBitsConfig;
                });
 
-
-
-
-
-
-
-
-
-
-
-
                // Create the data bits label and combo box
 
                QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
@@ -1907,7 +1737,6 @@ private slots :
 
 
                QString DataBitsConfig = settings.value("DataBits", "").toString();
-//                QString stopBitsConfig;
                // Set the selected option in the combo box
 
                int indexDataBits = DataBitsComboBox->findText(DataBitsConfig);
@@ -1915,7 +1744,6 @@ private slots :
                    DataBitsComboBox->setCurrentIndex(indexDataBits);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString DataBits; // declare stopBits outside of the lambda
 
                connect(DataBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DataBits](int indexDataBits){
@@ -1932,8 +1760,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                    qDebug() << "selected option:" << DataBits;
                    qDebug() << "DataBits:" << DataBitsConfig;
                });
@@ -2032,7 +1858,6 @@ private slots :
 
                             QString Date = dateString +", " + timestring;
 
-
                             settings.beginGroup("USART2");
 
                settings.setValue("Baudrate",  Baudrate);
@@ -2046,39 +1871,14 @@ private slots :
 
                settings.endGroup();
 
-
-
-
-
-
-
-
-
-
-
-
-
                // Create the QLabel and set its text and minimum height
                QLabel* footerLabel = new QLabel();
                footerLabel->setText("Footer Text");
                footerLabel->setMinimumHeight(40);
 
 
-
-               // Add the QLabel to the QHBoxLayout and center it
-               //layout->addWidget(footerLabel, 0, Qt::AlignHCenter);
-
                // Set the size of the QWidget
                widget->setGeometry(100, 100, 400, 300);
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -2088,8 +1888,6 @@ private slots :
 
                 // Create Layout form for SPI
                 QFormLayout* layout = new QFormLayout(this);
-
-
 
                 // Create a QLabel for "SPI configurations" and center it horizontally
                 QLabel* titleLabel = new QLabel("SPI configurations", this);
@@ -2160,7 +1958,6 @@ private slots :
                    ModeComboBox->setCurrentIndex(indexMode);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Mode; // declare stopBits outside of the lambda
 
                connect(ModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Mode](int indexMode){
@@ -2177,7 +1974,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString ModeConfig = settings.value("Mode" , Mode).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                    qDebug() << "selected option:" << Mode;
                    qDebug() << "Mode:" << ModeConfig;
@@ -2203,7 +1999,6 @@ private slots :
                    NSSComboBox->setCurrentIndex(indexNSS);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString NSS; // declare stopBits outside of the lambda
 
                connect(NSSComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&NSS](int indexNSS){
@@ -2220,7 +2015,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString NSSConfig = settings.value("NSS" , NSS).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                    qDebug() << "selected option:" << NSS;
                    qDebug() << "NSS:" << NSSConfig;
@@ -2249,7 +2043,6 @@ private slots :
                    FrameFormatComboBox->setCurrentIndex(indexFrameformat);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Frameformat; // declare stopBits outside of the lambda
 
                connect(FrameFormatComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Frameformat](int indexFrameformat){
@@ -2266,14 +2059,9 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString FrameformatConfig = settings.value("Frameformat" , Frameformat).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                    qDebug() << "selected option:" << Frameformat;
                    qDebug() << "Frameformat:" << FrameformatConfig;
                });
-
-
-
 
                // ----------------------Create Data size----------------------//
 
@@ -2337,7 +2125,6 @@ private slots :
                    FirstBitComboBox->setCurrentIndex(indexFirstbit);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Firstbit; // declare stopBits outside of the lambda
 
                connect(FirstBitComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Firstbit](int indexFirstbit){
@@ -2354,7 +2141,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString FirstbitConfig = settings.value("Firstbit" , Firstbit).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                    qDebug() << "selected option:" << Firstbit;
                    qDebug() << "Firstbit:" << FirstbitConfig;
@@ -2454,8 +2240,6 @@ private slots :
                 iconLabel->setFont(font);
 
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-
                 titleLabel->setAlignment(Qt::AlignCenter);
 
 
@@ -2488,7 +2272,6 @@ private slots :
                    ModeComboBox->setCurrentIndex(indexMode);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Mode; // declare stopBits outside of the lambda
 
                connect(ModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Mode](int indexMode){
@@ -2532,7 +2315,6 @@ private slots :
                    NSSComboBox->setCurrentIndex(indexNSS);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString NSS; // declare stopBits outside of the lambda
 
                connect(NSSComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&NSS](int indexNSS){
@@ -2579,7 +2361,6 @@ private slots :
                    FrameFormatComboBox->setCurrentIndex(indexFrameformat);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Frameformat; // declare stopBits outside of the lambda
 
                connect(FrameFormatComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Frameformat](int indexFrameformat){
@@ -2666,7 +2447,6 @@ private slots :
                    FirstBitComboBox->setCurrentIndex(indexFirstbit);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Firstbit; // declare stopBits outside of the lambda
 
                connect(FirstBitComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Firstbit](int indexFirstbit){
@@ -2785,7 +2565,6 @@ private slots :
                 iconLabel->setFont(font);
 
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
 
@@ -2819,7 +2598,6 @@ private slots :
                    ModeComboBox->setCurrentIndex(indexMode);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Mode; // declare stopBits outside of the lambda
 
                connect(ModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Mode](int indexMode){
@@ -2862,7 +2640,6 @@ private slots :
                    NSSComboBox->setCurrentIndex(indexNSS);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString NSS; // declare stopBits outside of the lambda
 
                connect(NSSComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&NSS](int indexNSS){
@@ -2879,7 +2656,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString NSSConfig = settings.value("NSS" , NSS).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                    qDebug() << "selected option:" << NSS;
                    qDebug() << "NSS:" << NSSConfig;
@@ -2908,7 +2684,6 @@ private slots :
                    FrameFormatComboBox->setCurrentIndex(indexFrameformat);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Frameformat; // declare stopBits outside of the lambda
 
                connect(FrameFormatComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Frameformat](int indexFrameformat){
@@ -2925,8 +2700,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString FrameformatConfig = settings.value("Frameformat" , Frameformat).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                    qDebug() << "selected option:" << Frameformat;
                    qDebug() << "Frameformat:" << FrameformatConfig;
                });
@@ -2996,7 +2769,6 @@ private slots :
                    FirstBitComboBox->setCurrentIndex(indexFirstbit);
 
                // Connect the combo box to the slot
-    //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                QString Firstbit; // declare stopBits outside of the lambda
 
                connect(FirstBitComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&Firstbit](int indexFirstbit){
@@ -3013,8 +2785,6 @@ private slots :
 
                    // Retrieve the stored value and print to the console
                    QString FirstbitConfig = settings.value("Firstbit" , Firstbit).toString();
-//                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                    qDebug() << "selected option:" << Firstbit;
                    qDebug() << "Firstbit:" << FirstbitConfig;
                });
@@ -3115,7 +2885,6 @@ private slots :
                     iconLabel->setFont(font);
 
                     titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-    //                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                     titleLabel->setAlignment(Qt::AlignCenter);
 
@@ -3143,7 +2912,6 @@ private slots :
 
 
                    QString AdressLenghtConfig = settings.value("AdressLenght", "").toString();
-    //                QString stopBitsConfig;
                    // Set the selected option in the combo box
 
                    int indexAdressLenght= AddressingModeBox->findText(AdressLenghtConfig);
@@ -3151,7 +2919,6 @@ private slots :
                        AddressingModeBox->setCurrentIndex(indexAdressLenght);
 
                    // Connect the combo box to the slot
-        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                    QString AddressingMODE; // declare stopBits outside of the lambda
 
                    connect(AddressingModeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressingMODE](int indexAdressLenght){
@@ -3168,8 +2935,6 @@ private slots :
 
                        // Retrieve the stored value and print to the console
                        QString AdressLenghtConfig  = settings.value("AdressLenght" , AddressingMODE).toString();
-    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                        qDebug() << "selected option:" << AddressingMODE;
                        qDebug() << "AdressLenght:" << AdressLenghtConfig;
                    });
@@ -3190,7 +2955,6 @@ private slots :
 
 
                    QString DualAddressModeConfig = settings.value("DualAddressMode", "").toString();
-    //                QString stopBitsConfig;
                    // Set the selected option in the combo box
 
                    int indexDualAddressMode = DualAddressModeComboBox->findText(DualAddressModeConfig);
@@ -3198,7 +2962,6 @@ private slots :
                        DualAddressModeComboBox->setCurrentIndex(indexDualAddressMode);
 
                    // Connect the combo box to the slot
-        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                    QString DualAddressMode; // declare stopBits outside of the lambda
 
                    connect(DualAddressModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DualAddressMode](int indexDualAddressMode){
@@ -3215,8 +2978,6 @@ private slots :
 
                        // Retrieve the stored value and print to the console
                        QString DualAddressModeConfig = settings.value("DualAddressMode" , DualAddressMode).toString();
-    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                        qDebug() << "selected option:" << DualAddressMode;
                        qDebug() << "Speed:" << DualAddressModeConfig;
                    });
@@ -3230,12 +2991,6 @@ private slots :
                    QLabel* AddressMasksLabel = new QLabel(tr("AddressMasks"), this);
                    QComboBox* AddressMasksComboBox = new QComboBox(this);
                    AddressMasksComboBox->addItems(QStringList() << "NO Mask" << "1 " << "2" <<"3"<<"4"<<"5"<<"6"<<"7");
-
-
-
-
-
-
                    AddressMasksLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                    AddressMasksComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
@@ -3247,7 +3002,6 @@ private slots :
 
 
                    QString AddressMasksConfig = settings.value("AddressMasks", "").toString();
-    //                QString stopBitsConfig;
                    // Set the selected option in the combo box
 
                    int indexAddressMasks = AddressMasksComboBox->findText(AddressMasksConfig);
@@ -3255,7 +3009,6 @@ private slots :
                        AddressMasksComboBox->setCurrentIndex(indexAddressMasks);
 
                    // Connect the combo box to the slot
-        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                    QString AddressMasks; // declare stopBits outside of the lambda
 
                    connect(AddressMasksComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressMasks](int indexAddressMasks){
@@ -3272,8 +3025,6 @@ private slots :
 
                        // Retrieve the stored value and print to the console
                        QString AddressMasksConfig = settings.value("AddressMasks" , AddressMasks).toString();
-    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                        qDebug() << "selected option:" << AddressMasks;
                        qDebug() << "AddressMasks:" << AddressMasksConfig;
                    });
@@ -3300,15 +3051,12 @@ private slots :
 
 
                    QString GeneralCallModeConfig = settings.value("GeneralCallMode", "").toString();
-    //                QString stopBitsConfig;
                    // Set the selected option in the combo box
-
                    int indexGeneralCallMode = GeneralCallModeComboBox->findText(GeneralCallModeConfig);
                    if (indexGeneralCallMode != -1)
                        GeneralCallModeComboBox->setCurrentIndex(indexGeneralCallMode);
 
                    // Connect the combo box to the slot
-        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                    QString GeneralCallMode; // declare stopBits outside of the lambda
 
                    connect(GeneralCallModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&GeneralCallMode](int indexGeneralCallMode){
@@ -3336,24 +3084,15 @@ private slots :
                                 QLabel* NoStretchModeLabel = new QLabel(tr("NoStretchMode"), this);
                                 QComboBox* NoStretchModeComboBox = new QComboBox(this);
                                 NoStretchModeComboBox->addItems(QStringList() << "Enable" << "Disable " );
-
-
-
-
-
-
                                 NoStretchModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
                                 NoStretchModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                                 layout->addRow(NoStretchModeLabel, NoStretchModeComboBox);
 
-
-
                                 // ----------------------- Save NoStretchMode configs into a I2CConfig.txt-----------------------------------//
 
 
                                 QString NoStretchModeConfig = settings.value("AddressMasks", "").toString();
-                 //                QString stopBitsConfig;
                                 // Set the selected option in the combo box
 
                                 int indexNoStretchMode= NoStretchModeComboBox->findText(NoStretchModeConfig);
@@ -3361,7 +3100,6 @@ private slots :
                                     NoStretchModeComboBox->setCurrentIndex(indexNoStretchMode);
 
                                 // Connect the combo box to the slot
-                     //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                                 QString NoStretchMode; // declare stopBits outside of the lambda
 
                                 connect(NoStretchModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&NoStretchMode](int indexNoStretchMode){
@@ -3378,8 +3116,6 @@ private slots :
 
                                     // Retrieve the stored value and print to the console
                                     QString NoStretchModeConfig = settings.value("NoStretchMode" , NoStretchMode).toString();
-                 //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                                     qDebug() << "selected option:" << NoStretchMode;
                                     qDebug() << "NoStretchMode:" << NoStretchModeConfig;
                                 });
@@ -3494,7 +3230,6 @@ private slots :
                     iconLabel->setFont(font);
 
                     titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-    //                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                     titleLabel->setAlignment(Qt::AlignCenter);
 
@@ -3523,7 +3258,6 @@ private slots :
 
 
                    QString AdressLenghtConfig = settings.value("AdressLenght", "").toString();
-    //                QString stopBitsConfig;
                    // Set the selected option in the combo box
 
                    int indexAdressLenght= AddressingModeBox->findText(AdressLenghtConfig);
@@ -3531,7 +3265,6 @@ private slots :
                        AddressingModeBox->setCurrentIndex(indexAdressLenght);
 
                    // Connect the combo box to the slot
-        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                    QString AddressingMODE; // declare stopBits outside of the lambda
 
                    connect(AddressingModeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressingMODE](int indexAdressLenght){
@@ -3548,7 +3281,6 @@ private slots :
 
                        // Retrieve the stored value and print to the console
                        QString AdressLenghtConfig  = settings.value("AdressLenght" , AddressingMODE).toString();
-    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                        qDebug() << "selected option:" << AddressingMODE;
                        qDebug() << "AdressLenght:" << AdressLenghtConfig;
@@ -3570,7 +3302,6 @@ private slots :
 
 
                    QString DualAddressModeConfig = settings.value("DualAddressMode", "").toString();
-    //                QString stopBitsConfig;
                    // Set the selected option in the combo box
 
                    int indexDualAddressMode = DualAddressModeComboBox->findText(DualAddressModeConfig);
@@ -3578,7 +3309,6 @@ private slots :
                        DualAddressModeComboBox->setCurrentIndex(indexDualAddressMode);
 
                    // Connect the combo box to the slot
-        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                    QString DualAddressMode; // declare stopBits outside of the lambda
 
                    connect(DualAddressModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DualAddressMode](int indexDualAddressMode){
@@ -3595,8 +3325,6 @@ private slots :
 
                        // Retrieve the stored value and print to the console
                        QString DualAddressModeConfig = settings.value("DualAddressMode" , DualAddressMode).toString();
-    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                        qDebug() << "selected option:" << DualAddressMode;
                        qDebug() << "DualAddressMode:" << DualAddressModeConfig;
                    });
@@ -3627,7 +3355,6 @@ private slots :
 
 
                    QString AddressMasksConfig = settings.value("AddressMasks", "").toString();
-    //                QString stopBitsConfig;
                    // Set the selected option in the combo box
 
                    int indexAddressMasks = AddressMasksComboBox->findText(AddressMasksConfig);
@@ -3635,7 +3362,6 @@ private slots :
                        AddressMasksComboBox->setCurrentIndex(indexAddressMasks);
 
                    // Connect the combo box to the slot
-        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                    QString AddressMasks; // declare stopBits outside of the lambda
 
                    connect(AddressMasksComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressMasks](int indexAddressMasks){
@@ -3652,8 +3378,6 @@ private slots :
 
                        // Retrieve the stored value and print to the console
                        QString AddressMasksConfig = settings.value("AddressMasks" , AddressMasks).toString();
-    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                        qDebug() << "selected option:" << AddressMasks;
                        qDebug() << "AddressMasks:" << AddressMasksConfig;
                    });
@@ -3675,7 +3399,6 @@ private slots :
 
 
                    QString GeneralCallModeConfig = settings.value("GeneralCallMode", "").toString();
-    //                QString stopBitsConfig;
                    // Set the selected option in the combo box
 
                    int indexGeneralCallMode = GeneralCallModeComboBox->findText(GeneralCallModeConfig);
@@ -3683,7 +3406,6 @@ private slots :
                        GeneralCallModeComboBox->setCurrentIndex(indexGeneralCallMode);
 
                    // Connect the combo box to the slot
-        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                    QString GeneralCallMode; // declare stopBits outside of the lambda
 
                    connect(GeneralCallModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&GeneralCallMode](int indexGeneralCallMode){
@@ -3700,8 +3422,6 @@ private slots :
 
                        // Retrieve the stored value and print to the console
                        QString GeneralCallModeConfig = settings.value("GeneralCallMode" , GeneralCallMode).toString();
-    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                        qDebug() << "selected option:" << GeneralCallMode;
                        qDebug() << "GeneralCallMode:" << GeneralCallModeConfig;
                    });
@@ -3728,7 +3448,6 @@ private slots :
 
 
                                 QString NoStretchModeConfig = settings.value("NoStretchMode", "").toString();
-                 //                QString stopBitsConfig;
                                 // Set the selected option in the combo box
 
                                 int indexNoStretchMode= NoStretchModeComboBox->findText(AddressMasksConfig);
@@ -3736,7 +3455,6 @@ private slots :
                                     NoStretchModeComboBox->setCurrentIndex(indexNoStretchMode);
 
                                 // Connect the combo box to the slot
-                     //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                                 QString NoStretchMode; // declare stopBits outside of the lambda
 
                                 connect(NoStretchModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&NoStretchMode](int indexNoStretchMode){
@@ -3753,8 +3471,6 @@ private slots :
 
                                     // Retrieve the stored value and print to the console
                                     QString NoStretchModeConfig = settings.value("NoStretchMode" , NoStretchMode).toString();
-                 //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
-
                                     qDebug() << "selected option:" << NoStretchMode;
                                     qDebug() << "NoStretchMode:" << NoStretchModeConfig;
                                 });
@@ -3883,7 +3599,6 @@ private slots :
                        iconLabel->setFont(font);
 
                        titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-       //                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                        titleLabel->setAlignment(Qt::AlignCenter);
 
@@ -3919,7 +3634,6 @@ private slots :
                           AddressingModeBox->setCurrentIndex(indexAdressLenght);
 
                       // Connect the combo box to the slot
-           //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                       QString AddressingMODE; // declare stopBits outside of the lambda
 
                       connect(AddressingModeBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressingMODE](int indexAdressLenght){
@@ -3929,14 +3643,12 @@ private slots :
                           QString AddressingMODE = AddressingModeBox->itemText(indexAdressLenght);
                           settings.beginGroup("I2C2");
 
-
                           // Store the selected option in the settings file
                           settings.setValue("AdressLenght", AddressingMODE);
                           settings.endGroup();
 
                           // Retrieve the stored value and print to the console
                           QString AdressLenghtConfig  = settings.value("AdressLenght" , AddressingMODE).toString();
-       //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                           qDebug() << "selected option:" << AddressingMODE;
                           qDebug() << "AdressLenght:" << AdressLenghtConfig;
@@ -3958,7 +3670,6 @@ private slots :
 
 
                       QString DualAddressModeConfig = settings.value("DualAddressMode", "").toString();
-       //                QString stopBitsConfig;
                       // Set the selected option in the combo box
 
                       int indexDualAddressMode = DualAddressModeComboBox->findText(DualAddressModeConfig);
@@ -3966,7 +3677,6 @@ private slots :
                           DualAddressModeComboBox->setCurrentIndex(indexDualAddressMode);
 
                       // Connect the combo box to the slot
-           //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                       QString DualAddressMode; // declare stopBits outside of the lambda
 
                       connect(DualAddressModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&DualAddressMode](int indexDualAddressMode){
@@ -3983,7 +3693,6 @@ private slots :
 
                           // Retrieve the stored value and print to the console
                           QString DualAddressModeConfig = settings.value("DualAddressMode" , DualAddressMode).toString();
-       //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                           qDebug() << "selected option:" << DualAddressMode;
                           qDebug() << "DualAddressMode:" << DualAddressModeConfig;
@@ -4015,7 +3724,6 @@ private slots :
 
 
                       QString AddressMasksConfig = settings.value("AddressMasks", "").toString();
-       //                QString stopBitsConfig;
                       // Set the selected option in the combo box
 
                       int indexAddressMasks = AddressMasksComboBox->findText(AddressMasksConfig);
@@ -4023,7 +3731,6 @@ private slots :
                           AddressMasksComboBox->setCurrentIndex(indexAddressMasks);
 
                       // Connect the combo box to the slot
-           //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                       QString AddressMasks; // declare stopBits outside of the lambda
 
                       connect(AddressMasksComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&AddressMasks](int indexAddressMasks){
@@ -4040,7 +3747,6 @@ private slots :
 
                           // Retrieve the stored value and print to the console
                           QString AddressMasksConfig = settings.value("AddressMasks" , AddressMasks).toString();
-       //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                           qDebug() << "selected option:" << AddressMasks;
                           qDebug() << "AddressMasks:" << AddressMasksConfig;
@@ -4063,7 +3769,6 @@ private slots :
 
 
                       QString GeneralCallModeConfig = settings.value("GeneralCallMode", "").toString();
-       //                QString stopBitsConfig;
                       // Set the selected option in the combo box
 
                       int indexGeneralCallMode = GeneralCallModeComboBox->findText(GeneralCallModeConfig);
@@ -4071,7 +3776,6 @@ private slots :
                           GeneralCallModeComboBox->setCurrentIndex(indexGeneralCallMode);
 
                       // Connect the combo box to the slot
-           //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                       QString GeneralCallMode; // declare stopBits outside of the lambda
 
                       connect(GeneralCallModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&GeneralCallMode](int indexGeneralCallMode){
@@ -4088,7 +3792,6 @@ private slots :
 
                           // Retrieve the stored value and print to the console
                           QString GeneralCallModeConfig = settings.value("GeneralCallMode" , GeneralCallMode).toString();
-       //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                           qDebug() << "selected option:" << GeneralCallMode;
                           qDebug() << "GeneralCallMode:" << GeneralCallModeConfig;
@@ -4116,7 +3819,6 @@ private slots :
 
 
                                    QString NoStretchModeConfig = settings.value("NoStretchMode", "").toString();
-                    //                QString stopBitsConfig;
                                    // Set the selected option in the combo box
 
                                    int indexNoStretchMode= NoStretchModeComboBox->findText(AddressMasksConfig);
@@ -4124,7 +3826,6 @@ private slots :
                                        NoStretchModeComboBox->setCurrentIndex(indexNoStretchMode);
 
                                    // Connect the combo box to the slot
-                        //           connect(stopBitsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onStopBitsComboBoxChanged);
                                    QString NoStretchMode; // declare stopBits outside of the lambda
 
                                    connect(NoStretchModeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=,&NoStretchMode](int indexNoStretchMode){
@@ -4141,7 +3842,6 @@ private slots :
 
                                        // Retrieve the stored value and print to the console
                                        QString NoStretchModeConfig = settings.value("NoStretchMode" , NoStretchMode).toString();
-                    //                   qDebug() << "Retrieved stopBits:" << stopBitsConfig;
 
                                        qDebug() << "selected option:" << NoStretchMode;
                                        qDebug() << "NoStretchMode:" << NoStretchModeConfig;
@@ -4265,7 +3965,6 @@ private slots :
                 iconLabel->setFont(font);
 
                 titleLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
-//                iconLabel->setStyleSheet("font-weight: bold; color: white; background-color: #328930; ");
 
                 titleLabel->setAlignment(Qt::AlignCenter);
 
