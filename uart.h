@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include<QtSerialPort/QSerialPortInfo>
 #include<QtSerialPort/QSerialPort>
+#include <QLabel>
 
 
 QT_BEGIN_NAMESPACE
@@ -18,6 +19,10 @@ public:
     Uart(QWidget *parent = nullptr);
     QSerialPort *getSerialPort() const;
      static Uart* getInstance();
+
+     void openLinkedInUrl();
+     void openFacebookUrl();
+     void openInstagramUrl();
 
 
     ~Uart();
@@ -39,6 +44,8 @@ private slots:
 
 
 private:
+    QLabel *statusLabel;
+
     Ui::Uart *ui;
     QSerialPortInfo info;
     QSerialPort *serialPort;

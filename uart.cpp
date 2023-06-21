@@ -6,6 +6,8 @@
 #include <QFontDatabase>
 #include <QSettings>
 #include "configchoice.h"
+#include <QStatusBar>
+#include <QDesktopServices>
 
 
 
@@ -14,6 +16,89 @@ Uart::Uart(QWidget *parent)
     , ui(new Ui::Uart)
 {
     ui->setupUi(this);
+
+    // Create a status bar
+    QStatusBar *statusBar = new QStatusBar(this);
+    setStatusBar(statusBar);
+    // Create QLabel widgets for the logos
+    QLabel *linkedinLabel = new QLabel(this);
+    QLabel *instagramLabel = new QLabel(this);
+    QLabel *facebookLabel = new QLabel(this);
+
+    // Set the pixmap images for each label
+    QPixmap linkedinPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/linkedin-removebg-preview.png"); // Replace with the actual path to the LinkedIn logo image
+    QPixmap instagramPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/insta.png"); // Replace with the actual path to the Instagram logo image
+    QPixmap facebookPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/facebook-removebg-preview.png"); // Replace with the actual path to the Facebook logo image
+
+    linkedinLabel->setPixmap(linkedinPixmap.scaled(21, 21, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    instagramLabel->setPixmap(instagramPixmap.scaled(19, 19, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    facebookLabel->setPixmap(facebookPixmap.scaled(19, 19, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+//    linkedinLabel->setStyleSheet("background-color: #D3D3D3	;");
+//    instagramLabel->setStyleSheet("background-color: #D3D3D3	;");
+//    facebookLabel->setStyleSheet("background-color: #D3D3D3	;");
+
+    // Set the cursor shape to indicate clickable labels
+    linkedinLabel->setCursor(Qt::PointingHandCursor);
+    instagramLabel->setCursor(Qt::PointingHandCursor);
+    facebookLabel->setCursor(Qt::PointingHandCursor);
+
+    // Connect the linkActivated signal of the labels to the corresponding slots
+//    connect(linkedinLabel, &QLabel::linkActivated, this, &Uart::openLinkedInUrl);
+//    connect(instagramLabel, &QLabel::linkActivated, this, &Uart::openInstagramUrl);
+//    connect(facebookLabel, &QLabel::linkActivated, this, &Uart::openFacebookUrl);
+
+    // Enable text interaction and set open external links property for the labels
+    linkedinLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    linkedinLabel->setOpenExternalLinks(true);
+    instagramLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    instagramLabel->setOpenExternalLinks(true);
+    facebookLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    facebookLabel->setOpenExternalLinks(true);
+
+
+//    // Set the labels' text with the URLs
+//    linkedinLabel->setText("<a href=\"https://www.linkedin.com/company\"></a>");
+//    instagramLabel->setText("<a href=\"https://www.instagram.com/company\"></a>");
+//    facebookLabel->setText("<a href=\"https://www.facebook.com/company\"></a>");
+
+
+    // Add the QLabel widgets to the status bar
+    statusBar->addPermanentWidget(linkedinLabel);
+    statusBar->addPermanentWidget(instagramLabel);
+    statusBar->addPermanentWidget(facebookLabel);
+
+    // Create a QLabel for the footer text
+    QLabel *footerLabel = new QLabel("© ACTIA Engineering Services", this);
+    footerLabel->setStyleSheet("background-color: #D3D3D3	; color: #36454F;");
+    footerLabel->setAlignment(Qt::AlignCenter);
+
+    // Set the gray background color
+    QPalette palette = footerLabel->palette();
+    QPalette palette1 = linkedinLabel->palette();
+    QPalette palette2 = instagramLabel->palette();
+    QPalette palette3 = facebookLabel->palette();
+
+//    palette.setColor(QPalette::Background, QColor(200, 200, 200)); // Adjust the color as desired
+    footerLabel->setAutoFillBackground(true);
+    linkedinLabel->setAutoFillBackground(true);
+    instagramLabel->setAutoFillBackground(true);
+    facebookLabel->setAutoFillBackground(true);
+
+    footerLabel->setPalette(palette);
+    linkedinLabel->setPalette(palette1);
+    instagramLabel->setPalette(palette2);
+    facebookLabel->setPalette(palette3);
+
+    // Add the QLabel to the status bar
+    statusBar->addWidget(footerLabel, 1);
+
+    // Set the status bar properties
+    statusBar->setSizeGripEnabled(false); // Optional: Disable the size grip handle on the status bar
+    statusBar->setStyleSheet("background-color: #D3D3D3	;");
+
+    statusBar->setStyleSheet("QStatusBar { background-color: #D3D3D3; }");
+    statusBar->setStyleSheet("QStatusBar::item { border: none; }"); // Remove borders around the widgets
+    statusBar->setContentsMargins(0, 0, 10, 0); // Add some right margin to the widgets
 
     // Disable maximizing
     setFixedSize(width(), height());
@@ -708,6 +793,21 @@ void Uart::on_btnSendMsg_clicked()
         ui->textBrowser->append(packet2);
 
 
+
+}
+
+void Uart::openLinkedInUrl()
+{
+    QDesktopServices::openUrl(QUrl("https://www.linkedin.com/company/actia-engineering-services/mycompany/"));
+}
+void Uart::openFacebookUrl()
+{
+    QDesktopServices::openUrl(QUrl("https://mail.google.com/mail/u/0/#inbox"));
+
+}
+void Uart::openInstagramUrl()
+{
+    QDesktopServices::openUrl(QUrl("https://www.overleaf.com/project/646c5828c06d704d40e977c0"));
 
 }
 

@@ -8,6 +8,7 @@
 #include"uart.h"
 #include "runmode.h"
 #include<QProcess>
+#include <QStatusBar>
 
 //QStringList ConfigMode::selectedUartOptionsStatic; // initialisation de la variable statique
 //QStringList ConfigMode::selectedI2COptionsStatic; // initialisation de la variable statique
@@ -23,7 +24,26 @@ ConfigMode::ConfigMode(QWidget *parent) :
     ui(new Ui::ConfigMode)
 {
     ui->setupUi(this);
+    // Create a status bar
+    QStatusBar *statusBar = new QStatusBar(this);
+    setStatusBar(statusBar);
 
+    // Create a QLabel for the footer text
+    QLabel *footerLabel = new QLabel("© ACTIA Engineering Services", this);
+    footerLabel->setStyleSheet("background-color: #D3D3D3	; color: #36454F	;");
+    footerLabel->setAlignment(Qt::AlignCenter);
+
+    // Set the gray background color
+    QPalette palette = footerLabel->palette();
+//    palette.setColor(QPalette::Background, QColor(200, 200, 200)); // Adjust the color as desired
+    footerLabel->setAutoFillBackground(true);
+    footerLabel->setPalette(palette);
+
+    // Add the QLabel to the status bar
+    statusBar->addWidget(footerLabel, 1);
+
+    // Set the status bar properties
+    statusBar->setSizeGripEnabled(false); // Optional: Disable the size grip handle on the status bar
     QWidget::setWindowTitle("ConfigMode");
 
     // Create a QToolButton for the "Connect" button

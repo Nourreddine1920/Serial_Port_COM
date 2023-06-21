@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>636</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,9 +28,9 @@
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>40</y>
-      <width>751</width>
+      <x>0</x>
+      <y>10</y>
+      <width>801</width>
       <height>20</height>
      </rect>
     </property>
@@ -42,9 +42,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>80</y>
-      <width>751</width>
-      <height>471</height>
+      <y>50</y>
+      <width>761</width>
+      <height>541</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -225,17 +225,6 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
