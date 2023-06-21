@@ -74,10 +74,18 @@ DISTFILES += \
     debug1.png \
     debugging.png \
     download.png \
+    facebook-removebg-preview.png \
+    facebook.png \
     file.txt \
     images/logo-actia.png \
     images/logo-actia.png \
     input.png \
+    insta.png \
+    instagram-removebg-preview (1).png \
+    instagram-removebg-preview (1).png \
+    instagram.jpg \
+    linkedin-removebg-preview.png \
+    linkedin.png \
     loading.png \
     output.png \
     platform.png \
