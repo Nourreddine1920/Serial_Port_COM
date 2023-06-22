@@ -15,6 +15,7 @@ public:
     explicit testApplication(QWidget *parent = nullptr);
     ~testApplication();
 
+public slots:
 private:
     Ui::testApplication *ui;
 };

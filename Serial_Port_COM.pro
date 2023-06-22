@@ -20,6 +20,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     runmode.cpp \
+    sequenceapplication.cpp \
     starting_screen.cpp \
     testapplication.cpp \
     uart.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
     directrun.h \
     mainwindow.h \
     runmode.h \
+    sequenceapplication.h \
     starting_screen.h \
     testapplication.h \
     uart.h \
@@ -44,6 +46,7 @@ FORMS += \
     directrun.ui \
     mainwindow.ui \
     runmode.ui \
+    sequenceapplication.ui \
     starting_screen.ui \
     testapplication.ui \
     uart.ui \
