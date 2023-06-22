@@ -12,7 +12,9 @@
 #include <QCoreApplication>
 #include <QProgressDialog>
 #include "runmode.h"
-
+#include "sequenceapplication.h"
+#include <QMenuBar>
+#include "sequenceapplication.h"
 testApplication::testApplication(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::testApplication)
@@ -190,10 +192,101 @@ testApplication::testApplication(QWidget *parent) :
 
 
 
-//    connect(sendButton, &QPushButton::clicked, this, &ConfigChoice::handleLoadConfigButton);
+    connect(sendButton, &QPushButton::clicked, [=]() {
 
+        testApplication* test = new testApplication();
+        sequenceApplication* sequence = new sequenceApplication();
+
+                QSet<QString> addedUartOptions;
+                    QSet<QString> addedI2COptions;
+                    QSet<QString> addedSPIOptions;
+                    QSet<QString> addedADCOptions;
+                    QSet<QString> addedDACOptions;
+                    QSet<QString> addedGPIOOptions;
+                    QSet<QString> addedTIMEROptions;
+
+
+                    // Parcourir chaque élément sélectionné
+                    for (int i = 0; i < Dashboard::selectedUartOptionsStatic.size(); i++) {
+                        QString uartOption = Dashboard::selectedUartOptionsStatic.at(i);
+                        if (!addedUartOptions.contains(uartOption)) {
+                              sequence->addActionToMenu("&UART", uartOption);
+                              addedUartOptions.insert(uartOption);
+
+
+                               }
+
+
+
+
+                    }
+
+
+
+
+
+
+                    for (int i = 0; i < Dashboard::selectedI2COptionsStatic.size(); i++) {
+                        QString I2COption = Dashboard::selectedI2COptionsStatic.at(i);
+                        // Vérifier si l'élément a déjà été ajouté pour I2C
+                              if (!addedI2COptions.contains(I2COption)) {
+                                  sequence->addActionToMenu("&I2C", I2COption);
+                                  addedI2COptions.insert(I2COption);
+                              }
+                    }
+                    for (int i = 0; i < Dashboard::selectedSPIOptionsStatic.size(); i++) {
+                        QString SPIOption = Dashboard::selectedSPIOptionsStatic.at(i);
+                              if (!addedSPIOptions.contains(SPIOption)) {
+                                  sequence->addActionToMenu("&SPI", SPIOption);
+                                  addedSPIOptions.insert(SPIOption);
+                              }
+                    }
+
+                    for (int i = 0; i < Dashboard::selectedADCOptionsStatic.size(); i++) {
+                        QString ADCOption = Dashboard::selectedADCOptionsStatic.at(i);
+                        if (!addedADCOptions.contains(ADCOption)) {
+                           sequence->addActionToMenu("&ADC", ADCOption);
+                            addedADCOptions.insert(ADCOption);
+                        }
+
+                    }
+
+                    for (int i = 0; i < Dashboard::selectedDACOptionsStatic.size(); i++) {
+                        QString DACOption = Dashboard::selectedDACOptionsStatic.at(i);
+                        if (!addedDACOptions.contains(DACOption)) {
+                           sequence->addActionToMenu("&DAC", DACOption);
+                            addedDACOptions.insert(DACOption);
+                        }
+                    }
+
+                    for (int i = 0; i < Dashboard::selectedGPIOOptionsStatic.size(); i++) {
+                        QString GPIOOption = Dashboard::selectedGPIOOptionsStatic.at(i);
+                        if (!addedGPIOOptions.contains(GPIOOption)) {
+                           sequence->addActionToMenu("&GPIO", GPIOOption);
+                            addedGPIOOptions.insert(GPIOOption);
+                        }
+                    }
+
+                    for (int i = 0; i < Dashboard::selectedTIMEROptionsStatic.size(); i++) {
+                        QString TIMEROption = Dashboard::selectedTIMEROptionsStatic.at(i);
+                        if (!addedTIMEROptions.contains(TIMEROption)) {
+                          sequence->addActionToMenu("&Frequency Mesure", TIMEROption);
+                            addedTIMEROptions.insert(TIMEROption);
+                        }
+
+                    }
+
+
+
+        sequence->show();
+        this->hide();
+
+
+
+    });
 
 }
+
 
 testApplication::~testApplication()
 {
