@@ -17,6 +17,7 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
     ui(new Ui::sequenceApplication)
 {
     ui->setupUi(this);
+
     QWidget::setWindowTitle("Sequence Application");
     // Create a status bar
     QStatusBar *statusBar = new QStatusBar(this);
@@ -26,6 +27,25 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
     QLabel *footerLabel = new QLabel("© 2023 - ACTIA Engineering Services", this);
     footerLabel->setStyleSheet("background-color: #D3D3D3; color: #36454F;");
     footerLabel->setAlignment(Qt::AlignCenter);
+    // Appliquer le style au QListWidget
+    QString listStyle = "\
+    QListWidget {\
+    background-color: #D3D3D3; /* Couleur de fond */\
+    color: #000000; /* Couleur du texte */\
+    border: 1px solid #C0C0C0; /* Bordure */\
+    }\
+    QListWidget::item {\
+    background-color: #FFFFFF; /* Couleur de fond des éléments */\
+    padding: 5px; /* Espacement intérieur */\
+    }\
+    QListWidget::item:selected {\
+    background-color: #328930; /* Couleur de fond des éléments sélectionnés */\
+    color: #FFFFFF; /* Couleur du texte des éléments sélectionnés */\
+    }";
+
+    ui->listWidget->setStyleSheet(listStyle);
+
+
 
     // Set the gray background color
     QPalette palette = footerLabel->palette();
@@ -178,6 +198,15 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
 
     menuBar()->setFont(font);
     UART->setFont(font);
+
+
+
+    connect(action, &QAction::triggered, this, &sequenceApplication::onSubMenuSelected);
+
+//    QString menuItem;
+
+//    connect(menuItem, &QAction::triggered, this, &sequenceApplication::onSubMenuItemSelected);
+
 }
 
 void sequenceApplication::returnDashboard()
@@ -359,6 +388,19 @@ for (auto m : menus) {
 
 
 
+
+}
+}
+
+void sequenceApplication::onSubMenuSelected()
+{
+QAction* selectedAction = qobject_cast<QAction*>(sender());
+if (selectedAction)
+{
+QString selectedItemText = selectedAction->text();
+QListWidgetItem* listItem = new QListWidgetItem(selectedItemText);
+selectedItemsListWidget->addItem(listItem);
+qDebug() << "selected option:" <<listItem;
 
 }
 }

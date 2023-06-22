@@ -59,6 +59,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     1.png \
+    2.png \
     3.jpg \
     3.png \
     XCUBE.png \
