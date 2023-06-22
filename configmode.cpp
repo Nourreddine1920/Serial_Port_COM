@@ -9,7 +9,7 @@
 #include "runmode.h"
 #include<QProcess>
 #include <QStatusBar>
-
+#include "testapplication.h"
 //QStringList ConfigMode::selectedUartOptionsStatic; // initialisation de la variable statique
 //QStringList ConfigMode::selectedI2COptionsStatic; // initialisation de la variable statique
 //QStringList ConfigMode::selectedSPIOptionsStatic; // initialisation de la variable statique
@@ -29,7 +29,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
     setStatusBar(statusBar);
 
     // Create a QLabel for the footer text
-    QLabel *footerLabel = new QLabel("© ACTIA Engineering Services", this);
+    QLabel *footerLabel = new QLabel("© 2023 - ACTIA Engineering Services", this);
     footerLabel->setStyleSheet("background-color: #D3D3D3	; color: #36454F	;");
     footerLabel->setAlignment(Qt::AlignCenter);
 
@@ -56,6 +56,7 @@ ConfigMode::ConfigMode(QWidget *parent) :
 
     // Connect the QToolButton's clicked() signal to a slot that will open the new UI
     connect(connectButton, &QToolButton::clicked, this, &ConfigMode::sendframe);
+//        connect(connectButton, &QToolButton::clicked, this, &ConfigMode::sendframe);
 
     QToolButton *returnButton = new QToolButton(this);
     returnButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/back-arrow.png"));
@@ -522,6 +523,9 @@ void ConfigMode::returnDashboard()
 //                process.start(program, startArguments);
 //                process.waitForFinished(-1); // Attendre que le processus se termine (bloquant)
 
+
+
+        testApplication* testapp = new testApplication();
 
 
 
@@ -1551,7 +1555,7 @@ void ConfigMode::returnDashboard()
          }
 
 
-         /*------------------------------------- Go to Run Mode -----------------------------------------------*/
+         /*------------------------------------- Go to test ip Mode -----------------------------------------------*/
 
          Runmode* runmode = new Runmode();
 
@@ -1636,8 +1640,8 @@ void ConfigMode::returnDashboard()
              }
 
 
-         runmode->show();
-         this->hide();
+             testapp->show();
+             this->hide();
 
 
 

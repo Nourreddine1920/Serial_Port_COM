@@ -21,6 +21,7 @@ SOURCES += \
     mainwindow.cpp \
     runmode.cpp \
     starting_screen.cpp \
+    testapplication.cpp \
     uart.cpp \
     uartips.cpp
 
@@ -32,6 +33,7 @@ HEADERS += \
     mainwindow.h \
     runmode.h \
     starting_screen.h \
+    testapplication.h \
     uart.h \
     uartips.h
 
@@ -43,6 +45,7 @@ FORMS += \
     mainwindow.ui \
     runmode.ui \
     starting_screen.ui \
+    testapplication.ui \
     uart.ui \
     uartips.ui
 
@@ -62,6 +65,7 @@ DISTFILES += \
     back-arrow.png \
     back.png \
     back1.png \
+    browser.png \
     config1.png \
     config2.png \
     config3.png \
@@ -77,6 +81,7 @@ DISTFILES += \
     facebook-removebg-preview.png \
     facebook.png \
     file.txt \
+    gmail.png \
     images/logo-actia.png \
     images/logo-actia.png \
     input.png \
@@ -104,6 +109,7 @@ DISTFILES += \
     starting-app.png \
     starting.png \
     startingapplication.png \
+    testapplication.png \
     welcome.png \
     welcomeapp.png \
     xcube (2).png \
