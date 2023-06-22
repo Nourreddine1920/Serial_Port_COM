@@ -43,9 +43,9 @@ Uart::Uart(QWidget *parent)
     facebookLabel->setCursor(Qt::PointingHandCursor);
 
     // Connect the linkActivated signal of the labels to the corresponding slots
-//    connect(linkedinLabel, &QLabel::linkActivated, this, &Uart::openLinkedInUrl);
-//    connect(instagramLabel, &QLabel::linkActivated, this, &Uart::openInstagramUrl);
-//    connect(facebookLabel, &QLabel::linkActivated, this, &Uart::openFacebookUrl);
+    connect(linkedinLabel, &QLabel::linkHovered, this, &Uart::openLinkedInUrl);
+    connect(instagramLabel, &QLabel::linkActivated, this, &Uart::openInstagramUrl);
+    connect(facebookLabel, &QLabel::linkActivated, this, &Uart::openFacebookUrl);
 
     // Enable text interaction and set open external links property for the labels
     linkedinLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
@@ -798,7 +798,7 @@ void Uart::on_btnSendMsg_clicked()
 
 void Uart::openLinkedInUrl()
 {
-    QDesktopServices::openUrl(QUrl("https://www.linkedin.com/company/actia-engineering-services/mycompany/"));
+    QDesktopServices::openUrl(QUrl("https://www.linkedin.com/company/actia-engineering-services"));
 }
 void Uart::openFacebookUrl()
 {
