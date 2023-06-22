@@ -20,10 +20,6 @@ public:
     QSerialPort *getSerialPort() const;
      static Uart* getInstance();
 
-     void openLinkedInUrl();
-     void openFacebookUrl();
-     void openInstagramUrl();
-
 
     ~Uart();
 
@@ -40,8 +36,11 @@ private slots:
 
     void on_btnSendMsg_clicked();
     void recieveMessage();
-
-
+    void openLinkedInUrl();
+    void openFacebookUrl();
+    void openInstagramUrl();
+    void openUrl(const QString& url);
+    void openGmail();
 
 private:
     QLabel *statusLabel;

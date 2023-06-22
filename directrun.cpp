@@ -29,7 +29,7 @@ DirectRun::DirectRun(QWidget *parent) :
    setStatusBar(statusBar);
 
    // Create a QLabel for the footer text
-   QLabel *footerLabel = new QLabel("© ACTIA Engineering Services", this);
+   QLabel *footerLabel = new QLabel("© 2023 - ACTIA Engineering Services", this);
    footerLabel->setStyleSheet("background-color: #D3D3D3	; color: #36454F	;");
    footerLabel->setAlignment(Qt::AlignCenter);
 

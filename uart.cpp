@@ -8,8 +8,9 @@
 #include "configchoice.h"
 #include <QStatusBar>
 #include <QDesktopServices>
-
-
+#include <QUrl>
+#include <QBuffer>
+#include <QProcess>
 
 Uart::Uart(QWidget *parent)
     : QMainWindow(parent)
@@ -21,31 +22,121 @@ Uart::Uart(QWidget *parent)
     QStatusBar *statusBar = new QStatusBar(this);
     setStatusBar(statusBar);
     // Create QLabel widgets for the logos
-    QLabel *linkedinLabel = new QLabel(this);
-    QLabel *instagramLabel = new QLabel(this);
-    QLabel *facebookLabel = new QLabel(this);
+//    QLabel *linkedinLabel = new QLabel(this);
+//    QLabel *instagramLabel = new QLabel(this);
+//    QLabel *facebookLabel = new QLabel(this);
 
-    // Set the pixmap images for each label
-    QPixmap linkedinPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/linkedin-removebg-preview.png"); // Replace with the actual path to the LinkedIn logo image
-    QPixmap instagramPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/insta.png"); // Replace with the actual path to the Instagram logo image
-    QPixmap facebookPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/facebook-removebg-preview.png"); // Replace with the actual path to the Facebook logo image
+//    // Set the pixmap images for each label
+//    QPixmap linkedinPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/linkedin-removebg-preview.png"); // Replace with the actual path to the LinkedIn logo image
+//    QPixmap instagramPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/insta.png"); // Replace with the actual path to the Instagram logo image
+//    QPixmap facebookPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/facebook-removebg-preview.png"); // Replace with the actual path to the Facebook logo image
 
-    linkedinLabel->setPixmap(linkedinPixmap.scaled(21, 21, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    instagramLabel->setPixmap(instagramPixmap.scaled(19, 19, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    facebookLabel->setPixmap(facebookPixmap.scaled(19, 19, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-//    linkedinLabel->setStyleSheet("background-color: #D3D3D3	;");
-//    instagramLabel->setStyleSheet("background-color: #D3D3D3	;");
-//    facebookLabel->setStyleSheet("background-color: #D3D3D3	;");
+//    linkedinLabel->setPixmap(linkedinPixmap.scaled(21, 21, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+//    instagramLabel->setPixmap(instagramPixmap.scaled(19, 19, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+//    facebookLabel->setPixmap(facebookPixmap.scaled(19, 19, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+////    linkedinLabel->setStyleSheet("background-color: #D3D3D3	;");
+////    instagramLabel->setStyleSheet("background-color: #D3D3D3	;");
+////    facebookLabel->setStyleSheet("background-color: #D3D3D3	;");
 
-    // Set the cursor shape to indicate clickable labels
-    linkedinLabel->setCursor(Qt::PointingHandCursor);
-    instagramLabel->setCursor(Qt::PointingHandCursor);
+
+
+
+//    // Set the cursor shape to indicate clickable labels
+//    linkedinLabel->setCursor(Qt::PointingHandCursor);
+//    instagramLabel->setCursor(Qt::PointingHandCursor);
+
+
+
+
+//    // Dans votre constructeur ou méthode d'initialisation
+//    linkedinLabel->setText("<a href=\"https://www.linkedin.com/company/actia-engineering-services\">" +linkedinLabel->text()+ "</a>");
+//    linkedinLabel->setOpenExternalLinks(true);
+
+//    instagramLabel->setText("<a href=\"https://www.instagram.com/\">Instagram</a>");
+//    instagramLabel->setOpenExternalLinks(true);
+
+//    facebookLabel->setText("<a href=\"https://www.facebook.com/\">Facebook</a>");
+//    facebookLabel->setOpenExternalLinks(true);
+
+////     Connecter les signaux des labels à la fonction openUrl
+//    connect(linkedinLabel, &QLabel::linkActivated, this, &Uart::openUrl);
+//    connect(instagramLabel, &QLabel::linkActivated, this, &Uart::openUrl);
+//    connect(facebookLabel, &QLabel::linkActivated, this, &Uart::openUrl);
+
+
+
+
+
+
+    QPixmap linkedinPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/linkedin-removebg-preview.png");
+    QPixmap instagramPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/browser.png");
+    QPixmap facebookPixmap("C:/Users/nawledbr/Documents/Serial_Port_COM/gmail.png");
+
+    // Redimensionner les icônes avec la taille souhaitée
+    QPixmap linkedinIcon = linkedinPixmap.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QPixmap instagramIcon = instagramPixmap.scaled(19, 19, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QPixmap facebookIcon = facebookPixmap.scaled(18, 18, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+
+
+    // Convertir les icônes en format HTML
+    QByteArray linkedinData;
+    QBuffer linkedinBuffer(&linkedinData);
+    linkedinBuffer.open(QIODevice::WriteOnly);
+    linkedinIcon.save(&linkedinBuffer, "PNG");
+    QString linkedinHtmlIcon = QString("<img src=\"data:image/png;base64,%1\">").arg(QString::fromLatin1(linkedinData.toBase64().data()));
+
+    QByteArray instagramData;
+    QBuffer instagramBuffer(&instagramData);
+    instagramBuffer.open(QIODevice::WriteOnly);
+    instagramIcon.save(&instagramBuffer, "PNG");
+    QString instagramHtmlIcon = QString("<img src=\"data:image/png;base64,%1\">").arg(QString::fromLatin1(instagramData.toBase64().data()));
+
+    QByteArray facebookData;
+    QBuffer facebookBuffer(&facebookData);
+    facebookBuffer.open(QIODevice::WriteOnly);
+    facebookIcon.save(&facebookBuffer, "PNG");
+    QString facebookHtmlIcon = QString("<img src=\"data:image/png;base64,%1\">").arg(QString::fromLatin1(facebookData.toBase64().data()));
+    // Créer les QLabel pour les icônes
+    QLabel* linkedinLabel = new QLabel(this);
+    QLabel* instagramLabel = new QLabel(this);
+    QLabel* facebookLabel = new QLabel(this);
+
+    // Définir le texte des labels avec les icônes HTML
+    linkedinLabel->setText(QString("<a href=\"https://www.linkedin.com/company/actia-engineering-services\">%1</a>").arg(linkedinHtmlIcon));
+    instagramLabel->setText(QString("<a href=\"https://lab-engineering.actia.tn\">%1</a>").arg(instagramHtmlIcon));
+//    facebookLabel->setText(QString("<a href=\"mailto:contact@actia.com?subject=Subject%20of%20the%20email&body=Content%20of%20the%20email\">%1</a>").arg(facebookHtmlIcon));
+
+    facebookLabel->setText(facebookHtmlIcon);
+    facebookLabel->setOpenExternalLinks(true);
     facebookLabel->setCursor(Qt::PointingHandCursor);
 
+//    facebookLabel->setToolTip("contact@actia.com");
+    facebookLabel->setToolTip("<span style=\" font: bold 15px; color: #36454F; padding: 4px 8px; font-size: 15px;\">contact@actia.com</span>");
+
+    // Connecter le signal linkHovered pour afficher l'info-bulle lorsque le curseur survole l'icône
+    connect(facebookLabel, &QLabel::linkHovered, [facebookLabel]() {
+        facebookLabel->setToolTip("contact@actia.com");
+    });
+    // Connecter le signal clicked de l'icône de courrier électronique à la slot correspondante
+    connect(facebookLabel, &QLabel::linkActivated, this, &Uart::openGmail);
+
+
+    // Activer l'ouverture des liens dans un navigateur externe
+    linkedinLabel->setOpenExternalLinks(true);
+    instagramLabel->setOpenExternalLinks(true);
+
+    // Connecter les signaux des QLabel à la fonction d'ouverture des URL
+//    connect(linkedinLabel, &QLabel::linkActivated, this, &Uart::openLinkedInUrl);
+//    connect(instagramLabel, &QLabel::linkActivated, this, &Uart::openInstagramUrl);
+//    connect(facebookLabel, &QLabel::linkActivated, this, &Uart::openFacebookUrl);
+
+    // La fonction openUrl
+
     // Connect the linkActivated signal of the labels to the corresponding slots
-    connect(linkedinLabel, &QLabel::linkHovered, this, &Uart::openLinkedInUrl);
-    connect(instagramLabel, &QLabel::linkActivated, this, &Uart::openInstagramUrl);
-    connect(facebookLabel, &QLabel::linkActivated, this, &Uart::openFacebookUrl);
+//    connect(linkedinLabel, &QLabel::linkActivated, this, &Uart::openLinkedInUrl);
+//    connect(instagramLabel, &QLabel::linkActivated, this, &Uart::openInstagramUrl);
+//    connect(facebookLabel, &QLabel::linkActivated, this, &Uart::openFacebookUrl);
 
     // Enable text interaction and set open external links property for the labels
     linkedinLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
@@ -68,7 +159,7 @@ Uart::Uart(QWidget *parent)
     statusBar->addPermanentWidget(facebookLabel);
 
     // Create a QLabel for the footer text
-    QLabel *footerLabel = new QLabel("© ACTIA Engineering Services", this);
+    QLabel *footerLabel = new QLabel("© 2023 - ACTIA Engineering Services", this);
     footerLabel->setStyleSheet("background-color: #D3D3D3	; color: #36454F;");
     footerLabel->setAlignment(Qt::AlignCenter);
 
@@ -827,5 +918,20 @@ Uart* Uart::getInstance()
 
 
 
+void Uart::openUrl(const QString& url)
+{
+QDesktopServices::openUrl(QUrl(url));
+}
+void Uart::openGmail()
+{
+    QString email = "contact@actia.com";
+    QString subject = "Subject of the email";
+    QString body = "Content of the email";
 
+    QString mailToUrl = QString("mailto:%1?subject=%2&body=%3")
+    .arg(email, QUrl::toPercentEncoding(subject), QUrl::toPercentEncoding(body));
+
+    QProcess::startDetached("xdg-email", QStringList() << mailToUrl);
+
+}
 
