@@ -27,7 +27,7 @@ testApplication::testApplication(QWidget *parent) :
     centralWidget()->resize(400,300);
     setCentralWidget(testapplication);
 
-    QImage backgroundImage("C:/Users/nawledbr/Documents/Serial_Port_COM/testapplication.png");
+    QImage backgroundImage("C:/Users/nawledbr/Documents/Serial_Port_COM/2.png");
 
     // Création d'un label pour afficher l'image
 //    QWidget window;
