@@ -396,6 +396,8 @@ for (auto m : menus) {
 
           ui->listWidget->addItem(action->text());
 
+          showADCexec();
+
       });
 
   }
@@ -493,6 +495,54 @@ qDebug() << "selected option:" <<listItem;
 
 }
 }
+
+
+
+void sequenceApplication::showADCexec(){
+
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
+
+
+    QVBoxLayout* adcLayout = new QVBoxLayout(ui->ADCwidget);
+
+    // Create a QLabel to display the ADC device address
+    QLabel* deviceAddressLabel = new QLabel("ADC Device Address:", ui->ADCwidget);
+    QLabel* Adcvalue = new QLabel("Get value:", ui->ADCwidget);
+
+    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->ADCwidget);
+    QLineEdit* AdcvalueLineEdit = new QLineEdit(ui->ADCwidget);
+
+    deviceAddressLineEdit->setPlaceholderText("Enter the device address");
+    AdcvalueLineEdit->setPlaceholderText("Digital value");
+
+    // Create a QComboBox to select the ADC channel
+
+    // Create a QPushButton to initiate the ADC read operation
+//    QPushButton* readButton = new QPushButton("Read", ui->ADCwidget);
+//    QPushButton* writeButton = new QPushButton("Write", ui->ADCwidget);
+
+    // Create a QTextBrowser to display the ADC read data
+
+    // Add the components to the layout
+    adcLayout->addWidget(deviceAddressLabel);
+    adcLayout->addWidget(deviceAddressLineEdit);
+    adcLayout->addWidget(Adcvalue);
+    adcLayout->addWidget(AdcvalueLineEdit);
+
+//    adcLayout->addWidget(channelLabel);
+//    adcLayout->addWidget(channelComboBox);
+//    adcLayout->addWidget(dataTextBrowser);
+//    auto buttonLayout = new QHBoxLayout();
+//    buttonLayout->addWidget(writeButton);
+//    buttonLayout->addWidget(readButton);
+//    adcLayout->addLayout(buttonLayout);
+
+
+
+
+
+                  }
 sequenceApplication::~sequenceApplication()
 {
     delete ui;
