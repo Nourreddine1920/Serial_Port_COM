@@ -47,6 +47,7 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
 
 
 
+
     // Set the gray background color
     QPalette palette = footerLabel->palette();
 //    palette.setColor(QPalette::Background, QColor(200, 200, 200)); // Adjust the color as desired
