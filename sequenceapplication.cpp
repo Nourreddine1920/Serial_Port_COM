@@ -36,7 +36,7 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
     }\
     QListWidget::item {\
     background-color: #FFFFFF; /* Couleur de fond des éléments */\
-    padding: 5px; /* Espacement intérieur */\
+    padding: 7px; /* Espacement intérieur */\
     }\
     QListWidget::item:selected {\
     background-color: #328930; /* Couleur de fond des éléments sélectionnés */\
@@ -44,7 +44,6 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
     }";
 
     ui->listWidget->setStyleSheet(listStyle);
-
 
 
 
@@ -84,10 +83,6 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
 
 
     connect(returnButton, &QToolButton::clicked, this, &sequenceApplication::returnDashboard);
-
-
-
-
 
     QMenu *UART = menuBar()->addMenu("&UART");
     QCheckBox *checkBox = new QCheckBox();
@@ -331,66 +326,159 @@ for (auto m : menus) {
    QString ActionConfig = settings.value("actionUART4" , action->text()).toString();
 
    qDebug() << "actionUART4:" << ActionConfig;
+   connect(action, &QAction::triggered, [=]() {
 
-//  connect (action ,&QAction::triggered , this , &Runmode::showUART4Run);
-//}
-//  else if(action->text()=="&UART5") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showUART5Run);
-//  }
-//  else if(action->text()=="&USART1") {
-////      connect (action ,&QAction::triggered , this , &ConfigMode::showUSART1config);
-//  }
-//  else if(action->text()=="&USART2") {
-////      connect (action ,&QAction::triggered , this , &ConfigMode::showUSART2config);
-//  }
-//  else if(action->text()=="SPI1") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showSPI1Run);
-//  }
-//  else if(action->text()=="&SPI2") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showSPI2Run);
-//  }
-//  else if(action->text()=="&SPI3") {
-////      connect (action ,&QAction::triggered , this , &ConfigMode::showSPI3config);
-//  }
-//  else if(action->text()=="I2C1") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showI2C1Run);
-//  }
-//  else if(action->text()=="&I2C2") {
-////      connect (action ,&QAction::triggered , this , &ConfigMode::showI2C2config);
-//  }
-//  else if(action->text()=="ADC1") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showADC1Run);
-//  }
-//  else if(action->text()=="&ADC3") {
-////      connect (action ,&QAction::triggered , this , &ConfigMode::showADC3config);
-//  }
-//  else if(action->text()=="DAC_OUT1") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showDACOUT1Run);
-//  }
-//  else if(action->text()=="DAC_OUT2") {
-////      connect (action ,&QAction::triggered , this , &ConfigMode::showDACOUT2config);
-//  }
-//  else if(action->text()=="GPIO_OUTPUT") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showGPIOOUTPUTRun);
-//  }
-//  else if(action->text()=="&GPIO_INPUT") {
-////      connect (action ,&QAction::triggered , this , &ConfigMode::showGPIOINPUTconfig);
-//  }
-//  else if(action->text()=="Input Capture Mode") {
-//      connect (action ,&QAction::triggered , this , &Runmode::showFrequencyMesureRun);
-//  }
+       ui->listWidget->addItem(action->text());
+
+   });
+
+}
+  else if(action->text()=="&UART5") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+  }
+  else if(action->text()=="&USART1") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+  }
+  else if(action->text()=="&USART2") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+  }
+  else if(action->text()=="SPI1") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+  }
+  else if(action->text()=="&SPI2") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+
+  }
+  else if(action->text()=="&SPI3") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+  }
+  else if(action->text()=="I2C1") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+  }
+  else if(action->text()=="&I2C2") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+
+  }
+  else if(action->text()=="ADC1") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+
+  }
+  else if(action->text()=="&ADC3") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+
+  }
+  else if(action->text()=="DAC_OUT1") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+
+  }
+  else if(action->text()=="DAC_OUT2") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+
+  }
+  else if(action->text()=="GPIO_OUTPUT") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+
+  }
+  else if(action->text()=="&GPIO_INPUT") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });
+
+  }
+  else if(action->text()=="Input Capture Mode") {
+      connect(action, &QAction::triggered, [=]() {
+
+          ui->listWidget->addItem(action->text());
+
+      });  }
 
 
 
   qDebug() << "selected option:" << action->text();
+  QMenu* contextMenu = new QMenu(this);
+  QAction* deleteAction = new QAction("Delete IP", this);
+  QAction* checkOrderAction = new QAction("Order sequence", this);
+
+  // Ajout des actions au menu contextuel
+  contextMenu->addAction(deleteAction);
+  contextMenu->addAction(checkOrderAction);
+
+  // Connexion du signal du menu contextuel
+  connect(deleteAction, &QAction::triggered, [=]() {
+  QListWidgetItem* selectedItem = ui->listWidget->currentItem();
+  if (selectedItem) {
+  delete selectedItem;
+  }
+  });
+
+  // Configuration du menu contextuel pour la liste widget
+  ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+//  connect(ui->listWidget, &QListWidget::customContextMenuRequested, [contextMenu](const QPoint& pos) {
+//  contextMenu->exec(pos);
+//  });
 
 
+  // Connexion du signal du menu contextuel
+  connect(ui->listWidget, &QListWidget::customContextMenuRequested, [=](const QPoint& pos) {
+  QPoint globalPos = ui->listWidget->mapToGlobal(pos);
+  contextMenu->exec(globalPos);
+  });
 
 
-
-
-
-}
 }
 
 void sequenceApplication::onSubMenuSelected()
