@@ -455,7 +455,8 @@ for (auto m : menus) {
 
           showTIMERexec();
 
-      });  }
+      });
+  }
 
 
 
@@ -497,6 +498,51 @@ for (auto m : menus) {
   }
   });
 
+
+  // Connexion du signal itemClicked pour réafficher le widget
+//  connect(action, &QAction::triggered, [=]() {
+//  QString itemText = action->text();
+
+//  // Vérifier si l'élément existe déjà dans la liste
+//  QList<QListWidgetItem*> existingItems = ui->listWidget->findItems(itemText, Qt::MatchExactly);
+//  if (existingItems.isEmpty()) {
+//  ui->listWidget->addItem(itemText);
+//  }
+
+//  // Afficher le widget associé en fonction de l'élément sélectionné
+//  if (itemText == "ADC1") {
+//  ui->ADCwidget->show();
+//  } else if (itemText == "DAC_OUT1") {
+//  ui->DACwidget->show();
+//  } else if (itemText == "Input Capture Mode") {
+//  ui->TIMERwidget->show();
+//  } else if (itemText == "I2C1") {
+//  ui->I2Cwidget->show();
+//  } else if (itemText == "GPIO_OUTPUT") {
+//  ui->GPIOwidget->show();
+//  }
+//  });
+  QMap<QString, QWidget*> widgetMap;
+  widgetMap["ADC1"] = ui->ADCwidget;
+  widgetMap["DAC_OUT1"] = ui->DACwidget;
+  widgetMap["Input Capture Mode"] = ui->TIMERwidget;
+  widgetMap["I2C1"] = ui->I2Cwidget;
+  widgetMap["GPIO_OUTPUT"] = ui->GPIOwidget;
+  connect(action, &QAction::triggered, [=]() {
+  QString itemText = action->text();
+
+  // Vérifier si l'élément existe déjà dans la liste
+  QList<QListWidgetItem*> existingItems = ui->listWidget->findItems(itemText, Qt::MatchExactly);
+  if (existingItems.isEmpty()) {
+  ui->listWidget->addItem(itemText);
+  }
+
+  // Afficher le widget associé en fonction de l'élément sélectionné
+  if (widgetMap.contains(itemText)) {
+  QWidget* widget = widgetMap.value(itemText);
+  widget->show();
+  }
+  });
   // Configuration du menu contextuel pour la liste widget
   ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 //  connect(ui->listWidget, &QListWidget::customContextMenuRequested, [contextMenu](const QPoint& pos) {
