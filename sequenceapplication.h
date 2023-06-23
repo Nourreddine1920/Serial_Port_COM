@@ -3,7 +3,21 @@
 
 #include <QMainWindow>
 #include <QListWidget>
-
+#include <QTextBrowser>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QLineEdit>
+#include <QLabel>
+#include <QCheckBox>
+#include <QRadioButton>
+#include <QComboBox>
+#include <QSpinBox>
+#include "uart.h"
+#include <QSerialPort>
+#include <QDate>
+#include <QTime>
+#include <QFontDatabase>
+#include<QFont>
 namespace Ui {
 class sequenceApplication;
 }
@@ -25,6 +39,11 @@ public slots:
 private:
     Ui::sequenceApplication *ui;
 
+private slots :
+
+
+
+    void showADCexec();
 };
 
 #endif // SEQUENCEAPPLICATION_H
