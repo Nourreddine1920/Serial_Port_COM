@@ -330,6 +330,7 @@ for (auto m : menus) {
 
        ui->listWidget->addItem(action->text());
 
+
    });
 
 }
@@ -381,6 +382,9 @@ for (auto m : menus) {
 
           ui->listWidget->addItem(action->text());
 
+          showI2Cexec();
+
+
       });
   }
   else if(action->text()=="&I2C2") {
@@ -413,6 +417,7 @@ for (auto m : menus) {
       connect(action, &QAction::triggered, [=]() {
 
           ui->listWidget->addItem(action->text());
+          showDACexec();
 
       });
 
@@ -430,6 +435,8 @@ for (auto m : menus) {
 
           ui->listWidget->addItem(action->text());
 
+          showGPIOexec();
+
       });
 
   }
@@ -446,6 +453,8 @@ for (auto m : menus) {
 
           ui->listWidget->addItem(action->text());
 
+          showTIMERexec();
+
       });  }
 
 
@@ -460,10 +469,31 @@ for (auto m : menus) {
   contextMenu->addAction(checkOrderAction);
 
   // Connexion du signal du menu contextuel
+//  connect(deleteAction, &QAction::triggered, [=]() {
+//  QListWidgetItem* selectedItem = ui->listWidget->currentItem();
+//  if (selectedItem) {
+//  delete selectedItem;
+
+//  }
+//  });
   connect(deleteAction, &QAction::triggered, [=]() {
   QListWidgetItem* selectedItem = ui->listWidget->currentItem();
   if (selectedItem) {
+  QString itemText = selectedItem->text();
   delete selectedItem;
+
+  // Masquer le widget associé en fonction de l'élément supprimé
+  if (itemText == "ADC1") {
+  ui->ADCwidget->hide();
+  } else if (itemText == "DAC_OUT1") {
+  ui->DACwidget->hide();
+  } else if (itemText == "Input Capture Mode") {
+  ui->TIMERwidget->hide();
+  } else if (itemText == "I2C1") {
+  ui->I2Cwidget->hide();
+  } else if (itemText == "GPIO_OUTPUT") {
+  ui->GPIOwidget->hide();
+  }
   }
   });
 
@@ -538,6 +568,151 @@ void sequenceApplication::showADCexec(){
 //    buttonLayout->addWidget(readButton);
 //    adcLayout->addLayout(buttonLayout);
 
+
+
+
+
+                  }
+
+
+void sequenceApplication::showGPIOexec(){
+
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
+
+
+    QVBoxLayout* gpioOutputLayout = new QVBoxLayout(ui->GPIOwidget);
+
+    // Create a QLabel to display the status of the LED
+    QLabel* ledStatusLabel = new QLabel("LED Status: OFF/ON", ui->GPIOwidget);
+
+    // Create a QComboBox to select the ADC channel
+
+    // Create a QPushButton to initiate the ADC read operation
+//    QPushButton* readButton = new QPushButton("Read", ui->ADCwidget);
+//    QPushButton* writeButton = new QPushButton("Write", ui->ADCwidget);
+
+    // Create a QTextBrowser to display the ADC read data
+
+    // Add the components to the layout
+    gpioOutputLayout->addWidget(ledStatusLabel);
+//    adcLayout->addWidget(channelComboBox);
+//    adcLayout->addWidget(dataTextBrowser);
+//    auto buttonLayout = new QHBoxLayout();
+//    buttonLayout->addWidget(writeButton);
+//    buttonLayout->addWidget(readButton);
+//    adcLayout->addLayout(buttonLayout);
+
+
+
+
+
+                  }
+
+void sequenceApplication::showI2Cexec(){
+
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
+
+
+    QVBoxLayout* I2CLayout = new QVBoxLayout(ui->I2Cwidget);
+
+    // Create a QLabel to display the status of the LED
+    QLabel* ledStatusLabel = new QLabel("Temperature and Humidity values", ui->I2Cwidget);
+    QTextBrowser* dataTextBrowser = new QTextBrowser(ui->I2Cwidget);
+
+    // Create a QComboBox to select the ADC channel
+
+    // Create a QPushButton to initiate the ADC read operation
+//    QPushButton* readButton = new QPushButton("Read", ui->ADCwidget);
+//    QPushButton* writeButton = new QPushButton("Write", ui->ADCwidget);
+
+    // Create a QTextBrowser to display the ADC read data
+
+    // Add the components to the layout
+    I2CLayout->addWidget(ledStatusLabel);
+    I2CLayout->addWidget(dataTextBrowser);
+
+//    adcLayout->addWidget(channelComboBox);
+//    adcLayout->addWidget(dataTextBrowser);
+//    auto buttonLayout = new QHBoxLayout();
+//    buttonLayout->addWidget(writeButton);
+//    buttonLayout->addWidget(readButton);
+//    adcLayout->addLayout(buttonLayout);
+
+
+
+
+
+                  }
+
+
+void sequenceApplication::showDACexec(){
+
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
+
+
+    QVBoxLayout* DAClayout = new QVBoxLayout(ui->DACwidget);
+
+    QLabel* deviceAddressLabel = new QLabel("Digital value:", ui->DACwidget);
+    QLabel* Adcvalue = new QLabel("Get value:", ui->DACwidget);
+
+    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->DACwidget);
+    QLineEdit* AdcvalueLineEdit = new QLineEdit(ui->DACwidget);
+
+    deviceAddressLineEdit->setPlaceholderText("Enter the device address");
+    AdcvalueLineEdit->setPlaceholderText("Digital value");
+
+    // Create a QComboBox to select the ADC channel
+
+    // Create a QPushButton to initiate the ADC read operation
+//    QPushButton* readButton = new QPushButton("Read", ui->ADCwidget);
+//    QPushButton* writeButton = new QPushButton("Write", ui->ADCwidget);
+
+    // Create a QTextBrowser to display the ADC read data
+
+    // Add the components to the layout
+    DAClayout->addWidget(deviceAddressLabel);
+    DAClayout->addWidget(deviceAddressLineEdit);
+    DAClayout->addWidget(Adcvalue);
+    DAClayout->addWidget(AdcvalueLineEdit);
+
+
+
+
+                  }
+
+void sequenceApplication::showTIMERexec(){
+
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
+
+
+    QVBoxLayout* TIMERlayout = new QVBoxLayout(ui->TIMERwidget);
+
+    QLabel* deviceAddressLabel = new QLabel("Timer clock:", ui->TIMERwidget);
+    QLabel* Adcvalue = new QLabel("Get Frequency:", ui->TIMERwidget);
+
+    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->TIMERwidget);
+    QLineEdit* AdcvalueLineEdit = new QLineEdit(ui->TIMERwidget);
+
+    deviceAddressLineEdit->setPlaceholderText("Enter the device address");
+    AdcvalueLineEdit->setPlaceholderText("Digital value");
+
+    // Create a QComboBox to select the ADC channel
+
+    // Create a QPushButton to initiate the ADC read operation
+//    QPushButton* readButton = new QPushButton("Read", ui->ADCwidget);
+//    QPushButton* writeButton = new QPushButton("Write", ui->ADCwidget);
+
+    // Create a QTextBrowser to display the ADC read data
+
+    // Add the components to the layout
+    TIMERlayout->addWidget(deviceAddressLabel);
+    TIMERlayout->addWidget(deviceAddressLineEdit);
+    TIMERlayout->addWidget(Adcvalue);
+    TIMERlayout->addWidget(AdcvalueLineEdit);
 
 
 

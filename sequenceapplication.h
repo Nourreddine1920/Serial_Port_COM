@@ -44,6 +44,10 @@ private slots :
 
 
     void showADCexec();
+    void showGPIOexec();
+    void showI2Cexec();
+    void showDACexec();
+    void showTIMERexec();
 };
 
 #endif // SEQUENCEAPPLICATION_H
