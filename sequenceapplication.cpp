@@ -83,6 +83,7 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
 
 
     connect(returnButton, &QToolButton::clicked, this, &sequenceApplication::returnDashboard);
+    connect(connectButton, &QToolButton::clicked, this, &sequenceApplication::showOUTPUTexec);
 
     QMenu *UART = menuBar()->addMenu("&UART");
     QCheckBox *checkBox = new QCheckBox();
@@ -377,6 +378,8 @@ for (auto m : menus) {
 
        ui->listWidget->addItem(action->text());
 
+       showUARTexec();
+
 
 
    });
@@ -408,6 +411,8 @@ for (auto m : menus) {
 
           ui->listWidget->addItem(action->text());
 
+          showSPIexec();
+
       });
   }
   else if(action->text()=="&SPI2") {
@@ -434,13 +439,6 @@ for (auto m : menus) {
 
           QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
 
-
-//          ui->listWidget->currentItem()->setFont(font);
-//          ui->I2Cwidget->show(); // Afficher le widget correspondant
-//          ui->I2Cwidget->raise(); // Amener le widget à l'avant-plan
-
-
-
       });
   }
   else if(action->text()=="&I2C2") {
@@ -460,8 +458,6 @@ for (auto m : menus) {
 
 
 
-//          ui->ADCwidget->show(); // Afficher le widget correspondant
-//          ui->ADCwidget->raise(); // Amener le widget à l'avant-plan
 
 
       });
@@ -480,8 +476,6 @@ for (auto m : menus) {
 
           ui->listWidget->addItem(action->text());
           showDACexec();
-//          ui->DACwidget->show(); // Afficher le widget correspondant
-//          ui->DACwidget->raise(); // Amener le widget à l'avant-plan
 
 
       });
@@ -502,8 +496,6 @@ for (auto m : menus) {
 
           showGPIOexec();
 
-//          ui->GPIOwidget->show(); // Afficher le widget correspondant
-//          ui->GPIOwidget->raise(); // Amener le widget à l'avant-plan
 
 
       });
@@ -524,8 +516,6 @@ for (auto m : menus) {
 
           showTIMERexec();
 
-//          ui->TIMERwidget->show(); // Afficher le widget correspondant
-//          ui->TIMERwidget->raise(); // Amener le widget à l'avant-plan
 
 
       });
@@ -534,25 +524,7 @@ for (auto m : menus) {
 
 
 
-
-  if (action->text() == "ADC1") {
-  ui->ADCwidget->show(); // Afficher le widget correspondant
-  ui->ADCwidget->raise(); // Amener le widget à l'avant-plan
-  } else if (action->text() == "DAC_OUT1") {
-  ui->DACwidget->show();
-  ui->DACwidget->raise();
-  } else if (action->text() == "Input Capture Mode") {
-  ui->TIMERwidget->show();
-  ui->TIMERwidget->raise();
-  } else if (action->text() == "I2C1") {
-  ui->I2Cwidget->show();
-  ui->I2Cwidget->raise();
-  } else if (action->text() == "GPIO_OUTPUT") {
-  ui->GPIOwidget->show();
-  ui->GPIOwidget->raise();
-  }
 }
-
 void sequenceApplication::onSubMenuSelected()
 {
 QAction* selectedAction = qobject_cast<QAction*>(sender());
@@ -562,6 +534,9 @@ QString selectedItemText = selectedAction->text();
 QListWidgetItem* listItem = new QListWidgetItem(selectedItemText);
 selectedItemsListWidget->addItem(listItem);
 qDebug() << "selected option:" <<listItem;
+QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+
+listItem->setFont(font);
 
 }
 }
@@ -579,14 +554,10 @@ void sequenceApplication::showADCexec(){
 
     // Create a QLabel to display the ADC device address
     QLabel* deviceAddressLabel = new QLabel("ADC Device Address:", ui->ADCwidget);
-    QLabel* Adcvalue = new QLabel("Get value:", ui->ADCwidget);
 
     QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->ADCwidget);
-    QLineEdit* AdcvalueLineEdit = new QLineEdit(ui->ADCwidget);
 
     deviceAddressLineEdit->setPlaceholderText("Enter the device address");
-    AdcvalueLineEdit->setPlaceholderText("Digital value");
-
 
     QString styleSheet2 =
         "QPushButton {"
@@ -609,13 +580,11 @@ void sequenceApplication::showADCexec(){
     deviceAddressLabel->setFont(font);
 
 
-    deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
-    Adcvalue->setStyleSheet("font: bold 13px; color: #328930;");
+    deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
     // Create a label widget and set its font to Noto Sans
 //        QFont font("Noto Sans");
 
     deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-    AdcvalueLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
     // Create a QComboBox to select the ADC channel
@@ -629,8 +598,6 @@ void sequenceApplication::showADCexec(){
     // Add the components to the layout
     adcLayout->addWidget(deviceAddressLabel);
     adcLayout->addWidget(deviceAddressLineEdit);
-    adcLayout->addWidget(Adcvalue);
-    adcLayout->addWidget(AdcvalueLineEdit);
 
 
 
@@ -679,23 +646,23 @@ void sequenceApplication::showGPIOexec(){
             ledStatusLabel->setFont(font);
 
 
-            ledStatusLabel->setStyleSheet("font: bold 13px; color: #328930;");
+            ledStatusLabel->setStyleSheet("font: bold 13px; color: #36454F;");
             gpioOutputLayout->addWidget(ledStatusLabel);
 
 
                   }
 
-void sequenceApplication::showI2Cexec(){
+void sequenceApplication::showOUTPUTexec(){
 
     Uart* uart = Uart::getInstance();
     QSerialPort* serialPort = uart->getSerialPort();
 
 
-    QVBoxLayout* I2CLayout = new QVBoxLayout(ui->I2Cwidget);
+    QVBoxLayout* OUTPUTLayout = new QVBoxLayout(ui->OUTPUTwidget);
 
     // Create a QLabel to display the status of the LED
-    QLabel* ledStatusLabel = new QLabel("Temperature and Humidity values", ui->I2Cwidget);
-    QTextBrowser* dataTextBrowser = new QTextBrowser(ui->I2Cwidget);
+    QLabel* ledStatusLabel = new QLabel("OUTPUT values", ui->OUTPUTwidget);
+    QTextBrowser* dataTextBrowser = new QTextBrowser(ui->OUTPUTwidget);
 
 
     QString styleSheet2 =
@@ -718,15 +685,15 @@ void sequenceApplication::showI2Cexec(){
           ledStatusLabel->setFont(font);
 
 
-          ledStatusLabel->setStyleSheet("font: bold 13px; color: #328930;");
+          ledStatusLabel->setStyleSheet("font: bold 13px; color: #36454F;");
 
           dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
           font.setBold(true);
           dataTextBrowser->setFont(font);
 
     // Add the components to the layout
-    I2CLayout->addWidget(ledStatusLabel);
-    I2CLayout->addWidget(dataTextBrowser);
+    OUTPUTLayout->addWidget(ledStatusLabel);
+    OUTPUTLayout->addWidget(dataTextBrowser);
 
 }
 
@@ -740,13 +707,10 @@ void sequenceApplication::showDACexec(){
     QVBoxLayout* DAClayout = new QVBoxLayout(ui->DACwidget);
 
     QLabel* deviceAddressLabel = new QLabel("Digital value:", ui->DACwidget);
-    QLabel* Adcvalue = new QLabel("Get value:", ui->DACwidget);
 
     QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->DACwidget);
-    QLineEdit* AdcvalueLineEdit = new QLineEdit(ui->DACwidget);
 
     deviceAddressLineEdit->setPlaceholderText("Enter the device address");
-    AdcvalueLineEdit->setPlaceholderText("Digital value");
 
 
     QString styleSheet2 =
@@ -766,24 +730,19 @@ void sequenceApplication::showDACexec(){
               "    background-color: #3e8e41;"
               "}";
           QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
-          Adcvalue->setFont(font);
           deviceAddressLabel->setFont(font);
 
 
-          deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
-          Adcvalue->setStyleSheet("font: bold 13px; color: #328930;");
+          deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
 
-          AdcvalueLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
           deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
     // Add the components to the layout
     DAClayout->addWidget(deviceAddressLabel);
     DAClayout->addWidget(deviceAddressLineEdit);
-    DAClayout->addWidget(Adcvalue);
-    DAClayout->addWidget(AdcvalueLineEdit);
 
 
 
@@ -799,13 +758,10 @@ void sequenceApplication::showTIMERexec(){
     QVBoxLayout* TIMERlayout = new QVBoxLayout(ui->TIMERwidget);
 
     QLabel* deviceAddressLabel = new QLabel("Timer clock:", ui->TIMERwidget);
-    QLabel* Adcvalue = new QLabel("Get Frequency:", ui->TIMERwidget);
 
     QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->TIMERwidget);
-    QLineEdit* AdcvalueLineEdit = new QLineEdit(ui->TIMERwidget);
 
-    deviceAddressLineEdit->setPlaceholderText("Enter the device address");
-    AdcvalueLineEdit->setPlaceholderText("Digital value");
+    deviceAddressLineEdit->setPlaceholderText("Enter the Timer Clock");
 
 
     QString styleSheet2 =
@@ -825,23 +781,167 @@ void sequenceApplication::showTIMERexec(){
               "    background-color: #3e8e41;"
               "}";
           QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
-          Adcvalue->setFont(font);
           deviceAddressLabel->setFont(font);
 
 
-          deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
-          Adcvalue->setStyleSheet("font: bold 13px; color: #328930;");
+          deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
-          AdcvalueLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
           deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
     // Add the components to the layout
     TIMERlayout->addWidget(deviceAddressLabel);
     TIMERlayout->addWidget(deviceAddressLineEdit);
-    TIMERlayout->addWidget(Adcvalue);
-    TIMERlayout->addWidget(AdcvalueLineEdit);
+
+
+
+
+                  }
+
+void sequenceApplication::showUARTexec(){
+
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
+
+
+    QVBoxLayout* UARTlayout = new QVBoxLayout(ui->UARTwidget);
+
+    QLabel* deviceAddressLabel = new QLabel("Enter your message:", ui->UARTwidget);
+
+    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->UARTwidget);
+
+    deviceAddressLineEdit->setPlaceholderText("Enter your message");
+
+
+    QString styleSheet2 =
+              "QPushButton {"
+              "    background-color: gray;"
+              "    border: none;"
+              "    color: white;"
+              "    padding: 3px 3px;"
+              "    text-align: center;"
+              "    text-decoration: none;"
+              "    font-size: 14px;"
+              "    margin: 4px 2px;"
+              "    border-radius: 10px;"
+              "}"
+              ""
+              "QPushButton:hover {"
+              "    background-color: #3e8e41;"
+              "}";
+          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+          deviceAddressLabel->setFont(font);
+
+
+          deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
+          // Create a label widget and set its font to Noto Sans
+  //        QFont font("Noto Sans");
+          deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+    // Add the components to the layout
+    UARTlayout->addWidget(deviceAddressLabel);
+    UARTlayout->addWidget(deviceAddressLineEdit);
+
+
+
+
+                  }
+void sequenceApplication::showSPIexec(){
+
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
+
+
+    QVBoxLayout* SPIlayout = new QVBoxLayout(ui->SPIwidget);
+
+    QLabel* deviceAddressLabel = new QLabel("Enter your message (Master/Slave):", ui->SPIwidget);
+
+    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->SPIwidget);
+
+    deviceAddressLineEdit->setPlaceholderText("Enter your message");
+
+
+    QString styleSheet2 =
+              "QPushButton {"
+              "    background-color: gray;"
+              "    border: none;"
+              "    color: white;"
+              "    padding: 3px 3px;"
+              "    text-align: center;"
+              "    text-decoration: none;"
+              "    font-size: 14px;"
+              "    margin: 4px 2px;"
+              "    border-radius: 10px;"
+              "}"
+              ""
+              "QPushButton:hover {"
+              "    background-color: #3e8e41;"
+              "}";
+          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+          deviceAddressLabel->setFont(font);
+
+
+          deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
+          // Create a label widget and set its font to Noto Sans
+  //        QFont font("Noto Sans");
+          deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+    // Add the components to the layout
+    SPIlayout->addWidget(deviceAddressLabel);
+    SPIlayout->addWidget(deviceAddressLineEdit);
+
+
+
+
+                  }
+
+void sequenceApplication::showI2Cexec(){
+
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
+
+
+    QVBoxLayout* I2Clayout = new QVBoxLayout(ui->I2Cwidget);
+
+    QLabel* deviceAddressLabel = new QLabel("Enter your device address:", ui->I2Cwidget);
+
+    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->I2Cwidget);
+
+    deviceAddressLineEdit->setPlaceholderText("Enter your device address");
+
+
+    QString styleSheet2 =
+              "QPushButton {"
+              "    background-color: gray;"
+              "    border: none;"
+              "    color: white;"
+              "    padding: 3px 3px;"
+              "    text-align: center;"
+              "    text-decoration: none;"
+              "    font-size: 14px;"
+              "    margin: 4px 2px;"
+              "    border-radius: 10px;"
+              "}"
+              ""
+              "QPushButton:hover {"
+              "    background-color: #3e8e41;"
+              "}";
+          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+          deviceAddressLabel->setFont(font);
+
+
+          deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
+          // Create a label widget and set its font to Noto Sans
+  //        QFont font("Noto Sans");
+          deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+    // Add the components to the layout
+    I2Clayout->addWidget(deviceAddressLabel);
+    I2Clayout->addWidget(deviceAddressLineEdit);
 
 
 
