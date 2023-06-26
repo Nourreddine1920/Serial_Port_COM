@@ -320,6 +320,53 @@ for (auto m : menus) {
   QAction *action = new QAction(actionName, this);
   menu->addAction(action);
 
+
+  qDebug() << "selected option:" << action->text();
+  QMenu* contextMenu = new QMenu(this);
+  QAction* deleteAction = new QAction("Delete IP", this);
+  QAction* checkOrderAction = new QAction("Order sequence", this);
+
+  // Ajout des actions au menu contextuel
+  contextMenu->addAction(deleteAction);
+  contextMenu->addAction(checkOrderAction);
+
+
+  connect(deleteAction, &QAction::triggered, [=]() {
+  QListWidgetItem* selectedItem = ui->listWidget->currentItem();
+  if (selectedItem) {
+  QString itemText = selectedItem->text();
+  delete selectedItem;
+
+  // Masquer le widget associé en fonction de l'élément supprimé
+  if (itemText == "ADC1") {
+  ui->ADCwidget->hide();
+  } else if (itemText == "DAC_OUT1") {
+  ui->DACwidget->hide();
+  } else if (itemText == "Input Capture Mode") {
+  ui->TIMERwidget->hide();
+  } else if (itemText == "I2C1") {
+  ui->I2Cwidget->hide();
+  } else if (itemText == "GPIO_OUTPUT") {
+  ui->GPIOwidget->hide();
+  }
+  }
+  });
+  // Configuration du menu contextuel pour la liste widget
+  ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+//  connect(ui->listWidget, &QListWidget::customContextMenuRequested, [contextMenu](const QPoint& pos) {
+//  contextMenu->exec(pos);
+//  });
+
+
+  // Connexion du signal du menu contextuel
+  connect(ui->listWidget, &QListWidget::customContextMenuRequested, [=](const QPoint& pos) {
+  QListWidgetItem* selectedItem = ui->listWidget->itemAt(pos);
+  if (selectedItem) {
+  QPoint globalPos = ui->listWidget->mapToGlobal(pos);
+  contextMenu->exec(globalPos);
+  contextMenu->hide();
+  }
+  });
   if (action->text()=="UART4"){
    QSettings settings ("configSelection.txt" , QSettings::IniFormat);
    settings.setValue("actionUART4" , action->text());
@@ -329,6 +376,7 @@ for (auto m : menus) {
    connect(action, &QAction::triggered, [=]() {
 
        ui->listWidget->addItem(action->text());
+
 
 
    });
@@ -384,6 +432,14 @@ for (auto m : menus) {
 
           showI2Cexec();
 
+          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+
+
+//          ui->listWidget->currentItem()->setFont(font);
+//          ui->I2Cwidget->show(); // Afficher le widget correspondant
+//          ui->I2Cwidget->raise(); // Amener le widget à l'avant-plan
+
+
 
       });
   }
@@ -402,6 +458,12 @@ for (auto m : menus) {
 
           showADCexec();
 
+
+
+//          ui->ADCwidget->show(); // Afficher le widget correspondant
+//          ui->ADCwidget->raise(); // Amener le widget à l'avant-plan
+
+
       });
 
   }
@@ -418,6 +480,9 @@ for (auto m : menus) {
 
           ui->listWidget->addItem(action->text());
           showDACexec();
+//          ui->DACwidget->show(); // Afficher le widget correspondant
+//          ui->DACwidget->raise(); // Amener le widget à l'avant-plan
+
 
       });
 
@@ -437,6 +502,10 @@ for (auto m : menus) {
 
           showGPIOexec();
 
+//          ui->GPIOwidget->show(); // Afficher le widget correspondant
+//          ui->GPIOwidget->raise(); // Amener le widget à l'avant-plan
+
+
       });
 
   }
@@ -455,108 +524,33 @@ for (auto m : menus) {
 
           showTIMERexec();
 
+//          ui->TIMERwidget->show(); // Afficher le widget correspondant
+//          ui->TIMERwidget->raise(); // Amener le widget à l'avant-plan
+
+
       });
   }
 
 
 
-  qDebug() << "selected option:" << action->text();
-  QMenu* contextMenu = new QMenu(this);
-  QAction* deleteAction = new QAction("Delete IP", this);
-  QAction* checkOrderAction = new QAction("Order sequence", this);
 
-  // Ajout des actions au menu contextuel
-  contextMenu->addAction(deleteAction);
-  contextMenu->addAction(checkOrderAction);
 
-  // Connexion du signal du menu contextuel
-//  connect(deleteAction, &QAction::triggered, [=]() {
-//  QListWidgetItem* selectedItem = ui->listWidget->currentItem();
-//  if (selectedItem) {
-//  delete selectedItem;
-
-//  }
-//  });
-  connect(deleteAction, &QAction::triggered, [=]() {
-  QListWidgetItem* selectedItem = ui->listWidget->currentItem();
-  if (selectedItem) {
-  QString itemText = selectedItem->text();
-  delete selectedItem;
-
-  // Masquer le widget associé en fonction de l'élément supprimé
-  if (itemText == "ADC1") {
-  ui->ADCwidget->hide();
-  } else if (itemText == "DAC_OUT1") {
-  ui->DACwidget->hide();
-  } else if (itemText == "Input Capture Mode") {
-  ui->TIMERwidget->hide();
-  } else if (itemText == "I2C1") {
-  ui->I2Cwidget->hide();
-  } else if (itemText == "GPIO_OUTPUT") {
-  ui->GPIOwidget->hide();
+  if (action->text() == "ADC1") {
+  ui->ADCwidget->show(); // Afficher le widget correspondant
+  ui->ADCwidget->raise(); // Amener le widget à l'avant-plan
+  } else if (action->text() == "DAC_OUT1") {
+  ui->DACwidget->show();
+  ui->DACwidget->raise();
+  } else if (action->text() == "Input Capture Mode") {
+  ui->TIMERwidget->show();
+  ui->TIMERwidget->raise();
+  } else if (action->text() == "I2C1") {
+  ui->I2Cwidget->show();
+  ui->I2Cwidget->raise();
+  } else if (action->text() == "GPIO_OUTPUT") {
+  ui->GPIOwidget->show();
+  ui->GPIOwidget->raise();
   }
-  }
-  });
-
-
-  // Connexion du signal itemClicked pour réafficher le widget
-//  connect(action, &QAction::triggered, [=]() {
-//  QString itemText = action->text();
-
-//  // Vérifier si l'élément existe déjà dans la liste
-//  QList<QListWidgetItem*> existingItems = ui->listWidget->findItems(itemText, Qt::MatchExactly);
-//  if (existingItems.isEmpty()) {
-//  ui->listWidget->addItem(itemText);
-//  }
-
-//  // Afficher le widget associé en fonction de l'élément sélectionné
-//  if (itemText == "ADC1") {
-//  ui->ADCwidget->show();
-//  } else if (itemText == "DAC_OUT1") {
-//  ui->DACwidget->show();
-//  } else if (itemText == "Input Capture Mode") {
-//  ui->TIMERwidget->show();
-//  } else if (itemText == "I2C1") {
-//  ui->I2Cwidget->show();
-//  } else if (itemText == "GPIO_OUTPUT") {
-//  ui->GPIOwidget->show();
-//  }
-//  });
-  QMap<QString, QWidget*> widgetMap;
-  widgetMap["ADC1"] = ui->ADCwidget;
-  widgetMap["DAC_OUT1"] = ui->DACwidget;
-  widgetMap["Input Capture Mode"] = ui->TIMERwidget;
-  widgetMap["I2C1"] = ui->I2Cwidget;
-  widgetMap["GPIO_OUTPUT"] = ui->GPIOwidget;
-  connect(action, &QAction::triggered, [=]() {
-  QString itemText = action->text();
-
-  // Vérifier si l'élément existe déjà dans la liste
-  QList<QListWidgetItem*> existingItems = ui->listWidget->findItems(itemText, Qt::MatchExactly);
-  if (existingItems.isEmpty()) {
-  ui->listWidget->addItem(itemText);
-  }
-
-  // Afficher le widget associé en fonction de l'élément sélectionné
-  if (widgetMap.contains(itemText)) {
-  QWidget* widget = widgetMap.value(itemText);
-  widget->show();
-  }
-  });
-  // Configuration du menu contextuel pour la liste widget
-  ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-//  connect(ui->listWidget, &QListWidget::customContextMenuRequested, [contextMenu](const QPoint& pos) {
-//  contextMenu->exec(pos);
-//  });
-
-
-  // Connexion du signal du menu contextuel
-  connect(ui->listWidget, &QListWidget::customContextMenuRequested, [=](const QPoint& pos) {
-  QPoint globalPos = ui->listWidget->mapToGlobal(pos);
-  contextMenu->exec(globalPos);
-  });
-
-
 }
 
 void sequenceApplication::onSubMenuSelected()
@@ -579,6 +573,7 @@ void sequenceApplication::showADCexec(){
     Uart* uart = Uart::getInstance();
     QSerialPort* serialPort = uart->getSerialPort();
 
+//    setCentralWidget(ui->ADCwidget);
 
     QVBoxLayout* adcLayout = new QVBoxLayout(ui->ADCwidget);
 
@@ -591,6 +586,37 @@ void sequenceApplication::showADCexec(){
 
     deviceAddressLineEdit->setPlaceholderText("Enter the device address");
     AdcvalueLineEdit->setPlaceholderText("Digital value");
+
+
+    QString styleSheet2 =
+        "QPushButton {"
+        "    background-color: gray;"
+        "    border: none;"
+        "    color: white;"
+        "    padding: 3px 3px;"
+        "    text-align: center;"
+        "    text-decoration: none;"
+        "    font-size: 14px;"
+        "    margin: 4px 2px;"
+        "    border-radius: 10px;"
+        "}"
+        ""
+        "QPushButton:hover {"
+        "    background-color: #3e8e41;"
+        "}";
+    QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+    deviceAddressLabel->setFont(font);
+    deviceAddressLabel->setFont(font);
+
+
+    deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
+    Adcvalue->setStyleSheet("font: bold 13px; color: #328930;");
+    // Create a label widget and set its font to Noto Sans
+//        QFont font("Noto Sans");
+
+    deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    AdcvalueLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
 
     // Create a QComboBox to select the ADC channel
 
@@ -605,6 +631,8 @@ void sequenceApplication::showADCexec(){
     adcLayout->addWidget(deviceAddressLineEdit);
     adcLayout->addWidget(Adcvalue);
     adcLayout->addWidget(AdcvalueLineEdit);
+
+
 
 //    adcLayout->addWidget(channelLabel);
 //    adcLayout->addWidget(channelComboBox);
@@ -631,26 +659,28 @@ void sequenceApplication::showGPIOexec(){
 
     // Create a QLabel to display the status of the LED
     QLabel* ledStatusLabel = new QLabel("LED Status: OFF/ON", ui->GPIOwidget);
+    QString styleSheet2 =
+              "QPushButton {"
+              "    background-color: gray;"
+              "    border: none;"
+              "    color: white;"
+              "    padding: 3px 3px;"
+              "    text-align: center;"
+              "    text-decoration: none;"
+              "    font-size: 14px;"
+              "    margin: 4px 2px;"
+              "    border-radius: 10px;"
+              "}"
+              ""
+              "QPushButton:hover {"
+              "    background-color: #3e8e41;"
+              "}";
+             QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+            ledStatusLabel->setFont(font);
 
-    // Create a QComboBox to select the ADC channel
 
-    // Create a QPushButton to initiate the ADC read operation
-//    QPushButton* readButton = new QPushButton("Read", ui->ADCwidget);
-//    QPushButton* writeButton = new QPushButton("Write", ui->ADCwidget);
-
-    // Create a QTextBrowser to display the ADC read data
-
-    // Add the components to the layout
-    gpioOutputLayout->addWidget(ledStatusLabel);
-//    adcLayout->addWidget(channelComboBox);
-//    adcLayout->addWidget(dataTextBrowser);
-//    auto buttonLayout = new QHBoxLayout();
-//    buttonLayout->addWidget(writeButton);
-//    buttonLayout->addWidget(readButton);
-//    adcLayout->addLayout(buttonLayout);
-
-
-
+            ledStatusLabel->setStyleSheet("font: bold 13px; color: #328930;");
+            gpioOutputLayout->addWidget(ledStatusLabel);
 
 
                   }
@@ -667,30 +697,38 @@ void sequenceApplication::showI2Cexec(){
     QLabel* ledStatusLabel = new QLabel("Temperature and Humidity values", ui->I2Cwidget);
     QTextBrowser* dataTextBrowser = new QTextBrowser(ui->I2Cwidget);
 
-    // Create a QComboBox to select the ADC channel
 
-    // Create a QPushButton to initiate the ADC read operation
-//    QPushButton* readButton = new QPushButton("Read", ui->ADCwidget);
-//    QPushButton* writeButton = new QPushButton("Write", ui->ADCwidget);
+    QString styleSheet2 =
+              "QPushButton {"
+              "    background-color: gray;"
+              "    border: none;"
+              "    color: white;"
+              "    padding: 3px 3px;"
+              "    text-align: center;"
+              "    text-decoration: none;"
+              "    font-size: 14px;"
+              "    margin: 4px 2px;"
+              "    border-radius: 10px;"
+              "}"
+              ""
+              "QPushButton:hover {"
+              "    background-color: #3e8e41;"
+              "}";
+          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+          ledStatusLabel->setFont(font);
 
-    // Create a QTextBrowser to display the ADC read data
+
+          ledStatusLabel->setStyleSheet("font: bold 13px; color: #328930;");
+
+          dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+          font.setBold(true);
+          dataTextBrowser->setFont(font);
 
     // Add the components to the layout
     I2CLayout->addWidget(ledStatusLabel);
     I2CLayout->addWidget(dataTextBrowser);
 
-//    adcLayout->addWidget(channelComboBox);
-//    adcLayout->addWidget(dataTextBrowser);
-//    auto buttonLayout = new QHBoxLayout();
-//    buttonLayout->addWidget(writeButton);
-//    buttonLayout->addWidget(readButton);
-//    adcLayout->addLayout(buttonLayout);
-
-
-
-
-
-                  }
+}
 
 
 void sequenceApplication::showDACexec(){
@@ -710,13 +748,36 @@ void sequenceApplication::showDACexec(){
     deviceAddressLineEdit->setPlaceholderText("Enter the device address");
     AdcvalueLineEdit->setPlaceholderText("Digital value");
 
-    // Create a QComboBox to select the ADC channel
 
-    // Create a QPushButton to initiate the ADC read operation
-//    QPushButton* readButton = new QPushButton("Read", ui->ADCwidget);
-//    QPushButton* writeButton = new QPushButton("Write", ui->ADCwidget);
+    QString styleSheet2 =
+              "QPushButton {"
+              "    background-color: gray;"
+              "    border: none;"
+              "    color: white;"
+              "    padding: 3px 3px;"
+              "    text-align: center;"
+              "    text-decoration: none;"
+              "    font-size: 14px;"
+              "    margin: 4px 2px;"
+              "    border-radius: 10px;"
+              "}"
+              ""
+              "QPushButton:hover {"
+              "    background-color: #3e8e41;"
+              "}";
+          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+          Adcvalue->setFont(font);
+          deviceAddressLabel->setFont(font);
 
-    // Create a QTextBrowser to display the ADC read data
+
+          deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
+          Adcvalue->setStyleSheet("font: bold 13px; color: #328930;");
+          // Create a label widget and set its font to Noto Sans
+  //        QFont font("Noto Sans");
+
+          AdcvalueLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
 
     // Add the components to the layout
     DAClayout->addWidget(deviceAddressLabel);
@@ -746,13 +807,35 @@ void sequenceApplication::showTIMERexec(){
     deviceAddressLineEdit->setPlaceholderText("Enter the device address");
     AdcvalueLineEdit->setPlaceholderText("Digital value");
 
-    // Create a QComboBox to select the ADC channel
 
-    // Create a QPushButton to initiate the ADC read operation
-//    QPushButton* readButton = new QPushButton("Read", ui->ADCwidget);
-//    QPushButton* writeButton = new QPushButton("Write", ui->ADCwidget);
+    QString styleSheet2 =
+              "QPushButton {"
+              "    background-color: gray;"
+              "    border: none;"
+              "    color: white;"
+              "    padding: 3px 3px;"
+              "    text-align: center;"
+              "    text-decoration: none;"
+              "    font-size: 14px;"
+              "    margin: 4px 2px;"
+              "    border-radius: 10px;"
+              "}"
+              ""
+              "QPushButton:hover {"
+              "    background-color: #3e8e41;"
+              "}";
+          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+          Adcvalue->setFont(font);
+          deviceAddressLabel->setFont(font);
 
-    // Create a QTextBrowser to display the ADC read data
+
+          deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
+          Adcvalue->setStyleSheet("font: bold 13px; color: #328930;");
+          // Create a label widget and set its font to Noto Sans
+  //        QFont font("Noto Sans");
+          AdcvalueLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
 
     // Add the components to the layout
     TIMERlayout->addWidget(deviceAddressLabel);
