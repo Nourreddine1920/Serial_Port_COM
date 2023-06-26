@@ -48,6 +48,9 @@ private slots :
     void showI2Cexec();
     void showDACexec();
     void showTIMERexec();
+    void showUARTexec();
+    void showSPIexec();
+    void showOUTPUTexec();
 };
 
 #endif // SEQUENCEAPPLICATION_H
