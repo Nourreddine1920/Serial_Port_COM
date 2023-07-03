@@ -74,7 +74,7 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
 
 
     // Connect the QToolButton's clicked() signal to a slot that will open the new UI
-//    connect(connectButton, &QToolButton::clicked, this, &sequenceApplication::sendRUNframe);
+    connect(connectButton, &QToolButton::clicked, this, &sequenceApplication::sendSequenceframe);
 
     QToolButton *returnButton = new QToolButton(this);
     returnButton->setIcon(QIcon("C:/Users/nawledbr/Documents/Serial_Port_COM/back-arrow.png"));
@@ -299,6 +299,126 @@ void sequenceApplication::returnDashboard()
     configmode->show();
     this->hide();
 }
+
+
+void sequenceApplication::sendSequenceframe(){
+
+
+    Uart* uart = Uart::getInstance();
+   QSerialPort* serialPort = uart->getSerialPort();
+
+   QList<QMenu*> menus = menuBar()->findChildren<QMenu*>();
+
+
+
+    char delimiter2[2] = ",";
+    char delimiter1[2] = "|";
+
+    QByteArray packet;
+
+    QByteArray DelimPacket;
+
+
+
+
+
+
+    bool adc1found=false;
+
+
+
+    packet.clear();  // clear the existing packet to start fresh
+
+
+
+
+   for (auto menu : menus) {
+   // if (menu->title() == "Devices") { // Change "Devices" to the name of the menu that contains the devices
+   QList<QAction*> actions = menu->actions();
+
+   for (auto action : actions) {
+   QString deviceName = action->text();
+
+
+
+
+
+
+  if (deviceName.startsWith("ADC1")) {
+
+      qDebug() << " device:" << deviceName;
+
+
+
+
+
+      char delimiter2[2] = ",";
+      char delimiter1[2] = "|";
+
+      uint8_t messageBaudID = 0x02;
+      packet.append(messageBaudID);
+      packet.append(delimiter1);
+      QString message =deviceAddressLineEdit->text();
+      QByteArray Message = message.toUtf8();
+      qDebug() << " message:" << message;
+      packet.append(Message);
+
+      packet.append(delimiter2);
+      qDebug() << " packet:" << packet;
+
+
+}
+
+  if (deviceName.startsWith("I2C1")) {
+
+      qDebug() << " device:" << deviceName;
+
+
+
+
+
+      char delimiter3[2] = ",";
+      char delimiter4[2] = "|";
+
+      uint8_t messageBaudID1 = 0x03;
+      packet1.append(messageBaudID1);
+      packet1.append(delimiter4);
+      QString messageI2C =deviceAddressLineEditI2C->text();
+      QByteArray MessageI2C = messageI2C.toUtf8();
+      qDebug() << " message:" << message;
+      packet1.append(MessageI2C);
+
+      packet1.append(delimiter3);
+      qDebug() << " packet1:" << packet1;
+
+
+}
+}
+   }
+
+   QByteArray concatenated = packet + packet1 ;
+   qDebug() << " packet1:" << packet1;
+   qDebug() << " packet1:" << packet1;
+
+   concatenated.append("\n");
+   qint64 bytesWritten = serialPort->write(concatenated);
+
+   qDebug() << "concatenated" << concatenated;
+
+
+   if (bytesWritten == -1) {
+           qDebug() << "Failed to write to serial port";
+       } else if (bytesWritten != concatenated.size()) {
+           qDebug() << "Failed to write all bytes to serial port";
+       } else {
+           qDebug() << "Data sent successfully";
+       }
+
+   packet1.clear();
+   packet.clear();
+
+
+}
 void sequenceApplication::addActionToMenu(QString menuItem, QString actionName)
 {
 // Recherche du menu correspondant au menuItem
@@ -350,7 +470,13 @@ for (auto m : menus) {
   ui->I2Cwidget->hide();
   } else if (itemText == "GPIO_OUTPUT") {
   ui->GPIOwidget->hide();
+  } else if (itemText == "UART4") {
+    ui->UARTwidget->hide();
   }
+  else if (itemText == "SPI1") {
+   ui->SPIwidget->hide();
+   }
+
   }
   });
   // Configuration du menu contextuel pour la liste widget
@@ -369,6 +495,8 @@ for (auto m : menus) {
   contextMenu->hide();
   }
   });
+
+
   if (action->text()=="UART4"){
    QSettings settings ("configSelection.txt" , QSettings::IniFormat);
    settings.setValue("actionUART4" , action->text());
@@ -438,7 +566,6 @@ for (auto m : menus) {
 
           showI2Cexec();
 
-          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
 
       });
   }
@@ -456,6 +583,8 @@ for (auto m : menus) {
           ui->listWidget->addItem(action->text());
 
           showADCexec();
+
+//          ui->ADCwidget->show();
 
 
 
@@ -523,6 +652,29 @@ for (auto m : menus) {
   }
 
 
+  connect(action, &QAction::triggered, [=]() {
+  QString itemText = action->text();
+
+  // Vérifier si l'élément existe déjà dans la liste
+  QList<QListWidgetItem*> existingItems = ui->listWidget->findItems(itemText, Qt::MatchExactly);
+  if (existingItems.isEmpty()) {
+  ui->listWidget->addItem(itemText);
+  }
+
+  // Afficher le widget associé en fonction de l'élément sélectionné
+  if (itemText == "ADC1") {
+
+showSecondADCexec();
+  } else if (itemText == "DAC_OUT1") {
+  ui->DACwidget->showFullScreen();
+  } else if (itemText == "Input Capture Mode") {
+  ui->TIMERwidget->show();
+  } else if (itemText == "I2C1") {
+  ui->I2Cwidget->show();
+  } else if (itemText == "GPIO_OUTPUT") {
+  ui->GPIOwidget->show();
+  }
+  });
 
 
 }
@@ -556,7 +708,7 @@ void sequenceApplication::showADCexec(){
     // Create a QLabel to display the ADC device address
     QLabel* deviceAddressLabel = new QLabel("ADC Device Address:", ui->ADCwidget);
 
-    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->ADCwidget);
+    deviceAddressLineEdit = new QLineEdit(ui->ADCwidget);
 
     deviceAddressLineEdit->setPlaceholderText("Enter the device address");
 
@@ -602,6 +754,8 @@ void sequenceApplication::showADCexec(){
 
 
 
+
+//    deviceAddressLineEdit->clear();
 //    adcLayout->addWidget(channelLabel);
 //    adcLayout->addWidget(channelComboBox);
 //    adcLayout->addWidget(dataTextBrowser);
@@ -615,7 +769,74 @@ void sequenceApplication::showADCexec(){
 
 
                   }
+void sequenceApplication::showSecondADCexec(){
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
 
+//    setCentralWidget(ui->ADCwidget);
+
+    QVBoxLayout* secondadcLayout = new QVBoxLayout(ui->ADCwidget);
+
+    // Create a QLabel to display the ADC device address
+    QLabel* deviceAddressLabel = new QLabel("ADC Device Address:", ui->ADCwidget);
+
+    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->ADCwidget);
+
+    deviceAddressLineEdit->setPlaceholderText("Enter the device address");
+
+    QString styleSheet2 =
+        "QPushButton {"
+        "    background-color: gray;"
+        "    border: none;"
+        "    color: white;"
+        "    padding: 3px 3px;"
+        "    text-align: center;"
+        "    text-decoration: none;"
+        "    font-size: 14px;"
+        "    margin: 4px 2px;"
+        "    border-radius: 10px;"
+        "}"
+        ""
+        "QPushButton:hover {"
+        "    background-color: #3e8e41;"
+        "}";
+    QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+    deviceAddressLabel->setFont(font);
+    deviceAddressLabel->setFont(font);
+
+
+    deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
+    // Create a label widget and set its font to Noto Sans
+//        QFont font("Noto Sans");
+
+    deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+
+    // Create a QComboBox to select the ADC channel
+
+    // Create a QPushButton to initiate the ADC read operation
+//    QPushButton* readButton = new QPushButton("Read", ui->ADCwidget);
+//    QPushButton* writeButton = new QPushButton("Write", ui->ADCwidget);
+
+    // Create a QTextBrowser to display the ADC read data
+
+    // Add the components to the layout
+    secondadcLayout->addWidget(deviceAddressLabel);
+    secondadcLayout->addWidget(deviceAddressLineEdit);
+
+
+//    deviceAddressLineEdit->clear();
+//    adcLayout->addWidget(channelLabel);
+//    adcLayout->addWidget(channelComboBox);
+//    adcLayout->addWidget(dataTextBrowser);
+//    auto buttonLayout = new QHBoxLayout();
+//    buttonLayout->addWidget(writeButton);
+//    buttonLayout->addWidget(readButton);
+//    adcLayout->addLayout(buttonLayout);
+
+
+
+                  }
 
 void sequenceApplication::showGPIOexec(){
 
@@ -744,8 +965,6 @@ void sequenceApplication::showDACexec(){
     // Add the components to the layout
     DAClayout->addWidget(deviceAddressLabel);
     DAClayout->addWidget(deviceAddressLineEdit);
-
-
 
 
                   }
@@ -909,9 +1128,9 @@ void sequenceApplication::showI2Cexec(){
 
     QLabel* deviceAddressLabel = new QLabel("Enter your device address:", ui->I2Cwidget);
 
-    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->I2Cwidget);
+    deviceAddressLineEditI2C = new QLineEdit(ui->I2Cwidget);
 
-    deviceAddressLineEdit->setPlaceholderText("Enter your device address");
+    deviceAddressLineEditI2C->setPlaceholderText("Enter your device address");
 
 
     QString styleSheet2 =
@@ -937,12 +1156,12 @@ void sequenceApplication::showI2Cexec(){
           deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
-          deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          deviceAddressLineEditI2C->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
     // Add the components to the layout
     I2Clayout->addWidget(deviceAddressLabel);
-    I2Clayout->addWidget(deviceAddressLineEdit);
+    I2Clayout->addWidget(deviceAddressLineEditI2C);
 
 
 

@@ -18,6 +18,7 @@
 #include <QTime>
 #include <QFontDatabase>
 #include<QFont>
+
 namespace Ui {
 class sequenceApplication;
 }
@@ -29,7 +30,13 @@ class sequenceApplication : public QMainWindow
 public:
     explicit sequenceApplication(QWidget *parent = nullptr);
     QListWidget* selectedItemsListWidget;
+    QByteArray packet;
+    QByteArray packet1;
 
+    QByteArray Message;
+    QString message;
+    QLineEdit* deviceAddressLineEdit;
+    QLineEdit* deviceAddressLineEditI2C;
     ~sequenceApplication();
 
 public slots:
@@ -38,6 +45,11 @@ public slots:
     void onSubMenuSelected();
 private:
     Ui::sequenceApplication *ui;
+
+
+
+
+
 
 private slots :
 
@@ -51,6 +63,10 @@ private slots :
     void showUARTexec();
     void showSPIexec();
     void showOUTPUTexec();
+    void showSecondADCexec();
+
+
+    void sendSequenceframe();
 };
 
 #endif // SEQUENCEAPPLICATION_H
