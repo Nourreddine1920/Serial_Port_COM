@@ -32,11 +32,18 @@ public:
     QListWidget* selectedItemsListWidget;
     QByteArray packet;
     QByteArray packet1;
+    QByteArray packet2;
+    QByteArray packet3;
+    QByteArray packet4;
 
     QByteArray Message;
     QString message;
     QLineEdit* deviceAddressLineEdit;
     QLineEdit* deviceAddressLineEditI2C;
+    QLineEdit* deviceAddressLineEditUART;
+    QLineEdit* deviceAddressLineEditSPI;
+    QLineEdit* deviceAddressLineEditDAC;
+
     ~sequenceApplication();
 
 public slots:
