@@ -393,12 +393,89 @@ void sequenceApplication::sendSequenceframe(){
 
 
 }
+  if (deviceName.startsWith("UART4")) {
+
+      qDebug() << " device:" << deviceName;
+
+
+
+
+
+      char delimiter3[2] = ",";
+      char delimiter4[2] = "|";
+
+      uint8_t messageBaudID1 = 0x04;
+      packet2.append(messageBaudID1);
+      packet2.append(delimiter4);
+      QString messageUART = deviceAddressLineEditUART->text();
+      QByteArray MessageUART = messageUART.toUtf8();
+      qDebug() << " message:" << message;
+      packet2.append(MessageUART);
+
+      packet2.append(delimiter3);
+      qDebug() << " packet2:" << packet2;
+
+
+}
+  if (deviceName.startsWith("SPI1")) {
+
+      qDebug() << " device:" << deviceName;
+
+
+
+
+
+      char delimiter3[2] = ",";
+      char delimiter4[2] = "|";
+
+      uint8_t messageBaudID1 = 0x05;
+      packet3.append(messageBaudID1);
+      packet3.append(delimiter4);
+      QString messageSPI = deviceAddressLineEditSPI->text();
+      QByteArray MessageSPI = messageSPI.toUtf8();
+      qDebug() << " message:" << message;
+      packet3.append(MessageSPI);
+
+      packet3.append(delimiter3);
+      qDebug() << " packet3:" << packet3;
+
+
+}
+
+  if (deviceName.startsWith("DAC_OUT1")) {
+
+      qDebug() << " device:" << deviceName;
+
+
+
+
+
+      char delimiter3[2] = ",";
+      char delimiter4[2] = "|";
+
+      uint8_t messageBaudID1 = 0x06;
+      packet4.append(messageBaudID1);
+      packet4.append(delimiter4);
+      QString messageDAC = deviceAddressLineEditDAC->text();
+      QByteArray MessageDAC = messageDAC.toUtf8();
+      qDebug() << " message:" << message;
+      packet4.append(MessageDAC);
+
+      packet4.append(delimiter3);
+      qDebug() << " packet4:" << packet4;
+
+
+}
+
 }
    }
 
-   QByteArray concatenated = packet + packet1 ;
+   QByteArray concatenated = packet + packet1 + packet2 + packet3 + packet4;
+   qDebug() << " packet:" << packet;
    qDebug() << " packet1:" << packet1;
-   qDebug() << " packet1:" << packet1;
+   qDebug() << " packet2:" << packet2;
+   qDebug() << " packet3:" << packet3;
+   qDebug() << " packet4:" << packet4;
 
    concatenated.append("\n");
    qint64 bytesWritten = serialPort->write(concatenated);
@@ -416,6 +493,9 @@ void sequenceApplication::sendSequenceframe(){
 
    packet1.clear();
    packet.clear();
+   packet2.clear();
+   packet3.clear();
+   packet4.clear();
 
 
 }
@@ -812,31 +892,14 @@ void sequenceApplication::showSecondADCexec(){
     deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
-    // Create a QComboBox to select the ADC channel
 
-    // Create a QPushButton to initiate the ADC read operation
-//    QPushButton* readButton = new QPushButton("Read", ui->ADCwidget);
-//    QPushButton* writeButton = new QPushButton("Write", ui->ADCwidget);
 
-    // Create a QTextBrowser to display the ADC read data
+
 
     // Add the components to the layout
     secondadcLayout->addWidget(deviceAddressLabel);
     secondadcLayout->addWidget(deviceAddressLineEdit);
-
-
-//    deviceAddressLineEdit->clear();
-//    adcLayout->addWidget(channelLabel);
-//    adcLayout->addWidget(channelComboBox);
-//    adcLayout->addWidget(dataTextBrowser);
-//    auto buttonLayout = new QHBoxLayout();
-//    buttonLayout->addWidget(writeButton);
-//    buttonLayout->addWidget(readButton);
-//    adcLayout->addLayout(buttonLayout);
-
-
-
-                  }
+                 }
 
 void sequenceApplication::showGPIOexec(){
 
@@ -930,9 +993,9 @@ void sequenceApplication::showDACexec(){
 
     QLabel* deviceAddressLabel = new QLabel("Digital value:", ui->DACwidget);
 
-    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->DACwidget);
+    deviceAddressLineEditDAC = new QLineEdit(ui->DACwidget);
 
-    deviceAddressLineEdit->setPlaceholderText("Enter the device address");
+    deviceAddressLineEditDAC->setPlaceholderText("Enter the device address");
 
 
     QString styleSheet2 =
@@ -959,12 +1022,12 @@ void sequenceApplication::showDACexec(){
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
 
-          deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          deviceAddressLineEditDAC->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
     // Add the components to the layout
     DAClayout->addWidget(deviceAddressLabel);
-    DAClayout->addWidget(deviceAddressLineEdit);
+    DAClayout->addWidget(deviceAddressLineEditDAC);
 
 
                   }
@@ -1029,9 +1092,9 @@ void sequenceApplication::showUARTexec(){
 
     QLabel* deviceAddressLabel = new QLabel("Enter your message:", ui->UARTwidget);
 
-    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->UARTwidget);
+    deviceAddressLineEditUART = new QLineEdit(ui->UARTwidget);
 
-    deviceAddressLineEdit->setPlaceholderText("Enter your message");
+    deviceAddressLineEditUART->setPlaceholderText("Enter your message");
 
 
     QString styleSheet2 =
@@ -1057,12 +1120,12 @@ void sequenceApplication::showUARTexec(){
           deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
-          deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          deviceAddressLineEditUART->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
     // Add the components to the layout
     UARTlayout->addWidget(deviceAddressLabel);
-    UARTlayout->addWidget(deviceAddressLineEdit);
+    UARTlayout->addWidget(deviceAddressLineEditUART);
 
 
 
@@ -1078,9 +1141,9 @@ void sequenceApplication::showSPIexec(){
 
     QLabel* deviceAddressLabel = new QLabel("Enter your message (Master/Slave):", ui->SPIwidget);
 
-    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->SPIwidget);
+    deviceAddressLineEditSPI = new QLineEdit(ui->SPIwidget);
 
-    deviceAddressLineEdit->setPlaceholderText("Enter your message");
+    deviceAddressLineEditSPI->setPlaceholderText("Enter your message");
 
 
     QString styleSheet2 =
@@ -1106,12 +1169,12 @@ void sequenceApplication::showSPIexec(){
           deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
-          deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          deviceAddressLineEditSPI->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
     // Add the components to the layout
     SPIlayout->addWidget(deviceAddressLabel);
-    SPIlayout->addWidget(deviceAddressLineEdit);
+    SPIlayout->addWidget(deviceAddressLineEditSPI);
 
 
 
