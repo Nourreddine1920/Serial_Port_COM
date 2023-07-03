@@ -12,6 +12,7 @@ starting_screen::starting_screen(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlag(Qt::FramelessWindowHint);
+    setFixedSize(width(), height());
 
     // Initialize uart_connection object
 

@@ -26,6 +26,7 @@ Dashboard::Dashboard(QWidget *parent) :
     // Create a status bar
     QStatusBar *statusBar = new QStatusBar(this);
     setStatusBar(statusBar);
+    setFixedSize(width(), height());
 
     // Create a QLabel for the footer text
     QLabel *footerLabel = new QLabel("© 2023 - ACTIA Engineering Services", this);

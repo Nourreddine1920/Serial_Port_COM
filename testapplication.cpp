@@ -20,6 +20,7 @@ testApplication::testApplication(QWidget *parent) :
     ui(new Ui::testApplication)
 {
     ui->setupUi(this);
+    setFixedSize(width(), height());
 
     QWidget* testapplication = new QWidget(this);
     QWidget::setWindowTitle("test Application");

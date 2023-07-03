@@ -17,6 +17,7 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
     ui(new Ui::sequenceApplication)
 {
     ui->setupUi(this);
+    setFixedSize(width(), height());
 
     QWidget::setWindowTitle("Sequence Application");
     // Create a status bar
