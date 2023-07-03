@@ -24,6 +24,7 @@ DirectRun::DirectRun(QWidget *parent) :
 
     Uart* uart = Uart::getInstance();
    QSerialPort* serialPort = uart->getSerialPort();
+   setFixedSize(width(), height());
 
    QStatusBar *statusBar = new QStatusBar(this);
    setStatusBar(statusBar);

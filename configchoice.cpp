@@ -17,6 +17,7 @@ ConfigChoice::ConfigChoice(QWidget *parent) :
     ui(new Ui::ConfigChoice)
 {
     ui->setupUi(this);
+    setFixedSize(width(), height());
 
     QWidget* configChoice = new QWidget(this);
     QWidget::setWindowTitle("Welcome Application");
