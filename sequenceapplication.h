@@ -35,6 +35,7 @@ public:
     QByteArray packet2;
     QByteArray packet3;
     QByteArray packet4;
+    QByteArray packet5;
 
     QByteArray Message;
     QString message;
@@ -43,6 +44,7 @@ public:
     QLineEdit* deviceAddressLineEditUART;
     QLineEdit* deviceAddressLineEditSPI;
     QLineEdit* deviceAddressLineEditDAC;
+    QLineEdit* deviceAddressLineEditTIMER;
 
     ~sequenceApplication();
 

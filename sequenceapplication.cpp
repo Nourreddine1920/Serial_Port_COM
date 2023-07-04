@@ -317,165 +317,486 @@ void sequenceApplication::sendSequenceframe(){
     QByteArray packet;
 
     QByteArray DelimPacket;
-
-
-
-
-
-
+    bool uart4Found = false;
+    bool spi1Found = false;
+    bool gpioFound = false;
     bool adc1found=false;
+    bool I2C1Found=false;
+    bool DACFound=false;
+    bool TIMFound=false;
 
 
 
-    packet.clear();  // clear the existing packet to start fresh
 
+    bool containsUART4 = false;
 
+    // Parcourir les éléments de la liste
+    for (int i = 0; i < ui->listWidget->count(); i++) {
+    QListWidgetItem* item = ui->listWidget->item(i);
+    if (item->text() == "UART4") {
+    containsUART4 = true;
+    break; // Sortir de la boucle dès qu'on trouve un élément "UART4"
+    }
+    }
 
+    if (containsUART4) {
+    // La liste contient un élément "UART4"
+    qDebug() << "La liste contient UART4";
 
-   for (auto menu : menus) {
-   // if (menu->title() == "Devices") { // Change "Devices" to the name of the menu that contains the devices
-   QList<QAction*> actions = menu->actions();
 
-   for (auto action : actions) {
-   QString deviceName = action->text();
 
+    uart4Found = true;
 
 
 
+    char delimiter3[2] = ",";
+    char delimiter4[2] = "|";
 
+    uint8_t messageBaudID1 = 0x04;
+    packet2.append(messageBaudID1);
+    packet2.append(delimiter4);
+    QString messageUART = deviceAddressLineEditUART->text();
+    QByteArray MessageUART = messageUART.toUtf8();
+    qDebug() << " message:" << message;
+    packet2.append(MessageUART);
 
-  if (deviceName.startsWith("ADC1")) {
+    packet2.append(delimiter3);
+    qDebug() << " packet2:" << packet2;
+    } else {
+    // La liste ne contient pas d'élément "UART4"
+    qDebug() << "La liste ne contient pas UART4";
+    }
 
-      qDebug() << " device:" << deviceName;
+    bool containsSPI1 = false;
 
+    for (int i = 0; i < ui->listWidget->count(); i++) {
+    QListWidgetItem* item = ui->listWidget->item(i);
+    if (item->text() == "SPI1") {
+    containsSPI1 = true;
+    break;
+    }
+    }
 
+    if (containsSPI1) {
+    qDebug() << "La liste contient SPI1";
 
 
+    spi1Found = true;
 
-      char delimiter2[2] = ",";
-      char delimiter1[2] = "|";
 
-      uint8_t messageBaudID = 0x02;
-      packet.append(messageBaudID);
-      packet.append(delimiter1);
-      QString message =deviceAddressLineEdit->text();
-      QByteArray Message = message.toUtf8();
-      qDebug() << " message:" << message;
-      packet.append(Message);
+    char delimiter3[2] = ",";
+    char delimiter4[2] = "|";
 
-      packet.append(delimiter2);
-      qDebug() << " packet:" << packet;
+    uint8_t messageBaudID1 = 0x05;
+    packet3.append(messageBaudID1);
+    packet3.append(delimiter4);
+    QString messageSPI = deviceAddressLineEditSPI->text();
+    QByteArray MessageSPI = messageSPI.toUtf8();
+    qDebug() << " message:" << message;
+    packet3.append(MessageSPI);
 
+    packet3.append(delimiter3);
+    qDebug() << " packet3:" << packet3;
 
-}
 
-  if (deviceName.startsWith("I2C1")) {
+    } else {
+    qDebug() << "La liste ne contient pas SPI1";
+    }
+    bool containsI2C1 = false;
 
-      qDebug() << " device:" << deviceName;
+    for (int i = 0; i < ui->listWidget->count(); i++) {
+    QListWidgetItem* item = ui->listWidget->item(i);
+    if (item->text() == "I2C1") {
+    containsI2C1 = true;
+    break;
+    }
+    }
 
+    if (containsI2C1) {
+    qDebug() << "La liste contient I2C1";
 
+    I2C1Found = true;
 
 
 
-      char delimiter3[2] = ",";
-      char delimiter4[2] = "|";
+    char delimiter3[2] = ",";
+    char delimiter4[2] = "|";
 
-      uint8_t messageBaudID1 = 0x03;
-      packet1.append(messageBaudID1);
-      packet1.append(delimiter4);
-      QString messageI2C =deviceAddressLineEditI2C->text();
-      QByteArray MessageI2C = messageI2C.toUtf8();
-      qDebug() << " message:" << message;
-      packet1.append(MessageI2C);
+    uint8_t messageBaudID1 = 0x03;
+    packet1.append(messageBaudID1);
+    packet1.append(delimiter4);
+    QString messageI2C =deviceAddressLineEditI2C->text();
+    QByteArray MessageI2C = messageI2C.toUtf8();
+    qDebug() << " message:" << message;
+    packet1.append(MessageI2C);
+
+    packet1.append(delimiter3);
+    qDebug() << " packet1:" << packet1;
+
+    } else {
+    qDebug() << "La liste ne contient pas I2C1";
+    }
+    bool containsADC1 = false;
 
-      packet1.append(delimiter3);
-      qDebug() << " packet1:" << packet1;
+    for (int i = 0; i < ui->listWidget->count(); i++) {
+    QListWidgetItem* item = ui->listWidget->item(i);
+    if (item->text() == "ADC1") {
+    containsADC1 = true;
+    break;
+    }
+    }
 
+    if (containsADC1) {
+    qDebug() << "La liste contient ADC1";
 
-}
-  if (deviceName.startsWith("UART4")) {
+    adc1found = true;
 
-      qDebug() << " device:" << deviceName;
+    char delimiter2[2] = ",";
+    char delimiter1[2] = "|";
 
+    uint8_t messageBaudID = 0x02;
+    packet.append(messageBaudID);
+    packet.append(delimiter1);
+    QString message =deviceAddressLineEdit->text();
+    QByteArray Message = message.toUtf8();
+    qDebug() << " message:" << message;
+    packet.append(Message);
 
+    packet.append(delimiter2);
+    qDebug() << " packet:" << packet;
+    } else {
+    qDebug() << "La liste ne contient pas ADC1";
+    }
 
+    bool containsTIMER = false;
 
+    for (int i = 0; i < ui->listWidget->count(); i++) {
+    QListWidgetItem* item = ui->listWidget->item(i);
+    if (item->text() == "Input Capture Mode") {
+    containsTIMER = true;
+    break;
+    }
+    }
 
-      char delimiter3[2] = ",";
-      char delimiter4[2] = "|";
+    if (containsTIMER) {
+    qDebug() << "La liste contient TIMER";
 
-      uint8_t messageBaudID1 = 0x04;
-      packet2.append(messageBaudID1);
-      packet2.append(delimiter4);
-      QString messageUART = deviceAddressLineEditUART->text();
-      QByteArray MessageUART = messageUART.toUtf8();
-      qDebug() << " message:" << message;
-      packet2.append(MessageUART);
+    TIMFound = true;
 
-      packet2.append(delimiter3);
-      qDebug() << " packet2:" << packet2;
 
+    char delimiter3[2] = ",";
+    char delimiter4[2] = "|";
 
-}
-  if (deviceName.startsWith("SPI1")) {
+    uint8_t messageBaudID1 = 0x07;
+    packet5.append(messageBaudID1);
+    packet5.append(delimiter4);
+    QString messageTIMER = deviceAddressLineEditTIMER->text();
+    QByteArray MessageTIMER = messageTIMER.toUtf8();
+    qDebug() << " message:" << message;
+    packet5.append(MessageTIMER);
 
-      qDebug() << " device:" << deviceName;
+    packet5.append(delimiter3);
+    qDebug() << " packet5:" << packet5;
 
+    } else {
+    qDebug() << "La liste ne contient pas TIMER";
+    }
 
 
+    bool containsGPIO_OUTPUT = false;
 
+    for (int i = 0; i < ui->listWidget->count(); i++) {
+    QListWidgetItem* item = ui->listWidget->item(i);
+    if (item->text() == "GPIO_OUTPUT") {
+    containsGPIO_OUTPUT = true;
+    break;
+    }
+    }
 
-      char delimiter3[2] = ",";
-      char delimiter4[2] = "|";
+    if (containsGPIO_OUTPUT) {
+    qDebug() << "La liste contient GPIO_OUTPUT";
+    } else {
+    qDebug() << "La liste ne contient pas GPIO_OUTPUT";
+    }
 
-      uint8_t messageBaudID1 = 0x05;
-      packet3.append(messageBaudID1);
-      packet3.append(delimiter4);
-      QString messageSPI = deviceAddressLineEditSPI->text();
-      QByteArray MessageSPI = messageSPI.toUtf8();
-      qDebug() << " message:" << message;
-      packet3.append(MessageSPI);
 
-      packet3.append(delimiter3);
-      qDebug() << " packet3:" << packet3;
 
+    bool containsDAC1 = false;
 
-}
+    for (int i = 0; i < ui->listWidget->count(); i++) {
+    QListWidgetItem* item = ui->listWidget->item(i);
+    if (item->text() == "DAC_OUT1") {
+    containsDAC1 = true;
+    break;
+    }
+    }
 
-  if (deviceName.startsWith("DAC_OUT1")) {
+    if (containsDAC1) {
+    qDebug() << "La liste contient DAC1";
 
-      qDebug() << " device:" << deviceName;
 
+    DACFound = true;
 
 
+    char delimiter3[2] = ",";
+    char delimiter4[2] = "|";
 
+    uint8_t messageBaudID1 = 0x06;
+    packet4.append(messageBaudID1);
+    packet4.append(delimiter4);
+    QString messageDAC = deviceAddressLineEditDAC->text();
+    QByteArray MessageDAC = messageDAC.toUtf8();
+    qDebug() << " message:" << message;
+    packet4.append(MessageDAC);
 
-      char delimiter3[2] = ",";
-      char delimiter4[2] = "|";
+    packet4.append(delimiter3);
+    qDebug() << " packet4:" << packet4;
 
-      uint8_t messageBaudID1 = 0x06;
-      packet4.append(messageBaudID1);
-      packet4.append(delimiter4);
-      QString messageDAC = deviceAddressLineEditDAC->text();
-      QByteArray MessageDAC = messageDAC.toUtf8();
-      qDebug() << " message:" << message;
-      packet4.append(MessageDAC);
+    } else {
+    qDebug() << "La liste ne contient pas DAC1";
+    }
 
-      packet4.append(delimiter3);
-      qDebug() << " packet4:" << packet4;
 
 
-}
+//   for (auto menu : menus) {
+//   // if (menu->title() == "Devices") { // Change "Devices" to the name of the menu that contains the devices
+//   QList<QAction*> actions = menu->actions();
 
-}
+//   for (auto action : actions) {
+//   QString deviceName = action->text();
+
+
+
+
+
+
+//  if (deviceName.startsWith("ADC1")) {
+
+//      qDebug() << " device:" << deviceName;
+
+
+
+
+//      adc1found = true;
+
+//      char delimiter2[2] = ",";
+//      char delimiter1[2] = "|";
+
+//      uint8_t messageBaudID = 0x02;
+//      packet.append(messageBaudID);
+//      packet.append(delimiter1);
+//      QString message =deviceAddressLineEdit->text();
+//      QByteArray Message = message.toUtf8();
+//      qDebug() << " message:" << message;
+//      packet.append(Message);
+
+//      packet.append(delimiter2);
+//      qDebug() << " packet:" << packet;
+
+
+//}
+
+//  if (deviceName.startsWith("I2C1")) {
+
+//      qDebug() << " device:" << deviceName;
+
+
+//      I2C1Found = true;
+
+
+
+//      char delimiter3[2] = ",";
+//      char delimiter4[2] = "|";
+
+//      uint8_t messageBaudID1 = 0x03;
+//      packet1.append(messageBaudID1);
+//      packet1.append(delimiter4);
+//      QString messageI2C =deviceAddressLineEditI2C->text();
+//      QByteArray MessageI2C = messageI2C.toUtf8();
+//      qDebug() << " message:" << message;
+//      packet1.append(MessageI2C);
+
+//      packet1.append(delimiter3);
+//      qDebug() << " packet1:" << packet1;
+
+
+//}
+//  if (deviceName.startsWith("UART4")) {
+
+//      qDebug() << " device:" << deviceName;
+
+
+//      uart4Found = true;
+
+
+
+//      char delimiter3[2] = ",";
+//      char delimiter4[2] = "|";
+
+//      uint8_t messageBaudID1 = 0x04;
+//      packet2.append(messageBaudID1);
+//      packet2.append(delimiter4);
+//      QString messageUART = deviceAddressLineEditUART->text();
+//      QByteArray MessageUART = messageUART.toUtf8();
+//      qDebug() << " message:" << message;
+//      packet2.append(MessageUART);
+
+//      packet2.append(delimiter3);
+//      qDebug() << " packet2:" << packet2;
+
+
+//}
+//  if (deviceName.startsWith("SPI1")) {
+
+//      qDebug() << " device:" << deviceName;
+
+
+
+//      spi1Found = true;
+
+
+//      char delimiter3[2] = ",";
+//      char delimiter4[2] = "|";
+
+//      uint8_t messageBaudID1 = 0x05;
+//      packet3.append(messageBaudID1);
+//      packet3.append(delimiter4);
+//      QString messageSPI = deviceAddressLineEditSPI->text();
+//      QByteArray MessageSPI = messageSPI.toUtf8();
+//      qDebug() << " message:" << message;
+//      packet3.append(MessageSPI);
+
+//      packet3.append(delimiter3);
+//      qDebug() << " packet3:" << packet3;
+
+
+//}
+
+//  if (deviceName.startsWith("DAC_OUT1")) {
+
+//      qDebug() << " device:" << deviceName;
+
+
+
+//      DACFound = true;
+
+
+//      char delimiter3[2] = ",";
+//      char delimiter4[2] = "|";
+
+//      uint8_t messageBaudID1 = 0x06;
+//      packet4.append(messageBaudID1);
+//      packet4.append(delimiter4);
+//      QString messageDAC = deviceAddressLineEditDAC->text();
+//      QByteArray MessageDAC = messageDAC.toUtf8();
+//      qDebug() << " message:" << message;
+//      packet4.append(MessageDAC);
+
+//      packet4.append(delimiter3);
+//      qDebug() << " packet4:" << packet4;
+
+
+//}
+////  if (deviceName.startsWith("GPIO_OUTPUT")) {
+
+////      qDebug() << " device:" << deviceName;
+
+
+
+
+
+////      char delimiter3[2] = ",";
+////      char delimiter4[2] = "|";
+
+////      uint8_t messageBaudID1 = 0x06;
+////      packet5.append(messageBaudID1);
+////      packet5.append(delimiter4);
+////      QString messageGPIO = deviceAddressLineEditGPIO->text();
+////      QByteArray MessageGPIO = messageGPIO.toUtf8();
+////      qDebug() << " message:" << message;
+////      packet5.append(MessageGPIO);
+
+////      packet5.append(delimiter3);
+////      qDebug() << " packet5:" << packet5;
+
+
+////}
+//  if (deviceName.startsWith("Input Capture Mode")) {
+
+//      qDebug() << " device:" << deviceName;
+
+
+
+//      TIMFound = true;
+
+
+//      char delimiter3[2] = ",";
+//      char delimiter4[2] = "|";
+
+//      uint8_t messageBaudID1 = 0x07;
+//      packet5.append(messageBaudID1);
+//      packet5.append(delimiter4);
+//      QString messageTIMER = deviceAddressLineEditTIMER->text();
+//      QByteArray MessageTIMER = messageTIMER.toUtf8();
+//      qDebug() << " message:" << message;
+//      packet5.append(MessageTIMER);
+
+//      packet5.append(delimiter3);
+//      qDebug() << " packet5:" << packet5;
+
+
+//}
+//}
+//   }
+
+
+   if (!uart4Found) {
+   packet2.append(delimiter2);
+//         serialPort->write(packet);
    }
 
-   QByteArray concatenated = packet + packet1 + packet2 + packet3 + packet4;
-   qDebug() << " packet:" << packet;
+
+   if (!spi1Found) {
+   packet3.append(delimiter2);
+//         serialPort->write(packet2);
+   }
+
+
+
+//   if (!gpioFound) {
+//   packet4.append(delimiter2);
+////         serialPort->write(packet2);
+//   }
+
+   if (!adc1found) {
+   packet.append(delimiter2);
+   // serialPort->write(packet2);
+   }
+
+   if (!I2C1Found) {
+   packet1.append(delimiter2);
+
+   }
+
+
+   if (!DACFound) {
+   packet4.append(delimiter2);
+
+   }
+
+   if (!TIMFound) {
+   packet5.append(delimiter2);
+
+   }
+
+
+   QByteArray concatenated = packet + packet1 + packet2 + packet3 + packet4 + packet5;
+   qDebug() << " packet:"  << packet;
    qDebug() << " packet1:" << packet1;
    qDebug() << " packet2:" << packet2;
    qDebug() << " packet3:" << packet3;
    qDebug() << " packet4:" << packet4;
+   qDebug() << " packet5:" << packet5;
 
    concatenated.append("\n");
    qint64 bytesWritten = serialPort->write(concatenated);
@@ -496,6 +817,7 @@ void sequenceApplication::sendSequenceframe(){
    packet2.clear();
    packet3.clear();
    packet4.clear();
+   packet5.clear();
 
 
 }
@@ -902,37 +1224,114 @@ void sequenceApplication::showSecondADCexec(){
                  }
 
 void sequenceApplication::showGPIOexec(){
-
     Uart* uart = Uart::getInstance();
     QSerialPort* serialPort = uart->getSerialPort();
 
-
     QVBoxLayout* gpioOutputLayout = new QVBoxLayout(ui->GPIOwidget);
 
+    // Create a QHBoxLayout for the switch button and label
+    QVBoxLayout* switchLayout = new QVBoxLayout;
+
     // Create a QLabel to display the status of the LED
-    QLabel* ledStatusLabel = new QLabel("LED Status: OFF/ON", ui->GPIOwidget);
-    QString styleSheet2 =
-              "QPushButton {"
-              "    background-color: gray;"
-              "    border: none;"
-              "    color: white;"
-              "    padding: 3px 3px;"
-              "    text-align: center;"
-              "    text-decoration: none;"
-              "    font-size: 14px;"
-              "    margin: 4px 2px;"
-              "    border-radius: 10px;"
-              "}"
-              ""
-              "QPushButton:hover {"
-              "    background-color: #3e8e41;"
-              "}";
-             QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
-            ledStatusLabel->setFont(font);
+    QLabel* ledStatusLabel = new QLabel("LED Status", ui->GPIOwidget);
+    QFont font("Segoe UI", 10); // Police Arial avec une taille de 10 points
+    ledStatusLabel->setFont(font);
+    ledStatusLabel->setStyleSheet("font: bold 13px; color: #36454F;");
+
+    // Create a custom QPushButton for the Toggle Switch
+    QPushButton* switchButton = new QPushButton(ui->GPIOwidget);
+    switchButton->setCheckable(true);
+    switchButton->setChecked(false);
+    switchButton->setFixedSize(50, 30);
+    switchButton->setText("OFF");
 
 
-            ledStatusLabel->setStyleSheet("font: bold 13px; color: #36454F;");
-            gpioOutputLayout->addWidget(ledStatusLabel);
+    // Set the stylesheets for the ON and OFF states of the Toggle Switch
+    QString styleSheetOn = "QPushButton { background-color: #3e8e41; }";
+    QString styleSheetOff = "QPushButton { background-color: #cccccc; }";
+    switchButton->setStyleSheet(styleSheetOff);
+
+    // Connect the clicked signal of the switchButton to a slot
+    QObject::connect(switchButton, &QPushButton::clicked, [=]() {
+    if (switchButton->isChecked()) {
+    switchButton->setStyleSheet(styleSheetOn);
+    switchButton->setText("ON");
+    } else {
+    switchButton->setStyleSheet(styleSheetOff);
+    switchButton->setText("OFF");
+    }
+    });
+
+    switchButton->show();
+
+    // Add the switchButton and ledStatusLabel to the switchLayout
+    switchLayout->addWidget(switchButton);
+    switchLayout->addWidget(ledStatusLabel);
+
+    // Add a spacer item to center the switchLayout vertically
+    QSpacerItem* spacerItem = new QSpacerItem(100, 100, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    switchLayout->addSpacerItem(spacerItem);
+
+    // Add the switchLayout to the gpioOutputLayout
+    gpioOutputLayout->addLayout(switchLayout);
+
+    gpioOutputLayout->addWidget(ledStatusLabel);
+    gpioOutputLayout->addWidget(switchButton);
+
+//    Uart* uart = Uart::getInstance();
+//    QSerialPort* serialPort = uart->getSerialPort();
+
+//    QVBoxLayout* gpioOutputLayout = new QVBoxLayout(ui->GPIOwidget);
+
+//    // Create a QHBoxLayout for the switch button and label
+//    QHBoxLayout* switchLayout = new QHBoxLayout;
+
+//    // Create a QLabel to display the status of the LED
+//    QLabel* ledStatusLabel = new QLabel("LED Status: OFF/ON", ui->GPIOwidget);
+//    QFont font("Segoe UI", 10); // Police Arial avec une taille de 10 points
+//    ledStatusLabel->setFont(font);
+//    ledStatusLabel->setStyleSheet("font: bold 13px; color: #36454F;");
+
+//    QPushButton* switchButton = new QPushButton("OFF");
+//    switchButton->setCheckable(true); // Rendre le bouton-poussoir commutable (toggleable)
+
+//    // Connecter le signal "clicked" du bouton-poussoir à un slot
+//    QObject::connect(switchButton, &QPushButton::clicked, [=]() {
+//    if (switchButton->isChecked()) {
+//    switchButton->setText("ON");
+//    } else {
+//    switchButton->setText("OFF");
+//    }
+//    });
+
+//    switchButton->show();
+
+//    // Ajouter le bouton de commutation et l'étiquette au QHBoxLayout
+//    switchLayout->addWidget(switchButton);
+//    switchLayout->addWidget(ledStatusLabel);
+
+//    // Ajouter le QHBoxLayout au QVBoxLayout principal
+//    gpioOutputLayout->addLayout(switchLayout);
+
+//    QString styleSheet2 =
+//    "QPushButton {"
+//    " background-color: gray;"
+//    " border: none;"
+//    " color: white;"
+//    " padding: 3px 3px;"
+//    " text-align: center;"
+//    " text-decoration: none;"
+//    " font-size: 14px;"
+//    " margin: 4px 2px;"
+//    " border-radius: 10px;"
+//    "}"
+//    ""
+//    "QPushButton:hover {"
+//    " background-color: #3e8e41;"
+//    "}";
+
+//    gpioOutputLayout->addWidget(ledStatusLabel);
+//    gpioOutputLayout->addWidget(switchButton);
 
 
                   }
@@ -1042,9 +1441,9 @@ void sequenceApplication::showTIMERexec(){
 
     QLabel* deviceAddressLabel = new QLabel("Timer clock:", ui->TIMERwidget);
 
-    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->TIMERwidget);
+    deviceAddressLineEditTIMER = new QLineEdit(ui->TIMERwidget);
 
-    deviceAddressLineEdit->setPlaceholderText("Enter the Timer Clock");
+    deviceAddressLineEditTIMER->setPlaceholderText("Enter the Timer Clock");
 
 
     QString styleSheet2 =
@@ -1070,12 +1469,12 @@ void sequenceApplication::showTIMERexec(){
           deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
-          deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          deviceAddressLineEditTIMER->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
     // Add the components to the layout
     TIMERlayout->addWidget(deviceAddressLabel);
-    TIMERlayout->addWidget(deviceAddressLineEdit);
+    TIMERlayout->addWidget(deviceAddressLineEditTIMER);
 
 
 
