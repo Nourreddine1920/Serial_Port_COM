@@ -45,7 +45,7 @@ public:
     QLineEdit* deviceAddressLineEditSPI;
     QLineEdit* deviceAddressLineEditDAC;
     QLineEdit* deviceAddressLineEditTIMER;
-
+    QTextBrowser* dataTextBrowseroutput;
     ~sequenceApplication();
 
 public slots:
@@ -76,6 +76,7 @@ private slots :
 
 
     void sendSequenceframe();
+    void on_pushButton_clicked();
 };
 
 #endif // SEQUENCEAPPLICATION_H

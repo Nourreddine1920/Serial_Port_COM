@@ -798,7 +798,7 @@ void sequenceApplication::sendSequenceframe(){
    qDebug() << " packet4:" << packet4;
    qDebug() << " packet5:" << packet5;
 
-   concatenated.append("\n");
+   concatenated.append("$");
    qint64 bytesWritten = serialPort->write(concatenated);
 
    qDebug() << "concatenated" << concatenated;
@@ -1346,7 +1346,7 @@ void sequenceApplication::showOUTPUTexec(){
 
     // Create a QLabel to display the status of the LED
     QLabel* ledStatusLabel = new QLabel("OUTPUT values", ui->OUTPUTwidget);
-    QTextBrowser* dataTextBrowser = new QTextBrowser(ui->OUTPUTwidget);
+    dataTextBrowseroutput = new QTextBrowser(ui->OUTPUTwidget);
 
 
     QString styleSheet2 =
@@ -1371,13 +1371,52 @@ void sequenceApplication::showOUTPUTexec(){
 
           ledStatusLabel->setStyleSheet("font: bold 13px; color: #36454F;");
 
-          dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
           font.setBold(true);
-          dataTextBrowser->setFont(font);
+         dataTextBrowseroutput->setFont(font);
+          QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
+
+//            QTextBrowser* dataTextBrowseroutput->setStyleSheet(QString("color1: %1;").arg(color1));
+
+        dataTextBrowseroutput->setStyleSheet(style);
+
+        dataTextBrowseroutput->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+
+
+//            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
+//            QByteArray responseData;
+//            while (serialPort->waitForReadyRead(100)) {
+//            responseData.append(serialPort->readAll());
+
+
+//            }
+
+//                if (!responseData.isEmpty()) {
+//                    lastResponse = QString::fromUtf8(responseData);
+
+//                    qDebug() << "Received data:" << lastResponse;
+//                    textBrowser->append(lastResponse);
+//                } else {
+//                    qDebug() << "No data received from serial port";
+//                    textBrowser->append("No data received from serial port");
+//                }
+
+          QByteArray buffer;
+          const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+          QByteArray data = serialPort->readAll();
+          QString datastring(data);
+          buffer.append(data);
+//                QString message(data);
+          qDebug() << "Received message:" << datastring;
+
+
+
+          dataTextBrowseroutput->append(datastring);
 
     // Add the components to the layout
     OUTPUTLayout->addWidget(ledStatusLabel);
-    OUTPUTLayout->addWidget(dataTextBrowser);
+    OUTPUTLayout->addWidget(dataTextBrowseroutput);
 
 }
 
@@ -1633,3 +1672,53 @@ sequenceApplication::~sequenceApplication()
 {
     delete ui;
 }
+
+void sequenceApplication::on_pushButton_clicked()
+{
+
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
+
+    dataTextBrowseroutput->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+     QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
+
+//            QTextBrowser* dataTextBrowseroutput->setStyleSheet(QString("color1: %1;").arg(color1));
+
+   dataTextBrowseroutput->setStyleSheet(style);
+
+
+
+//            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
+//            QByteArray responseData;
+//            while (serialPort->waitForReadyRead(100)) {
+//            responseData.append(serialPort->readAll());
+
+
+//            }
+
+//                if (!responseData.isEmpty()) {
+//                    lastResponse = QString::fromUtf8(responseData);
+
+//                    qDebug() << "Received data:" << lastResponse;
+//                    textBrowser->append(lastResponse);
+//                } else {
+//                    qDebug() << "No data received from serial port";
+//                    textBrowser->append("No data received from serial port");
+//                }
+
+     QByteArray buffer;
+     const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+     QByteArray data = serialPort->readAll();
+     QString datastring(data);
+     buffer.append(data);
+//                QString message(data);
+     qDebug() << "Received message:" << datastring;
+
+
+
+     dataTextBrowseroutput->append(datastring);
+
+}
+
