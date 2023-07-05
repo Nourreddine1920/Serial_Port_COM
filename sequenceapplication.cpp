@@ -505,7 +505,7 @@ void sequenceApplication::sendSequenceframe(){
     char delimiter3[2] = ",";
     char delimiter4[2] = "|";
 
-    uint8_t messageBaudID1 = 0x07;
+    uint8_t messageBaudID1 = 0x11;
     packet5.append(messageBaudID1);
     packet5.append(delimiter4);
     QString messageTIMER = deviceAddressLineEditTIMER->text();
