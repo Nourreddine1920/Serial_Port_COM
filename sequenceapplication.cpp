@@ -45,7 +45,25 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
     }";
 
     ui->listWidget->setStyleSheet(listStyle);
+    QString styleSheetOn = "QPushButton { background-color: #3e8e41; }";
+    QString styleSheet = "QPushButton {"
+    " background-color: #868482; /* Couleur de fond */"
+    " color: white; /* Couleur du texte */"
+    " font-weight: bold; /* Texte en gras */"
+    " border: none; /* Supprimer la bordure */"
+    " border-radius: 2px; /* Coins arrondis */"
+    " padding: 10px 20px; /* Espacement interne */"
+    "}"
+    ""
+    "QPushButton:hover {"
+    " background-color: #3e8e41; /* Couleur de fond lors du survol */"
+    "}"
+    ""
+    "QPushButton:pressed {"
+    " background-color: #3e8e41; /* Couleur de fond lors du clic */"
+    "}";
 
+    ui->pushButton->setStyleSheet(styleSheet) ;
 
 
     // Set the gray background color
@@ -548,7 +566,6 @@ void sequenceApplication::sendSequenceframe(){
     QByteArray MessageDAC = messageDAC.toUtf8();
     qDebug() << " message:" << message;
     packet4.append(MessageDAC);
-
     packet4.append(delimiter3);
     qDebug() << " packet4:" << packet4;
 
