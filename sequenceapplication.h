@@ -78,6 +78,7 @@ private slots :
 
     void sendSequenceframe();
     void on_pushButton_clicked();
+    void showsecondTIME();
 };
 
 #endif // SEQUENCEAPPLICATION_H

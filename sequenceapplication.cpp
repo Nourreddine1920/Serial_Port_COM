@@ -103,6 +103,7 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
 
     connect(returnButton, &QToolButton::clicked, this, &sequenceApplication::returnDashboard);
     connect(connectButton, &QToolButton::clicked, this, &sequenceApplication::showOUTPUTexec);
+    connect(connectButton, &QToolButton::clicked, this, &sequenceApplication::showsecondTIME);
 
     QMenu *UART = menuBar()->addMenu("&UART");
     QCheckBox *checkBox = new QCheckBox();
@@ -1195,7 +1196,6 @@ void sequenceApplication::showOUTPUTexec(){
     QLabel* ledStatusLabel = new QLabel("OUTPUT values", ui->OUTPUTwidget);
     dataTextBrowseroutput = new QTextBrowser(ui->OUTPUTwidget);
 
-    dataTextBrowseroutput->clear();
 
 
     QString styleSheet2 =
@@ -1231,6 +1231,8 @@ void sequenceApplication::showOUTPUTexec(){
         dataTextBrowseroutput->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
 
 
+
+
 //            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
 //            QByteArray responseData;
 //            while (serialPort->waitForReadyRead(100)) {
@@ -1263,12 +1265,76 @@ void sequenceApplication::showOUTPUTexec(){
 
           dataTextBrowseroutput->append(datastring);
 
+
+
     // Add the components to the layout
     OUTPUTLayout->addWidget(ledStatusLabel);
     OUTPUTLayout->addWidget(dataTextBrowseroutput);
 
 }
 
+void sequenceApplication::showsecondTIME(){
+
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
+    dataTextBrowseroutput->clearHistory();
+
+//    QVBoxLayout* OUTPUTLayout = new QVBoxLayout(ui->OUTPUTwidget);
+
+
+//          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+
+//          font.setBold(true);
+//         dataTextBrowseroutput->setFont(font);
+//          QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
+
+////            QTextBrowser* dataTextBrowseroutput->setStyleSheet(QString("color1: %1;").arg(color1));
+
+//        dataTextBrowseroutput->setStyleSheet(style);
+
+//        dataTextBrowseroutput->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+
+
+
+
+////            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
+////            QByteArray responseData;
+////            while (serialPort->waitForReadyRead(100)) {
+////            responseData.append(serialPort->readAll());
+
+
+////            }
+
+////                if (!responseData.isEmpty()) {
+////                    lastResponse = QString::fromUtf8(responseData);
+
+////                    qDebug() << "Received data:" << lastResponse;
+////                    textBrowser->append(lastResponse);
+////                } else {
+////                    qDebug() << "No data received from serial port";
+////                    textBrowser->append("No data received from serial port");
+////                }
+
+//          QByteArray buffer;
+//          const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+
+
+//          QByteArray data = serialPort->readAll();
+//          QString datastring(data);
+//          buffer.append(data);
+////                QString message(data);
+//          qDebug() << "Received message:" << datastring;
+
+
+
+//          dataTextBrowseroutput->append(datastring);
+
+
+
+//    // Add the components to the layout
+//    OUTPUTLayout->addWidget(dataTextBrowseroutput);
+
+}
 
 void sequenceApplication::showDACexec(){
 
@@ -1524,50 +1590,28 @@ sequenceApplication::~sequenceApplication()
 
 void sequenceApplication::on_pushButton_clicked()
 {
+Uart* uart = Uart::getInstance();
+QSerialPort* serialPort = uart->getSerialPort();
 
-    Uart* uart = Uart::getInstance();
-    QSerialPort* serialPort = uart->getSerialPort();
+dataTextBrowseroutput->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+QString style = "color: #AA4A44;";
+dataTextBrowseroutput->setStyleSheet(style);
 
-    dataTextBrowseroutput->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
-     QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
+QByteArray buffer;
+const int MAX_BUFFER_SIZE = 20;
+QByteArray data = serialPort->readAll();
+QString datastring(data);
+buffer.append(data);
+qDebug() << "Received message:" << datastring;
 
-//            QTextBrowser* dataTextBrowseroutput->setStyleSheet(QString("color1: %1;").arg(color1));
-
-   dataTextBrowseroutput->setStyleSheet(style);
-
-
-
-//            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
-//            QByteArray responseData;
-//            while (serialPort->waitForReadyRead(100)) {
-//            responseData.append(serialPort->readAll());
-
-
-//            }
-
-//                if (!responseData.isEmpty()) {
-//                    lastResponse = QString::fromUtf8(responseData);
-
-//                    qDebug() << "Received data:" << lastResponse;
-//                    textBrowser->append(lastResponse);
-//                } else {
-//                    qDebug() << "No data received from serial port";
-//                    textBrowser->append("No data received from serial port");
-//                }
-
-     QByteArray buffer;
-     const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
+dataTextBrowseroutput->clearHistory();
+dataTextBrowseroutput->setText(datastring);
 
 
-     QByteArray data = serialPort->readAll();
-     QString datastring(data);
-     buffer.append(data);
-//                QString message(data);
-     qDebug() << "Received message:" << datastring;
+if (dataTextBrowseroutput == nullptr) {
+    dataTextBrowseroutput->setText(datastring);
+    qDebug() << "Received dataaaaaaaaaaaaa:" << datastring;
 
-
-
-     dataTextBrowseroutput->append(datastring);
-
+}
 }
 
