@@ -533,6 +533,23 @@ void sequenceApplication::sendSequenceframe(){
 
     if (containsGPIO_OUTPUT) {
     qDebug() << "La liste contient GPIO_OUTPUT";
+
+
+    gpioFound = true;
+
+
+    char delimiter3[2] = ",";
+    char delimiter4[2] = "|";
+
+//    uint8_t messageBaudID1 = 0x18;
+//    packet6.append(messageBaudID1);
+//    packet6.append(delimiter4);
+//    QString message = deviceAddressLineEditDAC->text();
+//    QByteArray messageGPIO = messageGPIO.toUtf8();
+//    qDebug() << " message:" << message;
+//    packet6.append(messageGPIO);
+//    packet6.append(delimiter3);
+//    qDebug() << " packet6:" << packet6;
     } else {
     qDebug() << "La liste ne contient pas GPIO_OUTPUT";
     }
@@ -574,199 +591,6 @@ void sequenceApplication::sendSequenceframe(){
     }
 
 
-
-//   for (auto menu : menus) {
-//   // if (menu->title() == "Devices") { // Change "Devices" to the name of the menu that contains the devices
-//   QList<QAction*> actions = menu->actions();
-
-//   for (auto action : actions) {
-//   QString deviceName = action->text();
-
-
-
-
-
-
-//  if (deviceName.startsWith("ADC1")) {
-
-//      qDebug() << " device:" << deviceName;
-
-
-
-
-//      adc1found = true;
-
-//      char delimiter2[2] = ",";
-//      char delimiter1[2] = "|";
-
-//      uint8_t messageBaudID = 0x02;
-//      packet.append(messageBaudID);
-//      packet.append(delimiter1);
-//      QString message =deviceAddressLineEdit->text();
-//      QByteArray Message = message.toUtf8();
-//      qDebug() << " message:" << message;
-//      packet.append(Message);
-
-//      packet.append(delimiter2);
-//      qDebug() << " packet:" << packet;
-
-
-//}
-
-//  if (deviceName.startsWith("I2C1")) {
-
-//      qDebug() << " device:" << deviceName;
-
-
-//      I2C1Found = true;
-
-
-
-//      char delimiter3[2] = ",";
-//      char delimiter4[2] = "|";
-
-//      uint8_t messageBaudID1 = 0x03;
-//      packet1.append(messageBaudID1);
-//      packet1.append(delimiter4);
-//      QString messageI2C =deviceAddressLineEditI2C->text();
-//      QByteArray MessageI2C = messageI2C.toUtf8();
-//      qDebug() << " message:" << message;
-//      packet1.append(MessageI2C);
-
-//      packet1.append(delimiter3);
-//      qDebug() << " packet1:" << packet1;
-
-
-//}
-//  if (deviceName.startsWith("UART4")) {
-
-//      qDebug() << " device:" << deviceName;
-
-
-//      uart4Found = true;
-
-
-
-//      char delimiter3[2] = ",";
-//      char delimiter4[2] = "|";
-
-//      uint8_t messageBaudID1 = 0x04;
-//      packet2.append(messageBaudID1);
-//      packet2.append(delimiter4);
-//      QString messageUART = deviceAddressLineEditUART->text();
-//      QByteArray MessageUART = messageUART.toUtf8();
-//      qDebug() << " message:" << message;
-//      packet2.append(MessageUART);
-
-//      packet2.append(delimiter3);
-//      qDebug() << " packet2:" << packet2;
-
-
-//}
-//  if (deviceName.startsWith("SPI1")) {
-
-//      qDebug() << " device:" << deviceName;
-
-
-
-//      spi1Found = true;
-
-
-//      char delimiter3[2] = ",";
-//      char delimiter4[2] = "|";
-
-//      uint8_t messageBaudID1 = 0x05;
-//      packet3.append(messageBaudID1);
-//      packet3.append(delimiter4);
-//      QString messageSPI = deviceAddressLineEditSPI->text();
-//      QByteArray MessageSPI = messageSPI.toUtf8();
-//      qDebug() << " message:" << message;
-//      packet3.append(MessageSPI);
-
-//      packet3.append(delimiter3);
-//      qDebug() << " packet3:" << packet3;
-
-
-//}
-
-//  if (deviceName.startsWith("DAC_OUT1")) {
-
-//      qDebug() << " device:" << deviceName;
-
-
-
-//      DACFound = true;
-
-
-//      char delimiter3[2] = ",";
-//      char delimiter4[2] = "|";
-
-//      uint8_t messageBaudID1 = 0x06;
-//      packet4.append(messageBaudID1);
-//      packet4.append(delimiter4);
-//      QString messageDAC = deviceAddressLineEditDAC->text();
-//      QByteArray MessageDAC = messageDAC.toUtf8();
-//      qDebug() << " message:" << message;
-//      packet4.append(MessageDAC);
-
-//      packet4.append(delimiter3);
-//      qDebug() << " packet4:" << packet4;
-
-
-//}
-////  if (deviceName.startsWith("GPIO_OUTPUT")) {
-
-////      qDebug() << " device:" << deviceName;
-
-
-
-
-
-////      char delimiter3[2] = ",";
-////      char delimiter4[2] = "|";
-
-////      uint8_t messageBaudID1 = 0x06;
-////      packet5.append(messageBaudID1);
-////      packet5.append(delimiter4);
-////      QString messageGPIO = deviceAddressLineEditGPIO->text();
-////      QByteArray MessageGPIO = messageGPIO.toUtf8();
-////      qDebug() << " message:" << message;
-////      packet5.append(MessageGPIO);
-
-////      packet5.append(delimiter3);
-////      qDebug() << " packet5:" << packet5;
-
-
-////}
-//  if (deviceName.startsWith("Input Capture Mode")) {
-
-//      qDebug() << " device:" << deviceName;
-
-
-
-//      TIMFound = true;
-
-
-//      char delimiter3[2] = ",";
-//      char delimiter4[2] = "|";
-
-//      uint8_t messageBaudID1 = 0x07;
-//      packet5.append(messageBaudID1);
-//      packet5.append(delimiter4);
-//      QString messageTIMER = deviceAddressLineEditTIMER->text();
-//      QByteArray MessageTIMER = messageTIMER.toUtf8();
-//      qDebug() << " message:" << message;
-//      packet5.append(MessageTIMER);
-
-//      packet5.append(delimiter3);
-//      qDebug() << " packet5:" << packet5;
-
-
-//}
-//}
-//   }
-
-
    if (!uart4Found) {
    packet2.append(delimiter2);
 //         serialPort->write(packet);
@@ -780,10 +604,10 @@ void sequenceApplication::sendSequenceframe(){
 
 
 
-//   if (!gpioFound) {
-//   packet4.append(delimiter2);
-////         serialPort->write(packet2);
-//   }
+   if (!gpioFound) {
+   packet6.append(delimiter2);
+//         serialPort->write(packet2);
+   }
 
    if (!adc1found) {
    packet.append(delimiter2);
@@ -807,13 +631,14 @@ void sequenceApplication::sendSequenceframe(){
    }
 
 
-   QByteArray concatenated = packet + packet1 + packet2 + packet3 + packet4 + packet5;
+   QByteArray concatenated = packet + packet1 + packet2 + packet3 + packet4 + packet5 + packet6;
    qDebug() << " packet:"  << packet;
    qDebug() << " packet1:" << packet1;
    qDebug() << " packet2:" << packet2;
    qDebug() << " packet3:" << packet3;
    qDebug() << " packet4:" << packet4;
    qDebug() << " packet5:" << packet5;
+   qDebug() << " packet6:" << packet6;
 
    concatenated.append("$");
    qint64 bytesWritten = serialPort->write(concatenated);
@@ -836,6 +661,7 @@ void sequenceApplication::sendSequenceframe(){
    packet4.clear();
    packet5.clear();
 
+   packet6.clear();
 
 }
 void sequenceApplication::addActionToMenu(QString menuItem, QString actionName)
@@ -1364,6 +1190,8 @@ void sequenceApplication::showOUTPUTexec(){
     // Create a QLabel to display the status of the LED
     QLabel* ledStatusLabel = new QLabel("OUTPUT values", ui->OUTPUTwidget);
     dataTextBrowseroutput = new QTextBrowser(ui->OUTPUTwidget);
+
+    dataTextBrowseroutput->clear();
 
 
     QString styleSheet2 =
