@@ -36,6 +36,7 @@ public:
     QByteArray packet3;
     QByteArray packet4;
     QByteArray packet5;
+    QByteArray packet6;
 
     QByteArray Message;
     QString message;
