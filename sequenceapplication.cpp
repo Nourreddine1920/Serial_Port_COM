@@ -541,15 +541,10 @@ void sequenceApplication::sendSequenceframe(){
     char delimiter3[2] = ",";
     char delimiter4[2] = "|";
 
-//    uint8_t messageBaudID1 = 0x18;
-//    packet6.append(messageBaudID1);
-//    packet6.append(delimiter4);
-//    QString message = deviceAddressLineEditDAC->text();
-//    QByteArray messageGPIO = messageGPIO.toUtf8();
-//    qDebug() << " message:" << message;
-//    packet6.append(messageGPIO);
-//    packet6.append(delimiter3);
-//    qDebug() << " packet6:" << packet6;
+    uint8_t messageBaudID1 = 0x18;
+    packet6.append(messageBaudID1);
+    packet6.append(delimiter4);
+    packet6.append(delimiter3);
     } else {
     qDebug() << "La liste ne contient pas GPIO_OUTPUT";
     }
@@ -593,25 +588,21 @@ void sequenceApplication::sendSequenceframe(){
 
    if (!uart4Found) {
    packet2.append(delimiter2);
-//         serialPort->write(packet);
    }
 
 
    if (!spi1Found) {
    packet3.append(delimiter2);
-//         serialPort->write(packet2);
    }
 
 
 
    if (!gpioFound) {
    packet6.append(delimiter2);
-//         serialPort->write(packet2);
    }
 
    if (!adc1found) {
    packet.append(delimiter2);
-   // serialPort->write(packet2);
    }
 
    if (!I2C1Found) {
