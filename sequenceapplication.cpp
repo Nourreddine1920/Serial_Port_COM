@@ -538,13 +538,6 @@ void sequenceApplication::sendSequenceframe(){
     gpioFound = true;
 
 
-    char delimiter3[2] = ",";
-    char delimiter4[2] = "|";
-
-    uint8_t messageBaudID1 = 0x18;
-    packet6.append(messageBaudID1);
-    packet6.append(delimiter4);
-    packet6.append(delimiter3);
     } else {
     qDebug() << "La liste ne contient pas GPIO_OUTPUT";
     }
@@ -1090,9 +1083,29 @@ void sequenceApplication::showGPIOexec(){
     if (switchButton->isChecked()) {
     switchButton->setStyleSheet(styleSheetOn);
     switchButton->setText("ON");
+    char delimiter3[2] = ",";
+    char delimiter4[2] = "|";
+
+    uint8_t messageBaudID1 = 0x18;
+    packet6.append(messageBaudID1);
+    packet6.append(delimiter4);
+    packet6.append("ON");
+
+    packet6.append(delimiter3);
+
     } else {
     switchButton->setStyleSheet(styleSheetOff);
     switchButton->setText("OFF");
+    char delimiter3[2] = ",";
+    char delimiter4[2] = "|";
+    uint8_t messageBaudID1 = 0x18;
+    packet6.append(messageBaudID1);
+    packet6.append(delimiter4);
+    packet6.append("OFF");
+
+    packet6.append(delimiter3);
+
+
     }
     });
 
