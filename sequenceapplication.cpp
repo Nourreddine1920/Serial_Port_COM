@@ -1607,11 +1607,11 @@ qDebug() << "Received message:" << datastring;
 dataTextBrowseroutput->clearHistory();
 dataTextBrowseroutput->setText(datastring);
 
-
-if (dataTextBrowseroutput == nullptr) {
-    dataTextBrowseroutput->setText(datastring);
+if (dataTextBrowseroutput != nullptr) {
+    dataTextBrowseroutput->append(datastring);
     qDebug() << "Received dataaaaaaaaaaaaa:" << datastring;
-
 }
+
+
 }
 
