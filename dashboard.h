@@ -99,6 +99,33 @@ private slots :
 
                QLabel* baudRateLabel = new QLabel(tr("Baud Rate"), this);
                QComboBox* baudRateComboBox = new QComboBox(this);
+
+               // Appliquer un style à la QComboBox
+               QString comboBoxStyle = "QComboBox {"
+               " border: 1px solid #555555;"
+               " border-radius: 3px;"
+               " padding: 1px 18px 1px 3px;"
+               " min-width: 6em;"
+               " background-color: #ffffff;"
+               "}"
+               "QComboBox::drop-down {"
+               " subcontrol-origin: padding;"
+               " subcontrol-position: top right;"
+               " width: 20px;"
+               " border-left-width: 1px;"
+               " border-left-color: #555555;"
+               " border-left-style: solid;"
+               " border-top-right-radius: 3px;"
+               " border-bottom-right-radius: 3px;"
+               " background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+               " stop: 0 #ffffff, stop: 1 #dcdcdc);"
+               "}"
+               "QComboBox::down-arrow {"
+               " image: url(down-arrow.png);"
+               "}";
+
+               baudRateComboBox->setStyleSheet(comboBoxStyle);
+
                QList<qint32> baudRates = info.standardBaudRates(); // What baudrates does my computer support ?
                QList<QString> stringBaudRates;
                 for(int i = 0 ; i < baudRates.size() ; i++){
@@ -474,6 +501,67 @@ private slots :
 
                QLabel* baudRateLabel = new QLabel(tr("Baud Rate"), this);
                QComboBox* baudRateComboBox = new QComboBox(this);
+
+               // Appliquer un style à la QComboBox
+//               QString comboBoxStyle = "QComboBox {"
+//               " border: 1px solid #555555;"
+//               " border-radius: 3px;"
+//               " padding: 1px 3px 1px 3px;"
+//               " min-width: 6em;"
+//               " background-color: #ffffff;"
+//               " selection-background-color: #dddddd;"
+//               "}"
+//               "QComboBox::drop-down {"
+//               " subcontrol-origin: padding;"
+//               " subcontrol-position: top right;"
+//               " width: 20px;"
+//               " border-left-width: 1px;"
+//               " border-left-color: #555555;"
+//               " border-left-style: solid;"
+//               " border-top-right-radius: 3px;"
+//               " border-bottom-right-radius: 3px;"
+//               " background-color: #dddddd;"
+//               "}"
+//               "QComboBox::down-arrow {"
+//               " width: 0;"
+//               " height: 0;"
+//               " border-style: solid;"
+//               " border-width: 5px 5px 0 5px;"
+//               " border-color: #555555 transparent transparent transparent;"
+//               "}";
+
+               // Appliquer un style à la QComboBox
+               QString comboBoxStyle = "QComboBox {"
+               " border: 1px solid #555555;"
+               " border-radius: 3px;"
+               " padding: 1px 3px 1px 3px;"
+               " min-width: 6em;"
+               " background-color: #ffffff;"
+               "}"
+               "QComboBox::drop-down {"
+               " subcontrol-origin: padding;"
+               " subcontrol-position: top right;"
+               " width: 20px;"
+               " border-left-width: 1px;"
+               " border-left-color: #555555;"
+               " border-left-style: solid;"
+               " border-top-right-radius: 3px;"
+               " border-bottom-right-radius: 3px;"
+               " background-color: #dddddd;"
+               "}"
+               "QComboBox::down-arrow {"
+               " width: 0;"
+               " height: 0;"
+               " border-style: solid;"
+               " border-width: 5px 5px 0 5px;"
+               " border-color: #555555 transparent transparent transparent;"
+               "}"
+               "QComboBox QAbstractItemView {"
+               " selection-background-color: #00ff00;"
+               "}";
+
+               baudRateComboBox->setStyleSheet(comboBoxStyle);
+
                QList<qint32> baudRates = info.standardBaudRates(); // What baudrates does my computer support ?
                QList<QString> stringBaudRates;
                 for(int i = 0 ; i < baudRates.size() ; i++){
@@ -485,7 +573,7 @@ private slots :
                // Set the minimum width to 100 pixels
                baudRateComboBox->setMinimumWidth(10);
                baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+//               baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(baudRateLabel, baudRateComboBox);
 
@@ -530,9 +618,11 @@ private slots :
 
                QLabel* parityLabel = new QLabel(tr("Parity"), this);
                QComboBox* parityComboBox = new QComboBox(this);
+
+
                parityComboBox->addItems(QStringList() << "None" << "Odd" << "Even");
                parityLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               parityComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               parityComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(parityLabel, parityComboBox);
 
@@ -578,12 +668,14 @@ private slots :
 
                QLabel* stopBitsLabel = new QLabel(tr("Stop Bits"), this);
                QComboBox* stopBitsComboBox = new QComboBox(this);
+
+               stopBitsComboBox->setStyleSheet(comboBoxStyle);
+
                stopBitsComboBox->addItem("1");
                stopBitsComboBox->addItem("1,5");
                stopBitsComboBox->addItem("2");
 
                stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                layout->addRow(stopBitsLabel, stopBitsComboBox);
 
@@ -639,9 +731,11 @@ private slots :
 
                QLabel* DataBitsLabel = new QLabel(tr("Data Bits"), this);
                QComboBox* DataBitsComboBox = new QComboBox(this);
+
+               DataBitsComboBox->setStyleSheet(comboBoxStyle);
+
                DataBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
                DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               DataBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
                // ----------------------- Save DataBits configs into a UARTConfig.txt-----------------------------------//
 
@@ -683,7 +777,7 @@ private slots :
                QComboBox* FlowControlComboBox = new QComboBox(this);
                FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control " );
                FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               FlowControlComboBox->setStyleSheet(comboBoxStyle);
 
 
 
@@ -884,7 +978,37 @@ private slots :
                // Set the minimum width to 100 pixels
                baudRateComboBox->setMinimumWidth(10);
                baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+
+               QString comboBoxStyle = "QComboBox {"
+               " border: 1px solid #555555;"
+               " border-radius: 3px;"
+               " padding: 1px 3px 1px 3px;"
+               " min-width: 6em;"
+               " background-color: #ffffff;"
+               "}"
+               "QComboBox::drop-down {"
+               " subcontrol-origin: padding;"
+               " subcontrol-position: top right;"
+               " width: 20px;"
+               " border-left-width: 1px;"
+               " border-left-color: #555555;"
+               " border-left-style: solid;"
+               " border-top-right-radius: 3px;"
+               " border-bottom-right-radius: 3px;"
+               " background-color: #dddddd;"
+               "}"
+               "QComboBox::down-arrow {"
+               " width: 0;"
+               " height: 0;"
+               " border-style: solid;"
+               " border-width: 5px 5px 0 5px;"
+               " border-color: #555555 transparent transparent transparent;"
+               "}"
+               "QComboBox QAbstractItemView {"
+               " selection-background-color: #00ff00;"
+               "}";
+
+               baudRateComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(baudRateLabel, baudRateComboBox);
 
@@ -930,7 +1054,7 @@ private slots :
                QComboBox* parityComboBox = new QComboBox(this);
                parityComboBox->addItems(QStringList() << "None" << "Odd" << "Even");
                parityLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               parityComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               parityComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(parityLabel, parityComboBox);
 
@@ -980,7 +1104,7 @@ private slots :
                stopBitsComboBox->addItem("2");
 
                stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               stopBitsComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(stopBitsLabel, stopBitsComboBox);
 
@@ -1036,7 +1160,7 @@ private slots :
                QComboBox* DataBitsComboBox = new QComboBox(this);
                DataBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
                DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               DataBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               DataBitsComboBox->setStyleSheet(comboBoxStyle);
 
                // ----------------------- Save DataBits configs into a UARTConfig.txt-----------------------------------//
 
@@ -1076,7 +1200,7 @@ private slots :
                QComboBox* FlowControlComboBox = new QComboBox(this);
                FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control" );
                FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               FlowControlComboBox->setStyleSheet(comboBoxStyle);
 
 
 
@@ -1252,7 +1376,35 @@ private slots :
                // Set the minimum width to 100 pixels
                baudRateComboBox->setMinimumWidth(10);
                baudRateLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               baudRateComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               QString comboBoxStyle = "QComboBox {"
+                 " border: 1px solid #555555;"
+                 " border-radius: 3px;"
+                 " padding: 1px 3px 1px 3px;"
+                 " min-width: 6em;"
+                 " background-color: #ffffff;"
+                 "}"
+                 "QComboBox::drop-down {"
+                 " subcontrol-origin: padding;"
+                 " subcontrol-position: top right;"
+                 " width: 20px;"
+                 " border-left-width: 1px;"
+                 " border-left-color: #555555;"
+                 " border-left-style: solid;"
+                 " border-top-right-radius: 3px;"
+                 " border-bottom-right-radius: 3px;"
+                 " background-color: #dddddd;"
+                 "}"
+                 "QComboBox::down-arrow {"
+                 " width: 0;"
+                 " height: 0;"
+                 " border-style: solid;"
+                 " border-width: 5px 5px 0 5px;"
+                 " border-color: #555555 transparent transparent transparent;"
+                 "}"
+                 "QComboBox QAbstractItemView {"
+                 " selection-background-color: #00ff00;"
+                 "}";
+               baudRateComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(baudRateLabel, baudRateComboBox);
 
@@ -1296,7 +1448,7 @@ private slots :
                QComboBox* parityComboBox = new QComboBox(this);
                parityComboBox->addItems(QStringList() << "None" << "Odd" << "Even");
                parityLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               parityComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               parityComboBox->setStyleSheet(comboBoxStyle);
                layout->addRow(parityLabel, parityComboBox);
 
 
@@ -1345,7 +1497,7 @@ private slots :
                stopBitsComboBox->addItem("2 Bits");
 
                stopBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               stopBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               stopBitsComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(stopBitsLabel, stopBitsComboBox);
 
@@ -1389,7 +1541,7 @@ private slots :
                QComboBox* DataBitsComboBox = new QComboBox(this);
                DataBitsComboBox->addItems(QStringList() << "5" << "6" << "7" << "8");
                DataBitsLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               DataBitsComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               DataBitsComboBox->setStyleSheet(comboBoxStyle);
 
                // ----------------------- Save DataBits configs into a UARTConfig.txt-----------------------------------//
 
@@ -1425,7 +1577,7 @@ private slots :
                QComboBox* FlowControlComboBox = new QComboBox(this);
                FlowControlComboBox->addItems(QStringList() << "No Flow Control" << "Hardware Flow Control" << "Software Flow Control " );
                FlowControlLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FlowControlComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               FlowControlComboBox->setStyleSheet(comboBoxStyle);
                layout->addRow(FlowControlLabel, FlowControlComboBox);
                layout->setContentsMargins(0, 0, 0, 0);
                layout->setSpacing(30);
@@ -1942,7 +2094,35 @@ private slots :
                // Set the minimum width to 100 pixels
                ModeComboBox->setMinimumWidth(10);
                ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               QString comboBoxStyle = "QComboBox {"
+                 " border: 1px solid #555555;"
+                 " border-radius: 3px;"
+                 " padding: 1px 3px 1px 3px;"
+                 " min-width: 6em;"
+                 " background-color: #ffffff;"
+                 "}"
+                 "QComboBox::drop-down {"
+                 " subcontrol-origin: padding;"
+                 " subcontrol-position: top right;"
+                 " width: 20px;"
+                 " border-left-width: 1px;"
+                 " border-left-color: #555555;"
+                 " border-left-style: solid;"
+                 " border-top-right-radius: 3px;"
+                 " border-bottom-right-radius: 3px;"
+                 " background-color: #dddddd;"
+                 "}"
+                 "QComboBox::down-arrow {"
+                 " width: 0;"
+                 " height: 0;"
+                 " border-style: solid;"
+                 " border-width: 5px 5px 0 5px;"
+                 " border-color: #555555 transparent transparent transparent;"
+                 "}"
+                 "QComboBox QAbstractItemView {"
+                 " selection-background-color: #00ff00;"
+                 "}";
+               ModeComboBox->setStyleSheet(comboBoxStyle);
 
 
                layout->addRow(ModeLabel, ModeComboBox);
@@ -1985,7 +2165,7 @@ private slots :
                QComboBox* NSSComboBox = new QComboBox(this);
                NSSComboBox->addItems(QStringList() << "Disable" << "Hardware NSS Input Signal" << "Hardware NSS Output Signal");
                NSSLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               NSSComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               NSSComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(NSSLabel, NSSComboBox);
 
@@ -2029,7 +2209,7 @@ private slots :
                QComboBox* FrameFormatComboBox = new QComboBox(this);
                FrameFormatComboBox->addItems(QStringList() << "Motorola" << "Texas Instruments");
                FrameFormatLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FrameFormatComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               FrameFormatComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(FrameFormatLabel, FrameFormatComboBox);
 
@@ -2071,7 +2251,7 @@ private slots :
                DataSizeSpinBox->setMaximum(32);
 
                DataSizeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               DataSizeSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               DataSizeSpinBox->setStyleSheet(comboBoxStyle);
                layout->addRow(DataSizeLabel, DataSizeSpinBox);
 
                QString DataSizeConfig = settings.value("DataSize", "").toString();
@@ -2109,7 +2289,7 @@ private slots :
                QComboBox* FirstBitComboBox = new QComboBox(this);
                FirstBitComboBox->addItems(QStringList() << "LSB" << "MSB"  );
                FirstBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FirstBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               FirstBitComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(FirstBitLabel, FirstBitComboBox);
                layout->setContentsMargins(0, 0, 0, 0);
@@ -2257,8 +2437,35 @@ private slots :
                // Set the minimum width to 100 pixels
                ModeComboBox->setMinimumWidth(10);
                ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
+               QString comboBoxStyle = "QComboBox {"
+                 " border: 1px solid #555555;"
+                 " border-radius: 3px;"
+                 " padding: 1px 3px 1px 3px;"
+                 " min-width: 6em;"
+                 " background-color: #ffffff;"
+                 "}"
+                 "QComboBox::drop-down {"
+                 " subcontrol-origin: padding;"
+                 " subcontrol-position: top right;"
+                 " width: 20px;"
+                 " border-left-width: 1px;"
+                 " border-left-color: #555555;"
+                 " border-left-style: solid;"
+                 " border-top-right-radius: 3px;"
+                 " border-bottom-right-radius: 3px;"
+                 " background-color: #dddddd;"
+                 "}"
+                 "QComboBox::down-arrow {"
+                 " width: 0;"
+                 " height: 0;"
+                 " border-style: solid;"
+                 " border-width: 5px 5px 0 5px;"
+                 " border-color: #555555 transparent transparent transparent;"
+                 "}"
+                 "QComboBox QAbstractItemView {"
+                 " selection-background-color: #00ff00;"
+                 "}";
+               ModeComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(ModeLabel, ModeComboBox);
 
@@ -2300,7 +2507,7 @@ private slots :
                QComboBox* NSSComboBox = new QComboBox(this);
                NSSComboBox->addItems(QStringList() << "Disable" << "Hardware NSS Input Signal" << "Hardware NSS Output Signal");
                NSSLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               NSSComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               NSSComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(NSSLabel, NSSComboBox);
 
@@ -2346,7 +2553,7 @@ private slots :
                QComboBox* FrameFormatComboBox = new QComboBox(this);
                FrameFormatComboBox->addItems(QStringList() << "Motorola" << "Texas Instruments");
                FrameFormatLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FrameFormatComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               FrameFormatComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(FrameFormatLabel, FrameFormatComboBox);
 
@@ -2394,7 +2601,7 @@ private slots :
                DataSizeSpinBox->setMaximum(32);
 
                DataSizeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               DataSizeSpinBox->setStyleSheet("font:Arial 15px; color: gray; background-color: white;");
+               DataSizeSpinBox->setStyleSheet(comboBoxStyle);
                layout->addRow(DataSizeLabel, DataSizeSpinBox);
 
 
@@ -2431,7 +2638,7 @@ private slots :
                QComboBox* FirstBitComboBox = new QComboBox(this);
                FirstBitComboBox->addItems(QStringList() << "LSB" << "MSB"  );
                FirstBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               FirstBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               FirstBitComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(FirstBitLabel, FirstBitComboBox);
                layout->setContentsMargins(0, 0, 0, 0);
@@ -3249,8 +3456,35 @@ private slots :
                    // Set the minimum width to 100 pixels
                    AddressingModeBox->setMinimumWidth(10);
                    AddressingMode->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-                   AddressingModeBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
+                   QString comboBoxStyle = "QComboBox {"
+                     " border: 1px solid #555555;"
+                     " border-radius: 3px;"
+                     " padding: 1px 3px 1px 3px;"
+                     " min-width: 6em;"
+                     " background-color: #ffffff;"
+                     "}"
+                     "QComboBox::drop-down {"
+                     " subcontrol-origin: padding;"
+                     " subcontrol-position: top right;"
+                     " width: 20px;"
+                     " border-left-width: 1px;"
+                     " border-left-color: #555555;"
+                     " border-left-style: solid;"
+                     " border-top-right-radius: 3px;"
+                     " border-bottom-right-radius: 3px;"
+                     " background-color: #dddddd;"
+                     "}"
+                     "QComboBox::down-arrow {"
+                     " width: 0;"
+                     " height: 0;"
+                     " border-style: solid;"
+                     " border-width: 5px 5px 0 5px;"
+                     " border-color: #555555 transparent transparent transparent;"
+                     "}"
+                     "QComboBox QAbstractItemView {"
+                     " selection-background-color: #00ff00;"
+                     "}";
+                   AddressingModeBox->setStyleSheet(comboBoxStyle);
 
                    layout->addRow(AddressingMode, AddressingModeBox);
 
@@ -3292,7 +3526,7 @@ private slots :
                    QComboBox* DualAddressModeComboBox = new QComboBox(this);
                    DualAddressModeComboBox->addItems(QStringList() << "Disable" << "Enable");
                    DualAddressModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-                   DualAddressModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+                   DualAddressModeComboBox->setStyleSheet(comboBoxStyle);
 
                    layout->addRow(DualAddressModeLabel, DualAddressModeComboBox);
 
@@ -3345,7 +3579,7 @@ private slots :
 
 
                    AddressMasksLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-                   AddressMasksComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+                   AddressMasksComboBox->setStyleSheet(comboBoxStyle);
 
                    layout->addRow(AddressMasksLabel, AddressMasksComboBox);
 
@@ -3390,7 +3624,7 @@ private slots :
                    QComboBox* GeneralCallModeComboBox = new QComboBox(this);
                    GeneralCallModeComboBox->addItems(QStringList() << "Enabled" << "Disabled"  );
                    GeneralCallModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-                   GeneralCallModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+                   GeneralCallModeComboBox->setStyleSheet(comboBoxStyle);
                    layout->addRow(GeneralCallModeLabel, GeneralCallModeComboBox);
 
 
@@ -3438,7 +3672,7 @@ private slots :
 
 
                                 NoStretchModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-                                NoStretchModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+                                NoStretchModeComboBox->setStyleSheet(comboBoxStyle);
 
                                 layout->addRow(NoStretchModeLabel, NoStretchModeComboBox);
 
@@ -4495,8 +4729,35 @@ private slots :
                // Set the minimum width to 100 pixels
                ChannelComboBox->setMinimumWidth(10);
                ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
+               QString comboBoxStyle = "QComboBox {"
+                 " border: 1px solid #555555;"
+                 " border-radius: 3px;"
+                 " padding: 1px 3px 1px 3px;"
+                 " min-width: 6em;"
+                 " background-color: #ffffff;"
+                 "}"
+                 "QComboBox::drop-down {"
+                 " subcontrol-origin: padding;"
+                 " subcontrol-position: top right;"
+                 " width: 20px;"
+                 " border-left-width: 1px;"
+                 " border-left-color: #555555;"
+                 " border-left-style: solid;"
+                 " border-top-right-radius: 3px;"
+                 " border-bottom-right-radius: 3px;"
+                 " background-color: #dddddd;"
+                 "}"
+                 "QComboBox::down-arrow {"
+                 " width: 0;"
+                 " height: 0;"
+                 " border-style: solid;"
+                 " border-width: 5px 5px 0 5px;"
+                 " border-color: #555555 transparent transparent transparent;"
+                 "}"
+                 "QComboBox QAbstractItemView {"
+                 " selection-background-color: #00ff00;"
+                 "}";
+               ChannelComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(ChannelLabel, ChannelComboBox);
 
@@ -4541,7 +4802,7 @@ private slots :
                QComboBox* ResolutionComboBox = new QComboBox(this);
                ResolutionComboBox->addItems(QStringList() << "ADC 8-Bit Resolution" << "ADC 10-Bit Resolution" << "ADC 12-Bit Resolution" << "ADC 14-Bit Resolution" << "ADC 16-Bit Resolution"<< "ADC 12-Bit Optimized Resolution" << "ADC 14-Bit Optimized Resolution"  );
                ResolutionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               ResolutionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               ResolutionComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(ResolutionLabel, ResolutionComboBox);
 
@@ -4589,7 +4850,7 @@ private slots :
                QComboBox* ScanComboBox = new QComboBox(this);
                ScanComboBox->addItems(QStringList() << "Disabled" );
                ScanLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               ScanComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               ScanComboBox->setStyleSheet(comboBoxStyle);
 
                layout->addRow(ScanLabel, ScanComboBox);
 
@@ -4639,7 +4900,7 @@ private slots :
                ContinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
 
                ContinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               ContinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               ContinuousComboBox->setStyleSheet(comboBoxStyle);
                layout->addRow(ContinuousLabel, ContinuousComboBox);
 
                // ----------------------- Save Continuous Mode Choices configs into a ADCConfig.txt-----------------------------------//
@@ -4687,7 +4948,7 @@ private slots :
               DiscontinuousComboBox->addItems(QStringList() << "Enabled" << "Disabled");
 
               DiscontinuousLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-              DiscontinuousComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+              DiscontinuousComboBox->setStyleSheet(comboBoxStyle);
 
 
               // ----------------------- Save Discontinuous Mode Choices configs into a ADCConfig.txt-----------------------------------//
@@ -4737,7 +4998,7 @@ private slots :
              EndConversionComboBox->addItems(QStringList() << "End of Single Conversion" << "End of sequence Conversion");
 
              EndConversionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-             EndConversionComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+             EndConversionComboBox->setStyleSheet(comboBoxStyle);
              layout->addRow(EndConversionLabel, EndConversionComboBox);
 
 
@@ -4786,7 +5047,7 @@ private slots :
             BehaviorComboBox->addItems(QStringList() << "Overrun Data Preserved" << "Overrun Data Overwritten");
 
             BehaviorLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-            BehaviorComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+            BehaviorComboBox->setStyleSheet(comboBoxStyle);
             layout->addRow(BehaviorLabel, BehaviorComboBox);
 
 
@@ -4833,7 +5094,7 @@ private slots :
                QComboBox* LeftBitComboBox = new QComboBox(this);
                LeftBitComboBox->addItems(QStringList() << "No Bit Shift" << "1 Bit Shift" << "2 Bit Shift"<<  "3 Bit Shift" << "4 Bit Shift" <<"5 Bit Shift" << "6 Bit Shift" <<"7 Bit Shift" <<"8 Bit Shift" <<"9 Bit Shift" <<"10 Bit Shift" <<"11 Bit Shift" << "12 Bit Shift" <<"13 Bit Shift" <<"14 Bit Shift" << "15 Bit Shift" );
                LeftBitLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-               LeftBitComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+               LeftBitComboBox->setStyleSheet(comboBoxStyle);
 
                // ----------------------- Save Left Bit Choices configs into a ADCConfig.txt-----------------------------------//
 
@@ -5687,8 +5948,35 @@ private slots :
         QComboBox* ChannelComboBox = new QComboBox(this);
         ChannelComboBox->addItems(QStringList() << "Disable" << "Only External Pin" << "Only on Chip Analog Peripherals" <<"Both external Pin and on Chip Analog" );
         ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-        layout->addRow(ChannelLabel, ChannelComboBox);
+        QString comboBoxStyle = "QComboBox {"
+          " border: 1px solid #555555;"
+          " border-radius: 3px;"
+          " padding: 1px 3px 1px 3px;"
+          " min-width: 6em;"
+          " background-color: #ffffff;"
+          "}"
+          "QComboBox::drop-down {"
+          " subcontrol-origin: padding;"
+          " subcontrol-position: top right;"
+          " width: 20px;"
+          " border-left-width: 1px;"
+          " border-left-color: #555555;"
+          " border-left-style: solid;"
+          " border-top-right-radius: 3px;"
+          " border-bottom-right-radius: 3px;"
+          " background-color: #dddddd;"
+          "}"
+          "QComboBox::down-arrow {"
+          " width: 0;"
+          " height: 0;"
+          " border-style: solid;"
+          " border-width: 5px 5px 0 5px;"
+          " border-color: #555555 transparent transparent transparent;"
+          "}"
+          "QComboBox QAbstractItemView {"
+          " selection-background-color: #00ff00;"
+          "}";
+        ChannelComboBox->setStyleSheet(comboBoxStyle);        layout->addRow(ChannelLabel, ChannelComboBox);
 
 
         // ----------------------- Save Resolution Choices configs into a ADCConfig.txt-----------------------------------//
@@ -5735,7 +6023,8 @@ private slots :
 
 
         ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        ModeComboBox->setStyleSheet(comboBoxStyle);
+        layout->addRow(ChannelLabel, ChannelComboBox);
 
 
         layout->addRow(ModeLabel, ModeComboBox);
@@ -5788,7 +6077,7 @@ private slots :
 
 
         BufferLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        BufferComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        BufferComboBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(BufferLabel, BufferComboBox);
@@ -5843,7 +6132,7 @@ private slots :
 
 
         TriggerLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        TriggerComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        TriggerComboBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(TriggerLabel, TriggerComboBox);
@@ -5897,7 +6186,7 @@ private slots :
 
 
         TrimmingLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        TrimmingComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        TrimmingComboBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(TrimmingLabel, TrimmingComboBox);
@@ -6437,8 +6726,35 @@ private slots :
 
 
         PINLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        PINComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
+        QString comboBoxStyle = "QComboBox {"
+          " border: 1px solid #555555;"
+          " border-radius: 3px;"
+          " padding: 1px 3px 1px 3px;"
+          " min-width: 6em;"
+          " background-color: #ffffff;"
+          "}"
+          "QComboBox::drop-down {"
+          " subcontrol-origin: padding;"
+          " subcontrol-position: top right;"
+          " width: 20px;"
+          " border-left-width: 1px;"
+          " border-left-color: #555555;"
+          " border-left-style: solid;"
+          " border-top-right-radius: 3px;"
+          " border-bottom-right-radius: 3px;"
+          " background-color: #dddddd;"
+          "}"
+          "QComboBox::down-arrow {"
+          " width: 0;"
+          " height: 0;"
+          " border-style: solid;"
+          " border-width: 5px 5px 0 5px;"
+          " border-color: #555555 transparent transparent transparent;"
+          "}"
+          "QComboBox QAbstractItemView {"
+          " selection-background-color: #00ff00;"
+          "}";
+        PINComboBox->setStyleSheet(comboBoxStyle);
 
         layout->addRow(PINLabel, PINComboBox);
         layout->setContentsMargins(0, 0, 0, 0);
@@ -6491,7 +6807,7 @@ private slots :
 
 
         ModeLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        ModeComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        ModeComboBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(ModeLabel, ModeComboBox);
@@ -6544,7 +6860,7 @@ private slots :
 
 
         GPIOLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        GPIOComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        GPIOComboBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(GPIOLabel, GPIOComboBox);
@@ -6600,7 +6916,7 @@ private slots :
 
 
         SpeedLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        SpeedComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        SpeedComboBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(SpeedLabel, SpeedComboBox);
@@ -6800,8 +7116,35 @@ private slots :
 
 
         PINLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        PINComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
+        QString comboBoxStyle = "QComboBox {"
+          " border: 1px solid #555555;"
+          " border-radius: 3px;"
+          " padding: 1px 3px 1px 3px;"
+          " min-width: 6em;"
+          " background-color: #ffffff;"
+          "}"
+          "QComboBox::drop-down {"
+          " subcontrol-origin: padding;"
+          " subcontrol-position: top right;"
+          " width: 20px;"
+          " border-left-width: 1px;"
+          " border-left-color: #555555;"
+          " border-left-style: solid;"
+          " border-top-right-radius: 3px;"
+          " border-bottom-right-radius: 3px;"
+          " background-color: #dddddd;"
+          "}"
+          "QComboBox::down-arrow {"
+          " width: 0;"
+          " height: 0;"
+          " border-style: solid;"
+          " border-width: 5px 5px 0 5px;"
+          " border-color: #555555 transparent transparent transparent;"
+          "}"
+          "QComboBox QAbstractItemView {"
+          " selection-background-color: #00ff00;"
+          "}";
+        PINComboBox->setStyleSheet(comboBoxStyle);
 
         layout->addRow(PINLabel, PINComboBox);
         layout->setContentsMargins(0, 0, 0, 0);
@@ -6853,7 +7196,7 @@ private slots :
 
 
         GPIOLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        GPIOComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        GPIOComboBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(GPIOLabel, GPIOComboBox);
@@ -7054,8 +7397,35 @@ private slots :
 
 
         ChannelLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        ChannelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
+        QString comboBoxStyle = "QComboBox {"
+          " border: 1px solid #555555;"
+          " border-radius: 3px;"
+          " padding: 1px 3px 1px 3px;"
+          " min-width: 6em;"
+          " background-color: #ffffff;"
+          "}"
+          "QComboBox::drop-down {"
+          " subcontrol-origin: padding;"
+          " subcontrol-position: top right;"
+          " width: 20px;"
+          " border-left-width: 1px;"
+          " border-left-color: #555555;"
+          " border-left-style: solid;"
+          " border-top-right-radius: 3px;"
+          " border-bottom-right-radius: 3px;"
+          " background-color: #dddddd;"
+          "}"
+          "QComboBox::down-arrow {"
+          " width: 0;"
+          " height: 0;"
+          " border-style: solid;"
+          " border-width: 5px 5px 0 5px;"
+          " border-color: #555555 transparent transparent transparent;"
+          "}"
+          "QComboBox QAbstractItemView {"
+          " selection-background-color: #00ff00;"
+          "}";
+        ChannelComboBox->setStyleSheet(comboBoxStyle);
 
         layout->addRow(ChannelLabel, ChannelComboBox);
         layout->setContentsMargins(0, 0, 0, 0);
@@ -7111,7 +7481,7 @@ private slots :
 
 
         PrescalerLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        PrescalerSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        PrescalerSpinBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(PrescalerLabel, PrescalerSpinBox);
@@ -7154,7 +7524,7 @@ private slots :
 
 
         CounterLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        CounterComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        CounterComboBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(CounterLabel, CounterComboBox);
@@ -7207,7 +7577,7 @@ private slots :
 
 
         AutoReloadLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        AutoReloadSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        AutoReloadSpinBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(AutoReloadLabel, AutoReloadSpinBox);
@@ -7253,7 +7623,7 @@ private slots :
 
 
         ClockLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        ClockComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        ClockComboBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(ClockLabel, ClockComboBox);
@@ -7308,7 +7678,7 @@ private slots :
 
 
         RepititionLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        RepititionSpinBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        RepititionSpinBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(RepititionLabel, RepititionSpinBox);
@@ -7354,7 +7724,7 @@ private slots :
 
 
         PreloadLabel->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-        PreloadComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        PreloadComboBox->setStyleSheet(comboBoxStyle);
 
 
         layout->addRow(PreloadLabel, PreloadComboBox);

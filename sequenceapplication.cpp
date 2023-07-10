@@ -159,6 +159,7 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
     \
     QListWidget::Item { \
     background-color: #FFFFFF; \
+    color: #6082B6			; \
     border: 1px solid #CCCCCC; \
     border-radius: 5px; \
     padding: 5px; \
@@ -731,12 +732,37 @@ for (auto m : menus) {
   QMenu* contextMenu = new QMenu(this);
   QAction* deleteAction = new QAction("Delete IP", this);
   QAction* checkOrderAction = new QAction("Order sequence", this);
+  QAction* addAction = new QAction("", this);
+
+
 
   // Ajout des actions au menu contextuel
   contextMenu->addAction(deleteAction);
   contextMenu->addAction(checkOrderAction);
 
+  connect(checkOrderAction, &QAction::triggered, [=]() {
+  QListWidgetItem* selectedItem = ui->listWidget->currentItem();
+  if (selectedItem) {
+  QString itemText = selectedItem->text();
 
+  // Afficher le widget associé en fonction de l'élément sélectionné
+  if (itemText == "ADC1") {
+ui->ADCwidget->show();
+  } else if (itemText == "DAC_OUT1") {
+      ui->ADCwidget->show();
+  } else if (itemText == "Input Capture Mode") {
+      ui->TIMERwidget->show();
+  } else if (itemText == "I2C1") {
+      ui->I2Cwidget->show();
+  } else if (itemText == "GPIO_OUTPUT") {
+      ui->GPIOwidget->show();
+  } else if (itemText == "UART4") {
+      ui->UARTwidget->show();
+  } else if (itemText == "SPI1") {
+      ui->SPIwidget->show();
+  }
+  }
+  });
   connect(deleteAction, &QAction::triggered, [=]() {
   QListWidgetItem* selectedItem = ui->listWidget->currentItem();
   if (selectedItem) {
@@ -967,27 +993,27 @@ for (auto m : menus) {
   }
 
 
-  connect(action, &QAction::triggered, [=]() {
-  QString itemText = action->text();
-  // Vérifier si l'élément existe déjà dans la liste
-  QList<QListWidgetItem*> existingItems = ui->listWidget->findItems(itemText, Qt::MatchExactly);
-  if (existingItems.isEmpty()) {
-  ui->listWidget->addItem(itemText);
-  }
+//  connect(action, &QAction::triggered, [=]() {
+//  QString itemText = action->text();
+//  // Vérifier si l'élément existe déjà dans la liste
+//  QList<QListWidgetItem*> existingItems = ui->listWidget->findItems(itemText, Qt::MatchExactly);
+//  if (existingItems.isEmpty()) {
+//  ui->listWidget->addItem(itemText);
+//  }
 
-  // Afficher le widget associé en fonction de l'élément sélectionné
-  if (itemText == "ADC1") {
+//  // Afficher le widget associé en fonction de l'élément sélectionné
+//  if (itemText == "ADC1") {
 
-  } else if (itemText == "DAC_OUT1") {
-  ui->DACwidget->showFullScreen();
-  } else if (itemText == "Input Capture Mode") {
-  ui->TIMERwidget->show();
-  } else if (itemText == "I2C1") {
-  ui->I2Cwidget->show();
-  } else if (itemText == "GPIO_OUTPUT") {
-  ui->GPIOwidget->show();
-  }
-  });
+//  } else if (itemText == "DAC_OUT1") {
+//  ui->DACwidget->showFullScreen();
+//  } else if (itemText == "Input Capture Mode") {
+//  ui->TIMERwidget->show();
+//  } else if (itemText == "I2C1") {
+//  ui->I2Cwidget->show();
+//  } else if (itemText == "GPIO_OUTPUT") {
+//  ui->GPIOwidget->show();
+//  }
+//  });
 
 
 }
