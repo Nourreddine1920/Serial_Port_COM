@@ -743,6 +743,37 @@ for (auto m : menus) {
   // Connexion du signal du menu contextuel
   connect(ui->listWidget, &QListWidget::customContextMenuRequested, [=](const QPoint& pos) {
   QListWidgetItem* selectedItem = ui->listWidget->itemAt(pos);
+
+  // Feuille de style pour les éléments de la liste
+  QString styleSheet = "\
+  QListWidget { \
+  background-color: #F5F5F5; \
+  } \
+  \
+  QListWidget::Item { \
+  background-color: #FFFFFF; \
+  border: 1px solid #CCCCCC; \
+  border-radius: 5px; \
+  padding: 5px; \
+  margin-bottom: 5px; \
+  font-family: Arial; \
+  font-size: 14px; \
+  } \
+  \
+  QListWidget::Item:hover { \
+  background-color: #C0C0C0; \
+  } \
+  \
+  QListWidget::Item:selected { \
+  background-color: #4CAF50; \
+  color: #FFFFFF; \
+  }";
+
+  ui->listWidget->setStyleSheet(styleSheet);
+  QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+   ui->listWidget->setFont(font);
+
+
   if (selectedItem) {
   QPoint globalPos = ui->listWidget->mapToGlobal(pos);
   contextMenu->exec(globalPos);
@@ -908,7 +939,6 @@ for (auto m : menus) {
 
   connect(action, &QAction::triggered, [=]() {
   QString itemText = action->text();
-
   // Vérifier si l'élément existe déjà dans la liste
   QList<QListWidgetItem*> existingItems = ui->listWidget->findItems(itemText, Qt::MatchExactly);
   if (existingItems.isEmpty()) {
@@ -940,7 +970,7 @@ QString selectedItemText = selectedAction->text();
 QListWidgetItem* listItem = new QListWidgetItem(selectedItemText);
 selectedItemsListWidget->addItem(listItem);
 qDebug() << "selected option:" <<listItem;
-QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+QFont font("Segoe UI", 12); // Police Arial avec une taille de 12 points
 
 listItem->setFont(font);
 
