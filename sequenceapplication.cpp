@@ -102,8 +102,7 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
 
 
     connect(returnButton, &QToolButton::clicked, this, &sequenceApplication::returnDashboard);
-    connect(connectButton, &QToolButton::clicked, this, &sequenceApplication::showOUTPUTexec);
-    connect(connectButton, &QToolButton::clicked, this, &sequenceApplication::showsecondTIME);
+//    connect(connectButton, &QToolButton::clicked, this, &sequenceApplication::showOUTPUTexec);
 
     QMenu *UART = menuBar()->addMenu("&UART");
     QCheckBox *checkBox = new QCheckBox();
@@ -648,6 +647,10 @@ void sequenceApplication::sendSequenceframe(){
 
    packet6.clear();
 
+
+
+   ui->out->clear();
+
 }
 void sequenceApplication::addActionToMenu(QString menuItem, QString actionName)
 {
@@ -942,6 +945,7 @@ void sequenceApplication::showADCexec(){
 
     deviceAddressLineEdit->setPlaceholderText("Enter the device address");
 
+
     QString styleSheet2 =
         "QPushButton {"
         "    background-color: gray;"
@@ -985,14 +989,7 @@ void sequenceApplication::showADCexec(){
 
 
 
-//    deviceAddressLineEdit->clear();
-//    adcLayout->addWidget(channelLabel);
-//    adcLayout->addWidget(channelComboBox);
-//    adcLayout->addWidget(dataTextBrowser);
-//    auto buttonLayout = new QHBoxLayout();
-//    buttonLayout->addWidget(writeButton);
-//    buttonLayout->addWidget(readButton);
-//    adcLayout->addLayout(buttonLayout);
+
 
 
 
@@ -1010,9 +1007,9 @@ void sequenceApplication::showSecondADCexec(){
     // Create a QLabel to display the ADC device address
     QLabel* deviceAddressLabel = new QLabel("ADC Device Address:", ui->ADCwidget);
 
-    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->ADCwidget);
+//    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->ADCwidget);
 
-    deviceAddressLineEdit->setPlaceholderText("Enter the device address");
+    //    deviceAddressLineEdit->setPlaceholderText("Enter the device address");
 
     QString styleSheet2 =
         "QPushButton {"
@@ -1039,7 +1036,7 @@ void sequenceApplication::showSecondADCexec(){
     // Create a label widget and set its font to Noto Sans
 //        QFont font("Noto Sans");
 
-    deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+//    deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
 
 
@@ -1184,105 +1181,41 @@ void sequenceApplication::showGPIOexec(){
 
                   }
 
-void sequenceApplication::showOUTPUTexec(){
+//void sequenceApplication::showOUTPUTexec(){
 
-    Uart* uart = Uart::getInstance();
-    QSerialPort* serialPort = uart->getSerialPort();
+//    Uart* uart = Uart::getInstance();
+//    QSerialPort* serialPort = uart->getSerialPort();
 
-
-    QVBoxLayout* OUTPUTLayout = new QVBoxLayout(ui->OUTPUTwidget);
-
-    // Create a QLabel to display the status of the LED
-    QLabel* ledStatusLabel = new QLabel("OUTPUT values", ui->OUTPUTwidget);
-    dataTextBrowseroutput = new QTextBrowser(ui->OUTPUTwidget);
-
-
-
-    QString styleSheet2 =
-              "QPushButton {"
-              "    background-color: gray;"
-              "    border: none;"
-              "    color: white;"
-              "    padding: 3px 3px;"
-              "    text-align: center;"
-              "    text-decoration: none;"
-              "    font-size: 14px;"
-              "    margin: 4px 2px;"
-              "    border-radius: 10px;"
-              "}"
-              ""
-              "QPushButton:hover {"
-              "    background-color: #3e8e41;"
-              "}";
-          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
-          ledStatusLabel->setFont(font);
-
-
-          ledStatusLabel->setStyleSheet("font: bold 13px; color: #36454F;");
-
-          font.setBold(true);
-         dataTextBrowseroutput->setFont(font);
-          QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
-
-//            QTextBrowser* dataTextBrowseroutput->setStyleSheet(QString("color1: %1;").arg(color1));
-
-        dataTextBrowseroutput->setStyleSheet(style);
-
-        dataTextBrowseroutput->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
-
-
-
-
-//            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
-//            QByteArray responseData;
-//            while (serialPort->waitForReadyRead(100)) {
-//            responseData.append(serialPort->readAll());
-
-
-//            }
-
-//                if (!responseData.isEmpty()) {
-//                    lastResponse = QString::fromUtf8(responseData);
-
-//                    qDebug() << "Received data:" << lastResponse;
-//                    textBrowser->append(lastResponse);
-//                } else {
-//                    qDebug() << "No data received from serial port";
-//                    textBrowser->append("No data received from serial port");
-//                }
-
-          QByteArray buffer;
-          const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
-
-
-          QByteArray data = serialPort->readAll();
-          QString datastring(data);
-          buffer.append(data);
-//                QString message(data);
-          qDebug() << "Received message:" << datastring;
-
-
-
-          dataTextBrowseroutput->append(datastring);
-
-
-
-    // Add the components to the layout
-    OUTPUTLayout->addWidget(ledStatusLabel);
-    OUTPUTLayout->addWidget(dataTextBrowseroutput);
-
-}
-
-void sequenceApplication::showsecondTIME(){
-
-    Uart* uart = Uart::getInstance();
-    QSerialPort* serialPort = uart->getSerialPort();
-    dataTextBrowseroutput->clearHistory();
 
 //    QVBoxLayout* OUTPUTLayout = new QVBoxLayout(ui->OUTPUTwidget);
 
+//    // Create a QLabel to display the status of the LED
+//    QLabel* ledStatusLabel = new QLabel("OUTPUT values", ui->OUTPUTwidget);
+//    dataTextBrowseroutput = new QTextBrowser(ui->OUTPUTwidget);
 
+
+
+//    QString styleSheet2 =
+//              "QPushButton {"
+//              "    background-color: gray;"
+//              "    border: none;"
+//              "    color: white;"
+//              "    padding: 3px 3px;"
+//              "    text-align: center;"
+//              "    text-decoration: none;"
+//              "    font-size: 14px;"
+//              "    margin: 4px 2px;"
+//              "    border-radius: 10px;"
+//              "}"
+//              ""
+//              "QPushButton:hover {"
+//              "    background-color: #3e8e41;"
+//              "}";
 //          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+//          ledStatusLabel->setFont(font);
+
+
+//          ledStatusLabel->setStyleSheet("font: bold 13px; color: #36454F;");
 
 //          font.setBold(true);
 //         dataTextBrowseroutput->setFont(font);
@@ -1332,9 +1265,12 @@ void sequenceApplication::showsecondTIME(){
 
 
 //    // Add the components to the layout
+//    OUTPUTLayout->addWidget(ledStatusLabel);
 //    OUTPUTLayout->addWidget(dataTextBrowseroutput);
 
-}
+//}
+
+
 
 void sequenceApplication::showDACexec(){
 
@@ -1588,14 +1524,13 @@ sequenceApplication::~sequenceApplication()
     delete ui;
 }
 
-void sequenceApplication::on_pushButton_clicked()
-{
+void sequenceApplication::on_pushButton_clicked() {
 Uart* uart = Uart::getInstance();
 QSerialPort* serialPort = uart->getSerialPort();
 
-dataTextBrowseroutput->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
-QString style = "color: #AA4A44;";
-dataTextBrowseroutput->setStyleSheet(style);
+//dataTextBrowseroutput->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+//QString style = "color: #AA4A44;";
+//dataTextBrowseroutput->setStyleSheet(style);
 
 QByteArray buffer;
 const int MAX_BUFFER_SIZE = 20;
@@ -1604,14 +1539,85 @@ QString datastring(data);
 buffer.append(data);
 qDebug() << "Received message:" << datastring;
 
-dataTextBrowseroutput->clearHistory();
-dataTextBrowseroutput->setText(datastring);
 
-if (dataTextBrowseroutput != nullptr) {
-    dataTextBrowseroutput->append(datastring);
-    qDebug() << "Received dataaaaaaaaaaaaa:" << datastring;
+
+
+qDebug() << "Received data:" << datastring;
+
+// Concaténer les nouvelles données avec les données précédentes
+
+
+QString styleSheet = "\
+    QMessageBox {\
+        background-color: #D3D3D3;\
+        color: #263238;\
+        font-family:Fantasy ;\
+        font-size: 12px;\
+    }\
+    \
+    QMessageBox QLabel {\
+        color: #000000	;\
+    }\
+    \
+    QMessageBox QPushButton {\
+        background-color: #4CAF50;\
+        border: 1px solid #388E3C;\
+        color: #FFFFFF;\
+        padding: 5px;\
+        min-width: 70px;\
+    }\
+    \
+    QMessageBox QPushButton:hover {\
+        background-color: #388E3C;\
+    }";
+
+
+
+QMessageBox msgBox;
+msgBox.setWindowTitle("Loaded Configurations");
+msgBox.setStyleSheet(styleSheet);
+msgBox.setIcon(QMessageBox::Information);
+msgBox.setText(datastring);
+msgBox.exec();
+
+//dataTextBrowseroutput->append(allData);
+
+
+
+//QString allData = dataTextBrowseroutput->toPlainText();
+//allData += datastring;
+
+//qDebug() << "all data:" << allData;
+
+////dataTextBrowseroutput->setText(datastring);
+///
+///
+    ui->out->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
+    QString style1 ="color: #097969;"; // Adresse de couleur pour le vert (green)
+
+
+    ui->out->setStyleSheet(style1);
+
+    QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+    font.setBold(true);
+    ui->out->setFont(font);
+
+
+    ui->out->append(datastring);
+
+//if (dataTextBrowseroutput == NULL){
+
+////    dataTextBrowseroutput->setText(allData);
+
+//    ui->out->append(datastring);
+
+
+//}
+
+
 }
 
 
-}
+
+
 
