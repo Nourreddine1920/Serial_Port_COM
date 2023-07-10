@@ -73,7 +73,6 @@ private slots :
     void showTIMERexec();
     void showUARTexec();
     void showSPIexec();
-    void showSecondADCexec();
 
 
     void sendSequenceframe();

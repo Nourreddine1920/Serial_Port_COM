@@ -23,7 +23,28 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
     // Create a status bar
     QStatusBar *statusBar = new QStatusBar(this);
     setStatusBar(statusBar);
+    QString styleSheet2 =
+        "QPushButton {"
+        "    background-color: gray;"
+        "    border: none;"
+        "    color: white;"
+        "    padding: 3px 3px;"
+        "    text-align: center;"
+        "    text-decoration: none;"
+        "    font-size: 14px;"
+        "    margin: 4px 2px;"
+        "    border-radius: 10px;"
+        "}"
+        ""
+        "QPushButton:hover {"
+        "    background-color: #3e8e41;"
+        "}";
+    QFont font1("Segoe UI", 10); // Police Arial avec une taille de 12 points
+    ui->label->setFont(font1);
+    ui->label->setFont(font1);
 
+
+    ui->label->setStyleSheet("font: bold 13px; color: #36454F;");
     // Create a QLabel for the footer text
     QLabel *footerLabel = new QLabel("© 2023 - ACTIA Engineering Services", this);
     footerLabel->setStyleSheet("background-color: #D3D3D3; color: #36454F;");
@@ -722,6 +743,37 @@ for (auto m : menus) {
   // Connexion du signal du menu contextuel
   connect(ui->listWidget, &QListWidget::customContextMenuRequested, [=](const QPoint& pos) {
   QListWidgetItem* selectedItem = ui->listWidget->itemAt(pos);
+
+  // Feuille de style pour les éléments de la liste
+  QString styleSheet = "\
+  QListWidget { \
+  background-color: #F5F5F5; \
+  } \
+  \
+  QListWidget::Item { \
+  background-color: #FFFFFF; \
+  border: 1px solid #CCCCCC; \
+  border-radius: 5px; \
+  padding: 5px; \
+  margin-bottom: 5px; \
+  font-family: Arial; \
+  font-size: 14px; \
+  } \
+  \
+  QListWidget::Item:hover { \
+  background-color: #C0C0C0; \
+  } \
+  \
+  QListWidget::Item:selected { \
+  background-color: #4CAF50; \
+  color: #FFFFFF; \
+  }";
+
+  ui->listWidget->setStyleSheet(styleSheet);
+  QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+   ui->listWidget->setFont(font);
+
+
   if (selectedItem) {
   QPoint globalPos = ui->listWidget->mapToGlobal(pos);
   contextMenu->exec(globalPos);
@@ -887,7 +939,6 @@ for (auto m : menus) {
 
   connect(action, &QAction::triggered, [=]() {
   QString itemText = action->text();
-
   // Vérifier si l'élément existe déjà dans la liste
   QList<QListWidgetItem*> existingItems = ui->listWidget->findItems(itemText, Qt::MatchExactly);
   if (existingItems.isEmpty()) {
@@ -897,7 +948,6 @@ for (auto m : menus) {
   // Afficher le widget associé en fonction de l'élément sélectionné
   if (itemText == "ADC1") {
 
-showSecondADCexec();
   } else if (itemText == "DAC_OUT1") {
   ui->DACwidget->showFullScreen();
   } else if (itemText == "Input Capture Mode") {
@@ -920,7 +970,7 @@ QString selectedItemText = selectedAction->text();
 QListWidgetItem* listItem = new QListWidgetItem(selectedItemText);
 selectedItemsListWidget->addItem(listItem);
 qDebug() << "selected option:" <<listItem;
-QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+QFont font("Segoe UI", 12); // Police Arial avec une taille de 12 points
 
 listItem->setFont(font);
 
@@ -996,57 +1046,7 @@ void sequenceApplication::showADCexec(){
 
 
                   }
-void sequenceApplication::showSecondADCexec(){
-    Uart* uart = Uart::getInstance();
-    QSerialPort* serialPort = uart->getSerialPort();
 
-//    setCentralWidget(ui->ADCwidget);
-
-    QVBoxLayout* secondadcLayout = new QVBoxLayout(ui->ADCwidget);
-
-    // Create a QLabel to display the ADC device address
-    QLabel* deviceAddressLabel = new QLabel("ADC Device Address:", ui->ADCwidget);
-
-//    QLineEdit* deviceAddressLineEdit = new QLineEdit(ui->ADCwidget);
-
-    //    deviceAddressLineEdit->setPlaceholderText("Enter the device address");
-
-    QString styleSheet2 =
-        "QPushButton {"
-        "    background-color: gray;"
-        "    border: none;"
-        "    color: white;"
-        "    padding: 3px 3px;"
-        "    text-align: center;"
-        "    text-decoration: none;"
-        "    font-size: 14px;"
-        "    margin: 4px 2px;"
-        "    border-radius: 10px;"
-        "}"
-        ""
-        "QPushButton:hover {"
-        "    background-color: #3e8e41;"
-        "}";
-    QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
-    deviceAddressLabel->setFont(font);
-    deviceAddressLabel->setFont(font);
-
-
-    deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
-    // Create a label widget and set its font to Noto Sans
-//        QFont font("Noto Sans");
-
-//    deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-
-
-
-
-
-
-    // Add the components to the layout
-    secondadcLayout->addWidget(deviceAddressLabel);
-    secondadcLayout->addWidget(deviceAddressLineEdit);
-                 }
 
 void sequenceApplication::showGPIOexec(){
     Uart* uart = Uart::getInstance();
@@ -1547,58 +1547,17 @@ qDebug() << "Received data:" << datastring;
 // Concaténer les nouvelles données avec les données précédentes
 
 
-QString styleSheet = "\
-    QMessageBox {\
-        background-color: #D3D3D3;\
-        color: #263238;\
-        font-family:Fantasy ;\
-        font-size: 12px;\
-    }\
-    \
-    QMessageBox QLabel {\
-        color: #000000	;\
-    }\
-    \
-    QMessageBox QPushButton {\
-        background-color: #4CAF50;\
-        border: 1px solid #388E3C;\
-        color: #FFFFFF;\
-        padding: 5px;\
-        min-width: 70px;\
-    }\
-    \
-    QMessageBox QPushButton:hover {\
-        background-color: #388E3C;\
-    }";
 
 
 
-QMessageBox msgBox;
-msgBox.setWindowTitle("Loaded Configurations");
-msgBox.setStyleSheet(styleSheet);
-msgBox.setIcon(QMessageBox::Information);
-msgBox.setText(datastring);
-msgBox.exec();
+    QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
 
-//dataTextBrowseroutput->append(allData);
-
-
-
-//QString allData = dataTextBrowseroutput->toPlainText();
-//allData += datastring;
-
-//qDebug() << "all data:" << allData;
-
-////dataTextBrowseroutput->setText(datastring);
-///
-///
     ui->out->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
     QString style1 ="color: #097969;"; // Adresse de couleur pour le vert (green)
 
 
     ui->out->setStyleSheet(style1);
 
-    QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
     font.setBold(true);
     ui->out->setFont(font);
 
