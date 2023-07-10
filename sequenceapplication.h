@@ -46,13 +46,14 @@ public:
     QLineEdit* deviceAddressLineEditSPI;
     QLineEdit* deviceAddressLineEditDAC;
     QLineEdit* deviceAddressLineEditTIMER;
-    QTextBrowser* dataTextBrowseroutput;
+
     ~sequenceApplication();
 
 public slots:
     void returnDashboard();
     void addActionToMenu(QString menuItem, QString actionName);
     void onSubMenuSelected();
+
 private:
     Ui::sequenceApplication *ui;
 
@@ -72,7 +73,6 @@ private slots :
     void showTIMERexec();
     void showUARTexec();
     void showSPIexec();
-    void showOUTPUTexec();
     void showSecondADCexec();
 
 
