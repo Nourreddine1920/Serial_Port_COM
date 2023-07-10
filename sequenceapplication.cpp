@@ -151,6 +151,36 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
     QBoxLayout *layout = new QBoxLayout(QBoxLayout::LeftToRight);
     menuBar()->setLayout(layout);
 
+
+    QString styleSheet5 = "\
+    QListWidget { \
+    background-color: #E5E4E2	; \
+    } \
+    \
+    QListWidget::Item { \
+    background-color: #FFFFFF; \
+    border: 1px solid #CCCCCC; \
+    border-radius: 5px; \
+    padding: 5px; \
+    margin-bottom: 5px; \
+    font-family: Arial; \
+    font-size: 14px; \
+    } \
+    \
+    QListWidget::Item:hover { \
+    background-color: #C0C0C0; \
+    } \
+    \
+    QListWidget::Item:selected { \
+    background-color: #4CAF50; \
+    color: #FFFFFF; \
+    }";
+
+    ui->listWidget->setStyleSheet(styleSheet5);
+//    QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+     ui->listWidget->setFont(font);
+
+
             // Create a QString with your menu bar and QToolButton styles
             QString style = "\
                 QMenuBar {\
@@ -745,33 +775,33 @@ for (auto m : menus) {
   QListWidgetItem* selectedItem = ui->listWidget->itemAt(pos);
 
   // Feuille de style pour les éléments de la liste
-  QString styleSheet = "\
-  QListWidget { \
-  background-color: #F5F5F5; \
-  } \
-  \
-  QListWidget::Item { \
-  background-color: #FFFFFF; \
-  border: 1px solid #CCCCCC; \
-  border-radius: 5px; \
-  padding: 5px; \
-  margin-bottom: 5px; \
-  font-family: Arial; \
-  font-size: 14px; \
-  } \
-  \
-  QListWidget::Item:hover { \
-  background-color: #C0C0C0; \
-  } \
-  \
-  QListWidget::Item:selected { \
-  background-color: #4CAF50; \
-  color: #FFFFFF; \
-  }";
+//  QString styleSheet = "\
+//  QListWidget { \
+//  background-color: #E5E4E2	; \
+//  } \
+//  \
+//  QListWidget::Item { \
+//  background-color: #FFFFFF; \
+//  border: 1px solid #CCCCCC; \
+//  border-radius: 5px; \
+//  padding: 5px; \
+//  margin-bottom: 5px; \
+//  font-family: Arial; \
+//  font-size: 14px; \
+//  } \
+//  \
+//  QListWidget::Item:hover { \
+//  background-color: #C0C0C0; \
+//  } \
+//  \
+//  QListWidget::Item:selected { \
+//  background-color: #4CAF50; \
+//  color: #FFFFFF; \
+//  }";
 
-  ui->listWidget->setStyleSheet(styleSheet);
-  QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
-   ui->listWidget->setFont(font);
+//  ui->listWidget->setStyleSheet(styleSheet);
+//  QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+//   ui->listWidget->setFont(font);
 
 
   if (selectedItem) {
@@ -1021,9 +1051,22 @@ void sequenceApplication::showADCexec(){
     // Create a label widget and set its font to Noto Sans
 //        QFont font("Noto Sans");
 
-    deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
 
+    QString styleSheet = "\
+    QLineEdit { \
+    background-color: #F5F5F5; \
+    border: 1px solid #CCCCCC; \
+    border-radius: 5px; \
+    padding: 5px; \
+    font-family: Arial; \
+    font-size: 14px; \
+    } \
+    \
+    QLineEdit:focus { \
+    border-color: #4CAF50; \
+    }";
 
+    deviceAddressLineEdit->setStyleSheet(styleSheet);
     // Create a QComboBox to select the ADC channel
 
     // Create a QPushButton to initiate the ADC read operation
@@ -1311,8 +1354,21 @@ void sequenceApplication::showDACexec(){
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
 
-          deviceAddressLineEditDAC->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          QString styleSheet = "\
+          QLineEdit { \
+          background-color: #F5F5F5; \
+          border: 1px solid #CCCCCC; \
+          border-radius: 5px; \
+          padding: 5px; \
+          font-family: Arial; \
+          font-size: 14px; \
+          } \
+          \
+          QLineEdit:focus { \
+          border-color: #4CAF50; \
+          }";
 
+          deviceAddressLineEditDAC->setStyleSheet(styleSheet);
 
     // Add the components to the layout
     DAClayout->addWidget(deviceAddressLabel);
@@ -1359,8 +1415,21 @@ void sequenceApplication::showTIMERexec(){
           deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
-          deviceAddressLineEditTIMER->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          QString styleSheet = "\
+          QLineEdit { \
+          background-color: #F5F5F5; \
+          border: 1px solid #CCCCCC; \
+          border-radius: 5px; \
+          padding: 5px; \
+          font-family: Arial; \
+          font-size: 14px; \
+          } \
+          \
+          QLineEdit:focus { \
+          border-color: #4CAF50; \
+          }";
 
+          deviceAddressLineEditTIMER->setStyleSheet(styleSheet);
 
     // Add the components to the layout
     TIMERlayout->addWidget(deviceAddressLabel);
@@ -1409,8 +1478,21 @@ void sequenceApplication::showUARTexec(){
           deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
-          deviceAddressLineEditUART->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          QString styleSheet = "\
+          QLineEdit { \
+          background-color: #F5F5F5; \
+          border: 1px solid #CCCCCC; \
+          border-radius: 5px; \
+          padding: 5px; \
+          font-family: Arial; \
+          font-size: 14px; \
+          } \
+          \
+          QLineEdit:focus { \
+          border-color: #4CAF50; \
+          }";
 
+          deviceAddressLineEditUART->setStyleSheet(styleSheet);
 
     // Add the components to the layout
     UARTlayout->addWidget(deviceAddressLabel);
@@ -1458,8 +1540,21 @@ void sequenceApplication::showSPIexec(){
           deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
-          deviceAddressLineEditSPI->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          QString styleSheet = "\
+          QLineEdit { \
+          background-color: #F5F5F5; \
+          border: 1px solid #CCCCCC; \
+          border-radius: 5px; \
+          padding: 5px; \
+          font-family: Arial; \
+          font-size: 14px; \
+          } \
+          \
+          QLineEdit:focus { \
+          border-color: #4CAF50; \
+          }";
 
+          deviceAddressLineEditSPI->setStyleSheet(styleSheet);
 
     // Add the components to the layout
     SPIlayout->addWidget(deviceAddressLabel);
@@ -1508,8 +1603,21 @@ void sequenceApplication::showI2Cexec(){
           deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
           // Create a label widget and set its font to Noto Sans
   //        QFont font("Noto Sans");
-          deviceAddressLineEditI2C->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+          QString styleSheet = "\
+          QLineEdit { \
+          background-color: #F5F5F5; \
+          border: 1px solid #CCCCCC; \
+          border-radius: 5px; \
+          padding: 5px; \
+          font-family: Arial; \
+          font-size: 14px; \
+          } \
+          \
+          QLineEdit:focus { \
+          border-color: #4CAF50; \
+          }";
 
+          deviceAddressLineEditI2C->setStyleSheet(styleSheet);
 
     // Add the components to the layout
     I2Clayout->addWidget(deviceAddressLabel);
