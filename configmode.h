@@ -96,9 +96,10 @@ private slots :
                 QString bestFont = fontFamilies.first();
 
                 // Create a font object with the best font and size
-                QFont font(bestFont, 18);
+                QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
+                QFont font1(bestFont, 18);
 
-                titleItem->setFont(font);
+                titleItem->setFont(font1);
                 titleItem->setTextAlignment(Qt::TopLeftCorner);
                 QBrush gray(Qt::darkGreen);
                 QBrush white(Qt::white);
@@ -106,19 +107,19 @@ private slots :
                 titleItem->setBackground(gray);
                 titleItem->setForeground(white);
 
-                baudRateItem->setFont(QFont("Helvetica", 13));
+                baudRateItem->setFont(font);
                 baudRateItem->setTextAlignment(Qt::TopLeftCorner);
-                ParityItem->setFont(QFont("Helvetica", 13));
+                ParityItem->setFont(font);
                 ParityItem->setTextAlignment(Qt::TopLeftCorner);
-                stopBitsItem->setFont(QFont("Helvetica", 13));
+                stopBitsItem->setFont(font);
                 stopBitsItem->setTextAlignment(Qt::TopLeftCorner);
-                DataBitsItem->setFont(QFont("Helvetica", 13));
+                DataBitsItem->setFont(font);
                 DataBitsItem->setTextAlignment(Qt::TopLeftCorner);
-                FlowControlItem->setFont(QFont("Helvetica", 13));
+                FlowControlItem->setFont(font);
                 FlowControlItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-                configList->setSpacing(15);
+                configList->setSpacing(13);
                 configList->addItem(titleItem);
 
                 configList->addItem(baudRateItem);
@@ -165,8 +166,8 @@ private slots :
 
 
 
-        //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-                configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+        //        configList->setStyleSheet("background-color: white; font-size: 13px;");
+                configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -221,6 +222,7 @@ private slots :
 
         // Create a font object with the best font and size
         QFont font(bestFont, 18);
+        QFont font1("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
         titleItem->setFont(font);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
@@ -230,19 +232,19 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        baudRateItem->setFont(QFont("Helvetica", 13));
+        baudRateItem->setFont(font1);
         baudRateItem->setTextAlignment(Qt::TopLeftCorner);
-        ParityItem->setFont(QFont("Helvetica", 13));
+        ParityItem->setFont(font1);
         ParityItem->setTextAlignment(Qt::TopLeftCorner);
-        stopBitsItem->setFont(QFont("Helvetica", 13));
+        stopBitsItem->setFont(font1);
         stopBitsItem->setTextAlignment(Qt::TopLeftCorner);
-        DataBitsItem->setFont(QFont("Helvetica", 13));
+        DataBitsItem->setFont(font1);
         DataBitsItem->setTextAlignment(Qt::TopLeftCorner);
-        FlowControlItem->setFont(QFont("Helvetica", 13));
+        FlowControlItem->setFont(font1);
         FlowControlItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(baudRateItem);
@@ -289,8 +291,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -343,9 +345,10 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -353,19 +356,19 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        baudRateItem->setFont(QFont("Helvetica", 13));
+        baudRateItem->setFont(font);
         baudRateItem->setTextAlignment(Qt::TopLeftCorner);
-        ParityItem->setFont(QFont("Helvetica", 13));
+        ParityItem->setFont(font);
         ParityItem->setTextAlignment(Qt::TopLeftCorner);
-        stopBitsItem->setFont(QFont("Helvetica", 13));
+        stopBitsItem->setFont(font);
         stopBitsItem->setTextAlignment(Qt::TopLeftCorner);
-        DataBitsItem->setFont(QFont("Helvetica", 13));
+        DataBitsItem->setFont(font);
         DataBitsItem->setTextAlignment(Qt::TopLeftCorner);
-        FlowControlItem->setFont(QFont("Helvetica", 13));
+        FlowControlItem->setFont(font);
         FlowControlItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(baudRateItem);
@@ -411,8 +414,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -465,9 +468,10 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -475,19 +479,19 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        baudRateItem->setFont(QFont("Helvetica", 13));
+        baudRateItem->setFont(font);
         baudRateItem->setTextAlignment(Qt::TopLeftCorner);
-        ParityItem->setFont(QFont("Helvetica", 13));
+        ParityItem->setFont(font);
         ParityItem->setTextAlignment(Qt::TopLeftCorner);
-        stopBitsItem->setFont(QFont("Helvetica", 13));
+        stopBitsItem->setFont(font);
         stopBitsItem->setTextAlignment(Qt::TopLeftCorner);
-        DataBitsItem->setFont(QFont("Helvetica", 13));
+        DataBitsItem->setFont(font);
         DataBitsItem->setTextAlignment(Qt::TopLeftCorner);
-        FlowControlItem->setFont(QFont("Helvetica", 13));
+        FlowControlItem->setFont(font);
         FlowControlItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(baudRateItem);
@@ -532,8 +536,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -587,9 +591,10 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -597,19 +602,19 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        ModeItem->setFont(QFont("Helvetica", 12));
+        ModeItem->setFont(font);
         ModeItem->setTextAlignment(Qt::TopLeftCorner);
-        NSSItem->setFont(QFont("Helvetica", 12));
+        NSSItem->setFont(font);
         NSSItem->setTextAlignment(Qt::TopLeftCorner);
-        FrameformatItem->setFont(QFont("Helvetica", 12));
+        FrameformatItem->setFont(font);
         FrameformatItem->setTextAlignment(Qt::TopLeftCorner);
-        DatasizeItem->setFont(QFont("Helvetica", 12));
+        DatasizeItem->setFont(font);
         DatasizeItem->setTextAlignment(Qt::TopLeftCorner);
-        FirstbitItem->setFont(QFont("Helvetica", 12));
+        FirstbitItem->setFont(font);
         FirstbitItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(ModeItem);
@@ -654,8 +659,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -706,9 +711,10 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -716,19 +722,19 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        ModeItem->setFont(QFont("Helvetica", 12));
+        ModeItem->setFont(font);
         ModeItem->setTextAlignment(Qt::TopLeftCorner);
-        NSSItem->setFont(QFont("Helvetica", 12));
+        NSSItem->setFont(font);
         NSSItem->setTextAlignment(Qt::TopLeftCorner);
-        FrameformatItem->setFont(QFont("Helvetica", 12));
+        FrameformatItem->setFont(font);
         FrameformatItem->setTextAlignment(Qt::TopLeftCorner);
-        DatasizeItem->setFont(QFont("Helvetica", 12));
+        DatasizeItem->setFont(font);
         DatasizeItem->setTextAlignment(Qt::TopLeftCorner);
-        FirstbitItem->setFont(QFont("Helvetica", 12));
+        FirstbitItem->setFont(font);
         FirstbitItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(ModeItem);
@@ -742,7 +748,7 @@ private slots :
 
         settings.endGroup();
 
-//        ModeItem->set("font: bold 15px; color: black; background-color: white;");
+//        ModeItem->set("font: bold 13px; color: black; background-color: white;");
 
 
         // Create Layout form
@@ -775,8 +781,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -835,9 +841,10 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -845,19 +852,19 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        ModeItem->setFont(QFont("Helvetica", 12));
+        ModeItem->setFont(font);
         ModeItem->setTextAlignment(Qt::TopLeftCorner);
-        NSSItem->setFont(QFont("Helvetica", 12));
+        NSSItem->setFont(font);
         NSSItem->setTextAlignment(Qt::TopLeftCorner);
-        FrameformatItem->setFont(QFont("Helvetica", 12));
+        FrameformatItem->setFont(font);
         FrameformatItem->setTextAlignment(Qt::TopLeftCorner);
-        DatasizeItem->setFont(QFont("Helvetica", 12));
+        DatasizeItem->setFont(font);
         DatasizeItem->setTextAlignment(Qt::TopLeftCorner);
-        FirstbitItem->setFont(QFont("Helvetica", 12));
+        FirstbitItem->setFont(font);
         FirstbitItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(ModeItem);
@@ -900,7 +907,7 @@ private slots :
 
 
 
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 2px solid #ccc; padding: 5px;text-align: center;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 2px solid #ccc; padding: 5px;text-align: center;");
 //        configList->setFixedHeight(450);
 //        configList->setFixedWidth(550);
 
@@ -960,9 +967,10 @@ private slots :
             QString bestFont = fontFamilies.first();
 
             // Create a font object with the best font and size
-            QFont font(bestFont, 18);
+            QFont font1(bestFont, 18);
+            QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-            titleItem->setFont(font);
+            titleItem->setFont(font1);
             titleItem->setTextAlignment(Qt::TopLeftCorner);
             QBrush gray(Qt::darkGreen);
             QBrush white(Qt::white);
@@ -970,20 +978,20 @@ private slots :
             titleItem->setBackground(gray);
             titleItem->setForeground(white);
 
-            AdressLenghtItem->setFont(QFont("Helvetica", 13));
+            AdressLenghtItem->setFont(font);
             AdressLenghtItem->setTextAlignment(Qt::TopLeftCorner);
-            DualAddressModeItem->setFont(QFont("Helvetica", 13));
+            DualAddressModeItem->setFont(font);
             DualAddressModeItem->setTextAlignment(Qt::TopLeftCorner);
-            NoStretchModeItem->setFont(QFont("Helvetica", 13));
+            NoStretchModeItem->setFont(font);
             NoStretchModeItem->setTextAlignment(Qt::TopLeftCorner);
-            AddressMasksItem->setFont(QFont("Helvetica", 13));
+            AddressMasksItem->setFont(font);
             AddressMasksItem->setTextAlignment(Qt::TopLeftCorner);
-            GeneralCallModeItem->setFont(QFont("Helvetica", 13));
+            GeneralCallModeItem->setFont(font);
             GeneralCallModeItem->setTextAlignment(Qt::TopLeftCorner);
 
 
 
-            configList->setSpacing(15);
+            configList->setSpacing(13);
             configList->addItem(titleItem);
 
             configList->addItem(AdressLenghtItem);
@@ -1029,8 +1037,8 @@ private slots :
 
 
 
-    //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-            configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+    //        configList->setStyleSheet("background-color: white; font-size: 13px;");
+            configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1087,9 +1095,10 @@ private slots :
             QString bestFont = fontFamilies.first();
 
             // Create a font object with the best font and size
-            QFont font(bestFont, 18);
+            QFont font1(bestFont, 18);
+            QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-            titleItem->setFont(font);
+            titleItem->setFont(font1);
             titleItem->setTextAlignment(Qt::TopLeftCorner);
             QBrush gray(Qt::darkGreen);
             QBrush white(Qt::white);
@@ -1097,20 +1106,20 @@ private slots :
             titleItem->setBackground(gray);
             titleItem->setForeground(white);
 
-            AdressLenghtItem->setFont(QFont("Helvetica", 13));
+            AdressLenghtItem->setFont(font);
             AdressLenghtItem->setTextAlignment(Qt::TopLeftCorner);
-            DualAddressModeItem->setFont(QFont("Helvetica", 13));
+            DualAddressModeItem->setFont(font);
             DualAddressModeItem->setTextAlignment(Qt::TopLeftCorner);
-            NoStretchModeItem->setFont(QFont("Helvetica", 13));
+            NoStretchModeItem->setFont(font);
             NoStretchModeItem->setTextAlignment(Qt::TopLeftCorner);
-            AddressMasksItem->setFont(QFont("Helvetica", 13));
+            AddressMasksItem->setFont(font);
             AddressMasksItem->setTextAlignment(Qt::TopLeftCorner);
-            GeneralCallModeItem->setFont(QFont("Helvetica", 13));
+            GeneralCallModeItem->setFont(font);
             GeneralCallModeItem->setTextAlignment(Qt::TopLeftCorner);
 
 
 
-            configList->setSpacing(15);
+            configList->setSpacing(13);
             configList->addItem(titleItem);
 
             configList->addItem(AdressLenghtItem);
@@ -1156,8 +1165,8 @@ private slots :
 
 
 
-    //        configList->setStyleSheet("background-color: white; font-size: 14px;");
-            configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+    //        configList->setStyleSheet("background-color: white; font-size: 13px;");
+            configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1220,9 +1229,10 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -1230,25 +1240,25 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        ChannelItem->setFont(QFont("Helvetica", 13));
+        ChannelItem->setFont(font);
         ChannelItem->setTextAlignment(Qt::TopLeftCorner);
-        ResolutionItem->setFont(QFont("Helvetica", 13));
+        ResolutionItem->setFont(font);
         ResolutionItem->setTextAlignment(Qt::TopLeftCorner);
-        ScanItem->setFont(QFont("Helvetica", 13));
+        ScanItem->setFont(font);
         ScanItem->setTextAlignment(Qt::TopLeftCorner);
-        ContinuousItem->setFont(QFont("Helvetica", 13));
+        ContinuousItem->setFont(font);
         ContinuousItem->setTextAlignment(Qt::TopLeftCorner);
-        DiscontinuousItem->setFont(QFont("Helvetica", 13));
+        DiscontinuousItem->setFont(font);
         DiscontinuousItem->setTextAlignment(Qt::TopLeftCorner);
-        EndConversionItem->setFont(QFont("Helvetica", 13));
+        EndConversionItem->setFont(font);
         EndConversionItem->setTextAlignment(Qt::TopLeftCorner);
-        BehaviorItem->setFont(QFont("Helvetica", 13));
+        BehaviorItem->setFont(font);
         BehaviorItem->setTextAlignment(Qt::TopLeftCorner);
-        LeftBitItem->setFont(QFont("Helvetica", 13));
+        LeftBitItem->setFont(font);
         LeftBitItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(ChannelItem);
@@ -1297,8 +1307,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1361,9 +1371,10 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -1371,25 +1382,25 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        ChannelItem->setFont(QFont("Helvetica", 13));
+        ChannelItem->setFont(font);
         ChannelItem->setTextAlignment(Qt::TopLeftCorner);
-        ResolutionItem->setFont(QFont("Helvetica", 13));
+        ResolutionItem->setFont(font);
         ResolutionItem->setTextAlignment(Qt::TopLeftCorner);
-        ScanItem->setFont(QFont("Helvetica", 13));
+        ScanItem->setFont(font);
         ScanItem->setTextAlignment(Qt::TopLeftCorner);
-        ContinuousItem->setFont(QFont("Helvetica", 13));
+        ContinuousItem->setFont(font);
         ContinuousItem->setTextAlignment(Qt::TopLeftCorner);
-        DiscontinuousItem->setFont(QFont("Helvetica", 13));
+        DiscontinuousItem->setFont(font);
         DiscontinuousItem->setTextAlignment(Qt::TopLeftCorner);
-        EndConversionItem->setFont(QFont("Helvetica", 13));
+        EndConversionItem->setFont(font);
         EndConversionItem->setTextAlignment(Qt::TopLeftCorner);
-        BehaviorItem->setFont(QFont("Helvetica", 13));
+        BehaviorItem->setFont(font);
         BehaviorItem->setTextAlignment(Qt::TopLeftCorner);
-        LeftBitItem->setFont(QFont("Helvetica", 13));
+        LeftBitItem->setFont(font);
         LeftBitItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(ChannelItem);
@@ -1438,8 +1449,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1496,9 +1507,10 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -1506,19 +1518,19 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        PINItem->setFont(QFont("Helvetica", 13));
+        PINItem->setFont(font);
         PINItem->setTextAlignment(Qt::TopLeftCorner);
-        ModeItem->setFont(QFont("Helvetica", 13));
+        ModeItem->setFont(font);
         ModeItem->setTextAlignment(Qt::TopLeftCorner);
-        GPIOItem->setFont(QFont("Helvetica", 13));
+        GPIOItem->setFont(font);
         GPIOItem->setTextAlignment(Qt::TopLeftCorner);
-        SpeedItem->setFont(QFont("Helvetica", 13));
+        SpeedItem->setFont(font);
         SpeedItem->setTextAlignment(Qt::TopLeftCorner);
-        UserLabelItem->setFont(QFont("Helvetica", 13));
+        UserLabelItem->setFont(font);
         UserLabelItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(PINItem);
@@ -1564,8 +1576,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1613,9 +1625,11 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -1623,15 +1637,15 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        PINItem->setFont(QFont("Helvetica", 13));
+        PINItem->setFont(font);
         PINItem->setTextAlignment(Qt::TopLeftCorner);
-        GPIOItem->setFont(QFont("Helvetica", 13));
+        GPIOItem->setFont(font);
         GPIOItem->setTextAlignment(Qt::TopLeftCorner);
-        UserLabelItem->setFont(QFont("Helvetica", 13));
+        UserLabelItem->setFont(font);
         UserLabelItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(PINItem);
@@ -1675,8 +1689,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1754,9 +1768,10 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -1764,21 +1779,21 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        ChannelItem->setFont(QFont("Helvetica", 13));
+        ChannelItem->setFont(font);
         ChannelItem->setTextAlignment(Qt::TopLeftCorner);
-//        Channel2Item->setFont(QFont("Helvetica", 13));
+//        Channel2Item->setFont(font);
 //        Channel2Item->setTextAlignment(Qt::TopLeftCorner);
-        ModeItem->setFont(QFont("Helvetica", 13));
+        ModeItem->setFont(font);
         ModeItem->setTextAlignment(Qt::TopLeftCorner);
-        BufferLabelItem->setFont(QFont("Helvetica", 13));
+        BufferLabelItem->setFont(font);
         BufferLabelItem->setTextAlignment(Qt::TopLeftCorner);
-        TriggerLabelItem->setFont(QFont("Helvetica", 13));
+        TriggerLabelItem->setFont(font);
         TriggerLabelItem->setTextAlignment(Qt::TopLeftCorner);
-        TrimmingLabelItem->setFont(QFont("Helvetica", 13));
+        TrimmingLabelItem->setFont(font);
         TrimmingLabelItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(ChannelItem);
@@ -1828,8 +1843,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -1907,9 +1922,10 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -1917,21 +1933,21 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        Channel2Item->setFont(QFont("Helvetica", 13));
+        Channel2Item->setFont(font);
         Channel2Item->setTextAlignment(Qt::TopLeftCorner);
-//        Channel22Item->setFont(QFont("Helvetica", 13));
+//        Channel22Item->setFont(font);
 //        Channel22Item->setTextAlignment(Qt::TopLeftCorner);
-        ModeItem->setFont(QFont("Helvetica", 13));
+        ModeItem->setFont(font);
         ModeItem->setTextAlignment(Qt::TopLeftCorner);
-        BufferLabelItem->setFont(QFont("Helvetica", 13));
+        BufferLabelItem->setFont(font);
         BufferLabelItem->setTextAlignment(Qt::TopLeftCorner);
-        TriggerLabelItem->setFont(QFont("Helvetica", 13));
+        TriggerLabelItem->setFont(font);
         TriggerLabelItem->setTextAlignment(Qt::TopLeftCorner);
-        TrimmingLabelItem->setFont(QFont("Helvetica", 13));
+        TrimmingLabelItem->setFont(font);
         TrimmingLabelItem->setTextAlignment(Qt::TopLeftCorner);
 
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(Channel2Item);
@@ -1981,8 +1997,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 
@@ -2063,9 +2079,10 @@ private slots :
         QString bestFont = fontFamilies.first();
 
         // Create a font object with the best font and size
-        QFont font(bestFont, 18);
+        QFont font1(bestFont, 18);
+        QFont font("Segoe UI", 13); // Police Arial avec une taille de 12 points
 
-        titleItem->setFont(font);
+        titleItem->setFont(font1);
         titleItem->setTextAlignment(Qt::TopLeftCorner);
         QBrush gray(Qt::darkGreen);
         QBrush white(Qt::white);
@@ -2073,24 +2090,24 @@ private slots :
         titleItem->setBackground(gray);
         titleItem->setForeground(white);
 
-        ChannelItem->setFont(QFont("Helvetica", 13));
+        ChannelItem->setFont(font);
         ChannelItem->setTextAlignment(Qt::TopLeftCorner);
-//        Channel2Item->setFont(QFont("Helvetica", 13));
+//        Channel2Item->setFont(font);
 //        Channel2Item->setTextAlignment(Qt::TopLeftCorner);
-        PrescalerItem->setFont(QFont("Helvetica", 13));
+        PrescalerItem->setFont(font);
         PrescalerItem->setTextAlignment(Qt::TopLeftCorner);
-        CounterLabelItem->setFont(QFont("Helvetica", 13));
+        CounterLabelItem->setFont(font);
         CounterLabelItem->setTextAlignment(Qt::TopLeftCorner);
-        AutoReloadLabelItem->setFont(QFont("Helvetica", 13));
+        AutoReloadLabelItem->setFont(font);
         AutoReloadLabelItem->setTextAlignment(Qt::TopLeftCorner);
-        ClockLabelItem->setFont(QFont("Helvetica", 13));
+        ClockLabelItem->setFont(font);
         ClockLabelItem->setTextAlignment(Qt::TopLeftCorner);
-        RepititionItem->setFont(QFont("Helvetica", 13));
+        RepititionItem->setFont(font);
         RepititionItem->setTextAlignment(Qt::TopLeftCorner);
-        PreloadItem->setFont(QFont("Helvetica", 13));
+        PreloadItem->setFont(font);
         PreloadItem->setTextAlignment(Qt::TopLeftCorner);
 
-        configList->setSpacing(15);
+        configList->setSpacing(13);
         configList->addItem(titleItem);
 
         configList->addItem(ChannelItem);
@@ -2141,8 +2158,8 @@ private slots :
 
 
 
-//        configList->setStyleSheet("background-color: white; font-size: 14px;");
-        configList->setStyleSheet("background-color: #E3E0DF; font-size: 14px; border: 1px solid #ccc; padding: 5px;text-align: center;");
+//        configList->setStyleSheet("background-color: white; font-size: 13px;");
+        configList->setStyleSheet("background-color: #E3E0DF; font-size: 13px; border: 1px solid #ccc; padding: 5px;text-align: center;");
 
 
 

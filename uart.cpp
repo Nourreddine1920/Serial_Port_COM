@@ -335,17 +335,45 @@ Uart::Uart(QWidget *parent)
     ui->comboBox_2->addItem("Software Flow Control");
 
     ui->label->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-    ui->comboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    QString comboBoxStyle = "QComboBox {"
+      " border: 1px solid #555555;"
+      " border-radius: 3px;"
+      " padding: 1px 3px 1px 3px;"
+      " min-width: 6em;"
+      " background-color: #ffffff;"
+      "}"
+      "QComboBox::drop-down {"
+      " subcontrol-origin: padding;"
+      " subcontrol-position: top right;"
+      " width: 20px;"
+      " border-left-width: 1px;"
+      " border-left-color: #555555;"
+      " border-left-style: solid;"
+      " border-top-right-radius: 3px;"
+      " border-bottom-right-radius: 3px;"
+      " background-color: #dddddd;"
+      "}"
+      "QComboBox::down-arrow {"
+      " width: 0;"
+      " height: 0;"
+      " border-style: solid;"
+      " border-width: 5px 5px 0 5px;"
+      " border-color: #555555 transparent transparent transparent;"
+      "}"
+      "QComboBox QAbstractItemView {"
+      " selection-background-color: #00ff00;"
+      "}";
+    ui->comboBox->setStyleSheet(comboBoxStyle);
     ui->label_4->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-    ui->comboBox_4->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->comboBox_4->setStyleSheet(comboBoxStyle);
     ui->label_3->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-    ui->comboBox_3->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->comboBox_3->setStyleSheet(comboBoxStyle);
     ui->label_5->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-    ui->comboBox_5->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->comboBox_5->setStyleSheet(comboBoxStyle);
     ui->label_6->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-    ui->comboBox_6->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->comboBox_6->setStyleSheet(comboBoxStyle);
     ui->label_2->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-    ui->comboBox_2->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    ui->comboBox_2->setStyleSheet(comboBoxStyle);
     ui->label_8->setStyleSheet("font: bold 15px; color: black; background-color: white;");
     ui->lineEdit_2->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
     ui->lineEdit_3->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
