@@ -1093,6 +1093,8 @@ void sequenceApplication::showADCexec(){
     }";
 
     deviceAddressLineEdit->setStyleSheet(styleSheet);
+    deviceAddressLineEdit->clear();
+
     // Create a QComboBox to select the ADC channel
 
     // Create a QPushButton to initiate the ADC read operation
@@ -1192,152 +1194,11 @@ void sequenceApplication::showGPIOexec(){
     gpioOutputLayout->addWidget(ledStatusLabel);
     gpioOutputLayout->addWidget(switchButton);
 
-//    Uart* uart = Uart::getInstance();
-//    QSerialPort* serialPort = uart->getSerialPort();
 
-//    QVBoxLayout* gpioOutputLayout = new QVBoxLayout(ui->GPIOwidget);
-
-//    // Create a QHBoxLayout for the switch button and label
-//    QHBoxLayout* switchLayout = new QHBoxLayout;
-
-//    // Create a QLabel to display the status of the LED
-//    QLabel* ledStatusLabel = new QLabel("LED Status: OFF/ON", ui->GPIOwidget);
-//    QFont font("Segoe UI", 10); // Police Arial avec une taille de 10 points
-//    ledStatusLabel->setFont(font);
-//    ledStatusLabel->setStyleSheet("font: bold 13px; color: #36454F;");
-
-//    QPushButton* switchButton = new QPushButton("OFF");
-//    switchButton->setCheckable(true); // Rendre le bouton-poussoir commutable (toggleable)
-
-//    // Connecter le signal "clicked" du bouton-poussoir à un slot
-//    QObject::connect(switchButton, &QPushButton::clicked, [=]() {
-//    if (switchButton->isChecked()) {
-//    switchButton->setText("ON");
-//    } else {
-//    switchButton->setText("OFF");
-//    }
-//    });
-
-//    switchButton->show();
-
-//    // Ajouter le bouton de commutation et l'étiquette au QHBoxLayout
-//    switchLayout->addWidget(switchButton);
-//    switchLayout->addWidget(ledStatusLabel);
-
-//    // Ajouter le QHBoxLayout au QVBoxLayout principal
-//    gpioOutputLayout->addLayout(switchLayout);
-
-//    QString styleSheet2 =
-//    "QPushButton {"
-//    " background-color: gray;"
-//    " border: none;"
-//    " color: white;"
-//    " padding: 3px 3px;"
-//    " text-align: center;"
-//    " text-decoration: none;"
-//    " font-size: 14px;"
-//    " margin: 4px 2px;"
-//    " border-radius: 10px;"
-//    "}"
-//    ""
-//    "QPushButton:hover {"
-//    " background-color: #3e8e41;"
-//    "}";
-
-//    gpioOutputLayout->addWidget(ledStatusLabel);
-//    gpioOutputLayout->addWidget(switchButton);
 
 
                   }
 
-//void sequenceApplication::showOUTPUTexec(){
-
-//    Uart* uart = Uart::getInstance();
-//    QSerialPort* serialPort = uart->getSerialPort();
-
-
-//    QVBoxLayout* OUTPUTLayout = new QVBoxLayout(ui->OUTPUTwidget);
-
-//    // Create a QLabel to display the status of the LED
-//    QLabel* ledStatusLabel = new QLabel("OUTPUT values", ui->OUTPUTwidget);
-//    dataTextBrowseroutput = new QTextBrowser(ui->OUTPUTwidget);
-
-
-
-//    QString styleSheet2 =
-//              "QPushButton {"
-//              "    background-color: gray;"
-//              "    border: none;"
-//              "    color: white;"
-//              "    padding: 3px 3px;"
-//              "    text-align: center;"
-//              "    text-decoration: none;"
-//              "    font-size: 14px;"
-//              "    margin: 4px 2px;"
-//              "    border-radius: 10px;"
-//              "}"
-//              ""
-//              "QPushButton:hover {"
-//              "    background-color: #3e8e41;"
-//              "}";
-//          QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
-//          ledStatusLabel->setFont(font);
-
-
-//          ledStatusLabel->setStyleSheet("font: bold 13px; color: #36454F;");
-
-//          font.setBold(true);
-//         dataTextBrowseroutput->setFont(font);
-//          QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
-
-////            QTextBrowser* dataTextBrowseroutput->setStyleSheet(QString("color1: %1;").arg(color1));
-
-//        dataTextBrowseroutput->setStyleSheet(style);
-
-//        dataTextBrowseroutput->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
-
-
-
-
-////            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
-////            QByteArray responseData;
-////            while (serialPort->waitForReadyRead(100)) {
-////            responseData.append(serialPort->readAll());
-
-
-////            }
-
-////                if (!responseData.isEmpty()) {
-////                    lastResponse = QString::fromUtf8(responseData);
-
-////                    qDebug() << "Received data:" << lastResponse;
-////                    textBrowser->append(lastResponse);
-////                } else {
-////                    qDebug() << "No data received from serial port";
-////                    textBrowser->append("No data received from serial port");
-////                }
-
-//          QByteArray buffer;
-//          const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
-
-
-//          QByteArray data = serialPort->readAll();
-//          QString datastring(data);
-//          buffer.append(data);
-////                QString message(data);
-//          qDebug() << "Received message:" << datastring;
-
-
-
-//          dataTextBrowseroutput->append(datastring);
-
-
-
-//    // Add the components to the layout
-//    OUTPUTLayout->addWidget(ledStatusLabel);
-//    OUTPUTLayout->addWidget(dataTextBrowseroutput);
-
-//}
 
 
 
@@ -1457,6 +1318,9 @@ void sequenceApplication::showTIMERexec(){
 
           deviceAddressLineEditTIMER->setStyleSheet(styleSheet);
 
+          deviceAddressLineEditTIMER->clear();
+
+
     // Add the components to the layout
     TIMERlayout->addWidget(deviceAddressLabel);
     TIMERlayout->addWidget(deviceAddressLineEditTIMER);
@@ -1519,6 +1383,7 @@ void sequenceApplication::showUARTexec(){
           }";
 
           deviceAddressLineEditUART->setStyleSheet(styleSheet);
+          deviceAddressLineEditUART->clear();
 
     // Add the components to the layout
     UARTlayout->addWidget(deviceAddressLabel);
@@ -1581,6 +1446,7 @@ void sequenceApplication::showSPIexec(){
           }";
 
           deviceAddressLineEditSPI->setStyleSheet(styleSheet);
+          deviceAddressLineEditSPI->clear();
 
     // Add the components to the layout
     SPIlayout->addWidget(deviceAddressLabel);
@@ -1644,6 +1510,7 @@ void sequenceApplication::showI2Cexec(){
           }";
 
           deviceAddressLineEditI2C->setStyleSheet(styleSheet);
+          deviceAddressLineEditI2C->clear();
 
     // Add the components to the layout
     I2Clayout->addWidget(deviceAddressLabel);
