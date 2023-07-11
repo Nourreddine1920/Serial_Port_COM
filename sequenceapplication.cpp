@@ -701,6 +701,9 @@ void sequenceApplication::sendSequenceframe(){
 
 
 
+
+
+
    ui->out->clear();
 
 }
@@ -1085,7 +1088,7 @@ void sequenceApplication::showADCexec(){
     border-radius: 5px; \
     padding: 5px; \
     font-family: Arial; \
-    font-size: 14px; \
+    font-size: 12px; \
     } \
     \
     QLineEdit:focus { \
@@ -1093,7 +1096,6 @@ void sequenceApplication::showADCexec(){
     }";
 
     deviceAddressLineEdit->setStyleSheet(styleSheet);
-    deviceAddressLineEdit->clear();
 
     // Create a QComboBox to select the ADC channel
 
@@ -1214,7 +1216,8 @@ void sequenceApplication::showDACexec(){
 
     deviceAddressLineEditDAC = new QLineEdit(ui->DACwidget);
 
-    deviceAddressLineEditDAC->setPlaceholderText("Enter the device address");
+    deviceAddressLineEditDAC->setPlaceholderText("Digital value between 1-4096");
+    deviceAddressLineEditDAC->setMaxLength(4);
 
 
     QString styleSheet2 =
@@ -1248,7 +1251,7 @@ void sequenceApplication::showDACexec(){
           border-radius: 5px; \
           padding: 5px; \
           font-family: Arial; \
-          font-size: 14px; \
+          font-size: 12px; \
           } \
           \
           QLineEdit:focus { \
@@ -1309,7 +1312,7 @@ void sequenceApplication::showTIMERexec(){
           border-radius: 5px; \
           padding: 5px; \
           font-family: Arial; \
-          font-size: 14px; \
+          font-size: 12px; \
           } \
           \
           QLineEdit:focus { \
@@ -1318,7 +1321,6 @@ void sequenceApplication::showTIMERexec(){
 
           deviceAddressLineEditTIMER->setStyleSheet(styleSheet);
 
-          deviceAddressLineEditTIMER->clear();
 
 
     // Add the components to the layout
@@ -1342,7 +1344,7 @@ void sequenceApplication::showUARTexec(){
 
     deviceAddressLineEditUART = new QLineEdit(ui->UARTwidget);
 
-    deviceAddressLineEditUART->setPlaceholderText("Enter your message");
+    deviceAddressLineEditUART->setPlaceholderText("Enter data to write");
 
 
     QString styleSheet2 =
@@ -1375,7 +1377,7 @@ void sequenceApplication::showUARTexec(){
           border-radius: 5px; \
           padding: 5px; \
           font-family: Arial; \
-          font-size: 14px; \
+          font-size: 12px; \
           } \
           \
           QLineEdit:focus { \
@@ -1383,7 +1385,6 @@ void sequenceApplication::showUARTexec(){
           }";
 
           deviceAddressLineEditUART->setStyleSheet(styleSheet);
-          deviceAddressLineEditUART->clear();
 
     // Add the components to the layout
     UARTlayout->addWidget(deviceAddressLabel);
@@ -1405,7 +1406,7 @@ void sequenceApplication::showSPIexec(){
 
     deviceAddressLineEditSPI = new QLineEdit(ui->SPIwidget);
 
-    deviceAddressLineEditSPI->setPlaceholderText("Enter your message");
+    deviceAddressLineEditSPI->setPlaceholderText("Enter the data to write");
 
 
     QString styleSheet2 =
@@ -1438,7 +1439,7 @@ void sequenceApplication::showSPIexec(){
           border-radius: 5px; \
           padding: 5px; \
           font-family: Arial; \
-          font-size: 14px; \
+          font-size: 12px; \
           } \
           \
           QLineEdit:focus { \
@@ -1446,7 +1447,6 @@ void sequenceApplication::showSPIexec(){
           }";
 
           deviceAddressLineEditSPI->setStyleSheet(styleSheet);
-          deviceAddressLineEditSPI->clear();
 
     // Add the components to the layout
     SPIlayout->addWidget(deviceAddressLabel);
@@ -1502,7 +1502,7 @@ void sequenceApplication::showI2Cexec(){
           border-radius: 5px; \
           padding: 5px; \
           font-family: Arial; \
-          font-size: 14px; \
+          font-size: 12px; \
           } \
           \
           QLineEdit:focus { \
@@ -1510,7 +1510,6 @@ void sequenceApplication::showI2Cexec(){
           }";
 
           deviceAddressLineEditI2C->setStyleSheet(styleSheet);
-          deviceAddressLineEditI2C->clear();
 
     // Add the components to the layout
     I2Clayout->addWidget(deviceAddressLabel);
@@ -1564,7 +1563,29 @@ qDebug() << "Received data:" << datastring;
 
 
     ui->out->append(datastring);
+    if ( deviceAddressLineEdit != nullptr){
+    deviceAddressLineEdit->clear();
+    }    if (deviceAddressLineEditTIMER != nullptr){
+    deviceAddressLineEditTIMER->clear();
+    }
+    if (deviceAddressLineEditUART != nullptr){
+    deviceAddressLineEditUART->clear();
+    }
+    if (deviceAddressLineEditSPI != nullptr){
+    deviceAddressLineEditSPI->clear();
+    }
+    if (deviceAddressLineEditI2C != nullptr){
+    deviceAddressLineEditI2C->clear();
+    }
+    if (deviceAddressLineEditDAC != nullptr){
+    deviceAddressLineEditDAC->clear();
+    }
 
+//    deviceAddressLineEditUART->clear();
+//    deviceAddressLineEditSPI->clear();
+//    deviceAddressLineEditI2C->clear();
+
+//    deviceAddressLineEditDAC->clear();
 //if (dataTextBrowseroutput == NULL){
 
 ////    dataTextBrowseroutput->setText(allData);
