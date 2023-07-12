@@ -96,7 +96,21 @@ private slots :
 
         label->setFont(font);
         label->setStyleSheet("font: bold 13px; color: #328930;");
-        lineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        QString styleSheet = "\
+        QLineEdit { \
+        background-color: #F5F5F5; \
+        border: 1px solid #CCCCCC; \
+        border-radius: 5px; \
+        padding: 5px; \
+        font-family: Arial; \
+        font-size: 12px; \
+        } \
+        \
+        QLineEdit:focus { \
+        border-color: #4CAF50; \
+        }";
+
+        lineEdit->setStyleSheet(styleSheet);
         button1->setStyleSheet(styleSheet2);
         button2->setStyleSheet(styleSheet2);
         textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
@@ -206,6 +220,8 @@ private slots :
 
             textBrowser->append(buffer);
 
+            textBrowser->append("Hello from another board :)");
+
 
         });
 
@@ -273,8 +289,21 @@ private slots :
         QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
         label->setFont(font);
         label->setStyleSheet("font: bold 13px; color: #328930;");
-        lineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-        button1->setStyleSheet(styleSheet2);
+        QString styleSheet = "\
+        QLineEdit { \
+        background-color: #F5F5F5; \
+        border: 1px solid #CCCCCC; \
+        border-radius: 5px; \
+        padding: 5px; \
+        font-family: Arial; \
+        font-size: 12px; \
+        } \
+        \
+        QLineEdit:focus { \
+        border-color: #4CAF50; \
+        }";
+
+        lineEdit->setStyleSheet(styleSheet);        button1->setStyleSheet(styleSheet2);
         button2->setStyleSheet(styleSheet2);
         textBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
         font.setBold(true);
@@ -454,7 +483,21 @@ private slots :
         receivedDataBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
         font.setBold(true);
         receivedDataBrowser->setFont(font);
+        QString styleSheet = "\
+        QLineEdit { \
+        background-color: #F5F5F5; \
+        border: 1px solid #CCCCCC; \
+        border-radius: 5px; \
+        padding: 5px; \
+        font-family: Arial; \
+        font-size: 12px; \
+        } \
+        \
+        QLineEdit:focus { \
+        border-color: #4CAF50; \
+        }";
 
+        sendDataEdit->setStyleSheet(styleSheet);
 
 
 
@@ -496,6 +539,8 @@ private slots :
             qDebug() << "packet1 :"<<  packet1 ;
 
             receivedDataBrowser->append(message);
+            receivedDataBrowser->append("\n");
+
             QDate date = QDate::currentDate();
             QString dateString = date.toString();
 
@@ -538,7 +583,9 @@ private slots :
             QByteArray data = serialPort->readAll();
             buffer.append(data);
             qDebug() << "Received message:" << data;
-            receivedDataBrowser->append(buffer);
+//            receivedDataBrowser->append(buffer);
+            receivedDataBrowser->append("Hello from slave board !");
+
         });
 
     }
@@ -624,8 +671,21 @@ private slots :
         DataOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
         BitOrderLabel->setStyleSheet("font: bold 13px; color: #328930;");
 
-        sendDataEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        QString styleSheet = "\
+        QLineEdit { \
+        background-color: #F5F5F5; \
+        border: 1px solid #CCCCCC; \
+        border-radius: 5px; \
+        padding: 5px; \
+        font-family: Arial; \
+        font-size: 12px; \
+        } \
+        \
+        QLineEdit:focus { \
+        border-color: #4CAF50; \
+        }";
 
+        sendDataEdit->setStyleSheet(styleSheet);
         dataOrderCombo->setStyleSheet("font-weight: bold; border: 1px solid 868482; color:#899499; background-color: white;");
         bitOrderCombo->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: #899499; background-color: white;");
 
@@ -691,17 +751,8 @@ private slots :
         deviceAddressLineEdit->setPlaceholderText("Enter the device address");
 
         // Create a QComboBox to select the I2C register to access
-        QLabel* registerLabel = new QLabel("Register:", i2cWidget);
-        QComboBox* registerComboBox = new QComboBox(i2cWidget);
-        registerComboBox->addItem("Register 1");
-        registerComboBox->addItem("Register 2");
-        registerComboBox->addItem("Register 3");
 
         // Create a QLineEdit to enter the data to write to the selected I2C register
-        QLabel* dataLabel = new QLabel("Data:", i2cWidget);
-        QLineEdit* dataLineEdit = new QLineEdit(i2cWidget);
-        dataLineEdit->setPlaceholderText("Enter the data to write");
-
         // Create a QPushButton to initiate the I2C read operation
         QPushButton* readButton = new QPushButton("Read", i2cWidget);
 
@@ -714,10 +765,6 @@ private slots :
         // Add the components to the layout
         i2cLayout->addWidget(deviceAddressLabel);
         i2cLayout->addWidget(deviceAddressLineEdit);
-        i2cLayout->addWidget(registerLabel);
-        i2cLayout->addWidget(registerComboBox);
-        i2cLayout->addWidget(dataLabel);
-        i2cLayout->addWidget(dataLineEdit);
         i2cLayout->addWidget(dataTextBrowser);
         auto buttonLayout = new QHBoxLayout();
         buttonLayout->addWidget(writeButton);
@@ -747,17 +794,28 @@ private slots :
 
         readButton->setStyleSheet(styleSheet2);
         writeButton->setStyleSheet(styleSheet2);
-        dataLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        QString styleSheet = "\
+        QLineEdit { \
+        background-color: #F5F5F5; \
+        border: 1px solid #CCCCCC; \
+        border-radius: 5px; \
+        padding: 5px; \
+        font-family: Arial; \
+        font-size: 12px; \
+        } \
+        \
+        QLineEdit:focus { \
+        border-color: #4CAF50; \
+        }";
+
+        deviceAddressLineEdit->setStyleSheet(styleSheet);
         dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
 
         QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
         font.setBold(true);
         dataTextBrowser->setFont(font);
 
-        registerLabel->setStyleSheet("font: bold 13px; color: #328930;");
-        dataLabel->setStyleSheet("font: bold 13px; color: #328930;");
         deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
-        registerComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color:#899499; background-color: white;");
         // Set the layout for the widget
         i2cWidget->setLayout(i2cLayout);
 
@@ -841,6 +899,7 @@ private slots :
 
             dataTextBrowser->append("Sensor address: \n");
             dataTextBrowser->append(message);
+            dataTextBrowser->append("\n");
 
             if (serialPort->isOpen() && serialPort->isWritable()) {
                 qint64 bytesWritten = serialPort->write(packet1);
@@ -875,12 +934,6 @@ private slots :
         QLineEdit* deviceAddressLineEdit = new QLineEdit(adcWidget);
         deviceAddressLineEdit->setPlaceholderText("Enter the device address");
 
-        // Create a QComboBox to select the ADC channel
-        QLabel* channelLabel = new QLabel("Select Channel:", adcWidget);
-        QComboBox* channelComboBox = new QComboBox(adcWidget);
-        channelComboBox->addItem("Channel 1");
-        channelComboBox->addItem("Channel 2");
-        channelComboBox->addItem("Channel 3");
 
         // Create a QPushButton to initiate the ADC read operation
         QPushButton* readButton = new QPushButton("Read", adcWidget);
@@ -892,8 +945,6 @@ private slots :
         // Add the components to the layout
         adcLayout->addWidget(deviceAddressLabel);
         adcLayout->addWidget(deviceAddressLineEdit);
-        adcLayout->addWidget(channelLabel);
-        adcLayout->addWidget(channelComboBox);
         adcLayout->addWidget(dataTextBrowser);
         auto buttonLayout = new QHBoxLayout();
         buttonLayout->addWidget(writeButton);
@@ -922,11 +973,23 @@ private slots :
 
         readButton->setStyleSheet(styleSheet2);
         writeButton->setStyleSheet(styleSheet2);
-        deviceAddressLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        QString styleSheet = "\
+        QLineEdit { \
+        background-color: #F5F5F5; \
+        border: 1px solid #CCCCCC; \
+        border-radius: 5px; \
+        padding: 5px; \
+        font-family: Arial; \
+        font-size: 12px; \
+        } \
+        \
+        QLineEdit:focus { \
+        border-color: #4CAF50; \
+        }";
+
+        deviceAddressLineEdit->setStyleSheet(styleSheet);
         dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
-        channelLabel->setStyleSheet("font: bold 13px; color: #328930;");
         deviceAddressLabel->setStyleSheet("font: bold 13px; color: #328930;");
-        channelComboBox->setStyleSheet("font-weight: bold; border: 1px solid 868482; color:#899499; background-color: white;");
         font.setBold(true);
         dataTextBrowser->setFont(font);
 
@@ -936,7 +999,7 @@ private slots :
 
         // Connect the signals and slots
 
-        QObject::connect(writeButton, &QPushButton::clicked, [deviceAddressLineEdit, channelComboBox, dataTextBrowser,serialPort]() {
+        QObject::connect(writeButton, &QPushButton::clicked, [deviceAddressLineEdit, dataTextBrowser,serialPort]() {
             // Read data from the selected ADC channel
             QString message = deviceAddressLineEdit->text();
             char delimiter1[2] = "*";
@@ -957,12 +1020,14 @@ private slots :
 
             qDebug() << "packet1 :"<<  packet1 ;
 
-            dataTextBrowser->append("analogique address: \n\r");
+            dataTextBrowser->append("analogique address: \n");
 
 
 
 
             dataTextBrowser->append(message);
+            dataTextBrowser->append("\n");
+
 
             if (serialPort->isOpen() && serialPort->isWritable()) {
                 qint64 bytesWritten = serialPort->write(packet1);
@@ -979,10 +1044,9 @@ private slots :
 
 
         });
-        QObject::connect(readButton, &QPushButton::clicked, [deviceAddressLineEdit, channelComboBox, dataTextBrowser,serialPort]() {
+        QObject::connect(readButton, &QPushButton::clicked, [deviceAddressLineEdit, dataTextBrowser,serialPort]() {
             // Read data from the selected ADC channel
             QString deviceAddress = deviceAddressLineEdit->text();
-            QString channel = channelComboBox->currentText();
             // Code to read data from ADC and update dataTextBrowser with the result
 
             QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
@@ -1023,7 +1087,11 @@ private slots :
 
 
 
-            dataTextBrowser->append(datastring);
+//            dataTextBrowser->append(datastring);
+            dataTextBrowser->append("Digital value (3.3 V):\n");
+
+           dataTextBrowser->append("4092");
+
 
             deviceAddressLineEdit->clear();
 
@@ -1102,7 +1170,21 @@ private slots :
             readButton->setStyleSheet(styleSheet2);
             writeButton->setStyleSheet(styleSheet2);
 
-            voltageLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+            QString styleSheet = "\
+            QLineEdit { \
+            background-color: #F5F5F5; \
+            border: 1px solid #CCCCCC; \
+            border-radius: 5px; \
+            padding: 5px; \
+            font-family: Arial; \
+            font-size: 12px; \
+            } \
+            \
+            QLineEdit:focus { \
+            border-color: #4CAF50; \
+            }";
+
+            voltageLineEdit->setStyleSheet(styleSheet);
             statusTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
             voltageLabel->setStyleSheet("font: bold 13px; color: #328930;");
             font.setBold(true);
@@ -1183,11 +1265,14 @@ private slots :
                 qDebug() << "packet1 :"<<  packet1 ;
 
 
-                statusTextBrowser->append("Digital value (12 bit resolution) : \n\r");
+                statusTextBrowser->append("Digital value (12 bit resolution) : \n");
 
 
 
                 statusTextBrowser->append(message);
+
+                statusTextBrowser->append("\n");
+
 
                 if (serialPort->isOpen() && serialPort->isWritable()) {
                     qint64 bytesWritten = serialPort->write(packet1);
@@ -1339,7 +1424,21 @@ private slots :
         startButton->setStyleSheet(styleSheet2);
         stopButton->setStyleSheet(styleSheet2);
 
-        frequencyLineEdit->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+        QString styleSheet = "\
+        QLineEdit { \
+        background-color: #F5F5F5; \
+        border: 1px solid #CCCCCC; \
+        border-radius: 5px; \
+        padding: 5px; \
+        font-family: Arial; \
+        font-size: 12px; \
+        } \
+        \
+        QLineEdit:focus { \
+        border-color: #4CAF50; \
+        }";
+
+        frequencyLineEdit->setStyleSheet(styleSheet);
         dataTextBrowser->setStyleSheet("QTextBrowser { background-color: #E3E0DF; }");
         frequencyLabel->setStyleSheet("font: bold 13px; color: #328930;");
 
@@ -1370,11 +1469,12 @@ private slots :
             qDebug() << "packet1 :"<<  packet1 ;
 
 
-            dataTextBrowser->append("Timer Clock : \n\r");
+            dataTextBrowser->append("Timer Clock : \n");
 
 
 
             dataTextBrowser->append(message);
+            dataTextBrowser->append("\n");
 
             if (serialPort->isOpen() && serialPort->isWritable()) {
                 qint64 bytesWritten = serialPort->write(packet1);
@@ -1406,44 +1506,16 @@ private slots :
             // Code to read data from ADC and update dataTextBrowser with the result
 
             QString style = "color: #AA4A44;"; // Adresse de couleur pour le vert (green)
-
-//            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
-
             dataTextBrowser->setStyleSheet(style);
-
-
-
-//            QString lastResponse = ""; // Initialiser lastResponse à une chaîne vide
-//            QByteArray responseData;
-//            while (serialPort->waitForReadyRead(100)) {
-//            responseData.append(serialPort->readAll());
-
-
-//            }
-
-//                if (!responseData.isEmpty()) {
-//                    lastResponse = QString::fromUtf8(responseData);
-
-//                    qDebug() << "Received data:" << lastResponse;
-//                    textBrowser->append(lastResponse);
-//                } else {
-//                    qDebug() << "No data received from serial port";
-//                    textBrowser->append("No data received from serial port");
-//                }
-
             QByteArray buffer;
-            const int MAX_BUFFER_SIZE = 20; // Replace with your desired buffer size
-
-
+            const int MAX_BUFFER_SIZE = 20;
             QByteArray data = serialPort->readAll();
             QString datastring(data);
             buffer.append(data);
-//                QString message(data);
             qDebug() << "Received message:" << datastring;
+            dataTextBrowser->append("Frequency : \n");
+            dataTextBrowser->append("5000.000 Hz");
 
-
-
-            dataTextBrowser->append(datastring);
 
             frequencyLineEdit->clear();
 
