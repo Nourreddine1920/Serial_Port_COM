@@ -127,7 +127,7 @@ MainWindow::~MainWindow()
 void MainWindow::start_Loading()
 {
 for (int value = ui->progressBar->minimum();value<= ui->progressBar->maximum();value++){
-QThread::msleep(30);
+QThread::msleep(100);
 ui->progressBar->setValue(value);
 qApp->processEvents(QEventLoop::EventLoopExec);
 
