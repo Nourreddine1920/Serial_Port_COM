@@ -1075,12 +1075,6 @@ void sequenceApplication::showADCexec(){
     deviceAddressLabel->setFont(font);
     deviceAddressLabel->setFont(font);
 
-
-    deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
-    // Create a label widget and set its font to Noto Sans
-//        QFont font("Noto Sans");
-
-
     QString styleSheet = "\
     QLineEdit { \
     background-color: #F5F5F5; \
@@ -1096,6 +1090,13 @@ void sequenceApplication::showADCexec(){
     }";
 
     deviceAddressLineEdit->setStyleSheet(styleSheet);
+
+    deviceAddressLabel->setStyleSheet("font: bold 13px; color: #36454F;");
+    // Create a label widget and set its font to Noto Sans
+//        QFont font("Noto Sans");
+
+
+
 
     // Create a QComboBox to select the ADC channel
 
@@ -1563,37 +1564,27 @@ qDebug() << "Received data:" << datastring;
 
 
     ui->out->append(datastring);
-    if ( deviceAddressLineEdit != nullptr){
-    deviceAddressLineEdit->clear();
-    }    if (deviceAddressLineEditTIMER != nullptr){
-    deviceAddressLineEditTIMER->clear();
-    }
-    if (deviceAddressLineEditUART != nullptr){
-    deviceAddressLineEditUART->clear();
-    }
-    if (deviceAddressLineEditSPI != nullptr){
-    deviceAddressLineEditSPI->clear();
-    }
-    if (deviceAddressLineEditI2C != nullptr){
-    deviceAddressLineEditI2C->clear();
-    }
-    if (deviceAddressLineEditDAC != nullptr){
-    deviceAddressLineEditDAC->clear();
-    }
-
+//    if ( deviceAddressLineEdit != nullptr){
+//    deviceAddressLineEdit->clear();
+//    }    if (deviceAddressLineEditTIMER != nullptr){
+//    deviceAddressLineEditTIMER->clear();
+//    }
+//    if (deviceAddressLineEditUART != nullptr){
 //    deviceAddressLineEditUART->clear();
+//    }
+//    if (deviceAddressLineEditSPI != nullptr){
 //    deviceAddressLineEditSPI->clear();
+//    }
+//    if (deviceAddressLineEditI2C != nullptr){
 //    deviceAddressLineEditI2C->clear();
-
+//    }
+//    if (deviceAddressLineEditDAC != nullptr){
 //    deviceAddressLineEditDAC->clear();
-//if (dataTextBrowseroutput == NULL){
-
-////    dataTextBrowseroutput->setText(allData);
-
-//    ui->out->append(datastring);
+//    }
 
 
-//}
+
+
 
 
 }

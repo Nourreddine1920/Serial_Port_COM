@@ -7067,7 +7067,7 @@ private slots :
 
         QFormLayout* layout = new QFormLayout(this);
         // Create a QLabel for "DAC configurations" and center it horizontally
-        QLabel* titleLabel = new QLabel("GPIO_OUTPUT configurations", this);
+        QLabel* titleLabel = new QLabel("GPIO_INPUT configurations", this);
 
         // Load the icon image
         QPixmap icon("C:/Users/nawledbr/Documents/Serial_Port_COM/config7.png");
@@ -7224,7 +7224,7 @@ private slots :
             QSettings settings("GPIOConfig.txt", QSettings::IniFormat);
 
             QString GPIO = GPIOComboBox->itemText(indexGPIO);
-            settings.beginGroup("GPIO_OUTPUT");
+            settings.beginGroup("GPIO_INPUT");
 
 
             // Store the selected option in the settings file

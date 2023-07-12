@@ -1609,7 +1609,7 @@ private slots :
         QString GPIOConfig = settings.value("GPIO" , GPIO).toString();
         QString UserLabelConfig = settings.value("User" , User).toString();
 
-
+        qDebug() << "gpio option:" << GPIOConfig;
         QListWidgetItem* titleItem = new QListWidgetItem(tr("GPIO INPUT Configurations"), configList);
 
 
