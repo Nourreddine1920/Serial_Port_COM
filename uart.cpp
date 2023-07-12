@@ -374,10 +374,21 @@ Uart::Uart(QWidget *parent)
     ui->comboBox_6->setStyleSheet(comboBoxStyle);
     ui->label_2->setStyleSheet("font: bold 15px; color: black; background-color: white;");
     ui->comboBox_2->setStyleSheet(comboBoxStyle);
-    ui->label_8->setStyleSheet("font: bold 15px; color: black; background-color: white;");
-    ui->lineEdit_2->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
-    ui->lineEdit_3->setStyleSheet("font-weight: bold; border: 1px solid 868482; color: gray; background-color: white;");
+    QString styleSheet5 = "\
+    QLineEdit { \
+    background-color: #F5F5F5; \
+    border: 1px solid #CCCCCC; \
+    border-radius: 5px; \
+    padding: 5px; \
+    font-family: Arial; \
+    font-size: 12px; \
+    } \
+    \
+    QLineEdit:focus { \
+    border-color: #4CAF50; \
+    }";
 
+    ui->lineEdit_3->setStyleSheet(styleSheet5);
 
 
 }
@@ -626,290 +637,26 @@ void Uart::on_btnClear_clicked()
 
 void Uart::on_btnSendMsg_clicked()
 {
-//    QString message = ui->lineEdit_3->text();
-//    QByteArray data = message.toUtf8();
-//    ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
-//    ui->textBrowser->append(message);
-    // Set text color to dark green
-//    ui->textBrowser->setTextColor(Qt::darkGreen);
+    Uart* uart = Uart::getInstance();
+    QSerialPort* serialPort = uart->getSerialPort();
+    QString message = ui->lineEdit_3->text();
+    char delimiter1[2] = "*";
+    QString style1 ="color: #097969;"; // Adresse de couleur pour le vert (green)
 
-    // Set background color to light gray
-//    ui->textBrowser->setStyleSheet("background-color: #f0f0f0;");
+    //            dataTextBrowser->setStyleSheet(QString("color1: %1;").arg(color1));
+    ui->textBrowser->setStyleSheet("QTextBrowser { background-color:#E5E4E2; }");
 
-    // Set font family, size, and weight
-//    ui->textBrowser->setFont(QFont("Arial", 12, QFont::Bold));
+    ui->textBrowser->setStyleSheet(style1);
+    ui->textBrowser->append(message);
+    ui->textBrowser->append("\n");
 
-    // Set text alignment to center
-//    ui->textBrowser->setAlignment(Qt::AlignCenter);
+    ui->textBrowser->append("Connection OK on USART3 :)");
 
-    // Add padding to the text browser
-//    ui->textBrowser->setStyleSheet("padding: 10px;");
-//    serialPort->write(data);
+    QFont font("Segoe UI", 10); // Police Arial avec une taille de 12 points
+    font.setBold(true);
 
+    ui->textBrowser->setFont(font);
 
-    QSettings settings("UARTConfig.txt", QSettings::IniFormat);
-    settings.beginGroup("UART4Configs");
-
-    QString baudrate;
-    QString Parity;
-    QString stopBits;
-    QString DataBits;
-    QString FlowControl;
-
-    QString BaudrateConfig = settings.value("Baudrate" , baudrate).toString();
-    QString ParityConfig = settings.value("Parity" , Parity).toString();
-    QString stopBitsConfig = settings.value("stopBits" , stopBits).toString();
-    QString DataBitsConfig = settings.value("DataBits" , DataBits).toString();
-    QString FlowControlConfig = settings.value("FlowControl" , FlowControl).toString();
-    settings.endGroup();
-
-    struct Message {
-        uint8_t id; // Message ID
-        uint16_t length; // Length of the payload
-        uint8_t *payload; // Pointer to the payload data
-    };
-
-    // Define the message ID and payload
-    uint8_t messageIPID = 0x01;
-    char delimiter[2] = "|";
-    char delimiter2[2] = ",";
-
-    uint8_t messageBaudID = 0x02;
-    uint8_t messageParityID = 0x03;
-    uint8_t messageStopID = 0x04;
-    uint8_t messageDataID = 0x05;
-    uint8_t messageFlowID = 0x06;
-
-    QByteArray dataBaud = BaudrateConfig.toUtf8();
-    QByteArray dataparity = ParityConfig.toUtf8();
-    QByteArray datastop = stopBitsConfig.toUtf8();
-    QByteArray databits = DataBitsConfig.toUtf8();
-    QByteArray dataflow = FlowControlConfig.toUtf8();
-
-
-
-//    QByteArray checking = "\n";
-
-
-//    QByteArray payloadData = "This is my payload data";
-
-    // Create a message packet
-    QByteArray packet;
-//    packet.append(messageIPID);
-//    packet.append(delimiter);
-
-
-    packet.append(messageBaudID);
-    packet.append(delimiter);
-
-    packet.append(dataBaud);
-
-    packet.append(delimiter);
-    packet.append(messageParityID);
-    packet.append(delimiter);
-
-    packet.append(dataparity);
-
-    packet.append(delimiter);
-    packet.append(messageStopID);
-    packet.append(delimiter);
-
-    packet.append(datastop);
-    packet.append(delimiter);
-
-    packet.append(messageDataID);
-    packet.append(delimiter);
-
-    packet.append(databits);
-    packet.append(delimiter);
-
-    packet.append(messageFlowID);
-    packet.append(delimiter);
-
-    packet.append(dataflow);
-    packet.append(delimiter2);
-
-
-//    packet.append(checking);
-
-
-    // Write the packet to the serial port
-//    QString baud="AT+BAUD4\r\n";
-//    serialPort->write("AT+BAUD4\r\n"); // Change to 9600 baud rate
-//    qDebug() << " message:" << baud;
-
-
-        serialPort->write(packet); // Change to 9600 baud rate
-//        qDebug() << " packet:" << packet;
-
-
-////        QSettings settings("UARTConfig.txt", QSettings::IniFormat);
-        settings.beginGroup("UART5Configs");
-
-        QString baudrate1;
-        QString Parity1;
-        QString stopBits1;
-        QString DataBits1;
-        QString FlowControl1;
-
-        QString BaudrateConfig1 = settings.value("Baudrate" , baudrate1).toString();
-        QString ParityConfig1 = settings.value("Parity" , Parity1).toString();
-        QString stopBitsConfig1 = settings.value("stopBits" , stopBits1).toString();
-        QString DataBitsConfig1 = settings.value("DataBits" , DataBits1).toString();
-        QString FlowControlConfig1 = settings.value("FlowControl" , FlowControl1).toString();
-        settings.endGroup();
-
-
-        // Define the message ID and payload
-        uint8_t messageIPID1 = 0x01;
-        char delimiter1[2] = "|";
-
-        uint8_t messageBaudID1 = 0x1;
-        uint8_t messageParityID1 = 0x03;
-        uint8_t messageStopID1 = 0x04;
-        uint8_t messageDataID1 = 0x05;
-        uint8_t messageFlowID1 = 0x06;
-
-        QByteArray dataBaud1 = BaudrateConfig1.toUtf8();
-        QByteArray dataparity1 = ParityConfig1.toUtf8();
-        QByteArray datastop1 = stopBitsConfig1.toUtf8();
-        QByteArray databits1 = DataBitsConfig1.toUtf8();
-        QByteArray dataflow1 = FlowControlConfig1.toUtf8();
-
-
-
-    //    QByteArray checking = "\n";
-
-
-    //    QByteArray payloadData = "This is my payload data";
-
-        // Create a message packet
-        QByteArray packet1;
-    //    packet.append(messageIPID);
-    //    packet.append(delimiter);
-
-
-        packet1.append(messageBaudID1);
-        packet1.append(delimiter1);
-
-        packet1.append(dataBaud1);
-
-        packet1.append(delimiter1);
-        packet1.append(messageParityID1);
-        packet1.append(delimiter1);
-
-        packet1.append(dataparity1);
-
-        packet1.append(delimiter1);
-        packet1.append(messageStopID1);
-        packet1.append(delimiter1);
-
-        packet1.append(datastop1);
-        packet1.append(delimiter1);
-
-        packet1.append(messageDataID1);
-        packet1.append(delimiter1);
-
-        packet1.append(databits1);
-        packet1.append(delimiter1);
-
-        packet1.append(messageFlowID1);
-        packet1.append(delimiter1);
-
-        packet1.append(dataflow1);
-        packet1.append(delimiter2);
-
-
-        serialPort->write(packet1);
-
-
-
-        QSettings settingsSPI("SPIConfig.txt", QSettings::IniFormat);
-
-
-        settingsSPI.beginGroup("SPI1Configs");
-
-        QString Mode;
-        QString NSS;
-        QString DataSize;
-        QString FirstBit;
-
-        QString ModeConfig1 = settingsSPI.value("Mode" , Mode).toString();
-        QString NSSConfig1 = settingsSPI.value("NSS" , NSS).toString();
-        QString DataSizeConfig1 = settingsSPI.value("DataSize" , DataSize).toString();
-        QString FirstBitConfig1 = settingsSPI.value("FirstBit" , FirstBit).toString();
-        settingsSPI.endGroup();
-
-
-        qDebug() << " Mode:" << ModeConfig1;
-
-        // Define the message ID and payload
-//        uint8_t messageIPID1 = 0x01;
-//        char delimiter1[2] = "|";
-
-        uint8_t messageModeID = 0x8;
-        uint8_t messageNSSID = 0x03;
-        uint8_t messageDataSizeID = 0x04;
-        uint8_t messageFirstBitID = 0x05;
-
-        QByteArray dataMode = ModeConfig1.toUtf8();
-        QByteArray dataNSS = NSSConfig1.toUtf8();
-        QByteArray dataSize = DataSizeConfig1.toUtf8();
-        QByteArray dataFirstbits = FirstBitConfig1.toUtf8();
-
-
-
-    //    QByteArray checking = "\n";
-
-
-    //    QByteArray payloadData = "This is my payload data";
-
-        // Create a message packet
-        QByteArray packet2;
-    //    packet.append(messageIPID);
-    //    packet.append(delimiter);
-
-
-        packet2.append(messageModeID);
-        packet2.append(delimiter1);
-
-        packet2.append(dataMode);
-
-        packet2.append(delimiter1);
-        packet2.append(messageNSSID);
-        packet2.append(delimiter1);
-
-        packet2.append(dataNSS);
-
-        packet2.append(delimiter1);
-        packet2.append(messageDataSizeID);
-        packet2.append(delimiter1);
-
-        packet2.append(dataSize);
-        packet2.append(delimiter1);
-
-        packet2.append(messageFirstBitID);
-        packet2.append(delimiter1);
-
-        packet2.append(dataFirstbits);
-
-        serialPort->write(packet2);
-
-
-
-
-
-
-            qDebug() << " packet:" << packet;
-            qDebug() << " packet1:" << packet1;
-            qDebug() << " packet2:" << packet2;
-
-//            qDebug() << " packe1:" << packet1;
-//        serialPort->write(delimiter2);
-        ui->textBrowser->setTextColor(Qt::darkGreen); // Color of message to send is green.
-        ui->textBrowser->append(packet);
-        ui->textBrowser->append(packet1);
-        ui->textBrowser->append(packet2);
 
 
 
