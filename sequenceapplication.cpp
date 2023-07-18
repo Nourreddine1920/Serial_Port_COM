@@ -43,6 +43,8 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
     ui->label->setFont(font1);
     ui->label->setFont(font1);
 
+    ui->label->hide();
+
 
     ui->label->setStyleSheet("font: bold 13px; color: #36454F;");
     // Create a QLabel for the footer text
@@ -266,7 +268,7 @@ sequenceApplication::sequenceApplication(QWidget *parent) :
 
     menuBar()->setFont(font);
     UART->setFont(font);
-
+    ui->out->hide();
 
 
     connect(action, &QAction::triggered, this, &sequenceApplication::onSubMenuSelected);
@@ -702,7 +704,9 @@ void sequenceApplication::sendSequenceframe(){
 
 
 
+   ui->label->show();
 
+   ui->out->show();
 
    ui->out->clear();
 
