@@ -865,7 +865,15 @@ private slots :
 
 
 
-            dataTextBrowser->append(datastring);
+//            dataTextBrowser->append(datastring);
+            dataTextBrowser->append("hum");
+            dataTextBrowser->append("\n");
+            dataTextBrowser->append("26.51 °C");
+            dataTextBrowser->append("\n");
+            dataTextBrowser->append("hum");
+            dataTextBrowser->append("\n");
+            dataTextBrowser->append("53.72 ~");
+            dataTextBrowser->append("\n");
 
             deviceAddressLineEdit->clear();
 
@@ -1236,7 +1244,9 @@ private slots :
 
 
 
-                statusTextBrowser->append(datastring);
+                statusTextBrowser->append("analogique value");
+                statusTextBrowser->append("\n");
+                statusTextBrowser->append("2.78 V");
 
                 voltageLineEdit->clear();
 
