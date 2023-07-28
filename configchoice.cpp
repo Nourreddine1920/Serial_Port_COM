@@ -155,7 +155,7 @@ ConfigChoice::ConfigChoice(QWidget *parent) :
 
         //         Commande pour l'écriture du fichier
                 QStringList writeArguments;
-                writeArguments << "-c" << "port=swd" << "-w" << "C:/Users/nawledbr/Desktop/testBins/read.bin" << "0x08000000";
+                writeArguments << "-c" << "port=swd" << "-w" << "C:/Users/nawledbr/Documents/testBins/read.bin" << "0x08000000";
                 QProcess writeProcess;
                 writeProcess.start(program, writeArguments);
         //        writeProcess.startDetached(program, writeArguments);

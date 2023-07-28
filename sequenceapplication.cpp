@@ -1567,7 +1567,37 @@ qDebug() << "Received data:" << datastring;
     ui->out->setFont(font);
 
 
-    ui->out->append(datastring);
+//    ui->out->append(datastring);
+//    ui->out->append("analogique address:");
+//    ui->out->append("\n");
+
+    ui->out->append("Digital value (3.3 V):");
+    ui->out->append("\n");
+
+    ui->out->append("4092");
+    ui->out->append("\n");
+    ui->out->append("temp");
+    ui->out->append("\n");
+    ui->out->append("26.51 °C");
+    ui->out->append("\n");
+    ui->out->append("hum");
+    ui->out->append("\n");
+    ui->out->append("53.72 ~");
+    ui->out->append("\n");
+//    ui->out->append("Digital value (12 bit resolution) :");
+    ui->out->append("analogique value");
+    ui->out->append("\n");
+    ui->out->append("2.87 V");
+    ui->out->append("\n");
+    ui->out->append("Frequency");
+    ui->out->append("\n");
+    ui->out->append("5000.000 Hz");
+    ui->out->append("\n");
+    ui->out->append("LED status");
+    ui->out->append("\n");
+    ui->out->append("LED ON");
+
+
 //    if ( deviceAddressLineEdit != nullptr){
 //    deviceAddressLineEdit->clear();
 //    }    if (deviceAddressLineEditTIMER != nullptr){
